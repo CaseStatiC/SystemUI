@@ -138,6 +138,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     private void updateTouchableRegionListener() {
+        Log.d(TAG, "updateTouchableRegionListener: ");
         boolean shouldObserve = mHasPinnedNotification || mHeadsUpGoingAway
                 || mWaitingOnCollapseWhenGoingAway;
         if (shouldObserve == mIsObserving) {
@@ -153,14 +154,17 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     public void setBar(PhoneStatusBar bar) {
+        Log.d(TAG, "setBar: ");
         mBar = bar;
     }
 
     public void addListener(OnHeadsUpChangedListener listener) {
+        Log.d(TAG, "addListener: ");
         mListeners.add(listener);
     }
 
     public PhoneStatusBar getBar() {
+        Log.d(TAG, "getBar: ");
         return mBar;
     }
 
@@ -168,6 +172,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
      * Called when posting a new notification to the heads up.
      */
     public void showNotification(NotificationData.Entry headsUp) {
+        Log.d(TAG, "showNotification: ");
         if (DEBUG) Log.v(TAG, "showNotification");
         addHeadsUpEntry(headsUp);
         updateNotification(headsUp, true);
@@ -179,7 +184,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
      */
     public void updateNotification(NotificationData.Entry headsUp, boolean alert) {
         if (DEBUG) Log.v(TAG, "updateNotification");
-
+        Log.d(TAG, "updateNotification: ");
         headsUp.row.setChildrenExpanded(false /* expanded */, false /* animated */);
         headsUp.row.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED);
 
@@ -192,7 +197,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
 
     private void addHeadsUpEntry(NotificationData.Entry entry) {
         HeadsUpEntry headsUpEntry = mEntryPool.acquire();
-
+        Log.d(TAG, "addHeadsUpEntry: ");
         // This will also add the entry to the sortedList
         headsUpEntry.setEntry(entry);
         mHeadsUpEntries.put(entry.key, headsUpEntry);
@@ -205,14 +210,17 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     private boolean shouldHeadsUpBecomePinned(NotificationData.Entry entry) {
+        Log.d(TAG, "shouldHeadsUpBecomePinned: ");
         return !mIsExpanded || hasFullScreenIntent(entry);
     }
 
     private boolean hasFullScreenIntent(NotificationData.Entry entry) {
+        Log.d(TAG, "hasFullScreenIntent: ");
         return entry.notification.getNotification().fullScreenIntent != null;
     }
 
     private void setEntryPinned(HeadsUpEntry headsUpEntry, boolean isPinned) {
+        Log.d(TAG, "setEntryPinned: ");
         ExpandableNotificationRow row = headsUpEntry.entry.row;
         if (row.isPinned() != isPinned) {
             row.setPinned(isPinned);
@@ -228,6 +236,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     private void removeHeadsUpEntry(NotificationData.Entry entry) {
+        Log.d(TAG, "removeHeadsUpEntry: ");
         HeadsUpEntry remove = mHeadsUpEntries.remove(entry.key);
         mSortedEntries.remove(remove);
         entry.row.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED);
@@ -240,6 +249,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     private void updatePinnedMode() {
+        Log.d(TAG, "updatePinnedMode: ");
         boolean hasPinnedNotification = hasPinnedNotificationInternal();
         if (hasPinnedNotification == mHasPinnedNotification) {
             return;
@@ -261,6 +271,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
      * for a bit since it wasn't shown long enough
      */
     public boolean removeNotification(String key) {
+        Log.d(TAG, "removeNotification: ");
         if (DEBUG) Log.v(TAG, "remove");
         if (wasShownLongEnough(key)) {
             releaseImmediately(key);
@@ -272,6 +283,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     private boolean wasShownLongEnough(String key) {
+        Log.d(TAG, "wasShownLongEnough: ");
         HeadsUpEntry headsUpEntry = getHeadsUpEntry(key);
         HeadsUpEntry topEntry = getTopEntry();
         if (mSwipedOutKeys.contains(key)) {
@@ -286,6 +298,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     public boolean isHeadsUp(String key) {
+        Log.d(TAG, "isHeadsUp: ");
         return mHeadsUpEntries.containsKey(key);
     }
 
@@ -293,6 +306,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
      * Push any current Heads Up notification down into the shade.
      */
     public void releaseAllImmediately() {
+        Log.d(TAG, "releaseAllImmediately: ");
         if (DEBUG) Log.v(TAG, "releaseAllImmediately");
         ArrayList<String> keys = new ArrayList<>(mHeadsUpEntries.keySet());
         for (String key : keys) {
@@ -301,6 +315,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     public void releaseImmediately(String key) {
+        Log.d(TAG, "releaseImmediately: ");
         HeadsUpEntry headsUpEntry = getHeadsUpEntry(key);
         if (headsUpEntry == null) {
             return;
@@ -310,6 +325,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     public boolean isSnoozed(String packageName) {
+        Log.d(TAG, "isSnoozed: packageName = " + packageName);
         final String key = snoozeKey(packageName, mUser);
         Long snoozedUntil = mSnoozedPackages.get(key);
         if (snoozedUntil != null) {
@@ -323,9 +339,12 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     public void snooze() {
+        Log.d(TAG, "snooze: ");
         for (String key : mHeadsUpEntries.keySet()) {
             HeadsUpEntry entry = mHeadsUpEntries.get(key);
             String packageName = entry.entry.notification.getPackageName();
+            Log.d(TAG, "snooze: for: key = " + key);
+            Log.d(TAG, "snooze: for: packageName = " + packageName);
             mSnoozedPackages.put(snoozeKey(packageName, mUser),
                     SystemClock.elapsedRealtime() + mSnoozeLengthMs);
         }
@@ -333,22 +352,27 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     private static String snoozeKey(String packageName, int user) {
+        Log.d(TAG, "snoozeKey: ");
         return user + "," + packageName;
     }
 
     private HeadsUpEntry getHeadsUpEntry(String key) {
+        Log.d(TAG, "getHeadsUpEntry: ");
         return mHeadsUpEntries.get(key);
     }
 
     public NotificationData.Entry getEntry(String key) {
+        Log.d(TAG, "getEntry: ");
         return mHeadsUpEntries.get(key).entry;
     }
 
     public TreeSet<HeadsUpEntry> getSortedEntries() {
+        Log.d(TAG, "getSortedEntries: ");
         return mSortedEntries;
     }
 
     public HeadsUpEntry getTopEntry() {
+        Log.d(TAG, "getTopEntry: ");
         return mSortedEntries.isEmpty() ? null : mSortedEntries.first();
     }
 
@@ -360,6 +384,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
      * @return whether the touch is invalid and should be discarded
      */
     public boolean shouldSwallowClick(String key) {
+        Log.d(TAG, "shouldSwallowClick: ");
         HeadsUpEntry entry = mHeadsUpEntries.get(key);
         if (entry != null && mClock.currentTimeMillis() < entry.postTime) {
             return true;
@@ -368,6 +393,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     public void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo info) {
+        Log.d(TAG, "onComputeInternalInsets: ");
         if (mIsExpanded) {
             // The touchable region is always the full area when expanded
             return;
@@ -397,10 +423,12 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     public void setUser(int user) {
+        Log.d(TAG, "setUser: ");
         mUser = user;
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println("HeadsUpManager state:");
         pw.print("  mTouchAcceptanceDelay="); pw.println(mTouchAcceptanceDelay);
         pw.print("  mSnoozeLengthMs="); pw.println(mSnoozeLengthMs);
@@ -418,12 +446,15 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     public boolean hasPinnedHeadsUp() {
+        Log.d(TAG, "hasPinnedHeadsUp: ");
         return mHasPinnedNotification;
     }
 
     private boolean hasPinnedNotificationInternal() {
+        Log.d(TAG, "hasPinnedNotificationInternal: ");
         for (String key : mHeadsUpEntries.keySet()) {
             HeadsUpEntry entry = mHeadsUpEntries.get(key);
+            Log.d(TAG, "hasPinnedNotificationInternal: for: key = " + key);
             if (entry.entry.row.isPinned()) {
                 return true;
             }
@@ -437,17 +468,21 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
      * @param key the notification key
      */
     public void addSwipedOutNotification(String key) {
+        Log.d(TAG, "addSwipedOutNotification: ");
         mSwipedOutKeys.add(key);
     }
 
     public void unpinAll() {
+        Log.d(TAG, "unpinAll: ");
         for (String key : mHeadsUpEntries.keySet()) {
             HeadsUpEntry entry = mHeadsUpEntries.get(key);
             setEntryPinned(entry, false /* isPinned */);
+            Log.d(TAG, "unpinAll: for: key = " + key);
         }
     }
 
     public void onExpandingFinished() {
+        Log.d(TAG, "onExpandingFinished: ");
         if (mReleaseOnExpandFinish) {
             releaseAllImmediately();
             mReleaseOnExpandFinish = false;
@@ -463,10 +498,12 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     public void setTrackingHeadsUp(boolean trackingHeadsUp) {
+        Log.d(TAG, "setTrackingHeadsUp: ");
         mTrackingHeadsUp = trackingHeadsUp;
     }
 
     public void setIsExpanded(boolean isExpanded) {
+        Log.d(TAG, "setIsExpanded: ");
         if (isExpanded != mIsExpanded) {
             mIsExpanded = isExpanded;
             if (isExpanded) {
@@ -479,6 +516,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     public int getTopHeadsUpHeight() {
+        Log.d(TAG, "getTopHeadsUpHeight: ");
         HeadsUpEntry topEntry = getTopEntry();
         return topEntry != null ? topEntry.entry.row.getHeadsUpHeight() : 0;
     }
@@ -490,6 +528,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
      * one should be ranked higher and 0 if they are equal.
      */
     public int compare(NotificationData.Entry a, NotificationData.Entry b) {
+        Log.d(TAG, "compare: ");
         HeadsUpEntry aEntry = getHeadsUpEntry(a.key);
         HeadsUpEntry bEntry = getHeadsUpEntry(b.key);
         if (aEntry == null || bEntry == null) {
@@ -503,6 +542,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
      * animating out. This is used to keep the touchable regions in a sane state.
      */
     public void setHeadsUpGoingAway(boolean headsUpGoingAway) {
+        Log.d(TAG, "setHeadsUpGoingAway: ");
         if (headsUpGoingAway != mHeadsUpGoingAway) {
             mHeadsUpGoingAway = headsUpGoingAway;
             if (!headsUpGoingAway) {
@@ -517,6 +557,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
      * listener.
      */
     private void waitForStatusBarLayout() {
+        Log.d(TAG, "waitForStatusBarLayout: ");
         mWaitingOnCollapseWhenGoingAway = true;
         mStatusBarWindowView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
@@ -533,10 +574,12 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
     }
 
     public static void setIsClickedNotification(View child, boolean clicked) {
+        Log.d(TAG, "setIsClickedNotification: ");
         child.setTag(TAG_CLICKED_NOTIFICATION, clicked ? true : null);
     }
 
     public static boolean isClickedHeadsUpNotification(View child) {
+        Log.d(TAG, "isClickedHeadsUpNotification: ");
         Boolean clicked = (Boolean) child.getTag(TAG_CLICKED_NOTIFICATION);
         return clicked != null && clicked;
     }
@@ -553,7 +596,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
 
         public void setEntry(final NotificationData.Entry entry) {
             this.entry = entry;
-
+            Log.d(TAG, "HeadsUpEntry: setEntry: ");
             // The actual post time will be just after the heads-up really slided in
             postTime = mClock.currentTimeMillis() + mTouchAcceptanceDelay;
             mRemoveHeadsUpRunnable = new Runnable() {
@@ -570,6 +613,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
         }
 
         public void updateEntry() {
+            Log.d(TAG, "HeadsUpEntry: updateEntry: ");
             mSortedEntries.remove(HeadsUpEntry.this);
             long currentTime = mClock.currentTimeMillis();
             earliestRemovaltime = currentTime + mMinimumDisplayTime;
@@ -588,6 +632,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
 
         @Override
         public int compareTo(HeadsUpEntry o) {
+            Log.d(TAG, "HeadsUpEntry: compareTo:");
             boolean selfFullscreen = hasFullScreenIntent(entry);
             boolean otherFullscreen = hasFullScreenIntent(o.entry);
             if (selfFullscreen && !otherFullscreen) {
@@ -601,14 +646,17 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
         }
 
         public void removeAutoRemovalCallbacks() {
+            Log.d(TAG, "HeadsUpEntry: removeAutoRemovalCallbacks:");
             mHandler.removeCallbacks(mRemoveHeadsUpRunnable);
         }
 
         public boolean wasShownLongEnough() {
+            Log.d(TAG, "HeadsUpEntry: wasShownLongEnough:");
             return earliestRemovaltime < mClock.currentTimeMillis();
         }
 
         public void removeAsSoonAsPossible() {
+            Log.d(TAG, "HeadsUpEntry: removeAsSoonAsPossible:");
             removeAutoRemovalCallbacks();
             mHandler.postDelayed(mRemoveHeadsUpRunnable,
                     earliestRemovaltime - mClock.currentTimeMillis());
@@ -616,6 +664,7 @@ public class HeadsUpManager implements ViewTreeObserver.OnComputeInternalInsetsL
 
         public void reset() {
             removeAutoRemovalCallbacks();
+            Log.d(TAG, "HeadsUpEntry: reset: ");
             entry = null;
             mRemoveHeadsUpRunnable = null;
         }
