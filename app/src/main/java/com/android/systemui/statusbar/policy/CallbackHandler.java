@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.telephony.SubscriptionInfo;
+import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.systemui.statusbar.policy.NetworkController.IconState;
@@ -34,6 +35,7 @@ import java.util.List;
  * the current or specified Looper.
  */
 public class CallbackHandler extends Handler implements EmergencyListener, SignalCallback {
+    public static final String TAG = "CallbackHandler";
     private static final int MSG_EMERGENCE_CHANGED           = 0;
     private static final int MSG_SUBS_CHANGED                = 1;
     private static final int MSG_NO_SIM_VISIBLE_CHANGED      = 2;
@@ -53,12 +55,14 @@ public class CallbackHandler extends Handler implements EmergencyListener, Signa
 
     @VisibleForTesting
     CallbackHandler(Looper looper) {
+        Log.d(TAG, "CallbackHandler: ");
         super(looper);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public void handleMessage(Message msg) {
+        Log.d(TAG, "handleMessage: ");
         switch (msg.what) {
             case MSG_EMERGENCE_CHANGED:
                 for (EmergencyListener listener : mEmergencyListeners) {
@@ -111,10 +115,16 @@ public class CallbackHandler extends Handler implements EmergencyListener, Signa
     public void setWifiIndicators(final boolean enabled, final IconState statusIcon,
             final IconState qsIcon, final boolean activityIn, final boolean activityOut,
             final String description) {
+        Log.d(TAG, "setWifiIndicators: enabled = " + enabled);
+        Log.d(TAG, "setWifiIndicators: activityIn = " + activityIn);
+        Log.d(TAG, "setWifiIndicators: activityOut = " + activityOut);
+        Log.d(TAG, "setWifiIndicators: description = " + description);
         post(new Runnable() {
             @Override
             public void run() {
+                Log.d(TAG, "setWifiIndicators: post: run: ");
                 for (SignalCallback callback : mSignalCallbacks) {
+                    Log.d(TAG, "setWifiIndicators: post: run: for: callback = " + callback);
                     callback.setWifiIndicators(enabled, statusIcon, qsIcon, activityIn, activityOut,
                             description);
                 }
@@ -127,10 +137,20 @@ public class CallbackHandler extends Handler implements EmergencyListener, Signa
             final int statusType, final int qsType,final boolean activityIn,
             final boolean activityOut, final String typeContentDescription,
             final String description, final boolean isWide, final int subId) {
+        Log.d(TAG, "setMobileDataIndicators: statusType = " + statusType);
+        Log.d(TAG, "setMobileDataIndicators: qsType = " + qsType);
+        Log.d(TAG, "setMobileDataIndicators: activityIn = " + activityIn);
+        Log.d(TAG, "setMobileDataIndicators: activityOut = " + activityOut);
+        Log.d(TAG, "setMobileDataIndicators: typeContentDescription = " + typeContentDescription);
+        Log.d(TAG, "setMobileDataIndicators: description = " + description);
+        Log.d(TAG, "setMobileDataIndicators: isWide = " + isWide);
+        Log.d(TAG, "setMobileDataIndicators: isWide = " + isWide);
+        Log.d(TAG, "setMobileDataIndicators: subId = " + subId);
         post(new Runnable() {
             @Override
             public void run() {
                 for (SignalCallback signalCluster : mSignalCallbacks) {
+                    Log.d(TAG, "setMobileDataIndicators: pos: run: for: signalCluster = " + signalCluster);
                     signalCluster.setMobileDataIndicators(statusIcon, qsIcon, statusType, qsType,
                             activityIn, activityOut, typeContentDescription, description, isWide,
                             subId);
@@ -141,39 +161,47 @@ public class CallbackHandler extends Handler implements EmergencyListener, Signa
 
     @Override
     public void setSubs(List<SubscriptionInfo> subs) {
+        Log.d(TAG, "setSubs: ");
         obtainMessage(MSG_SUBS_CHANGED, subs).sendToTarget();
     }
 
     @Override
     public void setNoSims(boolean show) {
+        Log.d(TAG, "setNoSims: ");
         obtainMessage(MSG_NO_SIM_VISIBLE_CHANGED, show ? 1 : 0, 0).sendToTarget();
     }
 
     @Override
     public void setMobileDataEnabled(boolean enabled) {
+        Log.d(TAG, "setMobileDataEnabled: ");
         obtainMessage(MSG_MOBILE_DATA_ENABLED_CHANGED, enabled ? 1 : 0, 0).sendToTarget();
     }
 
     @Override
     public void setEmergencyCallsOnly(boolean emergencyOnly) {
+        Log.d(TAG, "setEmergencyCallsOnly: ");
         obtainMessage(MSG_EMERGENCE_CHANGED, emergencyOnly ? 1 : 0, 0).sendToTarget();
     }
 
     @Override
     public void setEthernetIndicators(IconState icon) {
+        Log.d(TAG, "setEthernetIndicators: ");
         obtainMessage(MSG_ETHERNET_CHANGED, icon).sendToTarget();;
     }
 
     @Override
     public void setIsAirplaneMode(IconState icon) {
+        Log.d(TAG, "setIsAirplaneMode: ");
         obtainMessage(MSG_AIRPLANE_MODE_CHANGED, icon).sendToTarget();;
     }
 
     public void setListening(EmergencyListener listener, boolean listening) {
+        Log.d(TAG, "setListening: ");
         obtainMessage(MSG_ADD_REMOVE_EMERGENCY, listening ? 1 : 0, 0, listener).sendToTarget();
     }
 
     public void setListening(SignalCallback listener, boolean listening) {
+        Log.d(TAG, "setListening: ");
         obtainMessage(MSG_ADD_REMOVE_SIGNAL, listening ? 1 : 0, 0, listener).sendToTarget();
     }
 
