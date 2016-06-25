@@ -74,6 +74,7 @@ public class FlashlightController {
     }
 
     public void setFlashlight(boolean enabled) {
+        Log.d(TAG, "setFlashlight: ");
         boolean pendingError = false;
         synchronized (this) {
             if (mFlashlightEnabled != enabled) {
@@ -94,14 +95,17 @@ public class FlashlightController {
     }
 
     public synchronized boolean isEnabled() {
+        Log.d(TAG, "isEnabled: ");
         return mFlashlightEnabled;
     }
 
     public synchronized boolean isAvailable() {
+        Log.d(TAG, "isAvailable: ");
         return mTorchAvailable;
     }
 
     public void addListener(FlashlightListener l) {
+        Log.d(TAG, "addListener: ");
         synchronized (mListeners) {
             cleanUpListenersLocked(l);
             mListeners.add(new WeakReference<>(l));
@@ -109,12 +113,14 @@ public class FlashlightController {
     }
 
     public void removeListener(FlashlightListener l) {
+        Log.d(TAG, "removeListener: ");
         synchronized (mListeners) {
             cleanUpListenersLocked(l);
         }
     }
 
     private synchronized void ensureHandler() {
+        Log.d(TAG, "ensureHandler: ");
         if (mHandler == null) {
             HandlerThread thread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
             thread.start();
@@ -123,6 +129,7 @@ public class FlashlightController {
     }
 
     private String getCameraId() throws CameraAccessException {
+        Log.d(TAG, "getCameraId: ");
         String[] ids = mCameraManager.getCameraIdList();
         for (String id : ids) {
             CameraCharacteristics c = mCameraManager.getCameraCharacteristics(id);
@@ -137,18 +144,22 @@ public class FlashlightController {
     }
 
     private void dispatchModeChanged(boolean enabled) {
+        Log.d(TAG, "dispatchModeChanged: ");
         dispatchListeners(DISPATCH_CHANGED, enabled);
     }
 
     private void dispatchError() {
+        Log.d(TAG, "dispatchError: ");
         dispatchListeners(DISPATCH_CHANGED, false /* argument (ignored) */);
     }
 
     private void dispatchAvailabilityChanged(boolean available) {
+        Log.d(TAG, "dispatchAvailabilityChanged: ");
         dispatchListeners(DISPATCH_AVAILABILITY_CHANGED, available);
     }
 
     private void dispatchListeners(int message, boolean argument) {
+        Log.d(TAG, "dispatchListeners: ");
         synchronized (mListeners) {
             final int N = mListeners.size();
             boolean cleanup = false;
@@ -173,6 +184,7 @@ public class FlashlightController {
     }
 
     private void cleanUpListenersLocked(FlashlightListener listener) {
+        Log.d(TAG, "cleanUpListenersLocked: ");
         for (int i = mListeners.size() - 1; i >= 0; i--) {
             FlashlightListener found = mListeners.get(i).get();
             if (found == null || found == listener) {
@@ -188,11 +200,13 @@ public class FlashlightController {
         public void onTorchModeUnavailable(String cameraId) {
             if (TextUtils.equals(cameraId, mCameraId)) {
                 setCameraAvailable(false);
+                Log.d(TAG, "mTorchCallback: onTorchModeUnavailable: ");
             }
         }
 
         @Override
         public void onTorchModeChanged(String cameraId, boolean enabled) {
+            Log.d(TAG, "mTorchCallback: onTorchModeChanged: ");
             if (TextUtils.equals(cameraId, mCameraId)) {
                 setCameraAvailable(true);
                 setTorchMode(enabled);
@@ -200,6 +214,7 @@ public class FlashlightController {
         }
 
         private void setCameraAvailable(boolean available) {
+            Log.d(TAG, "mTorchCallback: setCameraAvailable: ");
             boolean changed;
             synchronized (FlashlightController.this) {
                 changed = mTorchAvailable != available;
@@ -212,6 +227,7 @@ public class FlashlightController {
         }
 
         private void setTorchMode(boolean enabled) {
+            Log.d(TAG, "mTorchAvailable: setTorchMode: ");
             boolean changed;
             synchronized (FlashlightController.this) {
                 changed = mFlashlightEnabled != enabled;
