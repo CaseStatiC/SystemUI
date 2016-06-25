@@ -30,6 +30,7 @@ import android.text.format.DateFormat;
 import android.text.style.CharacterStyle;
 import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.android.systemui.DemoMode;
@@ -46,6 +47,7 @@ import libcore.icu.LocaleData;
  * Digital clock for the status bar.
  */
 public class Clock extends TextView implements DemoMode {
+    public static final String TAG = "Clock";
     private boolean mAttached;
     private Calendar mCalendar;
     private String mClockFormatString;
@@ -109,6 +111,7 @@ public class Clock extends TextView implements DemoMode {
 
     @Override
     protected void onDetachedFromWindow() {
+        Log.d(TAG, "onDetachedFromWindow: ");
         super.onDetachedFromWindow();
         if (mAttached) {
             getContext().unregisterReceiver(mIntentReceiver);
@@ -120,6 +123,7 @@ public class Clock extends TextView implements DemoMode {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
+            Log.d(TAG, "mIntentReceiver: onReceive: action = " + action);
             if (action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
                 String tz = intent.getStringExtra("time-zone");
                 mCalendar = Calendar.getInstance(TimeZone.getTimeZone(tz));
@@ -138,12 +142,14 @@ public class Clock extends TextView implements DemoMode {
     };
 
     final void updateClock() {
+        Log.d(TAG, "updateClock: ");
         if (mDemoMode) return;
         mCalendar.setTimeInMillis(System.currentTimeMillis());
         setText(getSmallTime());
     }
 
     private final CharSequence getSmallTime() {
+        Log.d(TAG, "getSmallTime: ");
         Context context = getContext();
         boolean is24 = DateFormat.is24HourFormat(context, ActivityManager.getCurrentUser());
         LocaleData d = LocaleData.get(context.getResources().getConfiguration().locale);
@@ -219,6 +225,7 @@ public class Clock extends TextView implements DemoMode {
 
     @Override
     public void dispatchDemoCommand(String command, Bundle args) {
+        Log.d(TAG, "dispatchDemoCommand: ");
         if (!mDemoMode && command.equals(COMMAND_ENTER)) {
             mDemoMode = true;
         } else if (mDemoMode && command.equals(COMMAND_EXIT)) {
@@ -227,9 +234,12 @@ public class Clock extends TextView implements DemoMode {
         } else if (mDemoMode && command.equals(COMMAND_CLOCK)) {
             String millis = args.getString("millis");
             String hhmm = args.getString("hhmm");
+            Log.d(TAG, "dispatchDemoCommand: if: millis = " + millis);
+            Log.d(TAG, "dispatchDemoCommand: if: hhmm = " + hhmm);
             if (millis != null) {
                 mCalendar.setTimeInMillis(Long.parseLong(millis));
             } else if (hhmm != null && hhmm.length() == 4) {
+                Log.d(TAG, "dispatchDemoCommand: if: else if: ");
                 int hh = Integer.parseInt(hhmm.substring(0, 2));
                 int mm = Integer.parseInt(hhmm.substring(2));
                 boolean is24 = DateFormat.is24HourFormat(
