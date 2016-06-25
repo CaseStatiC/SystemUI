@@ -54,6 +54,8 @@ public class BatteryController extends BroadcastReceiver {
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: fd = " + fd.toString());
+        Log.d(TAG, "dump: pw = " + pw.toString());
         pw.println("BatteryController state:");
         pw.print("  mLevel="); pw.println(mLevel);
         pw.print("  mPluggedIn="); pw.println(mPluggedIn);
@@ -63,15 +65,18 @@ public class BatteryController extends BroadcastReceiver {
     }
 
     public void addStateChangedCallback(BatteryStateChangeCallback cb) {
+        Log.d(TAG, "addStateChangedCallback: ");
         mChangeCallbacks.add(cb);
         cb.onBatteryLevelChanged(mLevel, mPluggedIn, mCharging);
     }
 
     public void removeStateChangedCallback(BatteryStateChangeCallback cb) {
+        Log.d(TAG, "removeStateChangedCallback: ");
         mChangeCallbacks.remove(cb);
     }
 
     public void onReceive(Context context, Intent intent) {
+        Log.d(TAG, "onReceive: ");
         final String action = intent.getAction();
         if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
             mLevel = (int)(100f
@@ -93,14 +98,17 @@ public class BatteryController extends BroadcastReceiver {
     }
 
     public boolean isPowerSave() {
+        Log.d(TAG, "isPowerSave: ");
         return mPowerSave;
     }
 
     private void updatePowerSave() {
+        Log.d(TAG, "updatePowerSave: ");
         setPowerSave(mPowerManager.isPowerSaveMode());
     }
 
     private void setPowerSave(boolean powerSave) {
+        Log.d(TAG, "setPowerSave: ");
         if (powerSave == mPowerSave) return;
         mPowerSave = powerSave;
         if (DEBUG) Log.d(TAG, "Power save is " + (mPowerSave ? "on" : "off"));
@@ -108,6 +116,7 @@ public class BatteryController extends BroadcastReceiver {
     }
 
     private void fireBatteryLevelChanged() {
+        Log.d(TAG, "fireBatteryLevelChanged: ");
         final int N = mChangeCallbacks.size();
         for (int i = 0; i < N; i++) {
             mChangeCallbacks.get(i).onBatteryLevelChanged(mLevel, mPluggedIn, mCharging);
@@ -115,6 +124,7 @@ public class BatteryController extends BroadcastReceiver {
     }
 
     private void firePowerSaveChanged() {
+        Log.d(TAG, "firePowerSaveChanged: ");
         final int N = mChangeCallbacks.size();
         for (int i = 0; i < N; i++) {
             mChangeCallbacks.get(i).onPowerSaveChanged();
