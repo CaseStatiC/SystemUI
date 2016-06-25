@@ -17,6 +17,7 @@ package com.android.systemui.statusbar.policy;
 
 import android.content.Context;
 import android.net.NetworkCapabilities;
+import android.util.Log;
 
 import com.android.systemui.statusbar.policy.NetworkController.IconState;
 
@@ -25,11 +26,12 @@ import java.util.BitSet;
 
 public class EthernetSignalController extends
         SignalController<SignalController.State, SignalController.IconGroup> {
-
+    public static final String TAG = "EthernetSignalController";
     public EthernetSignalController(Context context,
             CallbackHandler callbackHandler, NetworkControllerImpl networkController) {
         super("EthernetSignalController", context, NetworkCapabilities.TRANSPORT_ETHERNET,
                 callbackHandler, networkController);
+        Log.d(TAG, "EthernetSignalController: ");
         mCurrentState.iconGroup = mLastState.iconGroup = new IconGroup(
                 "Ethernet Icons",
                 EthernetIcons.ETHERNET_ICONS,
@@ -41,12 +43,14 @@ public class EthernetSignalController extends
 
     @Override
     public void updateConnectivity(BitSet connectedTransports, BitSet validatedTransports) {
+        Log.d(TAG, "updateConnectivity: ");
         mCurrentState.connected = connectedTransports.get(mTransportType);
         super.updateConnectivity(connectedTransports, validatedTransports);
     }
 
     @Override
     public void notifyListeners() {
+        Log.d(TAG, "notifyListeners: ");
         boolean ethernetVisible = mCurrentState.connected;
         String contentDescription = getStringIfExists(getContentDescription());
 
@@ -57,6 +61,7 @@ public class EthernetSignalController extends
 
     @Override
     public SignalController.State cleanState() {
+        Log.d(TAG, "cleanState: ");
         return new SignalController.State();
     }
 }
