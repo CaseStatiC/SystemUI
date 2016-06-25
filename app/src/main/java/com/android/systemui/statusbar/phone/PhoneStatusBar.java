@@ -4130,6 +4130,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     public void onActivationReset(ActivatableNotificationView view) {
+        Log.d(TAG, "onActivationReset: ");
         if (view == mStackScroller.getActivatedChild()) {
             mKeyguardIndicationController.hideTransientIndication();
             mStackScroller.setActivatedChild(null);
@@ -4137,35 +4138,43 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     }
 
     public void onTrackingStarted() {
+        Log.d(TAG, "onTrackingStarted: ");
         runPostCollapseRunnables();
     }
 
     public void onClosingFinished() {
+        Log.d(TAG, "onClosingFinished: ");
         runPostCollapseRunnables();
     }
 
     public void onUnlockHintStarted() {
+        Log.d(TAG, "onUnlockHintStarted: ");
         mKeyguardIndicationController.showTransientIndication(R.string.keyguard_unlock);
     }
 
     public void onHintFinished() {
+        Log.d(TAG, "onHintFinished: ");
         // Delay the reset a bit so the user can read the text.
         mKeyguardIndicationController.hideTransientIndicationDelayed(HINT_RESET_DELAY_MS);
     }
 
     public void onCameraHintStarted() {
+        Log.d(TAG, "onCameraHintStarted: ");
         mKeyguardIndicationController.showTransientIndication(R.string.camera_hint);
     }
 
     public void onVoiceAssistHintStarted() {
+        Log.d(TAG, "onVoiceAssistHintStarted: ");
         mKeyguardIndicationController.showTransientIndication(R.string.voice_hint);
     }
 
     public void onPhoneHintStarted() {
+        Log.d(TAG, "onPhoneHintStarted: ");
         mKeyguardIndicationController.showTransientIndication(R.string.phone_hint);
     }
 
     public void onTrackingStopped(boolean expand) {
+        Log.d(TAG, "onTrackingStopped: expand = " + expand);
         if (mState == StatusBarState.KEYGUARD || mState == StatusBarState.SHADE_LOCKED) {
             if (!expand && !mUnlockMethodCache.canSkipBouncer()) {
                 showBouncer();
@@ -4175,10 +4184,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     protected int getMaxKeyguardNotifications() {
+        Log.d(TAG, "getMaxKeyguardNotifications: ");
         return mKeyguardMaxNotificationCount;
     }
 
     public NavigationBarView getNavigationBarView() {
+        Log.d(TAG, "getNavigationBarView: ");
         return mNavigationBarView;
     }
 
@@ -4186,6 +4197,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     public boolean onDraggedDown(View startingChild, int dragLengthY) {
+        Log.d(TAG, "onDraggedDown: ");
         if (hasActiveNotifications()) {
             EventLogTags.writeSysuiLockscreenGesture(
                     EventLogConstants.SYSUI_LOCKSCREEN_GESTURE_SWIPE_DOWN_FULL_SHADE,
@@ -4204,21 +4216,25 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     public void onDragDownReset() {
+        Log.d(TAG, "onDragDownReset: ");
         mStackScroller.setDimmed(true /* dimmed */, true /* animated */);
     }
 
     @Override
     public void onThresholdReached() {
+        Log.d(TAG, "onThresholdReached: ");
         mStackScroller.setDimmed(false /* dimmed */, true /* animate */);
     }
 
     @Override
     public void onTouchSlopExceeded() {
+        Log.d(TAG, "onTouchSlopExceeded: ");
         mStackScroller.removeLongPressCallback();
     }
 
     @Override
     public void setEmptyDragAmount(float amount) {
+        Log.d(TAG, "setEmptyDragAmount: amount = " + amount);
         mNotificationPanel.setEmptyDragAmount(amount);
     }
 
@@ -4230,6 +4246,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
      * @param expandView The view to expand after going to the shade.
      */
     public void goToLockedShade(View expandView) {
+        Log.d(TAG, "goToLockedShade: ");
         ExpandableNotificationRow row = null;
         if (expandView instanceof ExpandableNotificationRow) {
             row = (ExpandableNotificationRow) expandView;
@@ -4255,6 +4272,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
      * Goes back to the keyguard after hanging around in {@link StatusBarState#SHADE_LOCKED}.
      */
     public void goToKeyguard() {
+        Log.d(TAG, "goToKeyguard: ");
         if (mState == StatusBarState.SHADE_LOCKED) {
             mStackScroller.onGoToKeyguard();
             setBarState(StatusBarState.KEYGUARD);
@@ -4263,25 +4281,30 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     }
 
     public long getKeyguardFadingAwayDelay() {
+        Log.d(TAG, "getKeyguardFadingAwayDelay: ");
         return mKeyguardFadingAwayDelay;
     }
 
     public long getKeyguardFadingAwayDuration() {
+        Log.d(TAG, "getKeyguardFadingAwayDuration: ");
         return mKeyguardFadingAwayDuration;
     }
 
     @Override
     public void setBouncerShowing(boolean bouncerShowing) {
+        Log.d(TAG, "setBouncerShowing: ");
         super.setBouncerShowing(bouncerShowing);
         mStatusBarView.setBouncerShowing(bouncerShowing);
         disable(mDisabledUnmodified1, mDisabledUnmodified2, true /* animate */);
     }
 
     public void onStartedGoingToSleep() {
+        Log.d(TAG, "onStartedGoingToSleep: ");
         mStartedGoingToSleep = true;
     }
 
     public void onFinishedGoingToSleep() {
+        Log.d(TAG, "onFinishedGoingToSleep: ");
         mNotificationPanel.onAffordanceLaunchEnded();
         releaseGestureWakeLock();
         mLaunchCameraOnScreenTurningOn = false;
@@ -4306,6 +4329,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     }
 
     public void onStartedWakingUp() {
+        Log.d(TAG, "onStartedWakingUp: ");
         mDeviceInteractive = true;
         mStackScroller.setAnimationsEnabled(true);
         mNotificationPanel.setTouchDisabled(false);
@@ -4313,6 +4337,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     }
 
     public void onScreenTurningOn() {
+        Log.d(TAG, "onScreenTurningOn: ");
         mScreenTurningOn = true;
         mNotificationPanel.onScreenTurningOn();
         if (mLaunchCameraOnScreenTurningOn) {
@@ -4322,11 +4347,13 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     }
 
     private void vibrateForCameraGesture() {
+        Log.d(TAG, "vibrateForCameraGesture: ");
         // Make sure to pass -1 for repeat so VibratorService doesn't stop us when going to sleep.
         mVibrator.vibrate(new long[] { 0, 750L }, -1 /* repeat */);
     }
 
     public void onScreenTurnedOn() {
+        Log.d(TAG, "onScreenTurnedOn: ");
         mScreenTurningOn = false;
         mDozeScrimController.onScreenTurnedOn();
     }
@@ -4345,6 +4372,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
      * 2) Back is long-pressed without recents.
      */
     private void handleLongPressBackRecents(View v) {
+        Log.d(TAG, "handleLongPressBackRecents: ");
         try {
             boolean sendBackLongPress = false;
             IActivityManager activityManager = ActivityManagerNative.getDefault();
@@ -4390,6 +4418,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     protected void showRecents(boolean triggeredFromAltTab) {
+        Log.d(TAG, "showRecents: ");
         // Set the recents visibility flag
         mSystemUiVisibility |= View.RECENT_APPS_VISIBLE;
         notifyUiVisibilityChanged(mSystemUiVisibility);
@@ -4398,6 +4427,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     protected void hideRecents(boolean triggeredFromAltTab, boolean triggeredFromHomeKey) {
+        Log.d(TAG, "hideRecents: ");
         // Unset the recents visibility flag
         mSystemUiVisibility &= ~View.RECENT_APPS_VISIBLE;
         notifyUiVisibilityChanged(mSystemUiVisibility);
@@ -4406,6 +4436,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     protected void toggleRecents() {
+        Log.d(TAG, "toggleRecents: ");
         // Toggle the recents visibility flag
         mSystemUiVisibility ^= View.RECENT_APPS_VISIBLE;
         notifyUiVisibilityChanged(mSystemUiVisibility);
@@ -4414,6 +4445,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     public void onVisibilityChanged(boolean visible) {
+        Log.d(TAG, "onVisibilityChanged: ");
         // Update the recents visibility flag
         if (visible) {
             mSystemUiVisibility |= View.RECENT_APPS_VISIBLE;
@@ -4425,6 +4457,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     public void showScreenPinningRequest() {
+        Log.d(TAG, "showScreenPinningRequest: ");
         if (mKeyguardMonitor.isShowing()) {
             // Don't allow apps to trigger this from keyguard.
             return;
@@ -4434,14 +4467,17 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     }
 
     public void showScreenPinningRequest(boolean allowCancel) {
+        Log.d(TAG, "showScreenPinningRequest: ");
         mScreenPinningRequest.showPrompt(allowCancel);
     }
 
     public boolean hasActiveNotifications() {
+        Log.d(TAG, "hasActiveNotifications: ");
         return !mNotificationData.getActiveNotifications().isEmpty();
     }
 
     public void wakeUpIfDozing(long time, MotionEvent event) {
+        Log.d(TAG, "wakeUpIfDozing: ");
         if (mDozing && mDozeScrimController.isPulsing()) {
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
             pm.wakeUp(time, "com.android.systemui:NODOZE");
@@ -4454,7 +4490,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     public void appTransitionPending() {
-
+        Log.d(TAG, "appTransitionPending: ");
         // Use own timings when Keyguard is going away, see keyguardGoingAway and
         // setKeyguardFadingAway
         if (!mKeyguardFadingAway) {
@@ -4464,12 +4500,13 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     public void appTransitionCancelled() {
+        Log.d(TAG, "appTransitionCancelled: ");
         mIconController.appTransitionCancelled();
     }
 
     @Override
     public void appTransitionStarting(long startTime, long duration) {
-
+        Log.d(TAG, "appTransitionStarting: ");
         // Use own timings when Keyguard is going away, see keyguardGoingAway and
         // setKeyguardFadingAway.
         if (!mKeyguardGoingAway) {
@@ -4482,6 +4519,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     public void onCameraLaunchGestureDetected(int source) {
+        Log.d(TAG, "onCameraLaunchGestureDetected: ");
         mLastCameraLaunchSource = source;
         if (mStartedGoingToSleep) {
             mLaunchCameraOnFinishedGoingToSleep = true;
@@ -4520,10 +4558,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     }
 
     public void notifyFpAuthModeChanged() {
+        Log.d(TAG, "notifyFpAuthModeChanged: ");
         updateDozing();
     }
 
     private void updateDozing() {
+        Log.d(TAG, "updateDozing: ");
         // When in wake-and-unlock while pulsing, keep dozing state until fully unlocked.
         mDozing = mDozingRequested && mState == StatusBarState.KEYGUARD
                 || mFingerprintUnlockController.getMode()
@@ -4536,6 +4576,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         private final ArraySet<String> mNewVisibleNotifications = new ArraySet<String>();
 
         public void check() {
+            Log.d(TAG, "ShadeUpdates: check: ");
             mNewVisibleNotifications.clear();
             ArrayList<Entry> activeNotifications = mNotificationData.getActiveNotifications();
             for (int i = 0; i < activeNotifications.size(); i++) {
@@ -4572,22 +4613,27 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         @Override
         public String toString() {
+            Log.d(TAG, "DozeServiceHost: toString: ");
             return "PSB.DozeServiceHost[mCallbacks=" + mCallbacks.size() + "]";
         }
 
         public void firePowerSaveChanged(boolean active) {
+            Log.d(TAG, "DozeServiceHost: firePowerSaveChanged: ");
+
             for (Callback callback : mCallbacks) {
                 callback.onPowerSaveChanged(active);
             }
         }
 
         public void fireBuzzBeepBlinked() {
+            Log.d(TAG, "DozeServiceHost: fireBuzzBeepBlinked: ");
             for (Callback callback : mCallbacks) {
                 callback.onBuzzBeepBlinked();
             }
         }
 
         public void fireNotificationLight(boolean on) {
+            Log.d(TAG, "DozeServiceHost: fireNotificationLight: ");
             mNotificationLightOn = on;
             for (Callback callback : mCallbacks) {
                 callback.onNotificationLight(on);
@@ -4595,6 +4641,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
 
         public void fireNewNotifications() {
+            Log.d(TAG, "DozeServiceHost: fireNewNotifications: ");
             for (Callback callback : mCallbacks) {
                 callback.onNewNotifications();
             }
@@ -4602,46 +4649,56 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         @Override
         public void addCallback(@NonNull Callback callback) {
+            Log.d(TAG, "DozeServiceHost: addCallback: ");
             mCallbacks.add(callback);
         }
 
         @Override
         public void removeCallback(@NonNull Callback callback) {
+            Log.d(TAG, "DozeServiceHost: removeCallback: ");
             mCallbacks.remove(callback);
         }
 
         @Override
         public void startDozing(@NonNull Runnable ready) {
+            Log.d(TAG, "DozeServiceHost: startDozing: ");
             mHandler.obtainMessage(H.MSG_START_DOZING, ready).sendToTarget();
         }
 
         @Override
         public void pulseWhileDozing(@NonNull PulseCallback callback, int reason) {
+            Log.d(TAG, "DozeServiceHost: pulseWhileDozing: ");
             mHandler.obtainMessage(H.MSG_PULSE_WHILE_DOZING, reason, 0, callback).sendToTarget();
         }
 
         @Override
         public void stopDozing() {
+            Log.d(TAG, "DozeServiceHost: stopDozing: ");
             mHandler.obtainMessage(H.MSG_STOP_DOZING).sendToTarget();
         }
 
         @Override
         public boolean isPowerSaveActive() {
+            Log.d(TAG, "DozeServiceHost: isPowerSaveActive: ");
             return mBatteryController != null && mBatteryController.isPowerSave();
         }
 
         @Override
         public boolean isPulsingBlocked() {
+            Log.d(TAG, "DozeServiceHost: isPulsingBlocked: ");
             return mFingerprintUnlockController.getMode()
                     == FingerprintUnlockController.MODE_WAKE_AND_UNLOCK;
         }
 
         @Override
         public boolean isNotificationLightOn() {
+            Log.d(TAG, "DozeServiceHost: isNotificationLightOn: ");
             return mNotificationLightOn;
         }
 
         private void handleStartDozing(@NonNull Runnable ready) {
+            Log.d(TAG, "DozeServiceHost: handleStartDozing: ");
+
             if (!mDozingRequested) {
                 mDozingRequested = true;
                 DozeLog.traceDozing(mContext, mDozing);
@@ -4651,10 +4708,13 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
 
         private void handlePulseWhileDozing(@NonNull PulseCallback callback, int reason) {
+            Log.d(TAG, "DozeServiceHost: handlePulseWhileDozing: ");
             mDozeScrimController.pulse(callback, reason);
         }
 
         private void handleStopDozing() {
+            Log.d(TAG, "DozeServiceHost: handleStopDozing: ");
+
             if (mDozingRequested) {
                 mDozingRequested = false;
                 DozeLog.traceDozing(mContext, mDozing);
@@ -4669,6 +4729,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
             @Override
             public void handleMessage(Message msg) {
+                Log.d(TAG, "H: handleMessage: msg.what = " + msg.what);
                 switch (msg.what) {
                     case MSG_START_DOZING:
                         handleStartDozing((Runnable) msg.obj);
