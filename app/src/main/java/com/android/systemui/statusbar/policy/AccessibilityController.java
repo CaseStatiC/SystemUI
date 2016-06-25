@@ -17,6 +17,7 @@
 package com.android.systemui.statusbar.policy;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 
 import java.io.FileDescriptor;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 public class AccessibilityController implements
         AccessibilityManager.AccessibilityStateChangeListener,
         AccessibilityManager.TouchExplorationStateChangeListener {
+    public static final String  TAG = "AccessibilityManager";
 
     private final ArrayList<AccessibilityStateChangedCallback> mChangeCallbacks = new ArrayList<>();
 
@@ -33,6 +35,7 @@ public class AccessibilityController implements
     private boolean mTouchExplorationEnabled;
 
     public AccessibilityController(Context context) {
+        Log.d(TAG, "AccessibilityController: ");
         AccessibilityManager am =
                 (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
         am.addTouchExplorationStateChangeListener(this);
@@ -42,29 +45,35 @@ public class AccessibilityController implements
     }
 
     public boolean isAccessibilityEnabled() {
+        Log.d(TAG, "isAccessibilityEnabled: ");
         return mAccessibilityEnabled;
     }
 
     public boolean isTouchExplorationEnabled() {
+        Log.d(TAG, "isTouchExplorationEnabled: ");
         return mTouchExplorationEnabled;
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println("AccessibilityController state:");
         pw.print("  mAccessibilityEnabled="); pw.println(mAccessibilityEnabled);
         pw.print("  mTouchExplorationEnabled="); pw.println(mTouchExplorationEnabled);
     }
 
     public void addStateChangedCallback(AccessibilityStateChangedCallback cb) {
+        Log.d(TAG, "addStateChangedCallback: ");
         mChangeCallbacks.add(cb);
         cb.onStateChanged(mAccessibilityEnabled, mTouchExplorationEnabled);
     }
 
     public void removeStateChangedCallback(AccessibilityStateChangedCallback cb) {
+        Log.d(TAG, "removeStateChangedCallback: ");
         mChangeCallbacks.remove(cb);
     }
 
     private void fireChanged() {
+        Log.d(TAG, "fireChanged: ");
         final int N = mChangeCallbacks.size();
         for (int i = 0; i < N; i++) {
             mChangeCallbacks.get(i).onStateChanged(mAccessibilityEnabled, mTouchExplorationEnabled);
@@ -73,12 +82,14 @@ public class AccessibilityController implements
 
     @Override
     public void onAccessibilityStateChanged(boolean enabled) {
+        Log.d(TAG, "onAccessibilityStateChanged: ");
         mAccessibilityEnabled = enabled;
         fireChanged();
     }
 
     @Override
     public void onTouchExplorationStateChanged(boolean enabled) {
+        Log.d(TAG, "onTouchExplorationStateChanged: ");
         mTouchExplorationEnabled = enabled;
         fireChanged();
     }
