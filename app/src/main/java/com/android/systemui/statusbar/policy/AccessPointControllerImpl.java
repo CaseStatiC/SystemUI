@@ -67,16 +67,19 @@ public class AccessPointControllerImpl
     }
 
     public boolean canConfigWifi() {
+        Log.d(TAG, "canConfigWifi: ");
         return !mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_WIFI,
                 new UserHandle(mCurrentUser));
     }
 
     public void onUserSwitched(int newUserId) {
+        Log.d(TAG, "onUserSwitched: ");
         mCurrentUser = newUserId;
     }
 
     @Override
     public void addAccessPointCallback(AccessPointCallback callback) {
+        Log.d(TAG, "addAccessPointCallback: ");
         if (callback == null || mCallbacks.contains(callback)) return;
         if (DEBUG) Log.d(TAG, "addCallback " + callback);
         mCallbacks.add(callback);
@@ -87,6 +90,7 @@ public class AccessPointControllerImpl
 
     @Override
     public void removeAccessPointCallback(AccessPointCallback callback) {
+        Log.d(TAG, "removeAccessPointCallback: ");
         if (callback == null) return;
         if (DEBUG) Log.d(TAG, "removeCallback " + callback);
         mCallbacks.remove(callback);
@@ -97,17 +101,20 @@ public class AccessPointControllerImpl
 
     @Override
     public void scanForAccessPoints() {
+        Log.d(TAG, "scanForAccessPoints: ");
         if (DEBUG) Log.d(TAG, "scan!");
         mWifiTracker.forceScan();
     }
 
     @Override
     public int getIcon(AccessPoint ap) {
+        Log.d(TAG, "getIcon: ");
         int level = ap.getLevel();
         return ICONS[level >= 0 ? level : 0];
     }
 
     public boolean connect(AccessPoint ap) {
+        Log.d(TAG, "connect: ");
         if (ap == null) return false;
         if (DEBUG) Log.d(TAG, "connect networkId=" + ap.getConfig().networkId);
         if (ap.isSaved()) {
@@ -129,43 +136,51 @@ public class AccessPointControllerImpl
     }
 
     private void fireSettingsIntentCallback(Intent intent) {
+        Log.d(TAG, "fireSettingsIntentCallback: ");
         for (AccessPointCallback callback : mCallbacks) {
             callback.onSettingsActivityTriggered(intent);
         }
     }
 
     private void fireAcccessPointsCallback(List<AccessPoint> aps) {
+        Log.d(TAG, "fireAcccessPointsCallback: ");
         for (AccessPointCallback callback : mCallbacks) {
             callback.onAccessPointsChanged(aps);
         }
     }
 
     public void dump(PrintWriter pw) {
+        Log.d(TAG, "dump: ");
         mWifiTracker.dump(pw);
     }
 
     @Override
     public void onWifiStateChanged(int state) {
+        Log.d(TAG, "onWifiStateChanged: ");
     }
 
     @Override
     public void onConnectedChanged() {
+        Log.d(TAG, "onConnectedChanged: ");
         fireAcccessPointsCallback(mWifiTracker.getAccessPoints());
     }
 
     @Override
     public void onAccessPointsChanged() {
+        Log.d(TAG, "onAccessPointsChanged: ");
         fireAcccessPointsCallback(mWifiTracker.getAccessPoints());
     }
 
     private final ActionListener mConnectListener = new ActionListener() {
         @Override
         public void onSuccess() {
+            Log.d(TAG, "mConnectListener: onSuccess: ");
             if (DEBUG) Log.d(TAG, "connect success");
         }
 
         @Override
         public void onFailure(int reason) {
+            Log.d(TAG, "mConnectListener: onFailure: ");
             if (DEBUG) Log.d(TAG, "connect failure reason=" + reason);
         }
     };
