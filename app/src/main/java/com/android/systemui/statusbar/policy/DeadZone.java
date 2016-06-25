@@ -22,6 +22,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.Slog;
 import android.view.MotionEvent;
 import android.view.View;
@@ -51,17 +52,19 @@ public class DeadZone extends View {
     private final Runnable mDebugFlash = new Runnable() {
         @Override
         public void run() {
+            Log.d(TAG, "mDebugFlash: run: ");
             ObjectAnimator.ofFloat(DeadZone.this, "flash", 1f, 0f).setDuration(150).start();
         }
     };
 
     public DeadZone(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
+        Log.d(TAG, "DeadZone: ");
     }
 
     public DeadZone(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
-
+        Log.d(TAG, "DeadZone: ");
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DeadZone,
                 defStyle, 0);
 
