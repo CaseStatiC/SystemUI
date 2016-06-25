@@ -1,0 +1,64 @@
+[
+    {
+        "outputFile": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/values-ar-large-v4/values-ar-large-v4.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 113,
+                    "endOffset": 164
+                },
+                "from": {
+                    "file": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/values-ar-large/strings.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 4,
+                        "startOffset": 1004,
+                        "endColumn": 113,
+                        "endOffset": 1113
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 169,
+                    "endColumn": 97,
+                    "endOffset": 262
+                },
+                "from": {
+                    "file": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/values-ar-large/strings.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 906,
+                        "endColumn": 97,
+                        "endOffset": 999
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 267,
+                    "endColumn": 94,
+                    "endOffset": 357
+                },
+                "from": {
+                    "file": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/values-ar-large/strings.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 811,
+                        "endColumn": 94,
+                        "endOffset": 901
+                    }
+                }
+            }
+        ]
+    }
+]

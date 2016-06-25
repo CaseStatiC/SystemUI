@@ -1,0 +1,64 @@
+[
+    {
+        "outputFile": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/values-zh-rCN-large-v4/values-zh-rCN-large-v4.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 95,
+                    "endOffset": 146
+                },
+                "from": {
+                    "file": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/values-zh-rCN-large/strings.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 4,
+                        "startOffset": 992,
+                        "endColumn": 95,
+                        "endOffset": 1083
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 151,
+                    "endColumn": 89,
+                    "endOffset": 236
+                },
+                "from": {
+                    "file": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/values-zh-rCN-large/strings.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 902,
+                        "endColumn": 89,
+                        "endOffset": 987
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 241,
+                    "endColumn": 90,
+                    "endOffset": 327
+                },
+                "from": {
+                    "file": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/values-zh-rCN-large/strings.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 811,
+                        "endColumn": 90,
+                        "endOffset": 897
+                    }
+                }
+            }
+        ]
+    }
+]

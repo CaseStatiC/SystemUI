@@ -1,0 +1,64 @@
+[
+    {
+        "outputFile": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/values-sw720dp-land-v13/values-sw720dp-land-v13.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 65,
+                    "endOffset": 116
+                },
+                "from": {
+                    "file": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/values-sw720dp-land/dimens.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 948,
+                        "endColumn": 65,
+                        "endOffset": 1009
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 121,
+                    "endColumn": 65,
+                    "endOffset": 182
+                },
+                "from": {
+                    "file": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/values-sw720dp-land/dimens.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 1014,
+                        "endColumn": 65,
+                        "endOffset": 1075
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 187,
+                    "endColumn": 63,
+                    "endOffset": 246
+                },
+                "from": {
+                    "file": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/values-sw720dp-land/config.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 691,
+                        "endColumn": 63,
+                        "endOffset": 750
+                    }
+                }
+            }
+        ]
+    }
+]

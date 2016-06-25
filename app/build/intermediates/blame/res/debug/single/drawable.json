@@ -1,0 +1,286 @@
+[
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/recents_task_view_header_bg_color.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/recents_task_view_header_bg_color.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/scorecard.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/scorecard.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_dnd_disable_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_dnd_disable_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/stat_sys_location.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/stat_sys_location.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_hotspot_disable_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_hotspot_disable_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/screen_pinning_light_bg_circ.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/screen_pinning_light_bg_circ.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_volume_expand_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_volume_expand_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_notify_button_bg.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_notify_button_bg.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_signal_airplane_enable_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_signal_airplane_enable_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/keyguard_overflow_number_background.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/keyguard_overflow_number_background.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/stat_sys_alarm_dim.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/stat_sys_alarm_dim.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/stat_sys_ringer_silent.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/stat_sys_ringer_silent.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/dismiss_all_shape_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/dismiss_all_shape_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ripple_drawable_20dp.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ripple_drawable_20dp.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/trusted_state_to_error_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/trusted_state_to_error_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/stat_sys_zen_none.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/stat_sys_zen_none.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/stat_sys_hotspot.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/stat_sys_hotspot.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_expand_children.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_expand_children.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/scorecard_gameover.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/scorecard_gameover.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/segmented_buttons_background.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/segmented_buttons_background.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/lockscreen_fingerprint_draw_off_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/lockscreen_fingerprint_draw_off_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/recents_lock_to_task_button_bg.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/recents_lock_to_task_button_bg.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/volume_dialog_background.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/volume_dialog_background.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/stat_sys_ringer_vibrate.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/stat_sys_ringer_vibrate.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_signal_airplane_disable_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_signal_airplane_disable_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/qs_tile_background.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/qs_tile_background.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_landscape_from_auto_rotate_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_landscape_from_auto_rotate_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/zen_introduction_message_background.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/zen_introduction_message_background.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_qs_signal_carrier_network_change_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_qs_signal_carrier_network_change_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/qs_navbar_scrim.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/qs_navbar_scrim.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/lockscreen_fingerprint_fp_to_error_state_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/lockscreen_fingerprint_fp_to_error_state_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/stat_sys_signal_carrier_network_change_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/stat_sys_signal_carrier_network_change_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/assist_orb_scrim.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/assist_orb_scrim.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_landscape_to_auto_rotate_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_landscape_to_auto_rotate_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_portrait_from_auto_rotate_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_portrait_from_auto_rotate_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_collapse_children.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_collapse_children.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_invert_colors_enable_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_invert_colors_enable_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/btn_borderless_rect.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/btn_borderless_rect.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_signal_flashlight_disable_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_signal_flashlight_disable_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_invert_colors_disable_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_invert_colors_disable_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/stat_sys_alarm.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/stat_sys_alarm.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_signal_location_disable_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_signal_location_disable_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_signal_location_enable_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_signal_location_enable_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/lockscreen_fingerprint_error_state_to_fp_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/lockscreen_fingerprint_error_state_to_fp_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/notification_header_bg.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/notification_header_bg.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/notification_material_bg.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/notification_material_bg.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_volume_collapse_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_volume_collapse_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/lockscreen_fingerprint_draw_on_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/lockscreen_fingerprint_draw_on_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_qs_brightness_auto_off.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_qs_brightness_auto_off.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/recents_task_view_header_bg.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/recents_task_view_header_bg.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/indeterminate_anim.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/indeterminate_anim.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_hotspot_enable_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_hotspot_enable_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/notification_guts_bg.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/notification_guts_bg.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/screen_pinning_bg_circ.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/screen_pinning_bg_circ.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_qs_brightness_auto_on.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_qs_brightness_auto_on.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/heads_up_scrim.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/heads_up_scrim.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/qs_detail_background.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/qs_detail_background.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/qs_background_primary.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/qs_background_primary.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/qs_background_secondary.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/qs_background_secondary.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/notification_material_bg_dim.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/notification_material_bg_dim.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/recents_button_bg.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/recents_button_bg.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/brightness_mirror_background.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/brightness_mirror_background.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_portrait_to_auto_rotate_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_portrait_to_auto_rotate_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/stat_sys_dnd.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/stat_sys_dnd.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/stat_sys_cast.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/stat_sys_cast.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/error_to_trustedstate_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/error_to_trustedstate_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_dnd_total_silence_disable_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_dnd_total_silence_disable_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/stat_sys_dnd_total_silence.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/stat_sys_dnd_total_silence.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/assist_orb_navbar_scrim.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/assist_orb_navbar_scrim.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/stat_sys_zen_important.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/stat_sys_zen_important.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable/ic_signal_flashlight_enable_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable/ic_signal_flashlight_enable_animation.xml"
+    }
+]

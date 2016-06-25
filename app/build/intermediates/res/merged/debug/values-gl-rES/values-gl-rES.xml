@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals formatted="false" msgid="9138535907802238759" name="status_bar_accessibility_recent_apps">
+      <item quantity="other">%d pantallas en visión xeral</item>
+      <item quantity="one">Unha pantalla en visión xeral</item>
+    </plurals>
+    <string msgid="834748999790763092" name="accessibility_airplane_mode">"Modo avión"</string>
+    <string msgid="567011538994429120" name="accessibility_back">"Volver"</string>
+    <string msgid="8909122401720158582" name="accessibility_battery_full">"Batería cargada"</string>
+    <string msgid="7451474187113371965" name="accessibility_battery_level">"Carga da batería: <ns1:g id="NUMBER">%d</ns1:g> por cento."</string>
+    <string msgid="7774887721891057523" name="accessibility_battery_one_bar">"Unha barra de batería"</string>
+    <string msgid="2302983330865040446" name="accessibility_battery_three_bars">"Tres barras de batería"</string>
+    <string msgid="8500650438735009973" name="accessibility_battery_two_bars">"Dúas barras de batería"</string>
+    <string msgid="2707027633242983370" name="accessibility_bluetooth_connected">"Bluetooth conectado"</string>
+    <string msgid="7416648669976870175" name="accessibility_bluetooth_disconnected">"Bluetooth desconectado"</string>
+    <string msgid="8441517146585531676" name="accessibility_bluetooth_name">"Conectado a <ns1:g id="BLUETOOTH">%s</ns1:g>."</string>
+    <string msgid="4102784498140271969" name="accessibility_bluetooth_tether">"Ancoraxe de Bluetooth."</string>
+    <string msgid="8003681285547803095" name="accessibility_brightness">"Brillo de pantalla"</string>
+    <string msgid="8064671582820358152" name="accessibility_camera_button">"Cámara"</string>
+    <string msgid="4017301580441304305" name="accessibility_carrier_network_change_mode">"Cambio de rede do operador."</string>
+    <string msgid="1430668982271976172" name="accessibility_casting_turned_off">"Detívose a emisión en pantalla."</string>
+    <string msgid="5235938559247164925" name="accessibility_clear_all">"Eliminar todas as notificacións."</string>
+    <string msgid="8461115318742350699" name="accessibility_compatibility_zoom_button">"Botón de zoom de compatibilidade"</string>
+    <string msgid="4220687294564945780" name="accessibility_compatibility_zoom_example">"Zoom de compatibilidade co tamaño da pantalla."</string>
+    <string msgid="994133468120244018" name="accessibility_data_connection_1x">"1 X"</string>
+    <string msgid="8664845609981692001" name="accessibility_data_connection_3.5g">"3.5G"</string>
+    <string msgid="8628562305003568260" name="accessibility_data_connection_3g">"3G"</string>
+    <string msgid="7741000750630089612" name="accessibility_data_connection_4g">"4G"</string>
+    <string msgid="6132648193978823023" name="accessibility_data_connection_cdma">"CDMA"</string>
+    <string msgid="4477457051631979278" name="accessibility_data_connection_edge">"Edge"</string>
+    <string msgid="1606477224486747751" name="accessibility_data_connection_gprs">"GPRS"</string>
+    <string msgid="2032328855462645198" name="accessibility_data_connection_hspa">"HSPA"</string>
+    <string msgid="5413468808637540658" name="accessibility_data_connection_lte">"LTE"</string>
+    <string msgid="5977362333466556094" name="accessibility_data_connection_roaming">"Itinerancia"</string>
+    <string msgid="2324496756590645221" name="accessibility_data_connection_wifi">"Wi-Fi"</string>
+    <string msgid="1415625833238273628" name="accessibility_data_one_bar">"Unha barra de sinal de datos"</string>
+    <string msgid="2708384608124519369" name="accessibility_data_signal_full">"Sinal de datos: completo"</string>
+    <string msgid="9167670452395038520" name="accessibility_data_three_bars">"Tres barras de sinal de datos"</string>
+    <string msgid="6166018492360432091" name="accessibility_data_two_bars">"Sinal de datos: dúas barras"</string>
+    <string msgid="7479755364962766729" name="accessibility_desc_close">"Pechar"</string>
+    <string msgid="8366256693719499665" name="accessibility_desc_connected">"Conectado"</string>
+    <string msgid="3812924520316280149" name="accessibility_desc_connecting">"Conectando."</string>
+    <string msgid="5625143713611759164" name="accessibility_desc_lock_screen">"Pantalla de bloqueo."</string>
+    <string msgid="4690274844447504208" name="accessibility_desc_notification_shade">"Sombra de notificación"</string>
+    <string msgid="6475508157786853157" name="accessibility_desc_off">"Desactivada"</string>
+    <string msgid="2385254693624345265" name="accessibility_desc_on">"Activada"</string>
+    <string msgid="6186378411582437046" name="accessibility_desc_quick_settings">"Configuración rápida"</string>
+    <string msgid="4876900986661819788" name="accessibility_desc_recent_apps">"Visión xeral."</string>
+    <string msgid="3417884241751434521" name="accessibility_desc_settings">"Configuración"</string>
+    <string msgid="2692130313069182636" name="accessibility_ethernet_connected">"Conectouse a Ethernet."</string>
+    <string msgid="5896059303377589469" name="accessibility_ethernet_disconnected">"Desconectouse a Ethernet."</string>
+    <string msgid="8959333351058967158" name="accessibility_gps_acquiring">"Obtendo GPS."</string>
+    <string msgid="3511469499240123019" name="accessibility_gps_enabled">"GPS activado"</string>
+    <string msgid="8217216074895377641" name="accessibility_home">"Inicio"</string>
+    <string msgid="2427290146138169014" name="accessibility_location_active">"Solicitudes de localización activas"</string>
+    <string msgid="6613641363112584120" name="accessibility_managed_profile">"Perfil de traballo"</string>
+    <string msgid="316839303324695949" name="accessibility_menu">"Menú"</string>
+    <string msgid="1424081831468083402" name="accessibility_multi_user_switch_inactive">"Usuario actual <ns1:g id="CURRENT_USER_NAME">%s</ns1:g>"</string>
+    <string msgid="3020367729287990475" name="accessibility_multi_user_switch_quick_contact">"Mostrar perfil"</string>
+    <string msgid="7305948938141024937" name="accessibility_multi_user_switch_switcher">"Cambiar usuario"</string>
+    <string msgid="8434880595284601601" name="accessibility_multi_user_switch_switcher_with_current">"Cambiar usuario, usuario actual: <ns1:g id="CURRENT_USER_NAME">%s</ns1:g>"</string>
+    <string msgid="358343022352820946" name="accessibility_no_battery">"Sen batería"</string>
+    <string msgid="4791966295096867555" name="accessibility_no_data">"Sen datos"</string>
+    <string msgid="4894708937052611281" name="accessibility_no_phone">"Sen teléfono"</string>
+    <string msgid="7064645320782585167" name="accessibility_no_signal">"Sen sinal"</string>
+    <string msgid="8274017118472455155" name="accessibility_no_sim">"Sen SIM"</string>
+    <string msgid="3957997018324995781" name="accessibility_no_sims">"Non hai tarxeta SIM"</string>
+    <string msgid="4329180129727630368" name="accessibility_no_wimax">"Non hai WiMAX."</string>
+    <string msgid="6395326276213402883" name="accessibility_not_connected">"Non conectada"</string>
+    <string msgid="854211387186306927" name="accessibility_notification_dismissed">"Notificación rexeitada"</string>
+    <string msgid="4498000369779421892" name="accessibility_notifications_button">"Notificacións"</string>
+    <string msgid="1685730113192081895" name="accessibility_one_bar">"Unha barra"</string>
+    <string msgid="6738112589538563574" name="accessibility_phone_button">"Teléfono"</string>
+    <string msgid="687699278132664115" name="accessibility_phone_one_bar">"Unha barra de cobertura"</string>
+    <string msgid="6471834868580757898" name="accessibility_phone_signal_full">"Cobertura ao máximo"</string>
+    <string msgid="8521904843919971885" name="accessibility_phone_three_bars">"Tres barras de cobertura"</string>
+    <string msgid="8384905382804815201" name="accessibility_phone_two_bars">"Dúas barras de cobertura"</string>
+    <string msgid="66846307818850664" name="accessibility_quick_settings_airplane_changed_off">"Desactivouse o modo avión."</string>
+    <string msgid="8983005603505087728" name="accessibility_quick_settings_airplane_changed_on">"Activouse o modo avión."</string>
+    <string msgid="7786329360056634412" name="accessibility_quick_settings_airplane_off">"Modo avión desactivado."</string>
+    <string msgid="6406141469157599296" name="accessibility_quick_settings_airplane_on">"Modo avión activado."</string>
+    <string msgid="3959908972897295660" name="accessibility_quick_settings_alarm">"Alarma definida para as <ns1:g id="TIME">%s</ns1:g>"</string>
+    <string msgid="1480931583381408972" name="accessibility_quick_settings_battery">"Batería <ns1:g id="STATE">%s</ns1:g>."</string>
+    <string msgid="2730003763480934529" name="accessibility_quick_settings_bluetooth_changed_off">"Bluetooth desactivado."</string>
+    <string msgid="8722351798763206577" name="accessibility_quick_settings_bluetooth_changed_on">"Bluetooth activado."</string>
+    <string msgid="4306637793614573659" name="accessibility_quick_settings_bluetooth_connected">"Bluetooth conectado."</string>
+    <string msgid="6953242966685343855" name="accessibility_quick_settings_bluetooth_connecting">"Bluetooth conectando."</string>
+    <string msgid="2133631372372064339" name="accessibility_quick_settings_bluetooth_off">"Bluetooth desactivado."</string>
+    <string msgid="7681999166216621838" name="accessibility_quick_settings_bluetooth_on">"Bluetooth activado."</string>
+    <string msgid="3115847794692516306" name="accessibility_quick_settings_close">"Pechar panel."</string>
+    <string msgid="4406577213290173911" name="accessibility_quick_settings_color_inversion_changed_off">"Desactivouse a inversión da cor."</string>
+    <string msgid="6897462320184911126" name="accessibility_quick_settings_color_inversion_changed_on">"Activouse a inversión da cor."</string>
+    <string msgid="2579369091672902101" name="accessibility_quick_settings_detail">"Configuración rápida: <ns1:g id="TITLE">%s</ns1:g>."</string>
+    <string msgid="9152834845587554157" name="accessibility_quick_settings_dnd_alarms_on">"Non molestar activado, só alarmas."</string>
+    <string msgid="898107593453022935" name="accessibility_quick_settings_dnd_changed_off">"Desactivouse a opción Non molestar."</string>
+    <string msgid="4483780856613561039" name="accessibility_quick_settings_dnd_changed_on">"Activouse a opción Non molestar."</string>
+    <string msgid="6882582132662613537" name="accessibility_quick_settings_dnd_none_on">"Non molestar activado, silencio total."</string>
+    <string msgid="2371832603753738581" name="accessibility_quick_settings_dnd_off">"A opción Non molestar está desactivada."</string>
+    <string msgid="1448402297221249355" name="accessibility_quick_settings_dnd_priority_on">"Non molestar activado, só prioridade."</string>
+    <string msgid="3303701786768224304" name="accessibility_quick_settings_flashlight_changed_off">"Desactivouse a lanterna."</string>
+    <string msgid="6531793301533894686" name="accessibility_quick_settings_flashlight_changed_on">"Activouse a lanterna."</string>
+    <string msgid="4936432000069786988" name="accessibility_quick_settings_flashlight_off">"Lanterna desactivada."</string>
+    <string msgid="2003479320007841077" name="accessibility_quick_settings_flashlight_on">"Lanterna activada."</string>
+    <string msgid="5004708003447561394" name="accessibility_quick_settings_hotspot_changed_off">"Desactivouse a zona interactiva móbil."</string>
+    <string msgid="2890951609226476206" name="accessibility_quick_settings_hotspot_changed_on">"Activouse a zona interactiva móbil."</string>
+    <string msgid="2404728746293515623" name="accessibility_quick_settings_less_time">"Menos tempo."</string>
+    <string msgid="8526845571503387376" name="accessibility_quick_settings_location_changed_off">"Desactiváronse os Informes de localización."</string>
+    <string msgid="339403053079338468" name="accessibility_quick_settings_location_changed_on">"Activáronse os Informes de localización."</string>
+    <string msgid="5119080556976115520" name="accessibility_quick_settings_location_off">"Informes de localización desactivados."</string>
+    <string msgid="5809937096590102036" name="accessibility_quick_settings_location_on">"Informes de localización activados."</string>
+    <string msgid="4876806564086241341" name="accessibility_quick_settings_mobile">"Móbil <ns1:g id="SIGNAL">%1$s</ns1:g>. <ns1:g id="TYPE">%2$s</ns1:g>. <ns1:g id="NETWORK">%3$s</ns1:g>."</string>
+    <string msgid="3659274935356197708" name="accessibility_quick_settings_more_time">"Máis tempo."</string>
+    <string msgid="1104846699869476855" name="accessibility_quick_settings_user">"Usuario <ns1:g id="USER">%s</ns1:g>."</string>
+    <string msgid="5518210213118181692" name="accessibility_quick_settings_wifi">"<ns1:g id="SIGNAL">%1$s</ns1:g>."</string>
+    <string msgid="8716484460897819400" name="accessibility_quick_settings_wifi_changed_off">"Wifi desactivada."</string>
+    <string msgid="6440117170789528622" name="accessibility_quick_settings_wifi_changed_on">"Wifi activada."</string>
+    <string msgid="5208608566793607626" name="accessibility_recent">"Visión xeral"</string>
+    <string msgid="4464697366179168836" name="accessibility_recents_all_items_dismissed">"Rexeitáronse todas as aplicacións recentes."</string>
+    <string msgid="6803574935084867070" name="accessibility_recents_item_dismissed">"Rexeitouse <ns1:g id="APP">%s</ns1:g>."</string>
+    <string msgid="7616039892382525203" name="accessibility_recents_item_launched">"Iniciando <ns1:g id="APP">%s</ns1:g>."</string>
+    <string msgid="395770242498031481" name="accessibility_recents_item_will_be_dismissed">"Rexeitar <ns1:g id="APP">%s</ns1:g>."</string>
+    <string msgid="1437183540924535457" name="accessibility_recents_task_header">"<ns1:g id="APP">%1$s</ns1:g> <ns1:g id="ACTIVITY_LABEL">%2$s</ns1:g>"</string>
+    <string msgid="3603099514902182350" name="accessibility_remove_notification">"Eliminar notificación."</string>
+    <string msgid="9061243307939135383" name="accessibility_ringer_silent">"Timbre silenciado"</string>
+    <string msgid="666585363364155055" name="accessibility_ringer_vibrate">"Timbre en vibración"</string>
+    <string msgid="4062780228931590069" name="accessibility_rotation_lock_off">"A pantalla xirará automaticamente."</string>
+    <string msgid="8134601071026305153" name="accessibility_rotation_lock_off_changed">"Agora a pantalla xirará automaticamente."</string>
+    <string msgid="6731197337665366273" name="accessibility_rotation_lock_on_landscape">"A pantalla está bloqueada en orientación horizontal."</string>
+    <string msgid="3135965553707519743" name="accessibility_rotation_lock_on_landscape_changed">"Agora a pantalla está bloqueada en orientación horizontal."</string>
+    <string msgid="5809367521644012115" name="accessibility_rotation_lock_on_portrait">"A pantalla está bloqueada en orientación vertical."</string>
+    <string msgid="8922481981834012126" name="accessibility_rotation_lock_on_portrait_changed">"Agora a pantalla está bloqueada en orientación vertical."</string>
+    <string msgid="1103867596330271848" name="accessibility_search_light">"Buscar"</string>
+    <string msgid="799583911231893380" name="accessibility_settings_button">"Configuración do sistema"</string>
+    <string msgid="9122922886519676839" name="accessibility_signal_full">"Sinal completo"</string>
+    <string msgid="4099381329956402865" name="accessibility_status_bar_hotspot">"Zona wifi"</string>
+    <string msgid="2648241415119396648" name="accessibility_three_bars">"Tres barras"</string>
+    <string msgid="4613200365379426561" name="accessibility_tty_enabled">"TeleTypewriter activado"</string>
+    <string msgid="6437363648385206679" name="accessibility_two_bars">"Dúas barras"</string>
+    <string msgid="128158454631118828" name="accessibility_unlock_button">"Desbloquear"</string>
+    <string msgid="8214125623493923751" name="accessibility_unlock_button_fingerprint">"Botón de desbloqueo; agardando pola impresión dixital"</string>
+    <string msgid="7541705575183694446" name="accessibility_unlock_without_fingerprint">"Desbloquea sen usar a túa impresión dixital"</string>
+    <string msgid="487611083884852965" name="accessibility_voice_assist_button">"Asistente de voz"</string>
+    <string msgid="3609549593031810875" name="accessibility_volume_collapse">"Contraer"</string>
+    <string msgid="5946812790999244205" name="accessibility_volume_expand">"Ampliar"</string>
+    <string msgid="7202151365171148501" name="accessibility_wifi_name">"Conectado a <ns1:g id="WIFI">%s</ns1:g>."</string>
+    <string msgid="4170994299011863648" name="accessibility_wimax_one_bar">"Unha barra de WiMAX"</string>
+    <string msgid="2768089986795579558" name="accessibility_wimax_signal_full">"Sinal completo de WiMAX"</string>
+    <string msgid="6116551636752103927" name="accessibility_wimax_three_bars">"Tres barras de WiMAX"</string>
+    <string msgid="9176236858336502288" name="accessibility_wimax_two_bars">"Dúas barras de WiMAX"</string>
+    <string msgid="3806060224467027887" name="accessibility_zero_bars">"Ningunha barra"</string>
+    <string msgid="2995389510240786221" name="add_tile">"Engade un mosaico"</string>
+    <string msgid="3980063409350522735" name="alarm_template">"ás <ns1:g id="WHEN">%1$s</ns1:g>"</string>
+    <string msgid="4242179982586714810" name="alarm_template_far">"o <ns1:g id="WHEN">%1$s</ns1:g>"</string>
+    <string msgid="1210954576979621596" name="always_use_accessory">"Usar de forma predeterminada para este accesorio USB"</string>
+    <string msgid="1450287437017315906" name="always_use_device">"Usar de forma predeterminada para dispositivo USB"</string>
+    <string msgid="7164937344850004466" name="app_label">"IU sistema"</string>
+    <string msgid="2900940511201380775" name="battery_low_percent_format">"<ns1:g id="PERCENTAGE">%s</ns1:g> restante"</string>
+    <string msgid="6859235584035338833" name="battery_low_percent_format_saver_started">"<ns1:g id="PERCENTAGE">%s</ns1:g> restante. A función aforro de batería está activada."</string>
+    <string msgid="6456385927409742437" name="battery_low_title">"Queda pouca batería"</string>
+    <string msgid="4553600287639198111" name="battery_low_why">"Configuración"</string>
+    <string msgid="7507968430447930257" name="battery_saver_confirmation_ok">"Activar"</string>
+    <string msgid="5299585433050361634" name="battery_saver_confirmation_title">"Queres activar o aforro de batería?"</string>
+    <string msgid="109158658238110382" name="battery_saver_notification_action_text">"Desactivar o aforro de batería"</string>
+    <string msgid="820318788126672692" name="battery_saver_notification_text">"Reduce o rendemento e os datos en segundo plano"</string>
+    <string msgid="237918726750955859" name="battery_saver_notification_title">"O aforro de batería está activado"</string>
+    <string msgid="5576697451677486320" name="battery_saver_start_action">"Activar o aforro de batería"</string>
+    <string msgid="7094101612161133267" name="bluetooth_tethered">"Bluetooth ancorado"</string>
+    <string msgid="3894036511763289383" name="broadcast_tile">"Mosaico controlado pola emisión"</string>
+    <string msgid="7939688436797157483" name="camera_hint">"Pasa o dedo desde a icona para acceder á cámara"</string>
+    <string msgid="7261107956054836961" name="camera_label">"abrir cámara"</string>
+    <string msgid="6442560571259935130" name="cancel">"Cancelar"</string>
+    <string msgid="814192889771462828" name="clear_all_notifications_text">"Eliminar todas"</string>
+    <string msgid="4434467572461327898" name="compat_mode_off">"Estirar ata ocupar todo"</string>
+    <string msgid="6623839244840638213" name="compat_mode_on">"Ampliar ata ocupar todo"</string>
+    <string msgid="8453242888903772524" name="data_usage_disabled_dialog">"Como acadaches o límite de datos definido, o dispositivo puxo en pausa o uso de datos para o resto do ciclo.\n\nSe retomas o uso, poden aplicarse cargos do operador."</string>
+    <string msgid="5281770593459841889" name="data_usage_disabled_dialog_3g_title">"Os datos 2G-3G están en pausa"</string>
+    <string msgid="1601769736881078016" name="data_usage_disabled_dialog_4g_title">"Os datos 4G están en pausa"</string>
+    <string msgid="1412395410306390593" name="data_usage_disabled_dialog_enable">"Retomar"</string>
+    <string msgid="4651001290947318931" name="data_usage_disabled_dialog_mobile_title">"Os datos de móbiles están en pausa"</string>
+    <string msgid="3932437232199671967" name="data_usage_disabled_dialog_title">"Os datos están en pausa"</string>
+    <string msgid="2389163018533514619" name="demo_mode">"Modo de demostración"</string>
+    <string msgid="7207478719805562165" name="description_direction_left">"Pasa o dedo cara a esquerda para <ns1:g id="TARGET_DESCRIPTION">%s</ns1:g>."</string>
+    <string msgid="7169032478259485180" name="description_direction_up">"Pasa o dedo cara arriba para <ns1:g id="TARGET_DESCRIPTION">%s</ns1:g>."</string>
+    <string msgid="3091587249776033139" name="description_target_search">"Buscar"</string>
+    <string msgid="1295161776223959221" name="dessert_case">"Caixa de sobremesa"</string>
+    <string msgid="3802752663326030053" name="device_owned_footer">"É posible que se supervise o dispositivo"</string>
+    <string msgid="4435534311510272506" name="disable_vpn">"Desactivar VPN"</string>
+    <string msgid="1324915059568548655" name="disconnect_vpn">"Desconectar VPN"</string>
+    <string msgid="708135716272867002" name="empty_shade_text">"Non hai notificacións"</string>
+    <string msgid="6258074250948309715" name="enable_bluetooth_confirmation_ok">"Activar"</string>
+    <string msgid="9106595990708985385" name="enable_bluetooth_message">"Para conectar o teu teclado co tablet, primeiro tes que activar o Bluetooth."</string>
+    <string msgid="5027037706500635269" name="enable_bluetooth_title">"Queres activar o Bluetooth?"</string>
+    <string msgid="4844205668718636518" name="enable_demo_mode">"Activar modo de demostración"</string>
+    <string msgid="7967563676324087464" name="ethernet_label">"Ethernet"</string>
+    <string msgid="5945855970267657951" name="expanded_header_battery_charged">"Cargada"</string>
+    <string msgid="205623198487189724" name="expanded_header_battery_charging">"Cargando"</string>
+    <string msgid="457559884275395376" name="expanded_header_battery_charging_with_time">"<ns1:g id="CHARGING_TIME">%s</ns1:g> para completar a carga"</string>
+    <string msgid="4798147152367049732" name="expanded_header_battery_not_charging">"Non está cargando"</string>
+    <string msgid="2239653834387972602" name="got_it">"De acordo"</string>
+    <string msgid="4619274244146446464" name="gps_notification_found_text">"Localización establecida polo GPS"</string>
+    <string msgid="8574247005642736060" name="gps_notification_searching_text">"Buscando GPS"</string>
+    <string msgid="7187359342030096885" name="guest_exit_guest">"Eliminar invitado"</string>
+    <string msgid="4155503224769676625" name="guest_exit_guest_dialog_message">"Eliminaranse todas as aplicacións e datos desta sesión."</string>
+    <string msgid="7402231963862520531" name="guest_exit_guest_dialog_remove">"Eliminar"</string>
+    <string msgid="8480693520521766688" name="guest_exit_guest_dialog_title">"Queres eliminar o invitado?"</string>
+    <string msgid="600537543078847803" name="guest_new_guest">"Engadir invitado"</string>
+    <string msgid="8059989128963789678" name="guest_nickname">"Convidado"</string>
+    <string msgid="8820670703892101990" name="guest_notification_remove_action">"QUITAR CONVIDADO"</string>
+    <string msgid="335747957734796689" name="guest_notification_text">"Para eliminar aplicacións e datos, elimina usuario invitado"</string>
+    <string msgid="1585278533840603063" name="guest_notification_title">"Usuario convidado"</string>
+    <string msgid="1401113462524894716" name="guest_wipe_session_dontwipe">"Si, continuar"</string>
+    <string msgid="8476238178270112811" name="guest_wipe_session_message">"Queres continuar coa túa sesión?"</string>
+    <string msgid="6419439912885956132" name="guest_wipe_session_title">"Benvido de novo, convidado."</string>
+    <string msgid="5065558566939858884" name="guest_wipe_session_wipe">"Comezar de novo"</string>
+    <string msgid="3690709735122344913" name="hidden_notifications_cancel">"Non grazas"</string>
+    <string msgid="41079514801976810" name="hidden_notifications_setup">"Configurar"</string>
+    <string msgid="2326409389088668981" name="hidden_notifications_text">"Consúltaas antes de desbloquear"</string>
+    <string msgid="7139628534207443290" name="hidden_notifications_title">"Recibir notificacións máis rápido"</string>
+    <string msgid="2312667578562201583" name="installer_cd_button_title">"Instalar Android File Transfer para Mac"</string>
+    <string msgid="5226306993448328896" name="interruption_level_alarms">"Só alarmas"</string>
+    <string msgid="3266909566410106146" name="interruption_level_alarms_twoline">"Só\nalarmas"</string>
+    <string msgid="6000083681244492992" name="interruption_level_none">"Silencio total"</string>
+    <string msgid="3957581548190765889" name="interruption_level_none_twoline">"Silencio\ntotal"</string>
+    <string msgid="5114872171614161084" name="interruption_level_none_with_warning">"Silencio total. Esta acción tamén silenciará os lectores de pantalla."</string>
+    <string msgid="6426766465363855505" name="interruption_level_priority">"Só prioridade"</string>
+    <string msgid="1564715335217164124" name="interruption_level_priority_twoline">"Só\nprioridade"</string>
+    <string msgid="4549105996740522523" name="invalid_charger">"Non compatible coa carga por USB.\nUtiliza só o cargador proporcionado."</string>
+    <string msgid="5474997287953892710" name="invalid_charger_text">"Utiliza soamente o cargador fornecido."</string>
+    <string msgid="3515740382572798460" name="invalid_charger_title">"Non se admite a carga mediante USB."</string>
+    <string msgid="1757251776872835768" name="keyguard_indication_charging_time">"Cargando (<ns1:g id="CHARGING_TIME_LEFT">%s</ns1:g> para finalizar a carga)"</string>
+    <string msgid="9018981952053914986" name="keyguard_indication_charging_time_fast">"Cargando rápido (<ns1:g id="CHARGING_TIME_LEFT">%s</ns1:g> para rematar a carga)"</string>
+    <string msgid="955252797961724952" name="keyguard_indication_charging_time_slowly">"Cargando lento (<ns1:g id="CHARGING_TIME_LEFT">%s</ns1:g> para rematar a carga)"</string>
+    <string msgid="7412534203633528135" name="keyguard_indication_trust_disabled">"O dispositivo permanecerá bloqueado ata que o desbloquees manualmente"</string>
+    <string msgid="9195222469041601365" name="keyguard_more_overflow_text">"+<ns1:g id="NUMBER_OF_NOTIFICATIONS">%d</ns1:g>"</string>
+    <string msgid="8043466894212841998" name="keyguard_unlock">"Pasa o dedo cara arriba para desbloquear"</string>
+    <string msgid="6304565553218192990" name="label_view">"Ver"</string>
+    <string msgid="6604123105765737830" name="legacy_vpn_name">"VPN"</string>
+    <string msgid="5421487114739245972" name="managed_profile_foreground_toast">"Estás usando o perfil de traballo"</string>
+    <string msgid="8470872969457985954" name="media_projection_action_text">"Iniciar agora"</string>
+    <string msgid="3071431025448218928" name="media_projection_dialog_text">"<ns1:g id="APP_SEEKING_PERMISSION">%s</ns1:g> comezará a capturar todo o que apareza na túa pantalla."</string>
+    <string msgid="3103510882172746752" name="media_projection_remember_text">"Non mostrar outra vez"</string>
+    <string msgid="6259179342284742878" name="monitoring_description_app">"Estás conectado a <ns1:g id="APPLICATION">%1$s</ns1:g>, que pode supervisar a túa actividade na rede, incluídos os correos electrónicos, as aplicacións e os sitios web."</string>
+    <string msgid="484599052118316268" name="monitoring_description_app_personal">"Estás conectado a <ns1:g id="APPLICATION">%1$s</ns1:g>, que pode supervisar a túa actividade persoal na rede, incluídos os correos electrónicos, as aplicacións e os sitios web."</string>
+    <string msgid="4946600443852045903" name="monitoring_description_app_personal_work">"O teu perfil de traballo está xestionado por <ns1:g id="ORGANIZATION">%1$s</ns1:g>. Está conectado a <ns1:g id="APPLICATION_WORK">%2$s</ns1:g>, que pode supervisar a túa actividade na rede, incluídos os correos electrónicos, as aplicacións e os sitios web.\n\nTamén estás conectado a <ns1:g id="APPLICATION_PERSONAL">%3$s</ns1:g>, que pode supervisar a túa actividade persoal na rede."</string>
+    <string msgid="1754325860918060897" name="monitoring_description_app_work">"O teu perfil de traballo está xestionado por <ns1:g id="ORGANIZATION">%1$s</ns1:g>. Está conectado a <ns1:g id="APPLICATION">%2$s</ns1:g>, que pode supervisar a túa actividade na rede, incluídos os correos electrónicos, as aplicacións e os sitios web.\n\nPara obter máis información, ponte en contacto co teu administrador."</string>
+    <string msgid="5780988291898461883" name="monitoring_description_device_owned">"O teu dispositivo está xestionado por <ns1:g id="ORGANIZATION">%1$s</ns1:g>.\n\nO teu administrador pode supervisar e xestionar a configuración, o acceso corporativo, as aplicacións, os datos asociados co teu dispositivo e a información de localización do teu dispositivo. Para obter máis información, ponte en contacto co teu administrador."</string>
+    <string msgid="4445150119515393526" name="monitoring_description_vpn">"Outorgaches permiso a unha aplicación para configurar unha conexión VPN.\n\nEsta aplicación pode supervisar a túa actividade na rede, incluídos os correos electrónicos, as aplicacións e os sitios web."</string>
+    <string msgid="4970443827043261703" name="monitoring_description_vpn_app_device_owned">"O dispositivo está xestionado por <ns1:g id="ORGANIZATION">%1$s</ns1:g>.\n\nO teu administrador pode supervisar e xestionar a configuración, o acceso corporativo, as aplicacións, os datos asociados co dispositivo e a información de localización do dispositivo.\n\nEstás conectado a <ns1:g id="APPLICATION">%2$s</ns1:g>, que pode supervisar a túa actividade na rede: os correos electrónicos, as aplicacións e os sitios web.\n\nPara obter máis información, contacta co teu administrador."</string>
+    <string msgid="3090670777499161246" name="monitoring_description_vpn_device_owned">"O teu dispositivo está xestionado por <ns1:g id="ORGANIZATION">%1$s</ns1:g>.\n\nO teu administrador pode supervisar e xestionar a configuración, o acceso corporativo, as aplicacións, os datos asociados co teu dispositivo e a información de localización do teu dispositivo.\n\nEstás conectado a unha VPN, que pode supervisar a túa actividade de rede, incluídos os correos electrónicos, as aplicacións e os sitios web.\n\nPara obter máis información, ponte en contacto co teu administrador."</string>
+    <string msgid="2054949132145039290" name="monitoring_description_vpn_profile_owned">"O teu perfil de traballo está xestionado por <ns1:g id="ORGANIZATION">%1$s</ns1:g>.\n\nO teu administrador é capaz de supervisar a túa actividade na rede, incluídos os correos electrónicos, as aplicacións e os sitios web.\n\nPara obter máis información, ponte en contacto co teu administrador.\n\nTamén estás conectado a unha VPN, que pode supervisar a túa actividade na rede."</string>
+    <string msgid="169206259253048106" name="monitoring_title">"Supervisión de rede"</string>
+    <string msgid="7121079311903859610" name="monitoring_title_device_owned">"Supervisión de dispositivos"</string>
+    <string msgid="6790109874733501487" name="monitoring_title_profile_owned">"Supervisión do perfil"</string>
+    <string msgid="6883253262134328057" name="notification_collapse_button_text">"Ocultar todo"</string>
+    <string msgid="1037425494153780718" name="notification_expand_button_text">"Ver todo"</string>
+    <string msgid="1135169301897151909" name="notification_hidden_text">"Contido oculto"</string>
+    <string msgid="8524949573675922138" name="notification_tap_again">"Toca outra vez para abrir o elemento"</string>
+    <string msgid="4872890986869209950" name="phone_hint">"Pasa o dedo desde a icona para acceder ao teléfono"</string>
+    <string msgid="2320074140205331708" name="phone_label">"abrir teléfono"</string>
+    <string msgid="8021888108553696069" name="profile_owned_footer">"O perfil pódese supervisar"</string>
+    <string msgid="10042998191725428" name="quick_settings">"Configuración rápida"</string>
+    <string msgid="4910015762433302860" name="quick_settings_bluetooth_detail_empty_text">"Non hai dispositivos sincronizados dispoñibles"</string>
+    <string msgid="6304190285170721401" name="quick_settings_bluetooth_label">"Bluetooth"</string>
+    <string msgid="3912245565613684735" name="quick_settings_bluetooth_multiple_devices_label">"Bluetooth (<ns1:g id="NUMBER">%d</ns1:g> dispositivos)"</string>
+    <string msgid="8159652146149219937" name="quick_settings_bluetooth_off_label">"Bluetooth desactivado"</string>
+    <string msgid="5064982743784071218" name="quick_settings_brightness_dialog_auto_brightness_label">"AUTOMÁTICO"</string>
+    <string msgid="8599674057673605368" name="quick_settings_brightness_dialog_title">"Brillo"</string>
+    <string msgid="6968372297018755815" name="quick_settings_brightness_label">"Brillo"</string>
+    <string msgid="311785821261640623" name="quick_settings_cast_detail_empty_text">"Non hai dispositivos dispoñibles"</string>
+    <string msgid="2484573682378634413" name="quick_settings_cast_device_default_description">"Listo para emitir"</string>
+    <string msgid="5367253104742382945" name="quick_settings_cast_device_default_name">"Dispositivo sen nome"</string>
+    <string msgid="7709016546426454729" name="quick_settings_cast_title">"Emisión"</string>
+    <string msgid="6601710681033353316" name="quick_settings_casting">"Emitindo"</string>
+    <string msgid="56011158504994128" name="quick_settings_cellular_detail_data_limit">"Límite de <ns1:g id="DATA_LIMIT">%s</ns1:g>"</string>
+    <string msgid="1964260360259312002" name="quick_settings_cellular_detail_data_usage">"Uso de datos"</string>
+    <string msgid="1476810587475761478" name="quick_settings_cellular_detail_data_used">"<ns1:g id="DATA_USED">%s</ns1:g> usados"</string>
+    <string msgid="2440098045692399009" name="quick_settings_cellular_detail_data_warning">"Advertencia <ns1:g id="DATA_LIMIT">%s</ns1:g>"</string>
+    <string msgid="967669665390990427" name="quick_settings_cellular_detail_over_limit">"Superouse o límite"</string>
+    <string msgid="722715415543541249" name="quick_settings_cellular_detail_remaining_data">"Datos restantes"</string>
+    <string msgid="8575062783675171695" name="quick_settings_cellular_detail_title">"Datos móbiles"</string>
+    <string msgid="853443689745584770" name="quick_settings_color_space_label">"Modo de corrección de cor"</string>
+    <string msgid="1722253542984847487" name="quick_settings_connected">"Conectado"</string>
+    <string msgid="47623027419264404" name="quick_settings_connecting">"Conectando..."</string>
+    <string msgid="2559229444312445858" name="quick_settings_dnd_alarms_label">"Só alarmas"</string>
+    <string msgid="8735855737575028208" name="quick_settings_dnd_label">"Non molestar"</string>
+    <string msgid="5025477807123029478" name="quick_settings_dnd_none_label">"Silencio total"</string>
+    <string msgid="483232950670692036" name="quick_settings_dnd_priority_label">"Só prioridade"</string>
+    <string msgid="3402999958839153376" name="quick_settings_done">"Feito"</string>
+    <string msgid="2133093497691661546" name="quick_settings_flashlight_label">"Lanterna"</string>
+    <string msgid="6046917934974004879" name="quick_settings_hotspot_label">"Zona wifi"</string>
+    <string msgid="7073463064369468429" name="quick_settings_ime_label">"Método de entrada"</string>
+    <string msgid="8790919884718619648" name="quick_settings_inversion_label">"Inverter cores"</string>
+    <string msgid="5011327048748762257" name="quick_settings_location_label">"Localización"</string>
+    <string msgid="7464544086507331459" name="quick_settings_location_off_label">"Localización desactivada"</string>
+    <string msgid="1302906836372603762" name="quick_settings_media_device_label">"Dispositivo multimedia"</string>
+    <string msgid="326112621462813682" name="quick_settings_more_settings">"Máis opcións"</string>
+    <string msgid="4818156442169154523" name="quick_settings_notifications_label">"Notificacións"</string>
+    <string msgid="2660339101868367515" name="quick_settings_reset_confirmation_button">"Ocultar"</string>
+    <string msgid="2235970126803317374" name="quick_settings_reset_confirmation_message">"Volverá aparecer a próxima vez que se active na configuración."</string>
+    <string msgid="748792586749897883" name="quick_settings_reset_confirmation_title">"Queres ocultar <ns1:g id="TILE_LABEL">%1$s</ns1:g>?"</string>
+    <string msgid="6359205706154282377" name="quick_settings_rotation_locked_label">"Rotación bloqueada"</string>
+    <string msgid="8553157770061178719" name="quick_settings_rotation_locked_landscape_label">"Horizontal"</string>
+    <string msgid="5102691921442135053" name="quick_settings_rotation_locked_portrait_label">"Vertical"</string>
+    <string msgid="7305323031808150099" name="quick_settings_rotation_unlocked_label">"Rotación automática"</string>
+    <string msgid="2713774041672886750" name="quick_settings_rssi_emergency_only">"Só chamadas de emerxencia"</string>
+    <string msgid="7725671335550695589" name="quick_settings_rssi_label">"RSSI"</string>
+    <string msgid="5326556592578065401" name="quick_settings_settings_label">"Configuración"</string>
+    <string msgid="7153452060448575549" name="quick_settings_tethering_label">"Ancoraxe á rede"</string>
+    <string msgid="4635969182239736408" name="quick_settings_time_label">"Hora"</string>
+    <string msgid="5238995632130897840" name="quick_settings_user_label">"Eu"</string>
+    <string msgid="9030521362023479778" name="quick_settings_user_new_user">"Novo usuario"</string>
+    <string msgid="4467690427642392403" name="quick_settings_user_title">"Usuario"</string>
+    <string msgid="269990350383909226" name="quick_settings_wifi_detail_empty_text">"Non hai redes wifi dispoñibles"</string>
+    <string msgid="9135344704899546041" name="quick_settings_wifi_label">"Wifi"</string>
+    <string msgid="2221993077220856376" name="quick_settings_wifi_no_network">"Non hai rede"</string>
+    <string msgid="7171904845345573431" name="quick_settings_wifi_not_connected">"Non conectada"</string>
+    <string msgid="7558778100843885864" name="quick_settings_wifi_off_label">"Wifi desactivada"</string>
+    <string msgid="2890317189376000030" name="recents_app_info_button_label">"Información da aplicación"</string>
+    <string msgid="3517056471774958200" name="recents_caption_resize">"Seleccionar novo deseño de tarefas"</string>
+    <string msgid="8495275386693095768" name="recents_dismiss_all_message">"Rexeitar todas as aplicacións"</string>
+    <string msgid="8682129509540827999" name="recents_empty_message">"As túas pantallas recentes aparecen aquí"</string>
+    <string msgid="2969287838120550506" name="recents_launch_error_message">"Non foi posible iniciar <ns1:g id="APP">%s</ns1:g>."</string>
+    <string msgid="6942899049072506044" name="recents_lock_to_app_button_label">"fixación de pantalla"</string>
+    <string msgid="4177837597513701943" name="recents_multistack_add_stack_dialog_split_custom">"Dividir de xeito personalizado"</string>
+    <string msgid="8848514474543427332" name="recents_multistack_add_stack_dialog_split_horizontal">"Dividir en horizontal"</string>
+    <string msgid="9075292233696180813" name="recents_multistack_add_stack_dialog_split_vertical">"Dividir en vertical"</string>
+    <string msgid="8074997400187836677" name="recents_search_bar_label">"buscar"</string>
+    <string msgid="8389591916603406378" name="remove_from_settings">"Eliminar da Configuración"</string>
+    <string msgid="6069085993355887748" name="remove_from_settings_prompt">"Queres eliminar o configurador da IU do sistema da Configuración e deixar de usar todas as súas funcións?"</string>
+    <string msgid="1346522416878235405" name="screen_pinning_description">"A pantalla manterase visible ata que anules a fixación. Para facelo, mantén premido Atrás e Visión xeral ao mesmo tempo."</string>
+    <string msgid="8518446209564202557" name="screen_pinning_description_accessible">"A pantalla manterase visible ata que anules a fixación. Para facelo, mantén premido Visión xeral."</string>
+    <string msgid="3741602308343880268" name="screen_pinning_negative">"Non, grazas"</string>
+    <string msgid="3783985798366751226" name="screen_pinning_positive">"De acordo"</string>
+    <string msgid="3273740381976175811" name="screen_pinning_title">"A pantalla está fixada"</string>
+    <string msgid="1260203058661337274" name="screenshot_failed_text">"Non se pode realizar a captura de pantalla porque o espazo de almacenamento está limitado ou porque non o admite a aplicación ou a túa empresa."</string>
+    <string msgid="705781116746922771" name="screenshot_failed_title">"Non se puido facer a captura de pantalla."</string>
+    <string msgid="1152839647677558815" name="screenshot_saved_text">"Toca para ver a captura de pantalla."</string>
+    <string msgid="6461865960961414961" name="screenshot_saved_title">"Captura de pantalla gardada."</string>
+    <string msgid="2419718443411738818" name="screenshot_saving_text">"Estase gardando a captura de pantalla."</string>
+    <string msgid="7403652894056693515" name="screenshot_saving_ticker">"Gardando captura de pantalla…"</string>
+    <string msgid="8242282144535555697" name="screenshot_saving_title">"Gardando captura de pantalla…"</string>
+    <string msgid="5444136600512968798" name="show_battery_percentage">"Mostrar porcentaxe de batería inserida"</string>
+    <string msgid="3215025775576786037" name="show_battery_percentage_summary">"Mostrar porcentaxe do nivel de batería na icona da barra de estado cando non está en carga"</string>
+    <string msgid="2018336697782464029" name="show_demo_mode">"Mostrar modo de demostración"</string>
+    <string msgid="1288875699658819755" name="speed_bump_explanation">"Notificacións menos urxentes abaixo"</string>
+    <string msgid="9005954106902053641" name="ssl_ca_cert_warning">"É posible que se\nsupervise a rede"</string>
+    <string msgid="7219575858348719790" name="start_dreams">"Protector pantalla"</string>
+    <string msgid="4877645476959324760" name="status_bar">"Barra de estado"</string>
+    <string msgid="4576076075226540105" name="status_bar_accessibility_dismiss_recents">"Rexeitar aplicacións recentes"</string>
+    <string msgid="7057575501472249002" name="status_bar_airplane">"Modo avión"</string>
+    <string msgid="8536256753575881818" name="status_bar_alarm">"Alarma"</string>
+    <string msgid="7774721344716731603" name="status_bar_clear_all_button">"Borrar"</string>
+    <string msgid="5044290963549500128" name="status_bar_ethernet">"Ethernet"</string>
+    <string msgid="3504292471512317827" name="status_bar_input_method_settings_configure_input_methods">"Configurar métodos de entrada"</string>
+    <string msgid="6594767438577593172" name="status_bar_latest_events_title">"Notificacións"</string>
+    <string msgid="4755261167193833213" name="status_bar_no_notifications_title">"Non hai notificacións"</string>
+    <string msgid="7374907845131203189" name="status_bar_no_recent_apps">"As túas pantallas recentes aparecen aquí"</string>
+    <string msgid="5525260160341558869" name="status_bar_notification_app_settings_title">"Configuración de <ns1:g id="APP_NAME">%s</ns1:g>"</string>
+    <string msgid="5668348142410115323" name="status_bar_notification_inspect_item_title">"Configuración das notificacións"</string>
+    <string msgid="1682504513316879202" name="status_bar_ongoing_events_title">"En curso"</string>
+    <string msgid="7793624864528818569" name="status_bar_recent_inspect_item_title">"Información da aplicación"</string>
+    <string msgid="6026395868129852968" name="status_bar_recent_remove_item_title">"Quitar da lista"</string>
+    <string msgid="511453614962324674" name="status_bar_settings_auto_brightness_label">"AUTO"</string>
+    <string msgid="3790482541357798421" name="status_bar_settings_auto_rotation">"Xirar pantalla automaticamente"</string>
+    <string msgid="554682549917429396" name="status_bar_settings_mute_label">"APAGAR"</string>
+    <string msgid="397146176280905137" name="status_bar_settings_notifications">"Notificacións"</string>
+    <string msgid="3023889916699270224" name="status_bar_settings_settings_button">"Configuración"</string>
+    <string msgid="1940231521274147771" name="status_bar_settings_signal_meter_disconnected">"Sen Internet"</string>
+    <string msgid="6557486452774597820" name="status_bar_settings_signal_meter_wifi_nossid">"Wi-Fi conectada"</string>
+    <string msgid="1733928151698311923" name="status_bar_settings_wifi_button">"Wi-Fi"</string>
+    <string msgid="7551903084416057810" name="status_bar_use_physical_keyboard">"Teclado físico"</string>
+    <string msgid="6022553324802866373" name="status_bar_work">"Perfil de traballo"</string>
+    <string msgid="708224127392452018" name="system_ui_tuner">"Configurador da IU do sistema"</string>
+    <string msgid="4966265263465181372" name="title_usb_accessory">"Accesorio USB"</string>
+    <string msgid="8597333795565621795" name="tuner_persistent_warning">"Estas funcións experimentais poden cambiar, interromperse ou desaparecer en futuras versións. Continúa con precaución."</string>
+    <string msgid="603429811084428439" name="tuner_toast">"Parabéns! O configurador da IU do sistema engadiuse a Configuración"</string>
+    <string msgid="8730648121973575701" name="tuner_warning">"O configurador da IU do sistema ofréceche formas adicionais de modificar e personalizar a interface de usuario de Android. Estas funcións experimentais poden cambiar, interromperse ou desaparecer en futuras versións. Continúa con precaución."</string>
+    <string msgid="7094689930793031682" name="tuner_warning_title">"Diversión só para algúns"</string>
+    <string msgid="8779712358041029439" name="unlock_label">"desbloquear"</string>
+    <string msgid="3808984931830229888" name="usb_accessory_confirm_prompt">"Queres abrir <ns1:g id="ACTIVITY">%1$s</ns1:g> cando este accesorio USB estea conectado?"</string>
+    <string msgid="5171775411178865750" name="usb_accessory_permission_prompt">"Queres permitir que a aplicación <ns1:g id="APPLICATION">%1$s</ns1:g> acceda ao accesorio USB?"</string>
+    <string msgid="513450621413733343" name="usb_accessory_uri_prompt">"Ningunha aplicación instalada funciona co accesorio USB. Máis información: <ns1:g id="URL">%1$s</ns1:g>"</string>
+    <string msgid="303335496705863070" name="usb_debugging_always">"Permitir sempre desde este ordenador"</string>
+    <string msgid="2220143855912376496" name="usb_debugging_message">"A impresión dixital da clave de RSA do ordenador é:\n<ns1:g id="FINGERPRINT">%1$s</ns1:g>"</string>
+    <string msgid="6011931347142270156" name="usb_debugging_secondary_user_message">"O usuario que está conectado actualmente neste dispositivo non pode activar a depuración por USB. Para usar esta función, cambia ao usuario principal “<ns1:g id="NAME">%s</ns1:g>”."</string>
+    <string msgid="6353808721761220421" name="usb_debugging_secondary_user_title">"Non se permite a depuración por USB"</string>
+    <string msgid="4513918393387141949" name="usb_debugging_title">"Permitir a depuración de erros de USB?"</string>
+    <string msgid="5161205258635253206" name="usb_device_confirm_prompt">"Queres abrir <ns1:g id="ACTIVITY">%1$s</ns1:g> cando este dispositivo USB estea conectado?"</string>
+    <string msgid="834698001271562057" name="usb_device_permission_prompt">"Queres permitir que a aplicación <ns1:g id="APPLICATION">%1$s</ns1:g> acceda ao dispositivo USB?"</string>
+    <string msgid="6551050377388882787" name="usb_preference_title">"Opcións de transferencia USB"</string>
+    <string msgid="4333504413563023626" name="use_mtp_button_title">"Inserir como reprodutor multimedia (MTP)"</string>
+    <string msgid="7517127540301625751" name="use_ptp_button_title">"Inserir como cámara (PTP)"</string>
+    <string msgid="5110251524486079492" name="user_add_user">"Engadir usuario"</string>
+    <string msgid="2161624834066214559" name="user_add_user_message_short">"Cando engadas un usuario novo, este deberá configurar o seu espazo\n\nCalquera usuario pode actualizar as aplicacións para todos os demais usuarios."</string>
+    <string msgid="4553596395824132638" name="user_add_user_title">"Engadir un usuario novo?"</string>
+    <string msgid="426540612051178753" name="user_new_user_name">"Novo usuario"</string>
+    <string msgid="3956854378310019854" name="voice_assist_label">"abrir asistente de voz"</string>
+    <string msgid="8939888732119726665" name="voice_hint">"Pasa o dedo desde a icona para acceder ao asistente de voz"</string>
+    <string msgid="3179845345429841822" name="volume_zen_end_now">"Finalizar agora"</string>
+    <string msgid="1826889705095768656" name="volumeui_notification_text">"Toca para restaurar o orixinal."</string>
+    <string msgid="4906770126345910955" name="volumeui_notification_title">"<ns1:g id="APP_NAME">%1$s</ns1:g> é o cadro de diálogo de volume"</string>
+    <string msgid="7954396902482228786" name="volumeui_prompt_allow">"Permitir"</string>
+    <string msgid="5720663643411696731" name="volumeui_prompt_deny">"Denegar"</string>
+    <string msgid="918680947433389110" name="volumeui_prompt_message">"<ns1:g id="APP_NAME">%1$s</ns1:g> quere ser o cadro de diálogo de volume."</string>
+    <string msgid="2388611096129106812" name="vpn_footer">"É posible que se supervise a rede"</string>
+    <string msgid="444533119582244293" name="zen_alarm_warning">"Non escoitarás a alarma seguinte <ns1:g id="WHEN">%1$s</ns1:g>"</string>
+    <string msgid="3482966345578319605" name="zen_alarm_warning_indef">"Non escoitarás a alarma seguinte <ns1:g id="WHEN">%1$s</ns1:g> a menos que desactives esta opción antes desa hora"</string>
+    <string msgid="4462471036429759903" name="zen_mode_and_condition">"<ns1:g id="ZEN_MODE">%1$s</ns1:g>. <ns1:g id="EXIT_CONDITION">%2$s</ns1:g>"</string>
+    <string msgid="7948043278226955063" name="zen_priority_customize_button">"Personalizar"</string>
+    <string msgid="3070506961866919502" name="zen_priority_introduction">"Non te molestará ningún son nin vibración, agás os procedentes de alarmas, recordatorios, eventos de emisores de chamada especificados."</string>
+    <string msgid="3137882381093271568" name="zen_silence_introduction">"Esta acción bloquea TODOS os sons e vibracións, incluídos os das alarmas, música, vídeos e xogos."</string>
+    <string msgid="2284540992298200729" name="zen_silence_introduction_voice">"Esta acción bloquea TODOS os sons e vibracións, incluídos os das alarmas, música, vídeos e xogos. Aínda podes facer chamadas de teléfono."</string>
+</resources>

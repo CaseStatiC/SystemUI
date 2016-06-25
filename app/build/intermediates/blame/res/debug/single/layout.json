@@ -1,0 +1,246 @@
+[
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/notification_guts.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/notification_guts.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/zen_mode_condition.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/zen_mode_condition.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/zen_mode_panel.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/zen_mode_panel.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/screen_pinning_request_text_area.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/screen_pinning_request_text_area.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/quick_settings_brightness_dialog.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/quick_settings_brightness_dialog.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/mland_scorefield.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/mland_scorefield.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/volume_dialog_row.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/volume_dialog_row.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/status_bar_expanded.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/status_bar_expanded.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/notification_expand_button.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/notification_expand_button.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/qs_detail_item.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/qs_detail_item.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/qs_detail.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/qs_detail.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/notification_children_container.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/notification_children_container.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/recents_search_bar.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/recents_search_bar.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/screen_pinning_request.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/screen_pinning_request.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/recents_task_view.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/recents_task_view.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/screen_pinning_request_buttons.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/screen_pinning_request_buttons.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/tuner_qs.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/tuner_qs.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/recents_debug_overlay.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/recents_debug_overlay.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/quick_settings_footer.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/quick_settings_footer.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/notification_children_divider.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/notification_children_divider.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/status_bar.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/status_bar.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/recents_empty.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/recents_empty.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/data_usage.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/data_usage.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/notification_public_default.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/notification_public_default.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/keyguard_user_switcher_item.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/keyguard_user_switcher_item.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/keyguard_bottom_area.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/keyguard_bottom_area.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/status_bar_notification_keyguard_overflow.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/status_bar_notification_keyguard_overflow.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/remote_input.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/remote_input.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/segmented_button.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/segmented_button.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/qs_detail_header.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/qs_detail_header.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/navigation_bar.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/navigation_bar.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/keyguard_user_switcher.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/keyguard_user_switcher.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/status_bar_no_notifications.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/status_bar_no_notifications.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/qs_user_detail_item.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/qs_user_detail_item.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/split_clock_view.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/split_clock_view.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/mland.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/mland.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/volume_dialog.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/volume_dialog.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/status_bar_notification_row.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/status_bar_notification_row.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/qs_detail_items.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/qs_detail_items.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/status_bar_no_recent_apps.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/status_bar_no_recent_apps.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/status_bar_expanded_header.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/status_bar_expanded_header.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/status_bar_toggle_slider.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/status_bar_toggle_slider.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/recents_task_view_header.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/recents_task_view_header.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/notification_collapse_button.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/notification_collapse_button.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/qs_user_detail.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/qs_user_detail.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/status_bar_notification_dismiss_all.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/status_bar_notification_dismiss_all.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/global_screenshot.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/global_screenshot.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/signal_cluster_view.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/signal_cluster_view.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/volume_zen_footer.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/volume_zen_footer.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/system_icons.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/system_icons.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/assist_orb.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/assist_orb.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/screen_pinning_request_land_phone.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/screen_pinning_request_land_phone.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/remember_permission_checkbox.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/remember_permission_checkbox.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/screen_pinning_request_buttons_land.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/screen_pinning_request_buttons_land.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/recents_dismiss_button.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/recents_dismiss_button.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/super_status_bar.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/super_status_bar.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/mobile_signal_group.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/mobile_signal_group.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/recents.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/recents.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/status_bar_notification_speed_bump.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/status_bar_notification_speed_bump.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/qs_panel.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/qs_panel.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/layout/keyguard_status_bar.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/layout/keyguard_status_bar.xml"
+    }
+]

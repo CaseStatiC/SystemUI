@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string msgid="1439152806320786912" name="notifications_off_text">"Tryk her for at slå meddelelser til igen."</string>
+    <string msgid="1860117696034775851" name="notifications_off_title">"Meddelelser: fra"</string>
+    <string msgid="4661583896803349732" name="status_bar_clear_all_button">"Ryd alt"</string>
+</resources>

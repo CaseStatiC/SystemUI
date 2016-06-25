@@ -1,0 +1,870 @@
+[
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_signal_4_fully.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_signal_4_fully.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_4g.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_4g.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/vector_drawable_place_top_left.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/vector_drawable_place_top_left.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_lock_24dp.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_lock_24dp.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_signal_location_disable.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_signal_location_disable.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_data_fully_connected_3g.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_data_fully_connected_3g.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_ethernet_fully.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_ethernet_fully.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_android.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_android.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/pop_vortex2.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/pop_vortex2.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_full_4.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_full_4.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_h.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_h.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/recents_lower_gradient.9.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/recents_lower_gradient.9.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/cloud_off.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/cloud_off.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/vector_drawable_place_bottom.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/vector_drawable_place_bottom.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_signal_0.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_signal_0.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_cast_off.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_cast_off.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/recents_dismiss_light.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/recents_dismiss_light.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_cast_on.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_cast_on.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_wifi_signal_1.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_wifi_signal_1.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_ringer_vibrate.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_ringer_vibrate.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/recents_lock_to_app_pin.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/recents_lock_to_app_pin.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_no_sim.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_no_sim.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_remote_mute.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_remote_mute.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_dnd_disable.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_dnd_disable.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/recents_dismiss_dark.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/recents_dismiss_dark.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_settings.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_settings.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_full_2.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_full_2.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_mic_26dp.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_mic_26dp.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/qs_dual_tile_caret.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/qs_dual_tile_caret.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_wifi_signal_0_fully.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_wifi_signal_0_fully.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_sysbar_back_ime.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/ic_sysbar_back_ime.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_zen_important.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_zen_important.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_voice.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_voice.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_full_0.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_full_0.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/lockscreen_fingerprint_draw_on.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/lockscreen_fingerprint_draw_on.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/search_bg_transparent.9.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/search_bg_transparent.9.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_add_circle_qs.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_add_circle_qs.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_fingerprint.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_fingerprint.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/lockscreen_fingerprint_fp_to_error_state.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/lockscreen_fingerprint_fp_to_error_state.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/cloud.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/cloud.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/error_to_trustedstate.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/error_to_trustedstate.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_signal_1_fully.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_signal_1_fully.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_expand_less.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_expand_less.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_alarm.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_alarm.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_minus.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_minus.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_3.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_3.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_vpn_ic.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_vpn_ic.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_lock_open_24dp.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_lock_open_24dp.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_plus.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_plus.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_landscape_from_auto_rotate.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_landscape_from_auto_rotate.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_signal_flashlight_enable.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_signal_flashlight_enable.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_wifi_signal_2_fully.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_wifi_signal_2_fully.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_1.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_1.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_phone_24dp.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/ic_phone_24dp.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_chevron_left.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_chevron_left.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_media_bt.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_media_bt.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/vector_drawable_place_left.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/vector_drawable_place_left.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_dnd_on_total_silence.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_dnd_on_total_silence.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_dnd_total_silence_disable.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_dnd_total_silence_disable.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_invert_colors_enable.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_invert_colors_enable.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_no_signal.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_no_signal.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_settings.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_settings.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_4.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_4.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_0.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_0.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_wifi_signal_0.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_wifi_signal_0.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_4.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_4.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_signal_null.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_signal_null.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_data_fully_connected_1x.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_data_fully_connected_1x.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/pop_ball.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/pop_ball.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_signal_location_enable.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_signal_location_enable.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_cancel.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_cancel.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/qs_ic_wifi_lock.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/qs_ic_wifi_lock.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_camera_alt_24dp.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/ic_camera_alt_24dp.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_expand.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_expand.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_dnd_off.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_dnd_off.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_data_fully_connected_e.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_data_fully_connected_e.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/indeterminate.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/indeterminate.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_ethernet.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_ethernet.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_bluetooth_detail_empty.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_bluetooth_detail_empty.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_sysbar_home.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/ic_sysbar_home.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/nav_background.9.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/nav_background.9.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_ime_switcher_default.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_ime_switcher_default.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_portrait_to_auto_rotate.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_portrait_to_auto_rotate.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_system_mute.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_system_mute.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_full_3.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_full_3.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/vector_drawable_place_fullscreen.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/vector_drawable_place_fullscreen.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_media_bt_mute.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_media_bt_mute.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_landscape_to_auto_rotate.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_landscape_to_auto_rotate.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_bluetooth_off.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_bluetooth_off.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_full_4.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_full_4.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_bluetooth_connecting.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_bluetooth_connecting.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/qs_subhead_caret.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/qs_subhead_caret.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_brightness_auto_off_alpha.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/ic_qs_brightness_auto_off_alpha.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/screenshot_panel.9.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/screenshot_panel.9.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/vector_drawable_place_top_right.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/vector_drawable_place_top_right.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/pop_stripes.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/pop_stripes.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_collapse.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_collapse.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_ringer_mute.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_ringer_mute.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_signal_4.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_signal_4.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_sysbar_menu.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/ic_sysbar_menu.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_disabled.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_disabled.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_brightness_thumb.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_brightness_thumb.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_ringer_vibrate.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_ringer_vibrate.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/recents_status_gradient.9.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/recents_status_gradient.9.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/dismiss_all_shape.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/dismiss_all_shape.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_wifi_signal_1_fully.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_wifi_signal_1_fully.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/vector_drawable_place_right.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/vector_drawable_place_right.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_alarm_mute.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_alarm_mute.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_power_saver.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_power_saver.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_wifi_signal_null.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_wifi_signal_null.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_screenshot_share.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_screenshot_share.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_data_fully_connected_g.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_data_fully_connected_g.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/vector_drawable_place_top.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/vector_drawable_place_top.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_3.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_3.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_wifi_signal_3.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_wifi_signal_3.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_back.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_back.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_full_3.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_full_3.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_1.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_1.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/pop_droid.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/pop_droid.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_bluetooth_on.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_bluetooth_on.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/vector_drawable_place_bottom_right.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/vector_drawable_place_bottom_right.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_delete.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_delete.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/android.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/android.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/sun.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/sun.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_cast_detail_empty.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_cast_detail_empty.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_sysbar_recent.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/ic_sysbar_recent.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_hotspot_enable.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_hotspot_enable.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/pop_pizza.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/pop_pizza.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_zen_all.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_zen_all.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/moon.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/moon.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_bluetooth_connected.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_bluetooth_connected.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_ringer_silent.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_ringer_silent.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_hotspot_disable.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_hotspot_disable.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_remote.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_remote.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_info.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_info.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_2.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_2.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_close.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_close.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_portrait_from_auto_rotate.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_portrait_from_auto_rotate.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_dnd.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_dnd.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/pop_vortex.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/pop_vortex.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_notification_overlay.9.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/ic_notification_overlay.9.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_lock_to_app_24dp.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_lock_to_app_24dp.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_wifi_signal_3_fully.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_wifi_signal_3_fully.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_signal_0_fully.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_signal_0_fully.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_wifi_signal_4_fully.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_wifi_signal_4_fully.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_person.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_person.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_full_0.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_full_0.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_3g.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_3g.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_data_fully_connected_h.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_data_fully_connected_h.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_sysbar_back.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/ic_sysbar_back.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/sun2.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/sun2.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_r.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_r.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/pop_belt.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/pop_belt.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_managed_profile_status.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_managed_profile_status.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_signal_2_fully.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_signal_2_fully.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_screenshot_delete.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_screenshot_delete.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_signal_flashlight_disable.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_signal_flashlight_disable.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_media.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_media.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_brightness_auto_on_alpha.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/ic_qs_brightness_auto_on_alpha.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/lockscreen_fingerprint_draw_off.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/lockscreen_fingerprint_draw_off.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_no_network.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_no_network.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_sysbar_lights_out_dot_large.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/ic_sysbar_lights_out_dot_large.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_bt_sco.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_bt_sco.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_2.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_2.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_carrier_network_change.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_carrier_network_change.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/pop_swirl.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/pop_swirl.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_wifi_signal_4.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_wifi_signal_4.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_full_1.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_full_1.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_ringer.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_ringer.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_full_1.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_full_1.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_notify_more.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_notify_more.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_signal_1.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_signal_1.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_data_fully_connected_4g.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_data_fully_connected_4g.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_signal_carrier_network_change.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_signal_carrier_network_change.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_in.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_in.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_out.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_out.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_notify_image_error.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/stat_notify_image_error.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_lte.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_lte.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_tty_mode.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_tty_mode.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_zen_none.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_zen_none.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_signal_3_fully.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_signal_3_fully.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_data_bluetooth_connected.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_data_bluetooth_connected.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/status_background.9.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/status_background.9.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_invert_colors_disable.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_invert_colors_disable.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_no_sims.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_no_sims.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_access_alarms_small.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_access_alarms_small.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_dnd_on.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_dnd_on.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/trusted_state_to_error.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/trusted_state_to_error.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_signal_2.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_signal_2.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_sysbar_lights_out_dot_small.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/ic_sysbar_lights_out_dot_small.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_ringer_audible.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_ringer_audible.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_power_low.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_power_low.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_wifi_detail_empty.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_wifi_detail_empty.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/star.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/star.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_airplane_mode.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_airplane_mode.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_data_fully_connected_roam.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_data_fully_connected_roam.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_0.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_0.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_data_fully_connected_lte.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_data_fully_connected_lte.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/lockscreen_fingerprint_error_state_to_fp.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/lockscreen_fingerprint_error_state_to_fp.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_wifi_signal_2.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_wifi_signal_2.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_fingerprint_error.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_fingerprint_error.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_full_2.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_full_2.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_1x.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_1x.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_signal_3.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_signal_3.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_g.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_g.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_notify_image.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-mdpi/stat_notify_image.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/stat_sys_data_bluetooth.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/stat_sys_data_bluetooth.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_signal_airplane_disable.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_signal_airplane_disable.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_media_mute.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_media_mute.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/vector_drawable_place_bottom_left.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/vector_drawable_place_bottom_left.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_dnd_total_silence.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_dnd_total_silence.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_vpn.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_vpn.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_signal_airplane_enable.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_signal_airplane_enable.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_e.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_e.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_volume_system.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_volume_system.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_qs_signal_disabled.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_qs_signal_disabled.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_expand_more.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/generated/res/pngs/debug/drawable-mdpi/ic_expand_more.png"
+    }
+]

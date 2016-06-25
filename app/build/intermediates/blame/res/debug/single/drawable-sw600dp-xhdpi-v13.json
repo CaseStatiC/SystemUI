@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-sw600dp-xhdpi-v13/ic_sysbar_lights_out_dot_large.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-sw600dp-xhdpi/ic_sysbar_lights_out_dot_large.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/drawable-sw600dp-xhdpi-v13/ic_sysbar_lights_out_dot_small.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/drawable-sw600dp-xhdpi/ic_sysbar_lights_out_dot_small.png"
+    }
+]

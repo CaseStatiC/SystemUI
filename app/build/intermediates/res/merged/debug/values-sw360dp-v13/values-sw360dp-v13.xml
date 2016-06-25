@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="navigation_extra_key_width">40dip</dimen>
+    <dimen name="navigation_key_width">80dip</dimen>
+    <dimen name="navigation_side_padding">40dip</dimen>
+</resources>

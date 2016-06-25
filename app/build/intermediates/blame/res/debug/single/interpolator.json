@@ -1,0 +1,198 @@
+[
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_invert_colors_enable_mask_pathdata_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_invert_colors_enable_mask_pathdata_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_fp_to_error_state_animation_interpolator_2.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_fp_to_error_state_animation_interpolator_2.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_error_state_to_fp_animation_interpolator_5.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_error_state_to_fp_animation_interpolator_5.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_error_state_to_fp_animation_interpolator_0.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_error_state_to_fp_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_draw_off_animation_interpolator_0.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_draw_off_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_hotspot_disable_cross_1_pathdata_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_hotspot_disable_cross_1_pathdata_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/assist_disclosure_trace.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/assist_disclosure_trace.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_landscape_to_auto_rotate_arrows_rotation_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_landscape_to_auto_rotate_arrows_rotation_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/trusted_state_to_error_animation_interpolator_3.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/trusted_state_to_error_animation_interpolator_3.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/error_to_trustedstate_animation_interpolator_2.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/error_to_trustedstate_animation_interpolator_2.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_hotspot_enable_cross_1_pathdata_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_hotspot_enable_cross_1_pathdata_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/recents_launch_prev_affiliated_task_bounce_ydelta.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/recents_launch_prev_affiliated_task_bounce_ydelta.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_volume_expand_animation_interpolator_0.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_volume_expand_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_draw_on_animation_interpolator_0.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_draw_on_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_signal_airplane_enable_mask_pathdata_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_signal_airplane_enable_mask_pathdata_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_fp_to_error_state_animation_interpolator_5.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_fp_to_error_state_animation_interpolator_5.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_volume_collapse_animation_interpolator_0.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_volume_collapse_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_error_state_to_fp_animation_interpolator_2.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_error_state_to_fp_animation_interpolator_2.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_hotspot_disable_mask_pathdata_interpolator_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_hotspot_disable_mask_pathdata_interpolator_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_fp_to_error_state_animation_interpolator_4.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_fp_to_error_state_animation_interpolator_4.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_draw_on_animation_interpolator_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_draw_on_animation_interpolator_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_error_state_to_fp_animation_interpolator_3.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_error_state_to_fp_animation_interpolator_3.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/error_to_trustedstate_animation_interpolator_4.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/error_to_trustedstate_animation_interpolator_4.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/error_to_trustedstate_animation_interpolator_0.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/error_to_trustedstate_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_fp_to_error_state_animation_interpolator_0.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_fp_to_error_state_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/trusted_state_to_error_animation_interpolator_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/trusted_state_to_error_animation_interpolator_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_error_state_to_fp_animation_interpolator_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_error_state_to_fp_animation_interpolator_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_invert_colors_enable_cross_1_pathdata_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_invert_colors_enable_cross_1_pathdata_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_hotspot_disable_ic_hotspot_alpha_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_hotspot_disable_ic_hotspot_alpha_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_fp_to_error_state_animation_interpolator_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_fp_to_error_state_animation_interpolator_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/trusted_state_to_error_animation_interpolator_0.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/trusted_state_to_error_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_signal_flashlight_enable_cross_1_pathdata_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_signal_flashlight_enable_cross_1_pathdata_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_hotspot_disable_mask_pathdata_interpolator_2.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_hotspot_disable_mask_pathdata_interpolator_2.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_error_state_to_fp_animation_interpolator_4.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_error_state_to_fp_animation_interpolator_4.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_signal_location_enable_cross_1_pathdata_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_signal_location_enable_cross_1_pathdata_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_signal_airplane_enable_cross_1_pathdata_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_signal_airplane_enable_cross_1_pathdata_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_fp_to_error_state_animation_interpolator_3.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_fp_to_error_state_animation_interpolator_3.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_signal_flashlight_enable_mask_pathdata_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_signal_flashlight_enable_mask_pathdata_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_signal_location_enable_mask_pathdata_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_signal_location_enable_mask_pathdata_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_invert_colors_disable_cross_1_pathdata_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_invert_colors_disable_cross_1_pathdata_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_signal_airplane_disable_cross_1_pathdata_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_signal_airplane_disable_cross_1_pathdata_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/recents_launch_next_affiliated_task_bounce_scale.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/recents_launch_next_affiliated_task_bounce_scale.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_hotspot_enable_mask_pathdata_interpolator_2.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_hotspot_enable_mask_pathdata_interpolator_2.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_hotspot_enable_mask_pathdata_interpolator_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_hotspot_enable_mask_pathdata_interpolator_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/ic_landscape_from_auto_rotate_arrows_rotation_interpolator.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/ic_landscape_from_auto_rotate_arrows_rotation_interpolator.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/trusted_state_to_error_animation_interpolator_2.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/trusted_state_to_error_animation_interpolator_2.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/error_to_trustedstate_animation_interpolator_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/error_to_trustedstate_animation_interpolator_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/lockscreen_fingerprint_draw_off_animation_interpolator_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/lockscreen_fingerprint_draw_off_animation_interpolator_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/interpolator/error_to_trustedstate_animation_interpolator_3.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/interpolator/error_to_trustedstate_animation_interpolator_3.xml"
+    }
+]

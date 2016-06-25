@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="config_recents_interface_for_tablets">true</bool>
+    <bool name="config_recents_thumbnail_image_fits_to_xy">true</bool>
+    <bool name="recents_has_transposed_nav_bar">false</bool>
+    <bool name="recents_has_transposed_search_bar">false</bool>
+    <bool name="recents_transpose_search_layout_with_orientation">false</bool>
+    <dimen name="notification_panel_min_height">770dp</dimen>
+    <dimen name="panel_float">56dp</dimen>
+    <dimen name="recents_task_view_rounded_corners_radius">3dp</dimen>
+    <dimen name="status_bar_icon_padding">1dp</dimen>
+    <dimen name="status_bar_recents_app_description_text_size">18dip</dimen>
+    <dimen name="status_bar_recents_app_icon_left_margin">0dp</dimen>
+    <dimen name="status_bar_recents_app_icon_max_height">64dp</dimen>
+    <dimen name="status_bar_recents_app_icon_max_width">64dp</dimen>
+    <dimen name="status_bar_recents_app_icon_top_margin">8dp</dimen>
+    <dimen name="status_bar_recents_app_label_left_margin">16dip</dimen>
+    <dimen name="status_bar_recents_app_label_text_size">18dip</dimen>
+    <dimen name="status_bar_recents_app_label_width">97dip</dimen>
+    <dimen name="status_bar_recents_scroll_fading_edge_length">10dip</dimen>
+    <dimen name="status_bar_recents_text_description_padding">8dp</dimen>
+    <dimen name="status_bar_recents_text_fading_edge_length">20dip</dimen>
+    <dimen name="status_bar_recents_thumbnail_height">130dp</dimen>
+    <dimen name="status_bar_recents_thumbnail_left_margin">28dp</dimen>
+    <dimen name="status_bar_recents_thumbnail_width">208dp</dimen>
+    <dimen name="status_bar_recents_width">600dp</dimen>
+    <fraction name="keyguard_clock_y_fraction_max">35%</fraction>
+    <fraction name="keyguard_clock_y_fraction_min">25%</fraction>
+    <integer name="config_recent_item_min_alpha">0</integer>
+    <integer name="keyguard_max_notification_count">5</integer>
+    <integer name="status_bar_config_maxNotificationIcons">5</integer>
+    <string name="status_bar_date_formatter">%1$s\n%2$s</string>
+</resources>

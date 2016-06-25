@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="battery_margin_bottom">0dp</dimen>
+    <fraction name="battery_subpixel_smoothing_left">25%</fraction>
+    <fraction name="battery_subpixel_smoothing_right">12.5%</fraction>
+</resources>

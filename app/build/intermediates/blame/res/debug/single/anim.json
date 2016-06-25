@@ -1,0 +1,694 @@
+[
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_dnd_total_silence_disable_outer_ring_merged_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_dnd_total_silence_disable_outer_ring_merged_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_landscape_from_auto_rotate_animation_arrows.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_landscape_from_auto_rotate_animation_arrows.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/system_in.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/system_in.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/trusted_state_to_error_lock_left_side_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/trusted_state_to_error_lock_left_side_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_draw_off_ridge_1_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_draw_off_ridge_1_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_launch_next_affiliated_task_source.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_launch_next_affiliated_task_source.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_portrait_from_auto_rotate_animation_device_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_portrait_from_auto_rotate_animation_device_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_invert_colors_enable_animation_icon.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_invert_colors_enable_animation_icon.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_portrait_from_auto_rotate_animation_arrow_bottom.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_portrait_from_auto_rotate_animation_arrow_bottom.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_landscape_from_auto_rotate_animation_arrow_top.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_landscape_from_auto_rotate_animation_arrow_top.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_ridge_5_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_ridge_5_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_airplane_enable_animation_ic_signal_airplane.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_airplane_enable_animation_ic_signal_airplane.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_return_to_launcher_exit.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_return_to_launcher_exit.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_flashlight_enable_animation_cross_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_flashlight_enable_animation_cross_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_dnd_total_silence_disable_mask_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_dnd_total_silence_disable_mask_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/trusted_state_to_error_lock_right_side_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/trusted_state_to_error_lock_right_side_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_location_enable_animation_mask.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_location_enable_animation_mask.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_to_launcher_exit.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_to_launcher_exit.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_to_launcher_enter.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_to_launcher_enter.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/progress_indeterminate_horizontal_rect1_scale.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/progress_indeterminate_horizontal_rect1_scale.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_hotspot_enable_animation_mask.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_hotspot_enable_animation_mask.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_flashlight_disable_animation_root.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_flashlight_disable_animation_root.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_volume_collapse_rectangle_2_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_volume_collapse_rectangle_2_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_portrait_to_auto_rotate_animation_arrow_top.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_portrait_to_auto_rotate_animation_arrow_top.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/trusted_state_to_error_path_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/trusted_state_to_error_path_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_flashlight_disable_animation_ic_signal_flashlight.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_flashlight_disable_animation_ic_signal_flashlight.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_landscape_to_auto_rotate_animation_arrows.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_landscape_to_auto_rotate_animation_arrows.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_airplane_disable_animation_cross_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_airplane_disable_animation_cross_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/error_to_trustedstate_lock_right_side_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/error_to_trustedstate_lock_right_side_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/dismiss_all_shape_animation_2.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/dismiss_all_shape_animation_2.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_qs_signal_blink_3.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_qs_signal_blink_3.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_error_state_to_fp_path_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_error_state_to_fp_path_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_qs_signal_blink_2.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_qs_signal_blink_2.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_hotspot_enable_animation_root.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_hotspot_enable_animation_root.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/navbar_fade_in.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/navbar_fade_in.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_flashlight_disable_animation_cross_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_flashlight_disable_animation_cross_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/error_to_trustedstate_lock_left_side_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/error_to_trustedstate_lock_left_side_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/error_to_trustedstate_exclamation_dot_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/error_to_trustedstate_exclamation_dot_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_draw_off_ridge_7_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_draw_off_ridge_7_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_landscape_from_auto_rotate_animation_device.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_landscape_from_auto_rotate_animation_device.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_path_2_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_path_2_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_flashlight_enable_animation_mask.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_flashlight_enable_animation_mask.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_to_search_launcher_exit.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_to_search_launcher_exit.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/dismiss_all_shape_animation_rectangle_path_1_2.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/dismiss_all_shape_animation_rectangle_path_1_2.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_dnd_disable_mask_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_dnd_disable_mask_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_dnd_total_silence_disable_alpha_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_dnd_total_silence_disable_alpha_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_error_state_to_fp_ridge_1_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_error_state_to_fp_ridge_1_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/error_to_trustedstate_ellipse_path_2_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/error_to_trustedstate_ellipse_path_2_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_ridge_2_path_0_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_ridge_2_path_0_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_blink_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_blink_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/trusted_state_to_error_ellipse_path_2_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/trusted_state_to_error_ellipse_path_2_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_draw_off_ridge_6_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_draw_off_ridge_6_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_qs_signal_blink_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_qs_signal_blink_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_airplane_enable_animation_mask.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_airplane_enable_animation_mask.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_invert_colors_disable_animation_icon.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_invert_colors_disable_animation_icon.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_hotspot_disable_animation_root.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_hotspot_disable_animation_root.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/trusted_state_to_error_lock_top_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/trusted_state_to_error_lock_top_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_portrait_to_auto_rotate_animation_arrow_bottom.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_portrait_to_auto_rotate_animation_arrow_bottom.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_blink_2.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_blink_2.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/error_to_trustedstate_lock_top_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/error_to_trustedstate_lock_top_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_error_state_to_fp_ridge_6_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_error_state_to_fp_ridge_6_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/trusted_state_to_error_path_3_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/trusted_state_to_error_path_3_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/dismiss_all_shape_animation_rectangle_path_1_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/dismiss_all_shape_animation_rectangle_path_1_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_invert_colors_enable_animation_cross_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_invert_colors_enable_animation_cross_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_flashlight_enable_animation_root.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_flashlight_enable_animation_root.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_ridge_1_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_ridge_1_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_path_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_path_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_error_state_to_fp_group_2_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_error_state_to_fp_group_2_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_landscape_from_auto_rotate_animation_body.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_landscape_from_auto_rotate_animation_body.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_landscape_to_auto_rotate_animation_arrow_bottom.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_landscape_to_auto_rotate_animation_arrow_bottom.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_invert_colors_enable_animation_mask.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_invert_colors_enable_animation_mask.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_portrait_from_auto_rotate_animation_arrows.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_portrait_from_auto_rotate_animation_arrows.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_fingerprint_ridges_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_fingerprint_ridges_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_landscape_from_auto_rotate_animation_arrow_bottom.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_landscape_from_auto_rotate_animation_arrow_bottom.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_launch_next_affiliated_task_target.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_launch_next_affiliated_task_target.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/wallpaper_recents_launch_from_launcher_exit.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/wallpaper_recents_launch_from_launcher_exit.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/error_to_trustedstate_path_3_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/error_to_trustedstate_path_3_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_launch_next_affiliated_task_bounce.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_launch_next_affiliated_task_bounce.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_group_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_group_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_draw_on_ridge_5_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_draw_on_ridge_5_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_dnd_disable_alpha_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_dnd_disable_alpha_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_hotspot_disable_animation_cross_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_hotspot_disable_animation_cross_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_group_2_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_group_2_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_ridge_6_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_ridge_6_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_ridge_7_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_ridge_7_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_blink_3.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_blink_3.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_ridge_7_path_0_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_ridge_7_path_0_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_draw_on_ridge_1_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_draw_on_ridge_1_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_flashlight_enable_animation_ic_signal_flashlight.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_flashlight_enable_animation_ic_signal_flashlight.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/dismiss_all_shape_animation_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/dismiss_all_shape_animation_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_launch_from_launcher_exit.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_launch_from_launcher_exit.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/progress_indeterminate_horizontal_rect1_translate.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/progress_indeterminate_horizontal_rect1_translate.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_ridge_5_path_0_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_ridge_5_path_0_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_error_state_to_fp_ridge_7_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_error_state_to_fp_ridge_7_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_from_launcher_enter.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_from_launcher_enter.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_airplane_disable_animation_root.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_airplane_disable_animation_root.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_launch_prev_affiliated_task_bounce.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_launch_prev_affiliated_task_bounce.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_error_state_to_fp_path_3_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_error_state_to_fp_path_3_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/dismiss_all_shape_animation_rectangle_path_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/dismiss_all_shape_animation_rectangle_path_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_volume_collapse_rectangle_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_volume_collapse_rectangle_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/progress_indeterminate_horizontal_rect2_scale.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/progress_indeterminate_horizontal_rect2_scale.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_ridge_6_path_0_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_ridge_6_path_0_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_landscape_to_auto_rotate_animation_arrow_top.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_landscape_to_auto_rotate_animation_arrow_top.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_airplane_disable_animation_mask.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_airplane_disable_animation_mask.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/search_launch_enter.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/search_launch_enter.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/error_to_trustedstate_path_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/error_to_trustedstate_path_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_path_3_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_path_3_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/error_to_trustedstate_rectangle_path_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/error_to_trustedstate_rectangle_path_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_error_state_to_fp_ridge_5_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_error_state_to_fp_ridge_5_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_draw_off_ridge_5_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_draw_off_ridge_5_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_airplane_enable_animation_root.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_airplane_enable_animation_root.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_volume_expand_rectangle_3_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_volume_expand_rectangle_3_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_location_enable_animation_cross_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_location_enable_animation_cross_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_from_search_launcher_exit.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_from_search_launcher_exit.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/dismiss_all_shape_animation_3.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/dismiss_all_shape_animation_3.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_return_to_launcher_enter.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_return_to_launcher_enter.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_invert_colors_disable_animation_cross_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_invert_colors_disable_animation_cross_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/trusted_state_to_error_exclamation_dot_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/trusted_state_to_error_exclamation_dot_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_portrait_to_auto_rotate_animation_device.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_portrait_to_auto_rotate_animation_device.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_from_launcher_exit.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_from_launcher_exit.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_location_enable_animation_ic_signal_location.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_location_enable_animation_ic_signal_location.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_flashlight_disable_animation_mask.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_flashlight_disable_animation_mask.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_invert_colors_disable_animation_mask.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_invert_colors_disable_animation_mask.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_launch_from_launcher_enter.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_launch_from_launcher_enter.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/trusted_state_to_error_rectangle_path_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/trusted_state_to_error_rectangle_path_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/system_out.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/system_out.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/trusted_state_to_error_path_2_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/trusted_state_to_error_path_2_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_ridge_2_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_ridge_2_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_location_disable_animation_ic_signal_location.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_location_disable_animation_ic_signal_location.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_volume_expand_rectangle_4_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_volume_expand_rectangle_4_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_from_app_exit.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_from_app_exit.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_ridge_1_path_0_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_ridge_1_path_0_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/search_launch_exit.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/search_launch_exit.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_dnd_disable_bar01_0_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_dnd_disable_bar01_0_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_volume_expand_chevron_01_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_volume_expand_chevron_01_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/trusted_state_to_error_ellipse_path_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/trusted_state_to_error_ellipse_path_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_airplane_enable_animation_cross_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_airplane_enable_animation_cross_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_portrait_from_auto_rotate_animation_device.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_portrait_from_auto_rotate_animation_device.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_volume_collapse_chevron_02_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_volume_collapse_chevron_02_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/error_to_trustedstate_ellipse_path_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/error_to_trustedstate_ellipse_path_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_error_state_to_fp_white_fingerprint_ridges_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_error_state_to_fp_white_fingerprint_ridges_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_landscape_to_auto_rotate_animation_body.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_landscape_to_auto_rotate_animation_body.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_from_app_enter.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_from_app_enter.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_hotspot_enable_animation_cross_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_hotspot_enable_animation_cross_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_location_disable_animation_cross_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_location_disable_animation_cross_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_fp_to_error_state_white_fingerprint_ridges_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_fp_to_error_state_white_fingerprint_ridges_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_invert_colors_enable_animation_root.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_invert_colors_enable_animation_root.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/error_to_trustedstate_path_2_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/error_to_trustedstate_path_2_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_launch_prev_affiliated_task_target.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_launch_prev_affiliated_task_target.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_launch_prev_affiliated_task_source.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_launch_prev_affiliated_task_source.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_from_unknown_enter.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_from_unknown_enter.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_hotspot_disable_animation_mask.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_hotspot_disable_animation_mask.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_airplane_disable_animation_ic_signal_airplane.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_airplane_disable_animation_ic_signal_airplane.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_invert_colors_disable_animation_root.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_invert_colors_disable_animation_root.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_portrait_to_auto_rotate_animation_arrows.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_portrait_to_auto_rotate_animation_arrows.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_error_state_to_fp_ridge_2_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_error_state_to_fp_ridge_2_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_draw_off_ridge_2_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_draw_off_ridge_2_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_error_state_to_fp_group_1_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_error_state_to_fp_group_1_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/wallpaper_recents_launch_from_launcher_enter.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/wallpaper_recents_launch_from_launcher_enter.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_error_state_to_fp_path_2_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_error_state_to_fp_path_2_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_portrait_to_auto_rotate_animation_device_1.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_portrait_to_auto_rotate_animation_device_1.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_portrait_from_auto_rotate_animation_arrow_top.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_portrait_from_auto_rotate_animation_arrow_top.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/progress_indeterminate_horizontal_rect2_translate.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/progress_indeterminate_horizontal_rect2_translate.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_draw_on_ridge_7_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_draw_on_ridge_7_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_location_disable_animation_root.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_location_disable_animation_root.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_from_unknown_exit.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_from_unknown_exit.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_from_search_launcher_enter.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_from_search_launcher_enter.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_location_enable_animation_root.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_location_enable_animation_root.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_draw_on_ridge_2_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_draw_on_ridge_2_path_animation.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_landscape_to_auto_rotate_animation_device.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_landscape_to_auto_rotate_animation_device.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/recents_to_search_launcher_enter.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/recents_to_search_launcher_enter.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/ic_signal_location_disable_animation_mask.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/ic_signal_location_disable_animation_mask.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/anim/lockscreen_fingerprint_draw_on_ridge_6_path_animation.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/anim/lockscreen_fingerprint_draw_on_ridge_6_path_animation.xml"
+    }
+]

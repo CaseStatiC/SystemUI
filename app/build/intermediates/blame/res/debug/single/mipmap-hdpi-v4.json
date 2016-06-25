@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/mipmap-hdpi-v4/ic_daydreams.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/mipmap-hdpi/ic_daydreams.png"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/mipmap-hdpi-v4/ic_launcher_dreams.png",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/mipmap-hdpi/ic_launcher_dreams.png"
+    }
+]

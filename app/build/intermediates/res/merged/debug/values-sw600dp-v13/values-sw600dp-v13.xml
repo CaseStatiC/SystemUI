@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="config_keyguardUserSwitcher">true</bool>
+    <bool name="recents_has_transposed_nav_bar">false</bool>
+    <bool name="recents_has_transposed_search_bar">true</bool>
+    <dimen name="edge_tap_area_width">80dp</dimen>
+    <dimen name="keyguard_affordance_height">80dp</dimen>
+    <dimen name="keyguard_affordance_width">120dp</dimen>
+    <dimen name="keyguard_carrier_text_margin">24dp</dimen>
+    <dimen name="keyguard_clock_notifications_margin_max">44dp</dimen>
+    <dimen name="keyguard_clock_notifications_margin_min">44dp</dimen>
+    <dimen name="keyguard_indication_margin_bottom">90dp</dimen>
+    <dimen name="multi_user_avatar_keyguard_size">30dp</dimen>
+    <dimen name="multi_user_switch_keyguard_margin">6dp</dimen>
+    <dimen name="multi_user_switch_width_keyguard">48dp</dimen>
+    <dimen name="navbar_search_outerring_diameter">430dip</dimen>
+    <dimen name="navbar_search_outerring_radius">215dip</dimen>
+    <dimen name="navbar_search_panel_height">280dip</dimen>
+    <dimen name="navigation_extra_key_width">48dip</dimen>
+    <item name="notification_panel_min_height_frac" type="dimen">40%</item>
+    <dimen name="notification_panel_width">@dimen/standard_notification_panel_width</dimen>
+    <dimen name="peek_height">@dimen/close_handle_height</dimen>
+    <dimen name="recents_search_bar_space_height">72dp</dimen>
+    <item format="float" name="recents_stack_width_padding_percentage" type="dimen">0.075</item>
+    <dimen name="screen_pinning_request_button_width">128dp</dimen>
+    <dimen name="screen_pinning_request_frame_padding">22dp</dimen>
+    <dimen name="screen_pinning_request_side_width">8dp</dimen>
+    <dimen name="screen_pinning_request_width">400dp</dimen>
+    <dimen name="status_bar_header_height_keyguard">60dp</dimen>
+    <dimen name="status_bar_recents_thumbnail_height">177dp</dimen>
+    <dimen name="status_bar_recents_thumbnail_width">200dp</dimen>
+    <dimen name="system_icons_keyguard_padding_end">2dp</dimen>
+    <fraction name="keyguard_clock_y_fraction_max">34%</fraction>
+    <fraction name="keyguard_clock_y_fraction_min">24%</fraction>
+    <integer name="keyguard_max_notification_count">5</integer>
+    <integer name="notification_panel_layout_gravity">@integer/standard_notification_panel_layout_gravity</integer>
+    <integer name="quick_settings_max_rows">4</integer>
+    <integer name="quick_settings_user_time_settings_tile_span">1</integer>
+    <style name="BrightnessDialogContainer" parent="@style/BaseBrightnessDialogContainer">
+        <item name="android:layout_width">480dp</item>
+    </style>
+    <style name="UserDetailView">
+        <item name="numColumns">4</item>
+    </style>
+</resources>

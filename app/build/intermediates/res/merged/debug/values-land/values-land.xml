@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="navigation_bar_size">@*android:dimen/navigation_bar_width</dimen>
+    <dimen name="notification_panel_width">@dimen/standard_notification_panel_width</dimen>
+    <item format="float" name="recents_stack_width_padding_percentage" type="dimen">0.26</item>
+    <dimen name="status_bar_recents_app_icon_left_margin">8dp</dimen>
+    <dimen name="status_bar_recents_app_icon_top_margin">8dp</dimen>
+    <dimen name="status_bar_recents_app_label_left_margin">12dip</dimen>
+    <dimen name="status_bar_recents_app_label_width">156dip</dimen>
+    <dimen name="status_bar_recents_item_padding">2dip</dimen>
+    <dimen name="status_bar_recents_right_glow_margin">0dip</dimen>
+    <dimen name="status_bar_recents_text_description_padding">8dp</dimen>
+    <dimen name="status_bar_recents_thumbnail_left_margin">0dp</dimen>
+    <dimen name="status_bar_recents_thumbnail_top_margin">28dp</dimen>
+    <integer name="keyguard_max_notification_count">1</integer>
+    <integer name="notification_panel_layout_gravity">@integer/standard_notification_panel_layout_gravity</integer>
+    <integer name="quick_settings_max_rows">2</integer>
+    <integer name="quick_settings_user_time_settings_tile_span">2</integer>
+    <integer name="status_bar_recents_bg_gradient_degrees">90</integer>
+    <string name="toast_rotation_locked">Screen is now locked in landscape orientation.</string>
+    <style name="BrightnessDialogContainer" parent="@style/BaseBrightnessDialogContainer">
+        <item name="android:layout_width">360dp</item>
+    </style>
+</resources>

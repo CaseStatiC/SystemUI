@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/color/segmented_button_text_selector.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/color/segmented_button_text_selector.xml"
+    },
+    {
+        "merged": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/build/intermediates/res/merged/debug/color/qs_user_detail_name.xml",
+        "source": "/home/xuwanjin/Downloads/Android Module/SystemUI/app/src/main/res/color/qs_user_detail_name.xml"
+    }
+]
