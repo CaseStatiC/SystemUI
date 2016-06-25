@@ -57,6 +57,7 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println("BluetoothController state:");
         pw.print("  mLocalBluetoothManager="); pw.println(mLocalBluetoothManager);
         if (mLocalBluetoothManager == null) {
@@ -74,6 +75,7 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
     }
 
     private static String stateToString(int state) {
+        Log.d(TAG, "stateToString: ");
         switch (state) {
             case BluetoothAdapter.STATE_CONNECTED:
                 return "CONNECTED";
@@ -88,37 +90,44 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
     }
 
     private String getDeviceString(CachedBluetoothDevice device) {
+        Log.d(TAG, "getDeviceString: ");
         return device.getName() + " " + device.getBondState() + " " + device.isConnected();
     }
 
     @Override
     public void addStateChangedCallback(Callback cb) {
+        Log.d(TAG, "addStateChangedCallback: ");
         mCallbacks.add(cb);
         mHandler.sendEmptyMessage(H.MSG_STATE_CHANGED);
     }
 
     @Override
     public void removeStateChangedCallback(Callback cb) {
+        Log.d(TAG, "removeStateChangedCallback: ");
         mCallbacks.remove(cb);
     }
 
     @Override
     public boolean isBluetoothEnabled() {
+        Log.d(TAG, "isBluetoothEnabled: ");
         return mEnabled;
     }
 
     @Override
     public boolean isBluetoothConnected() {
+        Log.d(TAG, "isBluetoothConnected: ");
         return mConnectionState == BluetoothAdapter.STATE_CONNECTED;
     }
 
     @Override
     public boolean isBluetoothConnecting() {
+        Log.d(TAG, "isBluetoothConnecting: ");
         return mConnectionState == BluetoothAdapter.STATE_CONNECTING;
     }
 
     @Override
     public void setBluetoothEnabled(boolean enabled) {
+        Log.d(TAG, "setBluetoothEnabled: ");
         if (mLocalBluetoothManager != null) {
             mLocalBluetoothManager.getBluetoothAdapter().setBluetoothEnabled(enabled);
         }
@@ -126,34 +135,40 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
 
     @Override
     public boolean isBluetoothSupported() {
+        Log.d(TAG, "isBluetoothSupported: ");
         return mLocalBluetoothManager != null;
     }
 
     @Override
     public void connect(final CachedBluetoothDevice device) {
+        Log.d(TAG, "connect: ");
         if (mLocalBluetoothManager == null || device == null) return;
         device.connect(true);
     }
 
     @Override
     public void disconnect(CachedBluetoothDevice device) {
+        Log.d(TAG, "disconnect: ");
         if (mLocalBluetoothManager == null || device == null) return;
         device.disconnect();
     }
 
     @Override
     public String getLastDeviceName() {
+        Log.d(TAG, "getLastDeviceName: ");
         return mLastDevice != null ? mLastDevice.getName() : null;
     }
 
     @Override
     public Collection<CachedBluetoothDevice> getDevices() {
+        Log.d(TAG, "getDevices: ");
         return mLocalBluetoothManager != null
                 ? mLocalBluetoothManager.getCachedDeviceManager().getCachedDevicesCopy()
                 : null;
     }
 
     private void updateConnected() {
+        Log.d(TAG, "updateConnected: ");
         // Make sure our connection state is up to date.
         int state = mLocalBluetoothManager.getBluetoothAdapter().getConnectionState();
         if (state != mConnectionState) {
@@ -180,17 +195,20 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
 
     @Override
     public void onBluetoothStateChanged(int bluetoothState) {
+        Log.d(TAG, "onBluetoothStateChanged: ");
         mEnabled = bluetoothState == BluetoothAdapter.STATE_ON;
         mHandler.sendEmptyMessage(H.MSG_STATE_CHANGED);
     }
 
     @Override
     public void onScanningStateChanged(boolean started) {
+        Log.d(TAG, "onScanningStateChanged: ");
         // Don't care.
     }
 
     @Override
     public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
+        Log.d(TAG, "onDeviceAdded: ");
         cachedDevice.registerCallback(this);
         updateConnected();
         mHandler.sendEmptyMessage(H.MSG_PAIRED_DEVICES_CHANGED);
@@ -198,12 +216,14 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
 
     @Override
     public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) {
+        Log.d(TAG, "onDeviceDeleted: ");
         updateConnected();
         mHandler.sendEmptyMessage(H.MSG_PAIRED_DEVICES_CHANGED);
     }
 
     @Override
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
+        Log.d(TAG, "onDeviceBondStateChanged: ");
         updateConnected();
         mHandler.sendEmptyMessage(H.MSG_PAIRED_DEVICES_CHANGED);
     }
@@ -211,11 +231,13 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
     @Override
     public void onDeviceAttributesChanged() {
         updateConnected();
+        Log.d(TAG, "onDeviceAttributesChanged: ");
         mHandler.sendEmptyMessage(H.MSG_PAIRED_DEVICES_CHANGED);
     }
 
     @Override
     public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
+        Log.d(TAG, "onConnectionStateChanged: ");
         mLastDevice = cachedDevice;
         updateConnected();
         mConnectionState = state;
@@ -228,6 +250,7 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
 
         @Override
         public void handleMessage(Message msg) {
+            Log.d(TAG, "H: handleMessage: msg.what = " + msg.what);
             switch (msg.what) {
                 case MSG_PAIRED_DEVICES_CHANGED:
                     firePairedDevicesChanged();
@@ -239,18 +262,21 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
         }
 
         private void firePairedDevicesChanged() {
+            Log.d(TAG, "firePairedDevicesChanged: ");
             for (BluetoothController.Callback cb : mCallbacks) {
                 cb.onBluetoothDevicesChanged();
             }
         }
 
         private void fireStateChange() {
+            Log.d(TAG, "fireStateChange: ");
             for (BluetoothController.Callback cb : mCallbacks) {
                 fireStateChange(cb);
             }
         }
 
         private void fireStateChange(BluetoothController.Callback cb) {
+            Log.d(TAG, "fireStateChange(args): ");
             cb.onBluetoothStateChange(mEnabled);
         }
     }
