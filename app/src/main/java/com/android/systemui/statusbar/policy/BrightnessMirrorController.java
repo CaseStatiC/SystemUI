@@ -21,6 +21,7 @@ import com.android.systemui.statusbar.ScrimView;
 import com.android.systemui.statusbar.phone.PhoneStatusBar;
 import com.android.systemui.statusbar.phone.StatusBarWindowView;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.FrameLayout;
@@ -29,7 +30,7 @@ import android.widget.FrameLayout;
  * Controls showing and hiding of the brightness mirror.
  */
 public class BrightnessMirrorController {
-
+    public static final String TAG = "BrightnessMirrorController";
     public long TRANSITION_DURATION_OUT = 150;
     public long TRANSITION_DURATION_IN = 200;
 
@@ -45,6 +46,7 @@ public class BrightnessMirrorController {
     }
 
     public void showMirror() {
+        Log.d(TAG, "showMirror: ");
         mBrightnessMirror.setVisibility(View.VISIBLE);
         mScrimBehind.animateViewAlpha(0.0f, TRANSITION_DURATION_OUT, PhoneStatusBar.ALPHA_OUT);
         outAnimation(mPanelHolder.animate())
@@ -52,23 +54,27 @@ public class BrightnessMirrorController {
     }
 
     public void hideMirror() {
+        Log.d(TAG, "hideMirror: ");
         mScrimBehind.animateViewAlpha(1.0f, TRANSITION_DURATION_IN, PhoneStatusBar.ALPHA_IN);
         inAnimation(mPanelHolder.animate())
                 .withLayer()
                 .withEndAction(new Runnable() {
             @Override
             public void run() {
+                Log.d(TAG, "hideMirror: run: ");
                 mBrightnessMirror.setVisibility(View.INVISIBLE);
             }
         });
     }
 
     private ViewPropertyAnimator outAnimation(ViewPropertyAnimator a) {
+        Log.d(TAG, "outAnimation: ");
         return a.alpha(0.0f)
                 .setDuration(TRANSITION_DURATION_OUT)
                 .setInterpolator(PhoneStatusBar.ALPHA_OUT);
     }
     private ViewPropertyAnimator inAnimation(ViewPropertyAnimator a) {
+        Log.d(TAG, "inAnimation: ");
         return a.alpha(1.0f)
                 .setDuration(TRANSITION_DURATION_IN)
                 .setInterpolator(PhoneStatusBar.ALPHA_IN);
@@ -76,6 +82,7 @@ public class BrightnessMirrorController {
 
 
     public void setLocation(View original) {
+        Log.d(TAG, "setLocation: ");
         original.getLocationInWindow(mInt2Cache);
 
         // Original is slightly larger than the mirror, so make sure to use the center for the
@@ -92,10 +99,12 @@ public class BrightnessMirrorController {
     }
 
     public View getMirror() {
+        Log.d(TAG, "getMirror: ");
         return mBrightnessMirror;
     }
 
     public void updateResources() {
+        Log.d(TAG, "updateResources: ");
         FrameLayout.LayoutParams lp =
                 (FrameLayout.LayoutParams) mBrightnessMirror.getLayoutParams();
         lp.width = mBrightnessMirror.getResources().getDimensionPixelSize(
