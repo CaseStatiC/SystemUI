@@ -18,6 +18,7 @@ package com.android.systemui.statusbar.policy;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.util.Log;
 
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
@@ -39,7 +40,7 @@ public final class KeyguardMonitor extends KeyguardUpdateMonitorCallback {
     private boolean mCanSkipBouncer;
 
     private boolean mListening;
-
+    public static final String TAG = "KeyguardUpdateMonitor";
     public KeyguardMonitor(Context context) {
         mContext = context;
         mKeyguardUpdateMonitor = KeyguardUpdateMonitor.getInstance(mContext);
@@ -53,6 +54,7 @@ public final class KeyguardMonitor extends KeyguardUpdateMonitorCallback {
     }
 
     public void addCallback(Callback callback) {
+        Log.d(TAG, "addCallback: ");
         mCallbacks.add(callback);
         if (mCallbacks.size() != 0 && !mListening) {
             mListening = true;
@@ -64,6 +66,7 @@ public final class KeyguardMonitor extends KeyguardUpdateMonitorCallback {
     }
 
     public void removeCallback(Callback callback) {
+        Log.d(TAG, "removeCallback: ");
         if (mCallbacks.remove(callback) && mCallbacks.size() == 0 && mListening) {
             mListening = false;
             mKeyguardUpdateMonitor.removeCallback(this);
@@ -72,18 +75,22 @@ public final class KeyguardMonitor extends KeyguardUpdateMonitorCallback {
     }
 
     public boolean isShowing() {
+        Log.d(TAG, "isShowing: ");
         return mShowing;
     }
 
     public boolean isSecure() {
+        Log.d(TAG, "isSecure: ");
         return mSecure;
     }
 
     public boolean canSkipBouncer() {
+        Log.d(TAG, "canSkipBouncer: ");
         return mCanSkipBouncer;
     }
 
     public void notifyKeyguardState(boolean showing, boolean secure) {
+        Log.d(TAG, "notifyKeyguardState: ");
         if (mShowing == showing && mSecure == secure) return;
         mShowing = showing;
         mSecure = secure;
@@ -92,15 +99,18 @@ public final class KeyguardMonitor extends KeyguardUpdateMonitorCallback {
 
     @Override
     public void onTrustChanged(int userId) {
+        Log.d(TAG, "onTrustChanged: ");
         updateCanSkipBouncerState();
         notifyKeyguardChanged();
     }
 
     private void updateCanSkipBouncerState() {
+        Log.d(TAG, "updateCanSkipBouncerState: ");
         mCanSkipBouncer = mKeyguardUpdateMonitor.getUserCanSkipBouncer(mCurrentUser);
     }
 
     private void notifyKeyguardChanged() {
+        Log.d(TAG, "notifyKeyguardChanged: ");
         for (Callback callback : mCallbacks) {
             callback.onKeyguardChanged();
         }
