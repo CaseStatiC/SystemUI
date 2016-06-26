@@ -59,7 +59,7 @@ public class RemoteInputView extends FrameLayout implements View.OnClickListener
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-
+        Log.d(TAG, "onFinishInflate: ");
         mProgressBar = (ProgressBar) findViewById(R.id.remote_input_progress);
 
         mEditText = (RemoteEditText) getChildAt(0);
@@ -88,6 +88,7 @@ public class RemoteInputView extends FrameLayout implements View.OnClickListener
     }
 
     private void sendRemoteInput() {
+        Log.d(TAG, "sendRemoteInput: ");
         Bundle results = new Bundle();
         results.putString(mRemoteInput.getResultKey(), mEditText.getText().toString());
         Intent fillInIntent = new Intent();
@@ -106,6 +107,7 @@ public class RemoteInputView extends FrameLayout implements View.OnClickListener
 
     public static RemoteInputView inflate(Context context, ViewGroup root,
             Notification.Action action, RemoteInput remoteInput) {
+        Log.d(TAG, "inflate: ");
         RemoteInputView v = (RemoteInputView)
                 LayoutInflater.from(context).inflate(R.layout.remote_input, root, false);
 
@@ -119,6 +121,7 @@ public class RemoteInputView extends FrameLayout implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+        Log.d(TAG, "onClick: ");
         if (v == mEditText) {
             if (!mEditText.isFocusable()) {
                 mEditText.setInnerFocusable(true);
@@ -145,6 +148,7 @@ public class RemoteInputView extends FrameLayout implements View.OnClickListener
         }
 
         private void defocusIfNeeded() {
+            Log.d(TAG, "RemoteEditText: defocusIfNeeded: ");
             if (isFocusable() && isEnabled()) {
                 setInnerFocusable(false);
             }
@@ -152,6 +156,7 @@ public class RemoteInputView extends FrameLayout implements View.OnClickListener
 
         @Override
         protected void onVisibilityChanged(View changedView, int visibility) {
+            Log.d(TAG, "RemoteEditText: onVisibilityChanged: ");
             super.onVisibilityChanged(changedView, visibility);
 
             if (!isShown()) {
@@ -162,11 +167,13 @@ public class RemoteInputView extends FrameLayout implements View.OnClickListener
         @Override
         protected void onFocusLost() {
             super.onFocusLost();
+            Log.d(TAG, "RemoteEditText: onFocusLost: ");
             defocusIfNeeded();
         }
 
         @Override
         public boolean onKeyPreIme(int keyCode, KeyEvent event) {
+            Log.d(TAG, "RemoteEditText: onKeyPreIme: ");
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 defocusIfNeeded();
             }
@@ -175,6 +182,7 @@ public class RemoteInputView extends FrameLayout implements View.OnClickListener
 
 
         void setInnerFocusable(boolean focusable) {
+            Log.d(TAG, "RemoteEditText: setInnerFocusable: ");
             setFocusableInTouchMode(focusable);
             setFocusable(focusable);
             setCursorVisible(focusable);
