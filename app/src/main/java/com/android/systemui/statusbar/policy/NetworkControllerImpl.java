@@ -190,6 +190,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     }
 
     private void registerListeners() {
+        Log.d(TAG, "registerListeners: ");
         for (MobileSignalController mobileSignalController : mMobileSignalControllers.values()) {
             mobileSignalController.registerListener();
         }
@@ -218,6 +219,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     }
 
     private void unregisterListeners() {
+        Log.d(TAG, "unregisterListeners: ");
         mListening = false;
         for (MobileSignalController mobileSignalController : mMobileSignalControllers.values()) {
             mobileSignalController.unregisterListener();
@@ -325,11 +327,13 @@ public class NetworkControllerImpl extends BroadcastReceiver
 
     @Override
     public void removeSignalCallback(SignalCallback cb) {
+        Log.d(TAG, "removeSignalCallback: ");
         mCallbackHandler.setListening(cb, false);
     }
 
     @Override
     public void setWifiEnabled(final boolean enabled) {
+        Log.d(TAG, "setWifiEnabled: ");
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... args) {
@@ -348,6 +352,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
 
     @Override
     public void onUserSwitched(int newUserId) {
+        Log.d(TAG, "onUserSwitched: ");
         mCurrentUserId = newUserId;
         mAccessPoints.onUserSwitched(newUserId);
         updateConnectivity();
@@ -355,6 +360,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d(TAG, "onReceive: ");
         if (CHATTY) {
             Log.d(TAG, "onReceive: intent=" + intent);
         }
@@ -402,6 +408,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     }
 
     public void onConfigurationChanged() {
+        Log.d(TAG, "onConfigurationChanged: ");
         mConfig = Config.readConfig(mContext);
         mReceiverHandler.post(new Runnable() {
             @Override
@@ -413,6 +420,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
 
     @VisibleForTesting
     void handleConfigurationChanged() {
+        Log.d(TAG, "handleConfigurationChanged: ");
         for (MobileSignalController mobileSignalController : mMobileSignalControllers.values()) {
             mobileSignalController.setConfiguration(mConfig);
         }
@@ -420,6 +428,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     }
 
     private void updateMobileControllers() {
+        Log.d(TAG, "updateMobileControllers: ");
         if (!mListening) {
             return;
         }
@@ -428,6 +437,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
 
     @VisibleForTesting
     void doUpdateMobileControllers() {
+        Log.d(TAG, "doUpdateMobileControllers: ");
         List<SubscriptionInfo> subscriptions = mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptions == null) {
             subscriptions = Collections.emptyList();
@@ -447,6 +457,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
 
     @VisibleForTesting
     protected void updateNoSims() {
+        Log.d(TAG, "updateNoSims: ");
         boolean hasNoSims = mHasMobileDataFeature && mMobileSignalControllers.size() == 0;
         if (hasNoSims != mHasNoSims) {
             mHasNoSims = hasNoSims;
@@ -459,6 +470,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
         Collections.sort(subscriptions, new Comparator<SubscriptionInfo>() {
             @Override
             public int compare(SubscriptionInfo lhs, SubscriptionInfo rhs) {
+                Log.d(TAG, "setCurrentSubscriptions: compare: ");
                 return lhs.getSimSlotIndex() == rhs.getSimSlotIndex()
                         ? lhs.getSubscriptionId() - rhs.getSubscriptionId()
                         : lhs.getSimSlotIndex() - rhs.getSimSlotIndex();
@@ -507,6 +519,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
 
     @VisibleForTesting
     boolean hasCorrectMobileControllers(List<SubscriptionInfo> allSubscriptions) {
+        Log.d(TAG, "hasCorrectMobileControllers: ");
         if (allSubscriptions.size() != mMobileSignalControllers.size()) {
             return false;
         }
@@ -519,6 +532,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     }
 
     private void updateAirplaneMode(boolean force) {
+        Log.d(TAG, "updateAirplaneMode: ");
         boolean airplaneMode = (Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_ON, 0) == 1);
         if (airplaneMode != mAirplaneMode || force) {
@@ -531,6 +545,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     }
 
     private void refreshLocale() {
+        Log.d(TAG, "refreshLocale: ");
         Locale current = mContext.getResources().getConfiguration().locale;
         if (!current.equals(mLocale)) {
             mLocale = current;
@@ -543,6 +558,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
      * NetworkSignalChangedCallbacks.
      */
     private void notifyAllListeners() {
+        Log.d(TAG, "notifyAllListeners: ");
         notifyListeners();
         for (MobileSignalController mobileSignalController : mMobileSignalControllers.values()) {
             mobileSignalController.notifyListeners();
@@ -557,6 +573,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
      * notifyAllListeners.
      */
     private void notifyListeners() {
+        Log.d(TAG, "notifyListeners: ");
         mCallbackHandler.setIsAirplaneMode(new IconState(mAirplaneMode,
                 TelephonyIcons.FLIGHT_MODE_ICON, R.string.accessibility_airplane_mode, mContext));
         mCallbackHandler.setNoSims(mHasNoSims);
@@ -566,6 +583,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
      * Update the Inet conditions and what network we are connected to.
      */
     private void updateConnectivity() {
+        Log.d(TAG, "updateConnectivity: ");
         mConnectedTransports.clear();
         mValidatedTransports.clear();
         for (NetworkCapabilities nc :
@@ -592,6 +610,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
      * Pushes the current connectivity state to all SignalControllers.
      */
     private void pushConnectivityToSignals() {
+        Log.d(TAG, "pushConnectivityToSignals: ");
         // We want to update all the icons, all at once, for any condition change
         for (MobileSignalController mobileSignalController : mMobileSignalControllers.values()) {
             mobileSignalController.updateConnectivity(mConnectedTransports, mValidatedTransports);
@@ -601,6 +620,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println("NetworkController state:");
 
         pw.println("  - telephony ------");
@@ -636,6 +656,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     }
 
     private static final String emergencyToString(int emergencySource) {
+        Log.d(TAG, "emergencyToString: ");
         if (emergencySource > EMERGENCY_NO_SUB) {
             return "NO_SUB(" + (emergencySource - EMERGENCY_NO_SUB) + ")";
         } else if (emergencySource > EMERGENCY_VOICE_CONTROLLER) {
@@ -654,6 +675,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
 
     @Override
     public void dispatchDemoCommand(String command, Bundle args) {
+        Log.d(TAG, "dispatchDemoCommand: ");
         if (!mDemoMode && command.equals(COMMAND_ENTER)) {
             if (DEBUG) Log.d(TAG, "Entering demo mode");
             unregisterListeners();
@@ -779,6 +801,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     }
 
     private SubscriptionInfo addSignalController(int id, int simSlotIndex) {
+        Log.d(TAG, "addSignalController: ");
         SubscriptionInfo info = new SubscriptionInfo(id, "", simSlotIndex, "", "", 0, 0, "", 0,
                 null, 0, 0, "");
         mMobileSignalControllers.put(id, new MobileSignalController(mContext,
@@ -790,6 +813,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     private class SubListener extends OnSubscriptionsChangedListener {
         @Override
         public void onSubscriptionsChanged() {
+            Log.d(TAG, "SubListener: onSubscriptionsChanged: ");
             updateMobileControllers();
         }
     }
@@ -801,6 +825,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     private final Runnable mRegisterListeners = new Runnable() {
         @Override
         public void run() {
+            Log.d(TAG, "mRegisterListeners: run: ");
             registerListeners();
         }
     };
@@ -811,10 +836,12 @@ public class NetworkControllerImpl extends BroadcastReceiver
 
     public static class SubscriptionDefaults {
         public int getDefaultVoiceSubId() {
+            Log.d(TAG, "SubscriptionDefaults: getDefaultVoiceSubId: ");
             return SubscriptionManager.getDefaultVoiceSubId();
         }
 
         public int getDefaultDataSubId() {
+            Log.d(TAG, "SubscriptionDefaults: getDefaultDataSubId: ");
             return SubscriptionManager.getDefaultDataSubId();
         }
     }
@@ -827,6 +854,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
         boolean hspaDataDistinguishable;
 
         static Config readConfig(Context context) {
+            Log.d(TAG, "Config: readConfig: ");
             Config config = new Config();
             Resources res = context.getResources();
 
