@@ -88,6 +88,7 @@ public class SecurityControllerImpl implements SecurityController {
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println("SecurityController state:");
         pw.print("  mCurrentVpns={");
         for (int i = 0 ; i < mCurrentVpns.size(); i++) {
@@ -103,21 +104,25 @@ public class SecurityControllerImpl implements SecurityController {
 
     @Override
     public boolean hasDeviceOwner() {
+        Log.d(TAG, "hasDeviceOwner: ");
         return !TextUtils.isEmpty(mDevicePolicyManager.getDeviceOwner());
     }
 
     @Override
     public String getDeviceOwnerName() {
+        Log.d(TAG, "getDeviceOwnerName: ");
         return mDevicePolicyManager.getDeviceOwnerName();
     }
 
     @Override
     public boolean hasProfileOwner() {
+        Log.d(TAG, "hasProfileOwner: ");
         return mDevicePolicyManager.getProfileOwnerAsUser(mCurrentUserId) != null;
     }
 
     @Override
     public String getProfileOwnerName() {
+        Log.d(TAG, "getProfileOwnerName: ");
         for (UserInfo profile : mUserManager.getProfiles(mCurrentUserId)) {
             String name = mDevicePolicyManager.getProfileOwnerNameAsUser(profile.id);
             if (name != null) {
@@ -129,6 +134,7 @@ public class SecurityControllerImpl implements SecurityController {
 
     @Override
     public String getPrimaryVpnName() {
+        Log.d(TAG, "getPrimaryVpnName: ");
         VpnConfig cfg = mCurrentVpns.get(mVpnUserId);
         if (cfg != null) {
             return getNameForVpnConfig(cfg, new UserHandle(mVpnUserId));
@@ -139,6 +145,7 @@ public class SecurityControllerImpl implements SecurityController {
 
     @Override
     public String getProfileVpnName() {
+        Log.d(TAG, "getProfileVpnName: ");
         for (UserInfo profile : mUserManager.getProfiles(mVpnUserId)) {
             if (profile.id == mVpnUserId) {
                 continue;
@@ -153,6 +160,7 @@ public class SecurityControllerImpl implements SecurityController {
 
     @Override
     public boolean isVpnEnabled() {
+        Log.d(TAG, "isVpnEnabled: ");
         for (UserInfo profile : mUserManager.getProfiles(mVpnUserId)) {
             if (mCurrentVpns.get(profile.id) != null) {
                 return true;
@@ -163,6 +171,7 @@ public class SecurityControllerImpl implements SecurityController {
 
     @Override
     public void removeCallback(SecurityControllerCallback callback) {
+        Log.d(TAG, "removeCallback: ");
         synchronized (mCallbacks) {
             if (callback == null) return;
             if (DEBUG) Log.d(TAG, "removeCallback " + callback);
@@ -172,6 +181,7 @@ public class SecurityControllerImpl implements SecurityController {
 
     @Override
     public void addCallback(SecurityControllerCallback callback) {
+        Log.d(TAG, "addCallback: ");
         synchronized (mCallbacks) {
             if (callback == null || mCallbacks.contains(callback)) return;
             if (DEBUG) Log.d(TAG, "addCallback " + callback);
@@ -181,6 +191,7 @@ public class SecurityControllerImpl implements SecurityController {
 
     @Override
     public void onUserSwitched(int newUserId) {
+        Log.d(TAG, "onUserSwitched: ");
         mCurrentUserId = newUserId;
         if (mUserManager.getUserInfo(newUserId).isRestricted()) {
             // VPN for a restricted profile is routed through its owner user
@@ -192,6 +203,7 @@ public class SecurityControllerImpl implements SecurityController {
     }
 
     private String getNameForVpnConfig(VpnConfig cfg, UserHandle user) {
+        Log.d(TAG, "getNameForVpnConfig: ");
         if (cfg.legacy) {
             return mContext.getString(R.string.legacy_vpn_name);
         }
@@ -216,6 +228,7 @@ public class SecurityControllerImpl implements SecurityController {
     }
 
     private void updateState() {
+        Log.d(TAG, "updateState: ");
         // Find all users with an active VPN
         SparseArray<VpnConfig> vpns = new SparseArray<>();
         try {
@@ -244,18 +257,20 @@ public class SecurityControllerImpl implements SecurityController {
     private final NetworkCallback mNetworkCallback = new NetworkCallback() {
         @Override
         public void onAvailable(Network network) {
+            Log.d(TAG, "mNetworkCallback: onAvailable: ");
             if (DEBUG) Log.d(TAG, "onAvailable " + network.netId);
             updateState();
             fireCallbacks();
-        };
+        }
 
         // TODO Find another way to receive VPN lost.  This may be delayed depending on
         // how long the VPN connection is held on to.
         @Override
         public void onLost(Network network) {
+            Log.d(TAG, "mNetworkCallback: onLost: ");
             if (DEBUG) Log.d(TAG, "onLost " + network.netId);
             updateState();
             fireCallbacks();
-        };
+        }
     };
 }
