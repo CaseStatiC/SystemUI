@@ -137,6 +137,7 @@ public class UserSwitcherController {
      */
     @SuppressWarnings("unchecked")
     private void refreshUsers(int forcePictureLoadForId) {
+        Log.d(TAG, "refreshUsers: ");
         if (DEBUG) Log.d(TAG, "refreshUsers(forcePictureLoadForId=" + forcePictureLoadForId+")");
         if (forcePictureLoadForId != UserHandle.USER_NULL) {
             mForcePictureLoadForUserId.put(forcePictureLoadForId, true);
@@ -262,6 +263,7 @@ public class UserSwitcherController {
     }
 
     public void switchTo(UserRecord record) {
+        Log.d(TAG, "switchTo: ");
         int id;
         if (record.isGuest && record.info == null) {
             // No guest user. Create one.
@@ -291,6 +293,7 @@ public class UserSwitcherController {
     }
 
     private void switchToUserId(int id) {
+        Log.d(TAG, "switchToUserId: ");
         try {
             pauseRefreshUsers();
             ActivityManagerNative.getDefault().switchUser(id);
@@ -300,6 +303,7 @@ public class UserSwitcherController {
     }
 
     private void showExitGuestDialog(int id) {
+        Log.d(TAG, "showExitGuestDialog: ");
         if (mExitGuestDialog != null && mExitGuestDialog.isShowing()) {
             mExitGuestDialog.cancel();
         }
@@ -308,6 +312,7 @@ public class UserSwitcherController {
     }
 
     private void showAddUserDialog() {
+        Log.d(TAG, "showAddUserDialog: ");
         if (mAddUserDialog != null && mAddUserDialog.isShowing()) {
             mAddUserDialog.cancel();
         }
@@ -454,6 +459,7 @@ public class UserSwitcherController {
 
         @Override
         public int getCount() {
+            Log.d(TAG, "BaseUserAdapter: getCount: ");
             boolean secureKeyguardShowing = mController.mKeyguardMonitor.isShowing()
                     && mController.mKeyguardMonitor.isSecure()
                     && !mController.mKeyguardMonitor.canSkipBouncer();
@@ -475,19 +481,23 @@ public class UserSwitcherController {
 
         @Override
         public UserRecord getItem(int position) {
+            Log.d(TAG, "BaseUserAdapter: getItem: ");
             return mController.mUsers.get(position);
         }
 
         @Override
         public long getItemId(int position) {
+            Log.d(TAG, "BaseUserAdapter: getItemId: ");
             return position;
         }
 
         public void switchTo(UserRecord record) {
+            Log.d(TAG, "BaseUserAdapter: switchTo: ");
             mController.switchTo(record);
         }
 
         public String getName(Context context, UserRecord item) {
+            Log.d(TAG, "BaseUserAdapter: getName: ");
             if (item.isGuest) {
                 if (item.isCurrent) {
                     return context.getString(R.string.guest_exit_guest);
@@ -503,6 +513,7 @@ public class UserSwitcherController {
         }
 
         public Drawable getDrawable(Context context, UserRecord item) {
+            Log.d(TAG, "BaseUserAdapter: getDrawable: ");
             if (item.isAddUser) {
                 return context.getDrawable(R.drawable.ic_add_circle_qs);
             }
@@ -511,6 +522,7 @@ public class UserSwitcherController {
         }
 
         public void refresh() {
+            Log.d(TAG, "BaseUserAdapter: refresh: ");
             mController.refreshUsers(UserHandle.USER_NULL);
         }
     }
@@ -539,6 +551,7 @@ public class UserSwitcherController {
         }
 
         public String toString() {
+            Log.d(TAG, "UserRecord: toString: ");
             StringBuilder sb = new StringBuilder();
             sb.append("UserRecord(");
             if (info != null) {
@@ -565,11 +578,13 @@ public class UserSwitcherController {
 
         @Override
         public int getTitle() {
+            Log.d(TAG, "userDetailAdapter: getTitle: ");
             return R.string.quick_settings_user_title;
         }
 
         @Override
         public View createDetailView(Context context, View convertView, ViewGroup parent) {
+            Log.d(TAG, "userDetailAdapter: createDetailView: ");
             UserDetailView v;
             if (!(convertView instanceof UserDetailView)) {
                 v = UserDetailView.inflate(context, parent, false);
@@ -583,20 +598,24 @@ public class UserSwitcherController {
 
         @Override
         public Intent getSettingsIntent() {
+            Log.d(TAG, "userDetailAdapter: getSettingsIntent: ");
             return USER_SETTINGS_INTENT;
         }
 
         @Override
         public Boolean getToggleState() {
+            Log.d(TAG, "userDetailAdapter: getToggleState");
             return null;
         }
 
         @Override
         public void setToggleState(boolean state) {
+            Log.d(TAG, "userDetailAdapter: setToggleState: ");
         }
 
         @Override
         public int getMetricsCategory() {
+            Log.d(TAG, "userDetailAdapter: getMetricsCategory: ");
             return MetricsLogger.QS_USERDETAIL;
         }
     };
@@ -604,6 +623,7 @@ public class UserSwitcherController {
     private final KeyguardMonitor.Callback mCallback = new KeyguardMonitor.Callback() {
         @Override
         public void onKeyguardChanged() {
+            Log.d(TAG, "mCallback: onKeyguardChanged: ");
             notifyAdapters();
         }
     };
@@ -627,6 +647,7 @@ public class UserSwitcherController {
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
+            Log.d(TAG, "ExitGuestDialog: onClick: ");
             if (which == BUTTON_NEGATIVE) {
                 cancel();
             } else {
@@ -640,6 +661,7 @@ public class UserSwitcherController {
             DialogInterface.OnClickListener {
 
         public AddUserDialog(Context context) {
+            Log.d(TAG, "AddUserDialog: ");
             super(context);
             setTitle(R.string.user_add_user_title);
             setMessage(context.getString(R.string.user_add_user_message_short));
@@ -651,6 +673,8 @@ public class UserSwitcherController {
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
+            Log.d(TAG, "AddUserDialog: onClick: ");
+
             if (which == BUTTON_NEGATIVE) {
                 cancel();
             } else {
@@ -675,6 +699,7 @@ public class UserSwitcherController {
     }
 
     public static boolean isUserSwitcherAvailable(UserManager um) {
+        Log.d(TAG, "AddUserDialog: isUserSwitcherAvailable: ");
         return UserManager.supportsMultipleUsers() && um.isUserSwitcherEnabled();
     }
 
