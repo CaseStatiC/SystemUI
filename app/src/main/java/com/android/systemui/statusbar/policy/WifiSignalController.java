@@ -37,6 +37,7 @@ import java.util.Objects;
 
 public class WifiSignalController extends
         SignalController<WifiSignalController.WifiState, SignalController.IconGroup> {
+    public static final String TAG = "WifiSignalController";
     private final WifiManager mWifiManager;
     private final AsyncChannel mWifiChannel;
     private final boolean mHasMobileData;
@@ -69,11 +70,13 @@ public class WifiSignalController extends
 
     @Override
     protected WifiState cleanState() {
+        Log.d(TAG, "cleanState: ");
         return new WifiState();
     }
 
     @Override
     public void notifyListeners() {
+        Log.d(TAG, "notifyListeners: ");
         // only show wifi in the cluster if connected or if wifi-only
         boolean wifiVisible = mCurrentState.enabled
                 && (mCurrentState.connected || !mHasMobileData);
@@ -93,6 +96,7 @@ public class WifiSignalController extends
      * Extract wifi state directly from broadcasts about changes in wifi state.
      */
     public void handleBroadcast(Intent intent) {
+        Log.d(TAG, "handleBroadcast: ");
         String action = intent.getAction();
         if (action.equals(WifiManager.WIFI_STATE_CHANGED_ACTION)) {
             mCurrentState.enabled = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE,
@@ -126,6 +130,7 @@ public class WifiSignalController extends
     }
 
     private String getSsid(WifiInfo info) {
+        Log.d(TAG, "getSsid: ");
         String ssid = info.getSSID();
         if (ssid != null) {
             return ssid;
@@ -143,6 +148,7 @@ public class WifiSignalController extends
 
     @VisibleForTesting
     void setActivity(int wifiActivity) {
+        Log.d(TAG, "setActivity: ");
         mCurrentState.activityIn = wifiActivity == WifiManager.DATA_ACTIVITY_INOUT
                 || wifiActivity == WifiManager.DATA_ACTIVITY_IN;
         mCurrentState.activityOut = wifiActivity == WifiManager.DATA_ACTIVITY_INOUT
@@ -156,6 +162,7 @@ public class WifiSignalController extends
     private class WifiHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
+            Log.d(TAG, "WifiHandler: handleMessage: ");
             switch (msg.what) {
                 case AsyncChannel.CMD_CHANNEL_HALF_CONNECTED:
                     if (msg.arg1 == AsyncChannel.STATUS_SUCCESSFUL) {
@@ -181,6 +188,7 @@ public class WifiSignalController extends
         @Override
         public void copyFrom(State s) {
             super.copyFrom(s);
+            Log.d(TAG, "WifiState: copyFrom: ");
             WifiState state = (WifiState) s;
             ssid = state.ssid;
         }
@@ -188,11 +196,13 @@ public class WifiSignalController extends
         @Override
         protected void toString(StringBuilder builder) {
             super.toString(builder);
+            Log.d(TAG, "WifiState: toString: ");
             builder.append(',').append("ssid=").append(ssid);
         }
 
         @Override
         public boolean equals(Object o) {
+            Log.d(TAG, "WifiState: equals: ");
             return super.equals(o)
                     && Objects.equals(((WifiState) o).ssid, ssid);
         }
