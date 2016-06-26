@@ -91,53 +91,63 @@ public class ZenModeControllerImpl implements ZenModeController {
 
     @Override
     public boolean isVolumeRestricted() {
+        Log.d(TAG, "isVolumeRestricted: ");
         return mUserManager.hasUserRestriction(UserManager.DISALLOW_ADJUST_VOLUME,
                 new UserHandle(mUserId));
     }
 
     @Override
     public void addCallback(Callback callback) {
+        Log.d(TAG, "addCallback: ");
         mCallbacks.add(callback);
     }
 
     @Override
     public void removeCallback(Callback callback) {
+        Log.d(TAG, "removeCallback: ");
         mCallbacks.remove(callback);
     }
 
     @Override
     public int getZen() {
+        Log.d(TAG, "getZen: ");
         return mModeSetting.getValue();
     }
 
     @Override
     public void setZen(int zen, Uri conditionId, String reason) {
+        Log.d(TAG, "setZen: ");
         mNoMan.setZenMode(zen, conditionId, reason);
     }
 
     @Override
     public boolean isZenAvailable() {
+        Log.d(TAG, "isZenAvailable: ");
         return mSetupObserver.isDeviceProvisioned() && mSetupObserver.isUserSetup();
     }
 
     @Override
     public ZenRule getManualRule() {
+        Log.d(TAG, "getManualRule: ");
         return mConfig == null ? null : mConfig.manualRule;
     }
 
     @Override
     public ZenModeConfig getConfig() {
+        Log.d(TAG, "getConfig: ");
         return mConfig;
     }
 
     @Override
     public long getNextAlarm() {
+        Log.d(TAG, "getNextAlarm: ");
         final AlarmManager.AlarmClockInfo info = mAlarmManager.getNextAlarmClock(mUserId);
         return info != null ? info.getTriggerTime() : 0;
     }
 
     @Override
     public void setUserId(int userId) {
+        Log.d(TAG, "setUserId: ");
         mUserId = userId;
         if (mRegistered) {
             mContext.unregisterReceiver(mReceiver);
@@ -151,63 +161,74 @@ public class ZenModeControllerImpl implements ZenModeController {
 
     @Override
     public ComponentName getEffectsSuppressor() {
+        Log.d(TAG, "getEffectsSuppressor: ");
         return NotificationManager.from(mContext).getEffectsSuppressor();
     }
 
     @Override
     public boolean isCountdownConditionSupported() {
+        Log.d(TAG, "isCountdownConditionSupported: ");
         return NotificationManager.from(mContext)
                 .isSystemConditionProviderEnabled(ZenModeConfig.COUNTDOWN_PATH);
     }
 
     @Override
     public int getCurrentUser() {
+        Log.d(TAG, "getCurrentUser: ");
         return ActivityManager.getCurrentUser();
     }
 
     private void fireNextAlarmChanged() {
+        Log.d(TAG, "fireNextAlarmChanged: ");
         for (Callback cb : mCallbacks) {
             cb.onNextAlarmChanged();
         }
     }
 
     private void fireEffectsSuppressorChanged() {
+        Log.d(TAG, "fireEffectsSuppressorChanged: ");
         for (Callback cb : mCallbacks) {
             cb.onEffectsSupressorChanged();
         }
     }
 
     private void fireZenChanged(int zen) {
+        Log.d(TAG, "fireZenChanged: ");
         for (Callback cb : mCallbacks) {
             cb.onZenChanged(zen);
         }
     }
 
     private void fireZenAvailableChanged(boolean available) {
+        Log.d(TAG, "fireZenAvailableChanged: ");
         for (Callback cb : mCallbacks) {
             cb.onZenAvailableChanged(available);
         }
     }
 
     private void fireConditionsChanged(Condition[] conditions) {
+        Log.d(TAG, "fireConditionsChanged: ");
         for (Callback cb : mCallbacks) {
             cb.onConditionsChanged(conditions);
         }
     }
 
     private void fireManualRuleChanged(ZenRule rule) {
+        Log.d(TAG, "fireManualRuleChanged: ");
         for (Callback cb : mCallbacks) {
             cb.onManualRuleChanged(rule);
         }
     }
 
     private void fireConfigChanged(ZenModeConfig config) {
+        Log.d(TAG, "fireConfigChanged: ");
         for (Callback cb : mCallbacks) {
             cb.onConfigChanged(config);
         }
     }
 
     private void updateConditions(Condition[] conditions) {
+        Log.d(TAG, "updateConditions: ");
         if (conditions == null || conditions.length == 0) return;
         for (Condition c : conditions) {
             if ((c.flags & Condition.FLAG_RELEVANT_NOW) == 0) continue;
@@ -218,6 +239,7 @@ public class ZenModeControllerImpl implements ZenModeController {
     }
 
     private void updateZenModeConfig() {
+        Log.d(TAG, "updateZenModeConfig: ");
         final ZenModeConfig config = mNoMan.getZenModeConfig();
         if (Objects.equals(config, mConfig)) return;
         final ZenRule oldRule = mConfig != null ? mConfig.manualRule : null;
@@ -231,6 +253,7 @@ public class ZenModeControllerImpl implements ZenModeController {
     private final IConditionListener mListener = new IConditionListener.Stub() {
         @Override
         public void onConditionsReceived(Condition[] conditions) {
+            Log.d(TAG, "mListener: onConditionsReceived: ");
             if (DEBUG) Slog.d(TAG, "onConditionsReceived "
                     + (conditions == null ? 0 : conditions.length) + " mRequesting=" + mRequesting);
             if (!mRequesting) return;
@@ -241,6 +264,7 @@ public class ZenModeControllerImpl implements ZenModeController {
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "mReceiverL onReceive: ");
             if (AlarmManager.ACTION_NEXT_ALARM_CLOCK_CHANGED.equals(intent.getAction())) {
                 fireNextAlarmChanged();
             }
@@ -256,19 +280,23 @@ public class ZenModeControllerImpl implements ZenModeController {
         private boolean mRegistered;
 
         public SetupObserver(Handler handler) {
+            Log.d(TAG, "SetupObserver: SetupObserver: ");
             super(handler);
             mResolver = mContext.getContentResolver();
         }
 
         public boolean isUserSetup() {
+            Log.d(TAG, "SetupObserver: isUserSetup: ");
             return Secure.getIntForUser(mResolver, Secure.USER_SETUP_COMPLETE, 0, mUserId) != 0;
         }
 
         public boolean isDeviceProvisioned() {
+            Log.d(TAG, "SetupObserver: isDeviceProvisioned: ");
             return Global.getInt(mResolver, Global.DEVICE_PROVISIONED, 0) != 0;
         }
 
         public void register() {
+            Log.d(TAG, "SetupObserver: register: ");
             if (mRegistered) {
                 mResolver.unregisterContentObserver(this);
             }
@@ -281,6 +309,7 @@ public class ZenModeControllerImpl implements ZenModeController {
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
+            Log.d(TAG, "SetupObserver: onChange: ");
             if (Global.getUriFor(Global.DEVICE_PROVISIONED).equals(uri)
                     || Secure.getUriFor(Secure.USER_SETUP_COMPLETE).equals(uri)) {
                 fireZenAvailableChanged(isZenAvailable());
