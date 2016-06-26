@@ -26,6 +26,7 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.util.LayoutDirection;
+import android.util.Log;
 import android.view.View;
 
 import com.android.systemui.R;
@@ -44,7 +45,7 @@ public class KeyguardUserSwitcherScrim extends Drawable
     private int mAlpha = 255;
     private Paint mRadialGradientPaint = new Paint();
     private int mLayoutWidth;
-
+    public static final String TAG = "KeyguardUserSwitcherScrim";
     public KeyguardUserSwitcherScrim(View host) {
         host.addOnLayoutChangeListener(this);
         mDarkColor = host.getContext().getColor(
@@ -53,6 +54,7 @@ public class KeyguardUserSwitcherScrim extends Drawable
 
     @Override
     public void draw(Canvas canvas) {
+        Log.d(TAG, "draw: ");
         boolean isLtr = getLayoutDirection() == LayoutDirection.LTR;
         Rect bounds = getBounds();
         float width = bounds.width() * OUTER_EXTENT;
@@ -65,6 +67,7 @@ public class KeyguardUserSwitcherScrim extends Drawable
 
     @Override
     public void setAlpha(int alpha) {
+        Log.d(TAG, "setAlpha: ");
         mAlpha = alpha;
         updatePaint();
         invalidateSelf();
@@ -72,21 +75,25 @@ public class KeyguardUserSwitcherScrim extends Drawable
 
     @Override
     public int getAlpha() {
+        Log.d(TAG, "getAlpha: ");
         return mAlpha;
     }
 
     @Override
     public void setColorFilter(ColorFilter colorFilter) {
+        Log.d(TAG, "setColorFilter: ");
     }
 
     @Override
     public int getOpacity() {
+        Log.d(TAG, "getOpacity: ");
         return PixelFormat.TRANSLUCENT;
     }
 
     @Override
     public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft,
             int oldTop, int oldRight, int oldBottom) {
+        Log.d(TAG, "onLayoutChange: ");
         if (left != oldLeft || top != oldTop || right != oldRight || bottom != oldBottom) {
             mLayoutWidth = right - left;
             mTop = top;
@@ -95,6 +102,7 @@ public class KeyguardUserSwitcherScrim extends Drawable
     }
 
     private void updatePaint() {
+        Log.d(TAG, "updatePaint: ");
         if (mLayoutWidth == 0) {
             return;
         }
