@@ -23,6 +23,7 @@ import android.content.IntentFilter;
 import android.content.res.TypedArray;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.android.systemui.R;
@@ -43,6 +44,7 @@ public class DateView extends TextView {
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "mIntentReceiver: onReceive: ");
             final String action = intent.getAction();
             if (Intent.ACTION_TIME_TICK.equals(action)
                     || Intent.ACTION_TIME_CHANGED.equals(action)
@@ -60,6 +62,7 @@ public class DateView extends TextView {
 
     public DateView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        Log.d(TAG, "DateView: ");
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
                 R.styleable.DateView,
@@ -78,6 +81,7 @@ public class DateView extends TextView {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        Log.d(TAG, "onAttachedToWindow: ");
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_TIME_TICK);
@@ -92,12 +96,13 @@ public class DateView extends TextView {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-
+        Log.d(TAG, "onDetachedFromWindow: ");
         mDateFormat = null; // reload the locale next time
         getContext().unregisterReceiver(mIntentReceiver);
     }
 
     protected void updateClock() {
+        Log.d(TAG, "updateClock: ");
         if (mDateFormat == null) {
             final Locale l = Locale.getDefault();
             final String fmt = DateFormat.getBestDateTimePattern(l, mDatePattern);
