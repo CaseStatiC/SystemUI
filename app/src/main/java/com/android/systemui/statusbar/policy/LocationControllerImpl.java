@@ -31,6 +31,7 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.util.Log;
 
 import com.android.systemui.R;
 
@@ -45,7 +46,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
     // This string corresponds to config_statusBarIcons in core/res/res/values/config.xml.
     public static final String LOCATION_STATUS_ICON_PLACEHOLDER = "location";
     public static final int LOCATION_STATUS_ICON_ID = R.drawable.stat_sys_location;
-
+    public static final String TAG = "LocationControllerImpl";
     private static final int[] mHighPowerRequestAppOpArray
         = new int[] {AppOpsManager.OP_MONITOR_HIGH_POWER_LOCATION};
 
@@ -82,11 +83,13 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
      * Add a callback to listen for changes in location settings.
      */
     public void addSettingsChangedCallback(LocationSettingsChangeCallback cb) {
+        Log.d(TAG, "addSettingsChangedCallback: ");
         mSettingsChangeCallbacks.add(cb);
         mHandler.sendEmptyMessage(H.MSG_LOCATION_SETTINGS_CHANGED);
     }
 
     public void removeSettingsChangedCallback(LocationSettingsChangeCallback cb) {
+        Log.d(TAG, "removeSettingsChangedCallback: ");
         mSettingsChangeCallbacks.remove(cb);
     }
 
@@ -102,6 +105,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
      * @return true if attempt to change setting was successful.
      */
     public boolean setLocationEnabled(boolean enabled) {
+        Log.d(TAG, "setLocationEnabled: ");
         int currentUserId = ActivityManager.getCurrentUser();
         if (isUserLocationRestricted(currentUserId)) {
             return false;
@@ -121,6 +125,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
      * Returns true if location isn't disabled in settings.
      */
     public boolean isLocationEnabled() {
+        Log.d(TAG, "isLocationEnabled: ");
         ContentResolver resolver = mContext.getContentResolver();
         // QuickSettings always runs as the owner, so specifically retrieve the settings
         // for the current foreground user.
@@ -133,6 +138,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
      * Returns true if the current user is restricted from using location.
      */
     private boolean isUserLocationRestricted(int userId) {
+        Log.d(TAG, "isUserLocationRestricted: ");
         final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         return um.hasUserRestriction(
                 UserManager.DISALLOW_SHARE_LOCATION,
@@ -143,6 +149,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
      * Returns true if there currently exist active high power location requests.
      */
     private boolean areActiveHighPowerLocationRequests() {
+        Log.d(TAG, "areActiveHighPowerLocationRequests: ");
         List<AppOpsManager.PackageOps> packages
             = mAppOpsManager.getPackagesForOps(mHighPowerRequestAppOpArray);
         // AppOpsManager can return null when there is no requested data.
@@ -172,6 +179,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
 
     // Updates the status view based on the current state of location requests.
     private void refreshViews() {
+        Log.d(TAG, "refreshViews: ");
         if (mAreActiveLocationRequests) {
             mStatusBarManager.setIcon(LOCATION_STATUS_ICON_PLACEHOLDER, LOCATION_STATUS_ICON_ID,
                     0, mContext.getString(R.string.accessibility_location_active));
@@ -182,6 +190,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
 
     // Reads the active location requests and updates the status view if necessary.
     private void updateActiveLocationRequests() {
+        Log.d(TAG, "updateActiveLocationRequests: ");
         boolean hadActiveLocationRequests = mAreActiveLocationRequests;
         mAreActiveLocationRequests = areActiveHighPowerLocationRequests();
         if (mAreActiveLocationRequests != hadActiveLocationRequests) {
@@ -191,6 +200,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d(TAG, "onReceive: ");
         final String action = intent.getAction();
         if (LocationManager.HIGH_POWER_REQUEST_CHANGE_ACTION.equals(action)) {
             updateActiveLocationRequests();
@@ -204,6 +214,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
 
         @Override
         public void handleMessage(Message msg) {
+            Log.d(TAG, "H: handleMessage: msg.what = " + msg.what);
             switch (msg.what) {
                 case MSG_LOCATION_SETTINGS_CHANGED:
                     locationSettingsChanged();
@@ -212,6 +223,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
         }
 
         private void locationSettingsChanged() {
+            Log.d(TAG, "H: locationSettingsChanged: ");
             boolean isEnabled = isLocationEnabled();
             for (LocationSettingsChangeCallback cb : mSettingsChangeCallbacks) {
                 cb.onLocationSettingsChanged(isEnabled);
