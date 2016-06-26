@@ -73,10 +73,12 @@ public abstract class SignalController<T extends SignalController.State,
     }
 
     public T getState() {
+        Log.d(TAG, "getState: ");
         return mCurrentState;
     }
 
     public void updateConnectivity(BitSet connectedTransports, BitSet validatedTransports) {
+        Log.d(TAG, "updateConnectivity: ");
         mCurrentState.inetCondition = validatedTransports.get(mTransportType) ? 1 : 0;
         notifyListenersIfNecessary();
     }
@@ -89,6 +91,7 @@ public abstract class SignalController<T extends SignalController.State,
      * Used for demo mode.
      */
     public void resetLastState() {
+        Log.d(TAG, "resetLastState: ");
         mCurrentState.copyFrom(mLastState);
     }
 
@@ -97,6 +100,7 @@ public abstract class SignalController<T extends SignalController.State,
      * needs to trigger callbacks related to it.
      */
     public boolean isDirty() {
+        Log.d(TAG, "isDirty: ");
         if (!mLastState.equals(mCurrentState)) {
             if (DEBUG) {
                 Log.d(mTag, "Change in state from: " + mLastState + "\n"
@@ -108,6 +112,7 @@ public abstract class SignalController<T extends SignalController.State,
     }
 
     public void saveLastState() {
+        Log.d(TAG, "saveLastState: ");
         if (RECORD_HISTORY) {
             recordLastState();
         }
@@ -120,6 +125,7 @@ public abstract class SignalController<T extends SignalController.State,
      * Gets the signal icon for QS based on current state of connected, enabled, and level.
      */
     public int getQsCurrentIconId() {
+        Log.d(TAG, "getQsCurrentIconId: ");
         if (mCurrentState.connected) {
             return getIcons().mQsIcons[mCurrentState.inetCondition][mCurrentState.level];
         } else if (mCurrentState.enabled) {
@@ -133,6 +139,7 @@ public abstract class SignalController<T extends SignalController.State,
      * Gets the signal icon for SB based on current state of connected, enabled, and level.
      */
     public int getCurrentIconId() {
+        Log.d(TAG, "getCurrentIconId: ");
         if (mCurrentState.connected) {
             return getIcons().mSbIcons[mCurrentState.inetCondition][mCurrentState.level];
         } else if (mCurrentState.enabled) {
@@ -147,6 +154,7 @@ public abstract class SignalController<T extends SignalController.State,
      * level.
      */
     public int getContentDescription() {
+        Log.d(TAG, "getContentDescription: ");
         if (mCurrentState.connected) {
             return getIcons().mContentDesc[mCurrentState.level];
         } else {
@@ -155,6 +163,7 @@ public abstract class SignalController<T extends SignalController.State,
     }
 
     public void notifyListenersIfNecessary() {
+        Log.d(TAG, "notifyListenersIfNecessary: ");
         if (isDirty()) {
             saveLastState();
             notifyListeners();
@@ -165,10 +174,12 @@ public abstract class SignalController<T extends SignalController.State,
      * Returns the resource if resId is not 0, and an empty string otherwise.
      */
     protected String getStringIfExists(int resId) {
+        Log.d(TAG, "getStringIfExists: ");
         return resId != 0 ? mContext.getString(resId) : "";
     }
 
     protected I getIcons() {
+        Log.d(TAG, "getIcons: ");
         return (I) mCurrentState.iconGroup;
     }
 
@@ -177,10 +188,12 @@ public abstract class SignalController<T extends SignalController.State,
      * and last value of any state data.
      */
     protected void recordLastState() {
+        Log.d(TAG, "recordLastState: ");
         mHistory[mHistoryIndex++ & (HISTORY_SIZE - 1)].copyFrom(mLastState);
     }
 
     public void dump(PrintWriter pw) {
+        Log.d(TAG, "dump: ");
         pw.println("  - " + mTag + " -----");
         pw.println("  Current State: " + mCurrentState);
         if (RECORD_HISTORY) {
@@ -243,6 +256,7 @@ public abstract class SignalController<T extends SignalController.State,
 
         @Override
         public String toString() {
+            Log.d(TAG, "toString: ");
             return "IconGroup(" + mName + ")";
         }
     }
@@ -274,6 +288,7 @@ public abstract class SignalController<T extends SignalController.State,
 
         @Override
         public String toString() {
+            Log.d(TAG, "toString: ");
             if (time != 0) {
                 StringBuilder builder = new StringBuilder();
                 toString(builder);
@@ -297,6 +312,7 @@ public abstract class SignalController<T extends SignalController.State,
 
         @Override
         public boolean equals(Object o) {
+            Log.d(TAG, "equals: ");
             if (!o.getClass().equals(getClass())) {
                 return false;
             }
