@@ -44,6 +44,7 @@ import java.util.Objects;
 
 public class MobileSignalController extends SignalController<
         MobileSignalController.MobileState, MobileSignalController.MobileIconGroup> {
+    public static final String TAG = "MobileSignalController"; 
     private final TelephonyManager mPhone;
     private final SubscriptionDefaults mDefaults;
     private final String mNetworkNameDefault;
@@ -99,22 +100,26 @@ public class MobileSignalController extends SignalController<
     }
 
     public void setConfiguration(Config config) {
+        Log.d(TAG, "setConfiguration: ");
         mConfig = config;
         mapIconSets();
         updateTelephony();
     }
 
     public int getDataContentDescription() {
+        Log.d(TAG, "getDataContentDescription: ");
         return getIcons().mDataContentDescription;
     }
 
     public void setAirplaneMode(boolean airplaneMode) {
+        Log.d(TAG, "setAirplaneMode: ");
         mCurrentState.airplaneMode = airplaneMode;
         notifyListenersIfNecessary();
     }
 
     @Override
     public void updateConnectivity(BitSet connectedTransports, BitSet validatedTransports) {
+        Log.d(TAG, "updateConnectivity: ");
         boolean isValidated = validatedTransports.get(mTransportType);
         mCurrentState.isDefault = connectedTransports.get(mTransportType);
         // Only show this as not having connectivity if we are default.
@@ -123,6 +128,7 @@ public class MobileSignalController extends SignalController<
     }
 
     public void setCarrierNetworkChangeMode(boolean carrierNetworkChangeMode) {
+        Log.d(TAG, "setCarrierNetworkChangeMode: ");
         mCurrentState.carrierNetworkChangeMode = carrierNetworkChangeMode;
         updateTelephony();
     }
@@ -131,6 +137,7 @@ public class MobileSignalController extends SignalController<
      * Start listening for phone state changes.
      */
     public void registerListener() {
+        Log.d(TAG, "registerListener: ");
         mPhone.listen(mPhoneStateListener,
                 PhoneStateListener.LISTEN_SERVICE_STATE
                         | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
@@ -144,6 +151,7 @@ public class MobileSignalController extends SignalController<
      * Stop listening for phone state changes.
      */
     public void unregisterListener() {
+        Log.d(TAG, "unregisterListener: ");
         mPhone.listen(mPhoneStateListener, 0);
     }
 
@@ -152,6 +160,7 @@ public class MobileSignalController extends SignalController<
      * updateTelephony.
      */
     private void mapIconSets() {
+        Log.d(TAG, "mapIconSets: ");
         mNetworkToIconLookup.clear();
 
         mNetworkToIconLookup.put(TelephonyManager.NETWORK_TYPE_EVDO_0, TelephonyIcons.THREE_G);
@@ -199,6 +208,7 @@ public class MobileSignalController extends SignalController<
 
     @Override
     public void notifyListeners() {
+        Log.d(TAG, "notifyListeners: ");
         MobileIconGroup icons = getIcons();
 
         String contentDescription = getStringIfExists(getContentDescription());
@@ -236,10 +246,12 @@ public class MobileSignalController extends SignalController<
 
     @Override
     protected MobileState cleanState() {
+        Log.d(TAG, "cleanState: ");
         return new MobileState();
     }
 
     private boolean hasService() {
+        Log.d(TAG, "hasService: ");
         if (mServiceState != null) {
             // Consider the device to be in service if either voice or data
             // service is available. Some SIM cards are marketed as data-only
@@ -262,14 +274,17 @@ public class MobileSignalController extends SignalController<
     }
 
     private boolean isCdma() {
+        Log.d(TAG, "isCdma: ");
         return (mSignalStrength != null) && !mSignalStrength.isGsm();
     }
 
     public boolean isEmergencyOnly() {
+        Log.d(TAG, "isEmergencyOnly: ");
         return (mServiceState != null && mServiceState.isEmergencyOnly());
     }
 
     private boolean isRoaming() {
+        Log.d(TAG, "isRoaming: ");
         if (isCdma()) {
             final int iconMode = mServiceState.getCdmaEriIconMode();
             return mServiceState.getCdmaEriIconIndex() != EriInfo.ROAMING_INDICATOR_OFF
@@ -281,10 +296,12 @@ public class MobileSignalController extends SignalController<
     }
 
     private boolean isCarrierNetworkChangeActive() {
+        Log.d(TAG, "isCarrierNetworkChangeActive: ");
         return mCurrentState.carrierNetworkChangeMode;
     }
 
     public void handleBroadcast(Intent intent) {
+        Log.d(TAG, "handleBroadcast: ");
         String action = intent.getAction();
         if (action.equals(TelephonyIntents.SPN_STRINGS_UPDATED_ACTION)) {
             updateNetworkName(intent.getBooleanExtra(TelephonyIntents.EXTRA_SHOW_SPN, false),
@@ -300,6 +317,7 @@ public class MobileSignalController extends SignalController<
     }
 
     private void updateDataSim() {
+        Log.d(TAG, "updateDataSim: ");
         int defaultDataSub = mDefaults.getDefaultDataSubId();
         if (SubscriptionManager.isValidSubscriptionId(defaultDataSub)) {
             mCurrentState.dataSim = defaultDataSub == mSubscriptionInfo.getSubscriptionId();
@@ -320,6 +338,7 @@ public class MobileSignalController extends SignalController<
      */
     void updateNetworkName(boolean showSpn, String spn, String dataSpn,
             boolean showPlmn, String plmn) {
+        Log.d(TAG, "updateNetworkName: ");
         if (CHATTY) {
             Log.d("CarrierLabel", "updateNetworkName showSpn=" + showSpn
                     + " spn=" + spn + " dataSpn=" + dataSpn
@@ -361,6 +380,7 @@ public class MobileSignalController extends SignalController<
      * This will call listeners if necessary.
      */
     private final void updateTelephony() {
+        Log.d(TAG, "updateTelephony: ");
         if (DEBUG) {
             Log.d(mTag, "updateTelephonySignalStrength: hasService=" + hasService()
                     + " ss=" + mSignalStrength);
@@ -401,6 +421,7 @@ public class MobileSignalController extends SignalController<
 
     @VisibleForTesting
     void setActivity(int activity) {
+        Log.d(TAG, "setActivity: ");
         mCurrentState.activityIn = activity == TelephonyManager.DATA_ACTIVITY_INOUT
                 || activity == TelephonyManager.DATA_ACTIVITY_IN;
         mCurrentState.activityOut = activity == TelephonyManager.DATA_ACTIVITY_INOUT
@@ -410,6 +431,7 @@ public class MobileSignalController extends SignalController<
 
     @Override
     public void dump(PrintWriter pw) {
+        Log.d(TAG, "dump: ");
         super.dump(pw);
         pw.println("  mSubscription=" + mSubscriptionInfo + ",");
         pw.println("  mServiceState=" + mServiceState + ",");
@@ -425,6 +447,7 @@ public class MobileSignalController extends SignalController<
 
         @Override
         public void onSignalStrengthsChanged(SignalStrength signalStrength) {
+            Log.d(TAG, "onSignalStrengthsChanged: ");
             if (DEBUG) {
                 Log.d(mTag, "onSignalStrengthsChanged signalStrength=" + signalStrength +
                         ((signalStrength == null) ? "" : (" level=" + signalStrength.getLevel())));
@@ -435,6 +458,7 @@ public class MobileSignalController extends SignalController<
 
         @Override
         public void onServiceStateChanged(ServiceState state) {
+            Log.d(TAG, "onServiceStateChanged: ");
             if (DEBUG) {
                 Log.d(mTag, "onServiceStateChanged voiceState=" + state.getVoiceRegState()
                         + " dataState=" + state.getDataRegState());
@@ -446,6 +470,7 @@ public class MobileSignalController extends SignalController<
 
         @Override
         public void onDataConnectionStateChanged(int state, int networkType) {
+            Log.d(TAG, "onDataConnectionStateChanged: ");
             if (DEBUG) {
                 Log.d(mTag, "onDataConnectionStateChanged: state=" + state
                         + " type=" + networkType);
@@ -457,6 +482,7 @@ public class MobileSignalController extends SignalController<
 
         @Override
         public void onDataActivity(int direction) {
+            Log.d(TAG, "onDataActivity: ");
             if (DEBUG) {
                 Log.d(mTag, "onDataActivity: direction=" + direction);
             }
@@ -465,6 +491,7 @@ public class MobileSignalController extends SignalController<
 
         @Override
         public void onCarrierNetworkChange(boolean active) {
+            Log.d(TAG, "onCarrierNetworkChange: ");
             if (DEBUG) {
                 Log.d(mTag, "onCarrierNetworkChange: active=" + active);
             }
