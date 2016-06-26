@@ -72,10 +72,12 @@ public class MobileDataControllerImpl implements NetworkController.MobileDataCon
     }
 
     public void setNetworkController(NetworkControllerImpl networkController) {
+        Log.d(TAG, "setNetworkController: ");
         mNetworkController = networkController;
     }
 
     private INetworkStatsSession getSession() {
+        Log.d(TAG, "getSession: ");
         if (mSession == null) {
             try {
                 mSession = mStatsService.openSession();
@@ -89,15 +91,18 @@ public class MobileDataControllerImpl implements NetworkController.MobileDataCon
     }
 
     public void setCallback(Callback callback) {
+        Log.d(TAG, "setCallback: ");
         mCallback = callback;
     }
 
     private DataUsageInfo warn(String msg) {
+        Log.d(TAG, "warn: ");
         Log.w(TAG, "Failed to get data usage, " + msg);
         return null;
     }
 
     private static Time addMonth(Time t, int months) {
+        Log.d(TAG, "addMonth: ");
         final Time rt = new Time(t);
         rt.set(t.monthDay, t.month + months, t.year);
         rt.normalize(false);
@@ -105,6 +110,7 @@ public class MobileDataControllerImpl implements NetworkController.MobileDataCon
     }
 
     public DataUsageInfo getDataUsageInfo() {
+        Log.d(TAG, "getDataUsageInfo: ");
         final String subscriberId = getActiveSubscriberId(mContext);
         if (subscriberId == null) {
             return warn("no subscriber id");
@@ -171,6 +177,7 @@ public class MobileDataControllerImpl implements NetworkController.MobileDataCon
     }
 
     private NetworkPolicy findNetworkPolicy(NetworkTemplate template) {
+        Log.d(TAG, "findNetworkPolicy: ");
         if (mPolicyManager == null || template == null) return null;
         final NetworkPolicy[] policies = mPolicyManager.getNetworkPolicies();
         if (policies == null) return null;
@@ -185,6 +192,7 @@ public class MobileDataControllerImpl implements NetworkController.MobileDataCon
     }
 
     private static String historyEntryToString(NetworkStatsHistory.Entry entry) {
+        Log.d(TAG, "historyEntryToString: ");
         return entry == null ? null : new StringBuilder("Entry[")
                 .append("bucketDuration=").append(entry.bucketDuration)
                 .append(",bucketStart=").append(entry.bucketStart)
@@ -198,6 +206,7 @@ public class MobileDataControllerImpl implements NetworkController.MobileDataCon
     }
 
     public void setMobileDataEnabled(boolean enabled) {
+        Log.d(TAG, "setMobileDataEnabled: ");
         Log.d(TAG, "setMobileDataEnabled: enabled=" + enabled);
         mTelephonyManager.setDataEnabled(enabled);
         if (mCallback != null) {
@@ -206,16 +215,19 @@ public class MobileDataControllerImpl implements NetworkController.MobileDataCon
     }
 
     public boolean isMobileDataSupported() {
+        Log.d(TAG, "isMobileDataSupported: ");
         // require both supported network and ready SIM
         return mConnectivityManager.isNetworkSupported(TYPE_MOBILE)
                 && mTelephonyManager.getSimState() == SIM_STATE_READY;
     }
 
     public boolean isMobileDataEnabled() {
+        Log.d(TAG, "isMobileDataEnabled: ");
         return mTelephonyManager.getDataEnabled();
     }
 
     private static String getActiveSubscriberId(Context context) {
+        Log.d(TAG, "getActiveSubscriberId: ");
         final TelephonyManager tele = TelephonyManager.from(context);
         final String actualSubscriberId = tele.getSubscriberId(
                 SubscriptionManager.getDefaultDataSubId());
@@ -223,6 +235,7 @@ public class MobileDataControllerImpl implements NetworkController.MobileDataCon
     }
 
     private String formatDateRange(long start, long end) {
+        Log.d(TAG, "formatDateRange: ");
         final int flags = FORMAT_SHOW_DATE | FORMAT_ABBREV_MONTH;
         synchronized (PERIOD_BUILDER) {
             PERIOD_BUILDER.setLength(0);
