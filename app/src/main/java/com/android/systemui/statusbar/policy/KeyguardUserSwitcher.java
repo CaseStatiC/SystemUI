@@ -87,6 +87,7 @@ public class KeyguardUserSwitcher {
     }
 
     public void setKeyguard(boolean keyguard, boolean animate) {
+        Log.d(TAG, "setKeyguard: ");
         if (mUserSwitcher != null) {
             if (keyguard && shouldExpandByDefault()) {
                 show(animate);
@@ -101,10 +102,12 @@ public class KeyguardUserSwitcher {
      * @see android.os.UserManager#isUserSwitcherEnabled()
      */
     private boolean shouldExpandByDefault() {
+        Log.d(TAG, "shouldExpandByDefault: ");
         return (mUserSwitcherController != null) && mUserSwitcherController.isSimpleUserSwitcher();
     }
 
     public void show(boolean animate) {
+        Log.d(TAG, "show: ");
         if (mUserSwitcher != null && mUserSwitcherContainer.getVisibility() != View.VISIBLE) {
             cancelAnimations();
             mAdapter.refresh();
@@ -117,6 +120,7 @@ public class KeyguardUserSwitcher {
     }
 
     private void hide(boolean animate) {
+        Log.d(TAG, "hide: ");
         if (mUserSwitcher != null && mUserSwitcherContainer.getVisibility() == View.VISIBLE) {
             cancelAnimations();
             if (animate) {
@@ -129,6 +133,7 @@ public class KeyguardUserSwitcher {
     }
 
     private void cancelAnimations() {
+        Log.d(TAG, "cancelAnimations: ");
         int count = mUserSwitcher.getChildCount();
         for (int i = 0; i < count; i++) {
             mUserSwitcher.getChildAt(i).animate().cancel();
@@ -141,6 +146,7 @@ public class KeyguardUserSwitcher {
     }
 
     private void startAppearAnimation() {
+        Log.d(TAG, "startAppearAnimation: ");
         int count = mUserSwitcher.getChildCount();
         View[] objects = new View[count];
         for (int i = 0; i < count; i++) {
@@ -170,6 +176,7 @@ public class KeyguardUserSwitcher {
     }
 
     private void startDisappearAnimation() {
+        Log.d(TAG, "startDisappearAnimation: ");
         mAnimating = true;
         mUserSwitcher.animate()
                 .alpha(0f)
@@ -186,6 +193,7 @@ public class KeyguardUserSwitcher {
     }
 
     private void refresh() {
+        Log.d(TAG, "refresh: ");
         final int childCount = mUserSwitcher.getChildCount();
         final int adapterCount = mAdapter.getCount();
         final int N = Math.max(childCount, adapterCount);
@@ -212,18 +220,21 @@ public class KeyguardUserSwitcher {
     }
 
     public void hideIfNotSimple(boolean animate) {
+        Log.d(TAG, "hideIfNotSimple: ");
         if (mUserSwitcherContainer != null && !mUserSwitcherController.isSimpleUserSwitcher()) {
             hide(animate);
         }
     }
 
     boolean isAnimating() {
+        Log.d(TAG, "isAnimating: ");
         return mAnimating;
     }
 
     public final DataSetObserver mDataSetObserver = new DataSetObserver() {
         @Override
         public void onChanged() {
+            Log.d(TAG, "mDataSetObserver: onChanged: ");
             refresh();
         }
     };
@@ -244,7 +255,7 @@ public class KeyguardUserSwitcher {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             UserSwitcherController.UserRecord item = getItem(position);
-
+            Log.d(TAG, "Adapter: getView: ");
             if (!(convertView instanceof UserDetailItemView)
                     || !(convertView.getTag() instanceof UserSwitcherController.UserRecord)) {
                 convertView = LayoutInflater.from(mContext).inflate(
@@ -266,6 +277,7 @@ public class KeyguardUserSwitcher {
 
         @Override
         public void onClick(View v) {
+            Log.d(TAG, "Adapter: onClick: ");
             UserSwitcherController.UserRecord user = (UserSwitcherController.UserRecord) v.getTag();
             if (user.isCurrent && !user.isGuest) {
                 // Close the switcher if tapping the current user. Guest is excluded because
@@ -287,11 +299,13 @@ public class KeyguardUserSwitcher {
         }
 
         public void setKeyguardUserSwitcher(KeyguardUserSwitcher keyguardUserSwitcher) {
+            Log.d(TAG, "Container: setKeyguardUserSwitcher: ");
             mKeyguardUserSwitcher = keyguardUserSwitcher;
         }
 
         @Override
         public boolean onTouchEvent(MotionEvent ev) {
+            Log.d(TAG, "Container: onTouchEvent: ");
             // Hide switcher if it didn't handle the touch event (and let the event go through).
             if (mKeyguardUserSwitcher != null && !mKeyguardUserSwitcher.isAnimating()) {
                 mKeyguardUserSwitcher.hideIfNotSimple(true /* animate */);
