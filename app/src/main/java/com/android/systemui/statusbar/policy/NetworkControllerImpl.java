@@ -243,6 +243,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     }
 
     public void addEmergencyListener(EmergencyListener listener) {
+        Log.d(TAG, "addEmergencyListener: ");
         mCallbackHandler.setListening(listener, true);
         mCallbackHandler.setEmergencyCallsOnly(isEmergencyOnly());
     }
@@ -313,6 +314,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     }
 
     public void addSignalCallback(SignalCallback cb) {
+        Log.d(TAG, "addSignalCallback: ");
         mCallbackHandler.setListening(cb, true);
         mCallbackHandler.setSubs(mCurrentSubscriptions);
         mCallbackHandler.setIsAirplaneMode(new IconState(mAirplaneMode,
