@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 public class HotspotControllerImpl implements HotspotController {
 
-    private static final String TAG = "HotspotController";
+    private static final String TAG = "HotspotControllerImpl";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final Intent TETHER_SERVICE_INTENT = new Intent()
             .putExtra(TetherUtil.EXTRA_ADD_TETHER_TYPE, TetherUtil.TETHERING_WIFI)
@@ -44,7 +44,6 @@ public class HotspotControllerImpl implements HotspotController {
     private final ArrayList<Callback> mCallbacks = new ArrayList<Callback>();
     private final Receiver mReceiver = new Receiver();
     private final Context mContext;
-
     private int mHotspotState;
 
     public HotspotControllerImpl(Context context) {
@@ -52,11 +51,13 @@ public class HotspotControllerImpl implements HotspotController {
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println("HotspotController state:");
         pw.print("  mHotspotEnabled="); pw.println(stateToString(mHotspotState));
     }
 
     private static String stateToString(int hotspotState) {
+        Log.d(TAG, "stateToString: ");
         switch (hotspotState) {
             case WifiManager.WIFI_AP_STATE_DISABLED:
                 return "DISABLED";
@@ -73,6 +74,7 @@ public class HotspotControllerImpl implements HotspotController {
     }
 
     public void addCallback(Callback callback) {
+        Log.d(TAG, "addCallback: ");
         if (callback == null || mCallbacks.contains(callback)) return;
         if (DEBUG) Log.d(TAG, "addCallback " + callback);
         mCallbacks.add(callback);
@@ -80,6 +82,7 @@ public class HotspotControllerImpl implements HotspotController {
     }
 
     public void removeCallback(Callback callback) {
+        Log.d(TAG, "removeCallback: ");
         if (callback == null) return;
         if (DEBUG) Log.d(TAG, "removeCallback " + callback);
         mCallbacks.remove(callback);
@@ -88,16 +91,19 @@ public class HotspotControllerImpl implements HotspotController {
 
     @Override
     public boolean isHotspotEnabled() {
+        Log.d(TAG, "isHotspotEnabled: ");
         return mHotspotState == WifiManager.WIFI_AP_STATE_ENABLED;
     }
 
     @Override
     public boolean isHotspotSupported() {
+        Log.d(TAG, "isHotspotSupported: ");
         return TetherUtil.isTetheringSupported(mContext);
     }
 
     @Override
     public void setHotspotEnabled(boolean enabled) {
+        Log.d(TAG, "setHotspotEnabled: ");
         // Call provisioning app which is called when enabling Tethering from Settings
         if (enabled && TetherUtil.isProvisioningNeeded(mContext)) {
             mContext.startServiceAsUser(TETHER_SERVICE_INTENT, UserHandle.CURRENT);
@@ -107,6 +113,7 @@ public class HotspotControllerImpl implements HotspotController {
     }
 
     private void fireCallback(boolean isEnabled) {
+        Log.d(TAG, "fireCallback: ");
         for (Callback callback : mCallbacks) {
             callback.onHotspotChanged(isEnabled);
         }
@@ -116,6 +123,7 @@ public class HotspotControllerImpl implements HotspotController {
         private boolean mRegistered;
 
         public void setListening(boolean listening) {
+            Log.d(TAG, "Receiver: setListening: ");
             if (listening && !mRegistered) {
                 if (DEBUG) Log.d(TAG, "Registering receiver");
                 final IntentFilter filter = new IntentFilter();
@@ -131,6 +139,7 @@ public class HotspotControllerImpl implements HotspotController {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "Receiver: onReceive: ");
             if (DEBUG) Log.d(TAG, "onReceive " + intent.getAction());
             int state = intent.getIntExtra(
                     WifiManager.EXTRA_WIFI_AP_STATE, WifiManager.WIFI_AP_STATE_FAILED);
