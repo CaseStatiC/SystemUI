@@ -25,6 +25,7 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.InputDevice;
@@ -44,7 +45,7 @@ import static android.view.accessibility.AccessibilityNodeInfo.ACTION_CLICK;
 import static android.view.accessibility.AccessibilityNodeInfo.ACTION_LONG_CLICK;
 
 public class KeyButtonView extends ImageView {
-
+    public static final String TAG = "KeyButtonView";
     private int mContentDescriptionRes;
     private long mDownTime;
     private int mCode;
@@ -99,7 +100,7 @@ public class KeyButtonView extends ImageView {
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
+        Log.d(TAG, "onConfigurationChanged: ");
         if (mContentDescriptionRes != 0) {
             setContentDescription(mContext.getString(mContentDescriptionRes));
         }
@@ -108,6 +109,7 @@ public class KeyButtonView extends ImageView {
     @Override
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
+        Log.d(TAG, "onInitializeAccessibilityNodeInfo: ");
         if (mCode != 0) {
             info.addAction(new AccessibilityNodeInfo.AccessibilityAction(ACTION_CLICK, null));
             if (mSupportsLongpress || isLongClickable()) {
@@ -120,6 +122,7 @@ public class KeyButtonView extends ImageView {
     @Override
     protected void onWindowVisibilityChanged(int visibility) {
         super.onWindowVisibilityChanged(visibility);
+        Log.d(TAG, "onWindowVisibilityChanged: ");
         if (visibility != View.VISIBLE) {
             jumpDrawablesToCurrentState();
         }
@@ -127,6 +130,7 @@ public class KeyButtonView extends ImageView {
 
     @Override
     public boolean performAccessibilityActionInternal(int action, Bundle arguments) {
+        Log.d(TAG, "performAccessibilityActionInternal: ");
         if (action == ACTION_CLICK && mCode != 0) {
             sendEvent(KeyEvent.ACTION_DOWN, 0, SystemClock.uptimeMillis());
             sendEvent(KeyEvent.ACTION_UP, 0);
@@ -143,6 +147,7 @@ public class KeyButtonView extends ImageView {
     }
 
     public boolean onTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "onTouchEvent: ");
         final int action = ev.getAction();
         int x, y;
         if (action == MotionEvent.ACTION_DOWN) {
@@ -205,14 +210,17 @@ public class KeyButtonView extends ImageView {
     }
 
     public void playSoundEffect(int soundConstant) {
+        Log.d(TAG, "playSoundEffect: ");
         mAudioManager.playSoundEffect(soundConstant, ActivityManager.getCurrentUser());
-    };
+    }
 
     public void sendEvent(int action, int flags) {
+        Log.d(TAG, "sendEvent: ");
         sendEvent(action, flags, SystemClock.uptimeMillis());
     }
 
     void sendEvent(int action, int flags, long when) {
+        Log.d(TAG, "sendEvent: ");
         final int repeatCount = (flags & KeyEvent.FLAG_LONG_PRESS) != 0 ? 1 : 0;
         final KeyEvent ev = new KeyEvent(mDownTime, when, action, mCode, repeatCount,
                 0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0,
@@ -223,6 +231,7 @@ public class KeyButtonView extends ImageView {
     }
 
     public void abortCurrentGesture() {
+        Log.d(TAG, "abortCurrentGesture: ");
         setPressed(false);
         mGestureAborted = true;
     }
