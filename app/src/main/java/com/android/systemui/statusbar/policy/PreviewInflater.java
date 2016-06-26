@@ -51,16 +51,19 @@ public class PreviewInflater {
     }
 
     public View inflatePreview(Intent intent) {
+        Log.d(TAG, "inflatePreview: ");
         WidgetInfo info = getWidgetInfo(intent);
         return inflatePreview(info);
     }
 
     public View inflatePreviewFromService(ComponentName componentName) {
+        Log.d(TAG, "inflatePreviewFromService: ");
         WidgetInfo info = getWidgetInfoFromService(componentName);
         return inflatePreview(info);
     }
 
     private KeyguardPreviewContainer inflatePreview(WidgetInfo info) {
+        Log.d(TAG, "inflatePreview: ");
         if (info == null) {
             return null;
         }
@@ -74,6 +77,7 @@ public class PreviewInflater {
     }
 
     private View inflateWidgetView(WidgetInfo widgetInfo) {
+        Log.d(TAG, "inflateWidgetView: ");
         View widgetView = null;
         try {
             Context appContext = mContext.createPackageContext(
@@ -89,6 +93,7 @@ public class PreviewInflater {
     }
 
     private WidgetInfo getWidgetInfoFromService(ComponentName componentName) {
+        Log.d(TAG, "getWidgetInfoFromService: ");
         PackageManager packageManager = mContext.getPackageManager();
         // Look for the preview specified in the service meta-data
         try {
@@ -104,6 +109,7 @@ public class PreviewInflater {
 
     private WidgetInfo getWidgetInfoFromMetaData(String contextPackage,
             Bundle metaData) {
+        Log.d(TAG, "getWidgetInfoFromMetaData: ");
         if (metaData == null) {
             return null;
         }
@@ -119,6 +125,7 @@ public class PreviewInflater {
 
     private WidgetInfo getWidgetInfo(Intent intent) {
         PackageManager packageManager = mContext.getPackageManager();
+        Log.d(TAG, "getWidgetInfo: ");
         final List<ResolveInfo> appList = packageManager.queryIntentActivitiesAsUser(
                 intent, PackageManager.MATCH_DEFAULT_ONLY, KeyguardUpdateMonitor.getCurrentUser());
         if (appList.size() == 0) {
@@ -139,6 +146,7 @@ public class PreviewInflater {
 
     public static boolean wouldLaunchResolverActivity(Context ctx, Intent intent,
             int currentUserId) {
+        Log.d(TAG, "wouldLaunchResolverActivity: ");
         return getTargetActivityInfo(ctx, intent, currentUserId) == null;
     }
 
@@ -149,6 +157,7 @@ public class PreviewInflater {
     public static ActivityInfo getTargetActivityInfo(Context ctx, Intent intent,
             int currentUserId) {
         PackageManager packageManager = ctx.getPackageManager();
+        Log.d(TAG, "getTargetActivityInfo: ");
         final List<ResolveInfo> appList = packageManager.queryIntentActivitiesAsUser(
                 intent, PackageManager.MATCH_DEFAULT_ONLY, currentUserId);
         if (appList.size() == 0) {
@@ -167,6 +176,7 @@ public class PreviewInflater {
             ResolveInfo resolved, List<ResolveInfo> appList) {
         // If the list contains the above resolved activity, then it can't be
         // ResolverActivity itself.
+        Log.d(TAG, "wouldLaunchResolverActivity: ");
         for (int i = 0; i < appList.size(); i++) {
             ResolveInfo tmp = appList.get(i);
             if (tmp.activityInfo.name.equals(resolved.activityInfo.name)
