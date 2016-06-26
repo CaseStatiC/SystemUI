@@ -16,6 +16,7 @@
 package com.android.systemui.statusbar.policy;
 
 import android.telephony.SubscriptionInfo;
+import android.util.Log;
 
 import com.android.systemui.statusbar.policy.NetworkController.IconState;
 import com.android.systemui.statusbar.policy.NetworkController.SignalCallback;
@@ -28,36 +29,43 @@ import java.util.List;
  * the callbacks.
  */
 public class SignalCallbackAdapter implements SignalCallback {
-
+    public static final String TAG = "SignalCallback";
     @Override
     public void setWifiIndicators(boolean enabled, IconState statusIcon, IconState qsIcon,
             boolean activityIn, boolean activityOut, String description) {
+        Log.d(TAG, "setWifiIndicators: ");
     }
 
     @Override
     public void setMobileDataIndicators(IconState statusIcon, IconState qsIcon, int statusType,
             int qsType, boolean activityIn, boolean activityOut, String typeContentDescription,
             String description, boolean isWide, int subId) {
+        Log.d(TAG, "setMobileDataIndicators: ");
     }
 
     @Override
     public void setSubs(List<SubscriptionInfo> subs) {
+        Log.d(TAG, "setSubs: ");
     }
 
     @Override
     public void setNoSims(boolean show) {
+        Log.d(TAG, "setNoSims: ");
     }
 
     @Override
     public void setEthernetIndicators(IconState icon) {
+        Log.d(TAG, "setEthernetIndicators: ");
     }
 
     @Override
     public void setIsAirplaneMode(IconState icon) {
+        Log.d(TAG, "setIsAirplaneMode: ");
     }
 
     @Override
     public void setMobileDataEnabled(boolean enabled) {
+        Log.d(TAG, "setMobileDataEnabled: ");
     }
 
 }
