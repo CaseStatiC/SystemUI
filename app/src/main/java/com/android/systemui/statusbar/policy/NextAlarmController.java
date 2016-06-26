@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.UserHandle;
+import android.util.Log;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 
 public class NextAlarmController extends BroadcastReceiver {
 
+    public static final String TAG = "NextAlarmController";
     private final ArrayList<NextAlarmChangeCallback> mChangeCallbacks = new ArrayList<>();
 
     private AlarmManager mAlarmManager;
@@ -44,20 +46,24 @@ public class NextAlarmController extends BroadcastReceiver {
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println("NextAlarmController state:");
         pw.print("  mNextAlarm="); pw.println(mNextAlarm);
     }
 
     public void addStateChangedCallback(NextAlarmChangeCallback cb) {
+        Log.d(TAG, "addStateChangedCallback: ");
         mChangeCallbacks.add(cb);
         cb.onNextAlarmChanged(mNextAlarm);
     }
 
     public void removeStateChangedCallback(NextAlarmChangeCallback cb) {
+        Log.d(TAG, "removeStateChangedCallback: ");
         mChangeCallbacks.remove(cb);
     }
 
     public void onReceive(Context context, Intent intent) {
+        Log.d(TAG, "onReceive: ");
         final String action = intent.getAction();
         if (action.equals(Intent.ACTION_USER_SWITCHED)
                 || action.equals(AlarmManager.ACTION_NEXT_ALARM_CLOCK_CHANGED)) {
@@ -66,11 +72,13 @@ public class NextAlarmController extends BroadcastReceiver {
     }
 
     private void updateNextAlarm() {
+        Log.d(TAG, "updateNextAlarm: ");
         mNextAlarm = mAlarmManager.getNextAlarmClock(UserHandle.USER_CURRENT);
         fireNextAlarmChanged();
     }
 
     private void fireNextAlarmChanged() {
+        Log.d(TAG, "fireNextAlarmChanged: ");
         int n = mChangeCallbacks.size();
         for (int i = 0; i < n; i++) {
             mChangeCallbacks.get(i).onNextAlarmChanged(mNextAlarm);
