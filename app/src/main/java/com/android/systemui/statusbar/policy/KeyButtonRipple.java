@@ -26,6 +26,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.DisplayListCanvas;
 import android.view.RenderNodeAnimator;
 import android.view.View;
@@ -38,7 +39,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class KeyButtonRipple extends Drawable {
-
+    public static final String TAG = "KeyButtonRipple";
     private static final float GLOW_MAX_SCALE_FACTOR = 1.35f;
     private static final float GLOW_MAX_ALPHA = 0.2f;
     private static final int ANIMATION_DURATION_SCALE = 350;
@@ -72,6 +73,7 @@ public class KeyButtonRipple extends Drawable {
     }
 
     private Paint getRipplePaint() {
+        Log.d(TAG, "getRipplePaint: ");
         if (mRipplePaint == null) {
             mRipplePaint = new Paint();
             mRipplePaint.setAntiAlias(true);
@@ -81,6 +83,7 @@ public class KeyButtonRipple extends Drawable {
     }
 
     private void drawSoftware(Canvas canvas) {
+        Log.d(TAG, "drawSoftware: ");
         if (mGlowAlpha > 0f) {
             final Paint p = getRipplePaint();
             p.setAlpha((int)(mGlowAlpha * 255f));
@@ -104,6 +107,7 @@ public class KeyButtonRipple extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
+        Log.d(TAG, "draw: ");
         mSupportHardware = canvas.isHardwareAccelerated();
         if (mSupportHardware) {
             drawHardware((DisplayListCanvas) canvas);
@@ -114,24 +118,29 @@ public class KeyButtonRipple extends Drawable {
 
     @Override
     public void setAlpha(int alpha) {
+        Log.d(TAG, "setAlpha: ");
         // Not supported.
     }
 
     @Override
     public void setColorFilter(ColorFilter colorFilter) {
+        Log.d(TAG, "setColorFilter: ");
         // Not supported.
     }
 
     @Override
     public int getOpacity() {
+        Log.d(TAG, "getOpacity: ");
         return PixelFormat.TRANSLUCENT;
     }
 
     private boolean isHorizontal() {
+        Log.d(TAG, "isHorizontal: ");
         return getBounds().width() > getBounds().height();
     }
 
     private void drawHardware(DisplayListCanvas c) {
+        Log.d(TAG, "drawHardware: ");
         if (mDrawingHardwareGlow) {
             c.drawRoundRect(mLeftProp, mTopProp, mRightProp, mBottomProp, mRxProp, mRyProp,
                     mPaintProp);
@@ -139,25 +148,30 @@ public class KeyButtonRipple extends Drawable {
     }
 
     public float getGlowAlpha() {
+        Log.d(TAG, "getGlowAlpha: ");
         return mGlowAlpha;
     }
 
     public void setGlowAlpha(float x) {
+        Log.d(TAG, "setGlowAlpha: ");
         mGlowAlpha = x;
         invalidateSelf();
     }
 
     public float getGlowScale() {
+        Log.d(TAG, "getGlowScale: ");
         return mGlowScale;
     }
 
     public void setGlowScale(float x) {
+        Log.d(TAG, "setGlowScale: ");
         mGlowScale = x;
         invalidateSelf();
     }
 
     @Override
     protected boolean onStateChange(int[] state) {
+        Log.d(TAG, "onStateChange: ");
         boolean pressed = false;
         for (int i = 0; i < state.length; i++) {
             if (state[i] == android.R.attr.state_pressed) {
@@ -176,15 +190,18 @@ public class KeyButtonRipple extends Drawable {
 
     @Override
     public void jumpToCurrentState() {
+        Log.d(TAG, "jumpToCurrentState: ");
         cancelAnimations();
     }
 
     @Override
     public boolean isStateful() {
+        Log.d(TAG, "isStateful: ");
         return true;
     }
 
     public void setPressed(boolean pressed) {
+        Log.d(TAG, "setPressed: ");
         if (mSupportHardware) {
             setPressedHardware(pressed);
         } else {
@@ -193,6 +210,7 @@ public class KeyButtonRipple extends Drawable {
     }
 
     private void cancelAnimations() {
+        Log.d(TAG, "cancelAnimations: ");
         mTmpArray.addAll(mRunningAnimations);
         int size = mTmpArray.size();
         for (int i = 0; i < size; i++) {
@@ -204,6 +222,7 @@ public class KeyButtonRipple extends Drawable {
     }
 
     private void setPressedSoftware(boolean pressed) {
+        Log.d(TAG, "setPressedSoftware: ");
         if (pressed) {
             enterSoftware();
         } else {
@@ -212,6 +231,7 @@ public class KeyButtonRipple extends Drawable {
     }
 
     private void enterSoftware() {
+        Log.d(TAG, "enterSoftware: ");
         cancelAnimations();
         mGlowAlpha = GLOW_MAX_ALPHA;
         ObjectAnimator scaleAnimator = ObjectAnimator.ofFloat(this, "glowScale",
@@ -224,6 +244,7 @@ public class KeyButtonRipple extends Drawable {
     }
 
     private void exitSoftware() {
+        Log.d(TAG, "exitSoftware: ");
         ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(this, "glowAlpha", mGlowAlpha, 0f);
         alphaAnimator.setInterpolator(mAlphaExitInterpolator);
         alphaAnimator.setDuration(ANIMATION_DURATION_FADE);
@@ -233,6 +254,7 @@ public class KeyButtonRipple extends Drawable {
     }
 
     private void setPressedHardware(boolean pressed) {
+        Log.d(TAG, "setPressedHardware: ");
         if (pressed) {
             enterHardware();
         } else {
@@ -245,6 +267,7 @@ public class KeyButtonRipple extends Drawable {
      * horizontal or vertical mode.
      */
     private void setExtendStart(CanvasProperty<Float> prop) {
+        Log.d(TAG, "setExtendStart: ");
         if (isHorizontal()) {
             mLeftProp = prop;
         } else {
@@ -253,6 +276,7 @@ public class KeyButtonRipple extends Drawable {
     }
 
     private CanvasProperty<Float> getExtendStart() {
+        Log.d(TAG, "getExtendStart: ");
         return isHorizontal() ? mLeftProp : mTopProp;
     }
 
@@ -261,6 +285,7 @@ public class KeyButtonRipple extends Drawable {
      * horizontal or vertical mode.
      */
     private void setExtendEnd(CanvasProperty<Float> prop) {
+        Log.d(TAG, "setExtendEnd: ");
         if (isHorizontal()) {
             mRightProp = prop;
         } else {
@@ -269,19 +294,23 @@ public class KeyButtonRipple extends Drawable {
     }
 
     private CanvasProperty<Float> getExtendEnd() {
+        Log.d(TAG, "getExtendEnd: ");
         return isHorizontal() ? mRightProp : mBottomProp;
     }
 
     private int getExtendSize() {
+        Log.d(TAG, "getExtendSize: ");
         return isHorizontal() ? getBounds().width() : getBounds().height();
     }
 
     private int getRippleSize() {
+        Log.d(TAG, "getRippleSize: ");
         int size = isHorizontal() ? getBounds().width() : getBounds().height();
         return Math.min(size, mMaxWidth);
     }
 
     private void enterHardware() {
+        Log.d(TAG, "enterHardware: ");
         cancelAnimations();
         mDrawingHardwareGlow = true;
         setExtendStart(CanvasProperty.createFloat(getExtendSize() / 2));
@@ -327,6 +356,7 @@ public class KeyButtonRipple extends Drawable {
     }
 
     private void exitHardware() {
+        Log.d(TAG, "exitHardware: ");
         mPaintProp = CanvasProperty.createPaint(getRipplePaint());
         final RenderNodeAnimator opacityAnim = new RenderNodeAnimator(mPaintProp,
                 RenderNodeAnimator.PAINT_ALPHA, 0);
@@ -345,6 +375,7 @@ public class KeyButtonRipple extends Drawable {
             new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
+            Log.d(TAG, "mAnimatorListener: onAnimationEnd: ");
             mRunningAnimations.remove(animation);
             if (mRunningAnimations.isEmpty() && !mPressed) {
                 mDrawingHardwareGlow = false;
@@ -359,6 +390,7 @@ public class KeyButtonRipple extends Drawable {
     private static final class LogInterpolator implements Interpolator {
         @Override
         public float getInterpolation(float input) {
+            Log.d(TAG, "LogInterpolator: getInterpolation: ");
             return 1 - (float) Math.pow(400, -input * 1.4);
         }
     }
