@@ -70,12 +70,14 @@ public final class UserInfoController {
     }
 
     public void addListener(OnUserInfoChangedListener callback) {
+        Log.d(TAG, "addListener: ");
         mCallbacks.add(callback);
     }
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "mReceiver: onReceive: ");
             final String action = intent.getAction();
             if (Intent.ACTION_USER_SWITCHED.equals(action)) {
                 reloadUserInfo();
@@ -90,6 +92,7 @@ public final class UserInfoController {
     private final BroadcastReceiver mProfileReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "mProfileReceiver: onReceive: ");
             final String action = intent.getAction();
             if (ContactsContract.Intents.ACTION_PROFILE_CHANGED.equals(action) ||
                     Intent.ACTION_USER_INFO_CHANGED.equals(action)) {
@@ -108,6 +111,7 @@ public final class UserInfoController {
     };
 
     public void reloadUserInfo() {
+        Log.d(TAG, "reloadUserInfo: ");
         if (mUserInfoTask != null) {
             mUserInfoTask.cancel(false);
             mUserInfoTask = null;
@@ -116,6 +120,7 @@ public final class UserInfoController {
     }
 
     private void queryForUserInformation() {
+        Log.d(TAG, "queryForUserInformation: ");
         Context currentUserContext;
         UserInfo userInfo;
         try {
@@ -193,6 +198,7 @@ public final class UserInfoController {
     }
 
     private void notifyChanged() {
+        Log.d(TAG, "notifyChanged: ");
         for (OnUserInfoChangedListener listener : mCallbacks) {
             listener.onUserInfoChanged(mUserName, mUserDrawable);
         }
