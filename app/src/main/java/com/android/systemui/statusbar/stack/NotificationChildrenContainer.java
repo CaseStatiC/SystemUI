@@ -18,6 +18,7 @@ package com.android.systemui.statusbar.stack;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ import java.util.List;
  * A container containing child notifications
  */
 public class NotificationChildrenContainer extends ViewGroup {
-
+    public static final String TAG = "NotificationChildrenContainer";
     private final int mChildPadding;
     private final int mDividerHeight;
     private final int mMaxNotificationHeight;
@@ -80,6 +81,7 @@ public class NotificationChildrenContainer extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Log.d(TAG, "onLayout: ");
         int childCount = mChildren.size();
         boolean firstChild = true;
         for (int i = 0; i < childCount; i++) {
@@ -110,6 +112,7 @@ public class NotificationChildrenContainer extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.d(TAG, "onMeasure: ");
         int ownMaxHeight = mMaxNotificationHeight;
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         boolean hasFixedHeight = heightMode == MeasureSpec.EXACTLY;
@@ -157,6 +160,7 @@ public class NotificationChildrenContainer extends ViewGroup {
      * @param childIndex the index to add it at, if -1 it will be added at the end
      */
     public void addNotification(ExpandableNotificationRow row, int childIndex) {
+        Log.d(TAG, "addNotification: ");
         int newIndex = childIndex < 0 ? mChildren.size() : childIndex;
         mChildren.add(newIndex, row);
         addView(row);
@@ -170,6 +174,7 @@ public class NotificationChildrenContainer extends ViewGroup {
     }
 
     public void removeNotification(ExpandableNotificationRow row) {
+        Log.d(TAG, "removeNotification: ");
         int childIndex = mChildren.indexOf(row);
         mChildren.remove(row);
         removeView(row);
@@ -182,11 +187,13 @@ public class NotificationChildrenContainer extends ViewGroup {
     }
 
     private View inflateDivider() {
+        Log.d(TAG, "inflateDivider: ");
         return LayoutInflater.from(mContext).inflate(
                 R.layout.notification_children_divider, this, false);
     }
 
     public List<ExpandableNotificationRow> getNotificationChildren() {
+        Log.d(TAG, "getNotificationChildren: ");
         return mChildren;
     }
 
@@ -197,6 +204,7 @@ public class NotificationChildrenContainer extends ViewGroup {
      * @return whether the list order has changed
      */
     public boolean applyChildOrder(List<ExpandableNotificationRow> childOrder) {
+        Log.d(TAG, "applyChildOrder: ");
         if (childOrder == null) {
             return false;
         }
@@ -222,6 +230,7 @@ public class NotificationChildrenContainer extends ViewGroup {
     }
 
     public int getIntrinsicHeight() {
+        Log.d(TAG, "getIntrinsicHeight: ");
         int childCount = mChildren.size();
         int intrinsicHeight = 0;
         int visibleChildren = 0;
@@ -246,6 +255,7 @@ public class NotificationChildrenContainer extends ViewGroup {
      * @param parentState the state of the parent
      */
     public void getState(StackScrollState resultState, StackViewState parentState) {
+        Log.d(TAG, "getState: ");
         int childCount = mChildren.size();
         int yPosition = mCollapseButtonHeight;
         boolean firstChild = true;
@@ -278,6 +288,7 @@ public class NotificationChildrenContainer extends ViewGroup {
     }
 
     public void applyState(StackScrollState state) {
+        Log.d(TAG, "applyState: ");
         int childCount = mChildren.size();
         boolean firstChild = true;
         ViewState dividerState = new ViewState();
@@ -303,6 +314,7 @@ public class NotificationChildrenContainer extends ViewGroup {
     }
 
     public void setCollapseClickListener(OnClickListener collapseClickListener) {
+        Log.d(TAG, "setCollapseClickListener: ");
         mCollapseButton.setOnClickListener(collapseClickListener);
     }
 
@@ -313,6 +325,7 @@ public class NotificationChildrenContainer extends ViewGroup {
      * @param state the new state we animate to
      */
     public void prepareExpansionChanged(StackScrollState state) {
+        Log.d(TAG, "prepareExpansionChanged: ");
         int childCount = mChildren.size();
         boolean firstChild = true;
         StackViewState sourceState = new StackViewState();
@@ -346,6 +359,7 @@ public class NotificationChildrenContainer extends ViewGroup {
 
     public void startAnimationToState(StackScrollState state, StackStateAnimator stateAnimator,
             boolean withDelays, long baseDelay, long duration) {
+        Log.d(TAG, "startAnimationToState: ");
         int childCount = mChildren.size();
         boolean firstChild = true;
         ViewState dividerState = new ViewState();
@@ -386,6 +400,7 @@ public class NotificationChildrenContainer extends ViewGroup {
     }
 
     public ExpandableNotificationRow getViewAtPosition(float y) {
+        Log.d(TAG, "getViewAtPosition: ");
         // find the view under the pointer, accounting for GONE views
         final int count = mChildren.size();
         for (int childIdx = 0; childIdx < count; childIdx++) {
@@ -401,6 +416,7 @@ public class NotificationChildrenContainer extends ViewGroup {
     }
 
     public void setTintColor(int color) {
+        Log.d(TAG, "setTintColor: ");
         ExpandableNotificationRow.applyTint(mCollapseDivider, color);
     }
 }

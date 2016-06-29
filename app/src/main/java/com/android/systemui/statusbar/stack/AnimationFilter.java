@@ -16,12 +16,15 @@
 
 package com.android.systemui.statusbar.stack;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
  * Filters the animations for only a certain type of properties.
  */
 public class AnimationFilter {
+    public static final String TAG = "AnimationFilter";
     boolean animateAlpha;
     boolean animateY;
     boolean animateZ;
@@ -38,51 +41,61 @@ public class AnimationFilter {
     int darkAnimationOriginIndex;
 
     public AnimationFilter animateAlpha() {
+        Log.d(TAG, "animateAlpha: ");
         animateAlpha = true;
         return this;
     }
 
     public AnimationFilter animateY() {
+        Log.d(TAG, "animateY: ");
         animateY = true;
         return this;
     }
 
     public AnimationFilter hasDelays() {
+        Log.d(TAG, "hasDelays: ");
         hasDelays = true;
         return this;
     }
 
     public AnimationFilter animateZ() {
+        Log.d(TAG, "animateZ: ");
         animateZ = true;
         return this;
     }
 
     public AnimationFilter animateScale() {
+        Log.d(TAG, "animateScale: ");
         animateScale = true;
         return this;
     }
 
     public AnimationFilter animateHeight() {
+        Log.d(TAG, "animateHeight: ");
         animateHeight = true;
         return this;
     }
 
     public AnimationFilter animateTopInset() {
+        Log.d(TAG, "animateTopInset: ");
         animateTopInset = true;
         return this;
     }
 
     public AnimationFilter animateDimmed() {
+        Log.d(TAG, "animateDimmed: ");
         animateDimmed = true;
         return this;
     }
 
     public AnimationFilter animateDark() {
+        Log.d(TAG, "animateDark: ");
         animateDark = true;
         return this;
     }
 
     public AnimationFilter animateHideSensitive() {
+        Log.d(TAG, "animateHideSensitive: ");
         animateHideSensitive = true;
         return this;
     }
@@ -93,6 +106,7 @@ public class AnimationFilter {
      * @param events The animation events from the filters to combine.
      */
     public void applyCombination(ArrayList<NotificationStackScrollLayout.AnimationEvent> events) {
+        Log.d(TAG, "applyCombination: ");
         reset();
         int size = events.size();
         for (int i = 0; i < size; i++) {
@@ -115,6 +129,7 @@ public class AnimationFilter {
     }
 
     private void combineFilter(AnimationFilter filter) {
+        Log.d(TAG, "combineFilter: ");
         animateAlpha |= filter.animateAlpha;
         animateY |= filter.animateY;
         animateZ |= filter.animateZ;
@@ -128,6 +143,7 @@ public class AnimationFilter {
     }
 
     private void reset() {
+        Log.d(TAG, "reset: ");
         animateAlpha = false;
         animateY = false;
         animateZ = false;

@@ -16,6 +16,7 @@
 
 package com.android.systemui.statusbar.stack;
 
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -24,7 +25,7 @@ import android.view.View;
  * {@link com.android.systemui.statusbar.stack.StackStateAnimator}.
 */
 public class ViewState {
-
+    public static final String TAG = "ViewState";
     public float alpha;
     public float yTranslation;
     public float zTranslation;
@@ -32,6 +33,7 @@ public class ViewState {
     public float scale;
 
     public void copyFrom(ViewState viewState) {
+        Log.d(TAG, "copyFrom: ");
         alpha = viewState.alpha;
         yTranslation = viewState.yTranslation;
         zTranslation = viewState.zTranslation;
@@ -40,6 +42,7 @@ public class ViewState {
     }
 
     public void initFrom(View view) {
+        Log.d(TAG, "initFrom: ");
         alpha = view.getVisibility() == View.INVISIBLE ? 0.0f : view.getAlpha();
         yTranslation = view.getTranslationY();
         zTranslation = view.getTranslationZ();

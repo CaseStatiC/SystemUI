@@ -16,6 +16,8 @@
 
 package com.android.systemui.statusbar.stack;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -24,7 +26,7 @@ import java.util.ArrayList;
  * quadratic function
  */
 public class PiecewiseLinearIndentationFunctor extends StackIndentationFunctor {
-
+    public static final String TAG = "PiecewiseLinearIndentationFunctor";.
     private final ArrayList<Float> mBaseValues;
     private final float mLinearPart;
 
@@ -64,6 +66,7 @@ public class PiecewiseLinearIndentationFunctor extends StackIndentationFunctor {
     }
 
     private void initBaseValues() {
+        Log.d(TAG, "initBaseValues: ");
         int sumOfSquares = getSumOfSquares(mMaxItemsInStack-1);
         int totalWeight = 0;
         mBaseValues.add(0.0f);
@@ -80,11 +83,13 @@ public class PiecewiseLinearIndentationFunctor extends StackIndentationFunctor {
      * @return
      */
     private int getSumOfSquares(int n) {
+        Log.d(TAG, "getSumOfSquares: ");
         return n * (n + 1) * (2 * n + 1) / 6;
     }
 
     @Override
     public float getValue(float itemsBefore) {
+        Log.d(TAG, "getValue: ");
         if (mStackStartsAtPeek) {
             // We directly start at the stack, so no initial interpolation.
             itemsBefore++;

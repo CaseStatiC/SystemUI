@@ -16,6 +16,7 @@
 
 package com.android.systemui.statusbar.stack;
 
+import android.util.Log;
 import android.view.View;
 
 import com.android.systemui.statusbar.ExpandableView;
@@ -26,7 +27,7 @@ import com.android.systemui.statusbar.ExpandableView;
 public class StackViewState extends ViewState {
 
     // These are flags such that we can create masks for filtering.
-
+    public static final String TAG = "StackViewState";
     public static final int LOCATION_UNKNOWN = 0x00;
     public static final int LOCATION_FIRST_CARD = 0x01;
     public static final int LOCATION_TOP_STACK_HIDDEN = 0x02;
@@ -70,6 +71,7 @@ public class StackViewState extends ViewState {
     @Override
     public void copyFrom(ViewState viewState) {
         super.copyFrom(viewState);
+        Log.d(TAG, "copyFrom: ");
         if (viewState instanceof StackViewState) {
             StackViewState svs = (StackViewState) viewState;
             height = svs.height;

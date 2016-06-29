@@ -16,11 +16,13 @@
 
 package com.android.systemui.statusbar.stack;
 
+import android.util.Log;
+
 /**
  * A functor which can be queried for offset given the number of items before it.
  */
 public abstract class StackIndentationFunctor {
-
+    public static final String TAG = "StackIndentationFunctor";
     protected int mTotalTransitionDistance;
     protected int mDistanceToPeekStart;
     protected int mMaxItemsInStack;
@@ -60,15 +62,18 @@ public abstract class StackIndentationFunctor {
     }
 
     private void updateTotalTransitionDistance() {
+        Log.d(TAG, "updateTotalTransitionDistance: ");
         mTotalTransitionDistance = mDistanceToPeekStart + mPeekSize;
     }
 
     public void setPeekSize(int mPeekSize) {
+        Log.d(TAG, "setPeekSize: ");
         this.mPeekSize = mPeekSize;
         updateTotalTransitionDistance();
     }
 
     public void setDistanceToPeekStart(int distanceToPeekStart) {
+        Log.d(TAG, "setDistanceToPeekStart: ");
         mDistanceToPeekStart = distanceToPeekStart;
         mStackStartsAtPeek = mDistanceToPeekStart == 0;
         updateTotalTransitionDistance();

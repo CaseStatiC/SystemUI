@@ -36,7 +36,7 @@ import java.util.Map;
  * can be applied to a viewGroup.
  */
 public class StackScrollState {
-
+    public static final String TAG = "StackScrollState";
     private static final String CHILD_NOT_FOUND_TAG = "StackScrollStateNoSuchChild";
 
     private final ViewGroup mHostView;
@@ -51,10 +51,12 @@ public class StackScrollState {
     }
 
     public ViewGroup getHostView() {
+        Log.d(TAG, "getHostView: ");
         return mHostView;
     }
 
     public void resetViewStates() {
+        Log.d(TAG, "resetViewStates: ");
         int numChildren = mHostView.getChildCount();
         for (int i = 0; i < numChildren; i++) {
             ExpandableView child = (ExpandableView) mHostView.getChildAt(i);
@@ -75,6 +77,7 @@ public class StackScrollState {
     }
 
     private void resetViewState(ExpandableView view) {
+        Log.d(TAG, "resetViewState: ");
         StackViewState viewState = mStateMap.get(view);
         if (viewState == null) {
             viewState = new StackViewState();
@@ -88,10 +91,12 @@ public class StackScrollState {
     }
 
     public StackViewState getViewStateForView(View requestedView) {
+        Log.d(TAG, "getViewStateForView: ");
         return mStateMap.get(requestedView);
     }
 
     public void removeViewStateForView(View child) {
+        Log.d(TAG, "removeViewStateForView: ");
         mStateMap.remove(child);
     }
 
@@ -100,6 +105,7 @@ public class StackScrollState {
      * The properties are only applied if they effectively changed.
      */
     public void apply() {
+        Log.d(TAG, "apply: ");
         int numChildren = mHostView.getChildCount();
         for (int i = 0; i < numChildren; i++) {
             ExpandableView child = (ExpandableView) mHostView.getChildAt(i);
@@ -128,6 +134,7 @@ public class StackScrollState {
      * @return whether the state was applied correctly
      */
     public boolean applyState(ExpandableView view, StackViewState state) {
+        Log.d(TAG, "applyState: ");
         if (state == null) {
             Log.wtf(CHILD_NOT_FOUND_TAG, "No child state was found when applying this state " +
                     "to the hostView");
@@ -179,6 +186,7 @@ public class StackScrollState {
      * Applies a  {@link ViewState} to a normal view.
      */
     public void applyViewState(View view, ViewState state) {
+        Log.d(TAG, "applyViewState: ");
         float alpha = view.getAlpha();
         float yTranslation = view.getTranslationY();
         float xTranslation = view.getTranslationX();
@@ -245,6 +253,7 @@ public class StackScrollState {
     }
 
     private View getNextChildNotGone(int childIndex) {
+        Log.d(TAG, "getNextChildNotGone: ");
         int childCount = mHostView.getChildCount();
         for (int i = childIndex + 1; i < childCount; i++) {
             View child = mHostView.getChildAt(i);

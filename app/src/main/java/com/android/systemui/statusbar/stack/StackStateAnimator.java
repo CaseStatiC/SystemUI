@@ -21,6 +21,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
@@ -39,7 +40,7 @@ import java.util.Stack;
  * An stack state animator which handles animations to new StackScrollStates
  */
 public class StackStateAnimator {
-
+    public static final String TAG = "StackStateAnimator";
     public static final int ANIMATION_DURATION_STANDARD = 360;
     public static final int ANIMATION_DURATION_GO_TO_FULL_SHADE = 448;
     public static final int ANIMATION_DURATION_APPEAR_DISAPPEAR = 464;
@@ -111,13 +112,14 @@ public class StackStateAnimator {
     }
 
     public boolean isRunning() {
+        Log.d(TAG, "isRunning: ");
         return !mAnimatorSet.isEmpty();
     }
 
     public void startAnimationForEvents(
             ArrayList<NotificationStackScrollLayout.AnimationEvent> mAnimationEvents,
             StackScrollState finalState, long additionalDelay) {
-
+        Log.d(TAG, "startAnimationForEvents: ");
         processAnimationEvents(mAnimationEvents, finalState);
 
         int childCount = mHostLayout.getChildCount();
@@ -155,6 +157,7 @@ public class StackStateAnimator {
      */
     private boolean applyWithoutAnimation(ExpandableView child, StackViewState viewState,
             StackScrollState finalState) {
+        Log.d(TAG, "applyWithoutAnimation: ");
         if (mShadeExpanded) {
             return false;
         }
@@ -175,6 +178,7 @@ public class StackStateAnimator {
     }
 
     private int findLastNotAddedIndex(StackScrollState finalState) {
+        Log.d(TAG, "findLastNotAddedIndex: ");
         int childCount = mHostLayout.getChildCount();
         for (int i = childCount - 1; i >= 0; i--) {
             final ExpandableView child = (ExpandableView) mHostLayout.getChildAt(i);
@@ -203,6 +207,7 @@ public class StackStateAnimator {
      */
     public void startStackAnimations(final ExpandableView child, StackViewState viewState,
             StackScrollState finalState, int i, long fixedDelay) {
+        Log.d(TAG, "startStackAnimations: ");
         final float alpha = viewState.alpha;
         boolean wasAdded = mNewAddChildren.contains(child);
         long duration = mCurrentLength;
@@ -277,6 +282,7 @@ public class StackStateAnimator {
      * @param duration the duration of the animation
      */
     public void startViewAnimations(View child, ViewState viewState, long delay, long duration) {
+        Log.d(TAG, "startViewAnimations: ");
         boolean wasVisible = child.getVisibility() == View.VISIBLE;
         final float alpha = viewState.alpha;
         if (!wasVisible && alpha != 0 && !viewState.gone) {
@@ -369,6 +375,7 @@ public class StackStateAnimator {
     }
 
     private long calculateDelayDark(StackViewState viewState) {
+        Log.d(TAG, "calculateDelayDark: ");
         int referenceIndex;
         if (mAnimationFilter.darkAnimationOriginIndex ==
                 NotificationStackScrollLayout.AnimationEvent.DARK_ANIMATION_ORIGIN_INDEX_ABOVE) {
@@ -383,6 +390,7 @@ public class StackStateAnimator {
     }
 
     private long calculateDelayGoToFullShade(StackViewState viewState) {
+        Log.d(TAG, "calculateDelayGoToFullShade: ");
         float index = viewState.notGoneIndex;
         index = (float) Math.pow(index, 0.7f);
         return (long) (index * ANIMATION_DELAY_PER_ELEMENT_GO_TO_FULL_SHADE);
@@ -390,6 +398,7 @@ public class StackStateAnimator {
 
     private void startHeightAnimation(final ExpandableView child,
             StackViewState viewState, long duration, long delay) {
+        Log.d(TAG, "startHeightAnimation: ");
         Integer previousStartValue = getChildTag(child, TAG_START_HEIGHT);
         Integer previousEndValue = getChildTag(child, TAG_END_HEIGHT);
         int newEndValue = viewState.height;
@@ -449,6 +458,7 @@ public class StackStateAnimator {
 
     private void startInsetAnimation(final ExpandableView child,
             StackViewState viewState, long duration, long delay) {
+        Log.d(TAG, "startInsetAnimation: ");
         Integer previousStartValue = getChildTag(child, TAG_START_TOP_INSET);
         Integer previousEndValue = getChildTag(child, TAG_END_TOP_INSET);
         int newEndValue = viewState.clipTopAmount;
@@ -581,6 +591,7 @@ public class StackStateAnimator {
 
     private void startZTranslationAnimation(final View child,
             final ViewState viewState, long duration, long delay) {
+        Log.d(TAG, "startZTranslationAnimation: ");
         Float previousStartValue = getChildTag(child,TAG_START_TRANSLATION_Z);
         Float previousEndValue = getChildTag(child,TAG_END_TRANSLATION_Z);
         float newEndValue = viewState.zTranslation;
@@ -633,6 +644,7 @@ public class StackStateAnimator {
 
     private void startYTranslationAnimation(final View child,
             ViewState viewState, long duration, long delay) {
+        Log.d(TAG, "startYTranslationAnimation: ");
         Float previousStartValue = getChildTag(child,TAG_START_TRANSLATION_Y);
         Float previousEndValue = getChildTag(child,TAG_END_TRANSLATION_Y);
         float newEndValue = viewState.yTranslation;
@@ -689,6 +701,7 @@ public class StackStateAnimator {
 
     private void startScaleAnimation(final View child,
             ViewState viewState, long duration) {
+        Log.d(TAG, "startScaleAnimation: ");
         Float previousStartValue = getChildTag(child, TAG_START_SCALE);
         Float previousEndValue = getChildTag(child, TAG_END_SCALE);
         float newEndValue = viewState.scale;
@@ -742,6 +755,7 @@ public class StackStateAnimator {
     }
 
     private void startAnimator(ValueAnimator animator) {
+        Log.d(TAG, "startAnimator: ");
         mAnimatorSet.add(animator);
         animator.start();
     }
@@ -792,6 +806,7 @@ public class StackStateAnimator {
      * @return the new duration
      */
     private long cancelAnimatorAndGetNewDuration(long duration, ValueAnimator previousAnimator) {
+        Log.d(TAG, "cancelAnimatorAndGetNewDuration: ");
         long newDuration = duration;
         if (previousAnimator != null) {
             // We take either the desired length of the new animation or the remaining time of
@@ -804,6 +819,7 @@ public class StackStateAnimator {
     }
 
     private void onAnimationFinished() {
+        Log.d(TAG, "onAnimationFinished: ");
         mHostLayout.onChildAnimationFinished();
         for (View v : mChildrenToClearFromOverlay) {
             mHostLayout.getOverlay().remove(v);
@@ -820,6 +836,7 @@ public class StackStateAnimator {
     private void processAnimationEvents(
             ArrayList<NotificationStackScrollLayout.AnimationEvent> animationEvents,
             StackScrollState finalState) {
+        Log.d(TAG, "processAnimationEvents: ");
         for (NotificationStackScrollLayout.AnimationEvent event : animationEvents) {
             final ExpandableView changingView = (ExpandableView) event.changingView;
             if (event.animationType ==
@@ -921,6 +938,7 @@ public class StackStateAnimator {
 
     public void animateOverScrollToAmount(float targetAmount, final boolean onTop,
             final boolean isRubberbanded) {
+        Log.d(TAG, "animateOverScrollToAmount: ");
         final float startOverScrollAmount = mHostLayout.getCurrentOverScrollAmount(onTop);
         if (targetAmount == startOverScrollAmount) {
             return;
@@ -958,6 +976,7 @@ public class StackStateAnimator {
     }
 
     public void cancelOverScrollAnimators(boolean onTop) {
+        Log.d(TAG, "cancelOverScrollAnimators: ");
         ValueAnimator currentAnimator = onTop ? mTopOverScrollAnimator : mBottomOverScrollAnimator;
         if (currentAnimator != null) {
             currentAnimator.cancel();
@@ -969,6 +988,7 @@ public class StackStateAnimator {
      * if no animation is running.
      */
     public static int getFinalActualHeight(ExpandableView view) {
+        Log.d(TAG, "getFinalActualHeight: ");
         if (view == null) {
             return 0;
         }
@@ -981,10 +1001,12 @@ public class StackStateAnimator {
     }
 
     public void setHeadsUpAppearHeightBottom(int headsUpAppearHeightBottom) {
+        Log.d(TAG, "setHeadsUpAppearHeightBottom: ");
         mHeadsUpAppearHeightBottom = headsUpAppearHeightBottom;
     }
 
     public void setShadeExpanded(boolean shadeExpanded) {
+        Log.d(TAG, "setShadeExpanded: ");
         mShadeExpanded = shadeExpanded;
     }
 }
