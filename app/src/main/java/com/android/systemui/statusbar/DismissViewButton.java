@@ -22,6 +22,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,6 +30,7 @@ import com.android.systemui.R;
 import com.android.systemui.statusbar.stack.NotificationStackScrollLayout;
 
 public class DismissViewButton extends Button {
+    public static final String TAG = "DismissViewButton";
     private AnimatedVectorDrawable mAnimatedDismissDrawable;
     private final Drawable mStaticDismissDrawable;
     private Drawable mActiveDrawable;
@@ -67,6 +69,7 @@ public class DismissViewButton extends Button {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        Log.d(TAG, "onDraw: ");
         canvas.save();
         int drawableHeight = mActiveDrawable.getBounds().height();
         boolean isRtl = (getLayoutDirection() == View.LAYOUT_DIRECTION_RTL);
@@ -80,6 +83,7 @@ public class DismissViewButton extends Button {
 
     @Override
     public boolean performClick() {
+        Log.d(TAG, "performClick: ");
         if (!mAnimatedDismissDrawable.isRunning()) {
             mActiveDrawable = mAnimatedDismissDrawable;
             mAnimatedDismissDrawable.start();
@@ -89,6 +93,7 @@ public class DismissViewButton extends Button {
 
     @Override
     protected boolean verifyDrawable(Drawable who) {
+        Log.d(TAG, "verifyDrawable: ");
         return super.verifyDrawable(who)
                 || who == mAnimatedDismissDrawable
                 || who == mStaticDismissDrawable;
@@ -96,6 +101,7 @@ public class DismissViewButton extends Button {
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 
@@ -110,6 +116,7 @@ public class DismissViewButton extends Button {
     @Override
     public void getDrawingRect(Rect outRect) {
         super.getDrawingRect(outRect);
+        Log.d(TAG, "getDrawingRect: ");
         float translationX = ((ViewGroup) mParent).getTranslationX();
         float translationY = ((ViewGroup) mParent).getTranslationY();
         outRect.left += translationX;
@@ -119,6 +126,7 @@ public class DismissViewButton extends Button {
     }
 
     public void showButton() {
+        Log.d(TAG, "showButton: ");
         mActiveDrawable = mStaticDismissDrawable;
         invalidate();
     }
@@ -127,6 +135,7 @@ public class DismissViewButton extends Button {
      * @return Whether the button is currently static and not being animated.
      */
     public boolean isButtonStatic() {
+        Log.d(TAG, "isButtonStatic: ");
         return mActiveDrawable == mStaticDismissDrawable;
     }
 }
