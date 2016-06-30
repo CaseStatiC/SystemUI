@@ -18,6 +18,7 @@ package com.android.systemui.statusbar;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 /**
@@ -26,6 +27,7 @@ import android.widget.FrameLayout;
  */
 public class AlphaOptimizedFrameLayout extends FrameLayout
 {
+    public static final String TAG = "AlphaOptimizedFrameLayout";
     public AlphaOptimizedFrameLayout(Context context) {
         super(context);
     }
@@ -45,6 +47,7 @@ public class AlphaOptimizedFrameLayout extends FrameLayout
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 }
