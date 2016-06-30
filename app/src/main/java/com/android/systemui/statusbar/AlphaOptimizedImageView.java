@@ -19,6 +19,7 @@ package com.android.systemui.statusbar;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.systemui.R;
@@ -28,6 +29,7 @@ import com.android.systemui.R;
  * commands and therefore does not need a layer when alpha is changed.
  */
 public class AlphaOptimizedImageView extends ImageView {
+    public static final String TAG = "AlphaOptimizedImageView";
     private final boolean mHasOverlappingRendering;
 
     public AlphaOptimizedImageView(Context context) {
@@ -60,6 +62,7 @@ public class AlphaOptimizedImageView extends ImageView {
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return mHasOverlappingRendering;
     }
 }
