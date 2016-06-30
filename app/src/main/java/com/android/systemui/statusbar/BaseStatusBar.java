@@ -1498,6 +1498,7 @@ public abstract class BaseStatusBar extends SystemUI implements
             try {
                 title.setText(pmUser.getApplicationLabel(
                         pmUser.getApplicationInfo(entry.notification.getPackageName(), 0)));
+                Log.d(TAG, "inflateViews: if: try: title.getText = " + title.getText());
             } catch (NameNotFoundException e) {
                 title.setText(entry.notification.getPackageName());
             }
@@ -1591,11 +1592,13 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     public void startPendingIntentDismissingKeyguard(final PendingIntent intent) {
         if (!isDeviceProvisioned()) return;
-
+        Log.d(TAG, "startPendingIntentDismissingKeyguard: intent = " + intent);
         final boolean keyguardShowing = mStatusBarKeyguardViewManager.isShowing();
         final boolean afterKeyguardGone = intent.isActivity()
                 && PreviewInflater.wouldLaunchResolverActivity(mContext, intent.getIntent(),
                 mCurrentUserId);
+        Log.d(TAG, "startPendingIntentDismissingKeyguard: keyguardShowing = " + keyguardShowing);
+        Log.d(TAG, "startPendingIntentDismissingKeyguard: afterKeyguardGone = " + afterKeyguardGone);
         dismissKeyguardThenExecute(new OnDismissAction() {
             public boolean onDismiss() {
                 new Thread() {
@@ -1624,6 +1627,7 @@ public abstract class BaseStatusBar extends SystemUI implements
 
                             // TODO: Dismiss Keyguard.
                         }
+                        Log.d(TAG, "startPendingIntentDismissingKeyguard: new Thread: run: intent.isActivity = " + intent.isActivity);
                         if (intent.isActivity()) {
                             mAssistManager.hideAssist();
                             overrideActivityPendingAppTransition(keyguardShowing
@@ -1644,6 +1648,7 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     private final class NotificationClicker implements View.OnClickListener {
         public void onClick(final View v) {
+            Log.d(TAG, "NotificationClicker: onClick: ");
             if (!(v instanceof ExpandableNotificationRow)) {
                 Log.e(TAG, "NotificationClicker called on a view that is not a notification row.");
                 return;
@@ -1659,12 +1664,14 @@ public abstract class BaseStatusBar extends SystemUI implements
             final PendingIntent intent = sbn.getNotification().contentIntent;
             final String notificationKey = sbn.getKey();
 
+            Log.d(TAG, "NotificationClicker: onClick: notificationKey = " + notificationKey);
             // Mark notification for one frame.
             row.setJustClicked(true);
             DejankUtils.postAfterTraversal(new Runnable() {
                 @Override
                 public void run() {
                     row.setJustClicked(false);
+                    Log.d(TAG, "NotificationClicker: onClick: run: " );
                 }
             });
 
@@ -1675,8 +1682,13 @@ public abstract class BaseStatusBar extends SystemUI implements
             final boolean afterKeyguardGone = intent.isActivity()
                     && PreviewInflater.wouldLaunchResolverActivity(mContext, intent.getIntent(),
                             mCurrentUserId);
+            Log.d(TAG, "NotificationClicker: onClick: keyguardShowing = " + keyguardShowing);
+            Log.d(TAG, "NotificationClicker: onClick: afterKeyguardGone = " + afterKeyguardGone);
+            Log.d(TAG, "NOTIFICATION_CLICK_DEBUG");
             dismissKeyguardThenExecute(new OnDismissAction() {
                 public boolean onDismiss() {
+                    Log.d(TAG, "NotificationClicker: onClick: onDismiss: mHeadsUpManager = " + mHeadsUpManager);
+                    Log.d(TAG, "NotificationClicker: onClick: onDismiss: mHeadsUpManager.isHeadsUp(notificationKey) = " + mHeadsUpManager.isHeadsUp(notificationKey));
                     if (mHeadsUpManager != null && mHeadsUpManager.isHeadsUp(notificationKey)) {
                         // Release the HUN notification to the shade.
                         //
@@ -1701,7 +1713,7 @@ public abstract class BaseStatusBar extends SystemUI implements
                                 ActivityManagerNative.getDefault().resumeAppSwitches();
                             } catch (RemoteException e) {
                             }
-
+                            Log.d(TAG, "NotificationClicker: onClick: onDismiss: run: intent = " + intent);
                             if (intent != null) {
                                 try {
                                     intent.send();
@@ -1738,7 +1750,10 @@ public abstract class BaseStatusBar extends SystemUI implements
         }
 
         public void register(ExpandableNotificationRow row, StatusBarNotification sbn) {
+            Log.d(TAG, "NotificationClicker: register: row = " + row);
+            Log.d(TAG, "NotificationClicker: register: sbn = " + sbn);
             final PendingIntent contentIntent = sbn.getNotification().contentIntent;
+            Log.d(TAG, "NotificationClicker: register: contentIntent = " + contentIntent);
             if (contentIntent != null) {
                 row.setOnClickListener(this);
             } else {
@@ -1748,12 +1763,18 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     public void animateCollapsePanels(int flags, boolean force) {
+        Log.d(TAG, "animateCollapsePanels: flags = " + flags);
+        Log.d(TAG, "animateCollapsePanels: force = " + force);
     }
 
     public void animateCollapsePanels(int flags, boolean force, boolean delayed) {
+        Log.d(TAG, "animateCollapsePanels: flags = " + flags);
+        Log.d(TAG, "animateCollapsePanels: force = " + force);
+        Log.d(TAG, "animateCollapsePanels: delayed = " + delayed);
     }
 
     public void overrideActivityPendingAppTransition(boolean keyguardShowing) {
+        Log.d(TAG, "overrideActivityPendingAppTransition: keyguardShowing = " + keyguardShowing);
         if (keyguardShowing) {
             try {
                 mWindowManagerService.overridePendingAppTransition(null, 0, 0, null);
@@ -1764,6 +1785,8 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     protected void visibilityChanged(boolean visible) {
+        Log.d(TAG, "visibilityChanged: visible = " + visible);
+        Log.d(TAG, "visibilityChanged: mVisible = " + mVisible);
         if (mVisible != visible) {
             mVisible = visible;
             if (!visible) {
@@ -1774,8 +1797,11 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     protected void updateVisibleToUser() {
+        Log.d(TAG, "updateVisibleToUser: ");
         boolean oldVisibleToUser = mVisibleToUser;
         mVisibleToUser = mVisible && mDeviceInteractive;
+        Log.d(TAG, "updateVisibleToUser: oldVisibleToUser = " + oldVisibleToUser);
+        Log.d(TAG, "updateVisibleToUser: mVisibleToUser = " + mVisibleToUser);
 
         if (oldVisibleToUser != mVisibleToUser) {
             handleVisibleToUserChanged(mVisibleToUser);
@@ -1786,6 +1812,7 @@ public abstract class BaseStatusBar extends SystemUI implements
      * The LEDs are turned off when the notification panel is shown, even just a little bit.
      */
     protected void handleVisibleToUserChanged(boolean visibleToUser) {
+        Log.d(TAG, "handleVisibleToUserChanged: visibleToUser = " + visibleToUser);
         try {
             if (visibleToUser) {
                 boolean pinnedHeadsUp = mHeadsUpManager.hasPinnedHeadsUp();
@@ -1794,6 +1821,9 @@ public abstract class BaseStatusBar extends SystemUI implements
                             (!pinnedHeadsUp && (mState == StatusBarState.SHADE
                                     || mState == StatusBarState.SHADE_LOCKED)));
                 int notificationLoad = mNotificationData.getActiveNotifications().size();
+                Log.d(TAG, "handleVisibleToUserChanged: try : if: pinnedHeadsUp: " + pinnedHeadsUp);
+                Log.d(TAG, "handleVisibleToUserChanged: try : if: clearNotificationEffects: " + clearNotificationEffects);
+                Log.d(TAG, "handleVisibleToUserChanged: try : if: notificationLoad: " + notificationLoad);
                 if (pinnedHeadsUp && isPanelFullyCollapsed())  {
                     notificationLoad = 1;
                 } else {
@@ -1812,6 +1842,7 @@ public abstract class BaseStatusBar extends SystemUI implements
      * Clear Buzz/Beep/Blink.
      */
     public void clearNotificationEffects() {
+        Log.d(TAG, "clearNotificationEffects: ");
         try {
             mBarService.clearNotificationEffects();
         } catch (RemoteException e) {
@@ -1828,6 +1859,7 @@ public abstract class BaseStatusBar extends SystemUI implements
      * WARNING: this will call back into us.  Don't hold any locks.
      */
     void handleNotificationError(StatusBarNotification n, String message) {
+        Log.d(TAG, "handleNotificationError: ");
         removeNotification(n.getKey(), null);
         try {
             mBarService.onNotificationError(n.getPackageName(), n.getTag(), n.getId(), n.getUid(),
@@ -1838,6 +1870,8 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     protected StatusBarNotification removeNotificationViews(String key, RankingMap ranking) {
+        Log.d(TAG, "removeNotificationViews: key = " + key);
+        Log.d(TAG, "removeNotificationViews: ranking = " + ranking);
         NotificationData.Entry entry = mNotificationData.remove(key, ranking);
         if (entry == null) {
             Log.w(TAG, "removeNotification for unknown key: " + key);
@@ -1848,6 +1882,7 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     protected NotificationData.Entry createNotificationViews(StatusBarNotification sbn) {
+        Log.d(TAG, "createNotificationViews: sbn = " + sbn);
         if (DEBUG) {
             Log.d(TAG, "createNotificationViews(notification=" + sbn);
         }
@@ -1867,6 +1902,7 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     protected StatusBarIconView createIcon(StatusBarNotification sbn) {
         // Construct the icon.
+        Log.d(TAG, "createIcon: sbn = " + sbn);
         Notification n = sbn.getNotification();
         final StatusBarIconView iconView = new StatusBarIconView(mContext,
                 sbn.getPackageName() + "/0x" + Integer.toHexString(sbn.getId()), n);
@@ -1893,6 +1929,8 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     protected void addNotificationViews(Entry entry, RankingMap ranking) {
+        Log.d(TAG, "addNotificationViews: entry = " + entry);
+        Log.d(TAG, "addNotificationViews: ranking = " + ranking);
         if (entry == null) {
             return;
         }
@@ -1910,16 +1948,19 @@ public abstract class BaseStatusBar extends SystemUI implements
      * Updates expanded, dimmed and locked states of notification rows.
      */
     protected void updateRowStates() {
+        Log.d(TAG, "updateRowStates: ");
         int maxKeyguardNotifications = getMaxKeyguardNotifications();
         mKeyguardIconOverflowContainer.getIconsView().removeAllViews();
-
+        Log.d(TAG, "updateRowStates: maxKeyguardNotifications = " + maxKeyguardNotifications);
         ArrayList<Entry> activeNotifications = mNotificationData.getActiveNotifications();
         final int N = activeNotifications.size();
-
+        Log.d(TAG, "updateRowStates: N = " + N);
         int visibleNotifications = 0;
         boolean onKeyguard = mState == StatusBarState.KEYGUARD;
+        Log.d(TAG, "updateRowStates: onKeyguard = " + onKeyguard);
         for (int i = 0; i < N; i++) {
             NotificationData.Entry entry = activeNotifications.get(i);
+            Log.d(TAG, "updateRowStates: for: entry = " + entry);
             if (onKeyguard) {
                 entry.row.setExpansionDisabled(true);
             } else {
@@ -1931,11 +1972,15 @@ public abstract class BaseStatusBar extends SystemUI implements
             }
             boolean isInvisibleChild = !mGroupManager.isVisible(entry.notification);
             boolean showOnKeyguard = shouldShowOnKeyguard(entry.notification);
+            Log.d(TAG, "updateRowStates: for: isInvisibleChild = " + isInvisibleChild);
+            Log.d(TAG, "updateRowStates: for: showOnKeyguard = " + showOnKeyguard);
             if ((isLockscreenPublicMode() && !mShowLockscreenNotifications) ||
                     (onKeyguard && (visibleNotifications >= maxKeyguardNotifications
                             || !showOnKeyguard || isInvisibleChild))) {
                 entry.row.setVisibility(View.GONE);
+                Log.d(TAG, "updateRowStates: for: if: ");
                 if (onKeyguard && showOnKeyguard && !isInvisibleChild) {
+                    Log.d(TAG, "updateRowStates: for: if: if: ");
                     mKeyguardIconOverflowContainer.getIconsView().addNotification(entry);
                 }
             } else {
@@ -1961,10 +2006,12 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     private boolean shouldShowOnKeyguard(StatusBarNotification sbn) {
+        Log.d(TAG, "shouldShowOnKeyguard: sbn = " + sbn);
         return mShowLockscreenNotifications && !mNotificationData.isAmbient(sbn.getKey());
     }
 
     protected void setZenMode(int mode) {
+        Log.d(TAG, "setZenMode: mode = " + mode);
         if (!isDeviceProvisioned()) return;
         mZenMode = mode;
         updateNotifications();
@@ -1972,18 +2019,23 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     // extended in PhoneStatusBar
     protected void setShowLockscreenNotifications(boolean show) {
+        Log.d(TAG, "setShowLockscreenNotifications: show = " + show);
         mShowLockscreenNotifications = show;
     }
 
     private void updateLockscreenNotificationSetting() {
+        Log.d(TAG, "updateLockscreenNotificationSetting: ");
         final boolean show = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS,
                 1,
                 mCurrentUserId) != 0;
+        Log.d(TAG, "updateLockscreenNotificationSetting: show = " + show);
         final int dpmFlags = mDevicePolicyManager.getKeyguardDisabledFeatures(
                 null /* admin */, mCurrentUserId);
+        Log.d(TAG, "updateLockscreenNotificationSetting: dpmFlags = " + dpmFlags);
         final boolean allowedByDpm = (dpmFlags
                 & DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS) == 0;
+        Log.d(TAG, "updateLockscreenNotificationSetting: allowedByDpm = " + allowedByDpm);
         setShowLockscreenNotifications(show && allowedByDpm);
     }
 
@@ -1997,31 +2049,40 @@ public abstract class BaseStatusBar extends SystemUI implements
     public abstract void removeNotification(String key, RankingMap ranking);
 
     public void updateNotification(StatusBarNotification notification, RankingMap ranking) {
+        Log.d(TAG, "updateNotification: notification: " + notification);
+        Log.d(TAG, "updateNotification: ranking: " + ranking);
         if (DEBUG) Log.d(TAG, "updateNotification(" + notification + ")");
 
         final String key = notification.getKey();
         Entry entry = mNotificationData.get(key);
+        Log.d(TAG, "updateNotification: entry = " + entry);
         if (entry == null) {
             return;
         }
 
         Notification n = notification.getNotification();
+        Log.d(TAG, "updateNotification: n = " + n);
         if (DEBUG) {
             logUpdate(entry, n);
         }
         boolean applyInPlace = shouldApplyInPlace(entry, n);
         boolean shouldInterrupt = shouldInterrupt(entry, notification);
         boolean alertAgain = alertAgain(entry, n);
-
-        final StatusBarNotification oldNotification = entry.notification;
+        Log.d(TAG, "updateNotification: applyInPlace = " + applyInPlace);
+        Log.d(TAG, "updateNotification: shouldInterrupt = " + shouldInterrupt);
+        Log.d(TAG, "updateNotification: alertAgain = " + alertAgain);
         entry.notification = notification;
+        final StatusBarNotification oldNotification = entry.notification;
+        Log.d(TAG, "updateNotification: oldNotification = " + oldNotification);
         mGroupManager.onEntryUpdated(entry, oldNotification);
 
         boolean updateSuccessful = false;
         if (applyInPlace) {
             if (DEBUG) Log.d(TAG, "reusing notification for key: " + key);
             try {
+                Log.d(TAG, "updateNotification: if: try: entry.icon = " + entry.icon);
                 if (entry.icon != null) {
+                    Log.d(TAG, "updateNotification: if: try: if: ");
                     // Update the icon
                     final StatusBarIcon ic = new StatusBarIcon(
                             notification.getUser(),
@@ -2044,6 +2105,7 @@ public abstract class BaseStatusBar extends SystemUI implements
                 Log.w(TAG, "Couldn't reapply views for package " + n.contentView.getPackage(), e);
             }
         }
+        Log.d(TAG, "updateNotification: updateSuccessful = " + updateSuccessful);
         if (!updateSuccessful) {
             if (DEBUG) Log.d(TAG, "not reusing notification for key: " + key);
             final StatusBarIcon ic = new StatusBarIcon(
@@ -2078,6 +2140,8 @@ public abstract class BaseStatusBar extends SystemUI implements
             boolean alertAgain);
 
     private void logUpdate(Entry oldEntry, Notification n) {
+        Log.d(TAG, "logUpdate: oldEntry = " + oldEntry);
+        Log.d(TAG, "logUpdate: n = " + n);
         StatusBarNotification oldNotification = oldEntry.notification;
         Log.d(TAG, "old notification: when=" + oldNotification.getNotification().when
                 + " ongoing=" + oldNotification.isOngoing()
@@ -2098,6 +2162,8 @@ public abstract class BaseStatusBar extends SystemUI implements
      * updated
      */
     private boolean shouldApplyInPlace(Entry entry, Notification n) {
+        Log.d(TAG, "shouldApplyInPlace: entry = " + entry);
+        Log.d(TAG, "shouldApplyInPlace: n = " + n);
         StatusBarNotification oldNotification = entry.notification;
         // XXX: modify when we do something more intelligent with the two content views
         final RemoteViews oldContentView = oldNotification.getNotification().contentView;
@@ -2145,6 +2211,8 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     private void updateNotificationViews(Entry entry, StatusBarNotification notification) {
+        Log.d(TAG, "updateNotificationViews: entry = " + entry);
+        Log.d(TAG, "updateNotificationViews: notification = " + notification);
         final RemoteViews contentView = notification.getNotification().contentView;
         final RemoteViews bigContentView = notification.getNotification().bigContentView;
         final RemoteViews headsUpContentView = notification.getNotification().headsUpContentView;
@@ -2177,26 +2245,32 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     protected void notifyHeadsUpScreenOff() {
+        Log.d(TAG, "notifyHeadsUpScreenOff: ");
         maybeEscalateHeadsUp();
     }
 
     private boolean alertAgain(Entry oldEntry, Notification newNotification) {
+        Log.d(TAG, "alertAgain: oldEntry = " + oldEntry);
+        Log.d(TAG, "alertAgain: newNotification = " + newNotification);
         return oldEntry == null || !oldEntry.hasInterrupted()
                 || (newNotification.flags & Notification.FLAG_ONLY_ALERT_ONCE) == 0;
     }
 
     protected boolean shouldInterrupt(Entry entry) {
+        Log.d(TAG, "shouldInterrupt: entry = " + entry);
         return shouldInterrupt(entry, entry.notification);
     }
 
     protected boolean shouldInterrupt(Entry entry, StatusBarNotification sbn) {
+        Log.d(TAG, "shouldInterrupt: entry = " + entry);
+        Log.d(TAG, "shouldInterrupt: sbn = " + sbn);
         if (mNotificationData.shouldFilterOut(sbn)) {
             if (DEBUG) {
                 Log.d(TAG, "Skipping HUN check for " + sbn.getKey() + " since it's filtered out.");
             }
             return false;
         }
-
+        Log.d(TAG, "shouldInterrupt: isSnoozedPackage = " + isSnoozedPackage(sbn));
         if (isSnoozedPackage(sbn)) {
             return false;
         }
@@ -2224,6 +2298,13 @@ public abstract class BaseStatusBar extends SystemUI implements
                 && (!mStatusBarKeyguardViewManager.isShowing()
                         || mStatusBarKeyguardViewManager.isOccluded())
                 && !mStatusBarKeyguardViewManager.isInputRestricted();
+        Log.d(TAG, "shouldInterrupt: isHighPriority = " + isHighPriority);
+        Log.d(TAG, "shouldInterrupt: isFullscreen = " + isFullscreen);
+        Log.d(TAG, "shouldInterrupt: hasTicker = " + hasTicker);
+        Log.d(TAG, "shouldInterrupt: isAllowed = " + isAllowed);
+        Log.d(TAG, "shouldInterrupt: accessibilityForcesLaunch = " + accessibilityForcesLaunch);
+        Log.d(TAG, "shouldInterrupt: justLaunchedFullScreenIntent = " + justLaunchedFullScreenIntent);
+        Log.d(TAG, "shouldInterrupt: interrupt = " + interrupt);
         try {
             interrupt = interrupt && !mDreamManager.isDreaming();
         } catch (RemoteException e) {
@@ -2236,10 +2317,13 @@ public abstract class BaseStatusBar extends SystemUI implements
     protected abstract boolean isSnoozedPackage(StatusBarNotification sbn);
 
     public void setInteracting(int barWindow, boolean interacting) {
+        Log.d(TAG, "setInteracting: barWindow = " + barWindow);
+        Log.d(TAG, "setInteracting: interacting = " + interacting);
         // hook for subclasses
     }
 
     public void setBouncerShowing(boolean bouncerShowing) {
+        Log.d(TAG, "setBouncerShowing: bouncerShowing = " + bouncerShowing);
         mBouncerShowing = bouncerShowing;
     }
 
@@ -2247,10 +2331,12 @@ public abstract class BaseStatusBar extends SystemUI implements
      * @return Whether the security bouncer from Keyguard is showing.
      */
     public boolean isBouncerShowing() {
+        Log.d(TAG, "isBouncerShowing: mBouncerShowing = " + mBouncerShowing);
         return mBouncerShowing;
     }
 
     public void destroy() {
+        Log.d(TAG, "destroy: ");
         mContext.unregisterReceiver(mBroadcastReceiver);
         try {
             mNotificationListener.unregisterAsSystemService();
@@ -2264,6 +2350,7 @@ public abstract class BaseStatusBar extends SystemUI implements
      *         return PackageManager for mContext
      */
     protected PackageManager getPackageManagerForUser(int userId) {
+        Log.d(TAG, "getPackageManagerForUser: userId = " + userId);
         Context contextForUser = mContext;
         // UserHandle defines special userId as negative values, e.g. USER_ALL
         if (userId >= 0) {
@@ -2274,15 +2361,20 @@ public abstract class BaseStatusBar extends SystemUI implements
                         mContext.createPackageContextAsUser(mContext.getPackageName(),
                         Context.CONTEXT_RESTRICTED,
                         new UserHandle(userId));
+                Log.d(TAG, "getPackageManagerForUser: contextForUser = " + contextForUser);
             } catch (NameNotFoundException e) {
                 // Shouldn't fail to find the package name for system ui.
             }
         }
+        Log.d(TAG, "getPackageManagerForUser: contextForUser.getPackageManagerForUser = " + contextForUser.getPackageCodePath());
         return contextForUser.getPackageManager();
     }
 
     @Override
     public void logNotificationExpansion(String key, boolean userAction, boolean expanded) {
+        Log.d(TAG, "logNotificationExpansion: key = " + key);
+        Log.d(TAG, "logNotificationExpansion: userAction = " + userAction);
+        Log.d(TAG, "logNotificationExpansion: expanded = " + expanded);
         try {
             mBarService.onNotificationExpansionChanged(key, userAction, expanded);
         } catch (RemoteException e) {
@@ -2291,6 +2383,7 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     public boolean isKeyguardSecure() {
+        Log.d(TAG, "isKeyguardSecure: ");
         if (mStatusBarKeyguardViewManager == null) {
             // startKeyguard() hasn't been called yet, so we don't know.
             // Make sure anything that needs to know isKeyguardSecure() checks and re-checks this
@@ -2299,11 +2392,14 @@ public abstract class BaseStatusBar extends SystemUI implements
                     new Throwable());
             return false;
         }
+        Log.d(TAG, "isKeyguardSecure: mStatusBarKeyguardViewManager.isSecure() = " + mStatusBarKeyguardViewManager.isSecure());
         return mStatusBarKeyguardViewManager.isSecure();
     }
 
     @Override
     public void showAssistDisclosure() {
+        Log.d(TAG, "showAssistDisclosure: ");
+        Log.d(TAG, "showAssistDisclosure: mAssistManager = " + mAssistManager);
         if (mAssistManager != null) {
             mAssistManager.showDisclosure();
         }
@@ -2311,6 +2407,9 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     @Override
     public void startAssist(Bundle args) {
+        Log.d(TAG, "startAssist: ");
+        Log.d(TAG, "startAssist: args = " + args);
+        Log.d(TAG, "startAssist: mAssistManager = " + mAssistManager);
         if (mAssistManager != null) {
             mAssistManager.startAssist(args);
         }
