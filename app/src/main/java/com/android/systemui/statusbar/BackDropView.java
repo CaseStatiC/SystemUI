@@ -18,6 +18,7 @@ package com.android.systemui.statusbar;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -26,6 +27,7 @@ import android.widget.FrameLayout;
  */
 public class BackDropView extends FrameLayout
 {
+    public static final String TAG = "BackDropView";
     private Runnable mOnVisibilityChangedRunnable;
 
     public BackDropView(Context context) {
@@ -47,18 +49,21 @@ public class BackDropView extends FrameLayout
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 
     @Override
     protected void onVisibilityChanged(View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
+        Log.d(TAG, "onVisibilityChanged: ");
         if (changedView == this && mOnVisibilityChangedRunnable != null) {
             mOnVisibilityChangedRunnable.run();
         }
     }
 
     public void setOnVisibilityChangedRunnable(Runnable runnable) {
+        Log.d(TAG, "setOnVisibilityChangedRunnable: ");
         mOnVisibilityChangedRunnable = runnable;
     }
 
