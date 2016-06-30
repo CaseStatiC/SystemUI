@@ -20,12 +20,14 @@ import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RemoteViews.RemoteView;
 
 @RemoteView
 public class AnimatedImageView extends AlphaOptimizedImageView {
+    public static final String TAG = "AlphaOptimizedImageView";
     AnimationDrawable mAnim;
     boolean mAttached;
 
@@ -43,6 +45,7 @@ public class AnimatedImageView extends AlphaOptimizedImageView {
     }
 
     private void updateAnim() {
+        Log.d(TAG, "updateAnim: ");
         Drawable drawable = getDrawable();
         if (mAttached && mAnim != null) {
             mAnim.stop();
@@ -59,6 +62,7 @@ public class AnimatedImageView extends AlphaOptimizedImageView {
 
     @Override
     public void setImageDrawable(Drawable drawable) {
+        Log.d(TAG, "setImageDrawable: ");
         if (drawable != null) {
             if (mDrawableId == drawable.hashCode()) return;
 
@@ -73,6 +77,7 @@ public class AnimatedImageView extends AlphaOptimizedImageView {
     @Override
     @android.view.RemotableViewMethod
     public void setImageResource(int resid) {
+        Log.d(TAG, "setImageResource: ");
         if (mDrawableId == resid) return;
 
         mDrawableId = resid;
@@ -83,6 +88,7 @@ public class AnimatedImageView extends AlphaOptimizedImageView {
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
+        Log.d(TAG, "onAttachedToWindow: ");
         mAttached = true;
         updateAnim();
     }
@@ -90,6 +96,7 @@ public class AnimatedImageView extends AlphaOptimizedImageView {
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        Log.d(TAG, "onDetachedFromWindow: ");
         if (mAnim != null) {
             mAnim.stop();
         }
@@ -99,6 +106,7 @@ public class AnimatedImageView extends AlphaOptimizedImageView {
     @Override
     protected void onVisibilityChanged(View changedView, int vis) {
         super.onVisibilityChanged(changedView, vis);
+        Log.d(TAG, "onVisibilityChanged: ");
         if (mAnim != null) {
             if (isShown()) {
                 mAnim.start();
