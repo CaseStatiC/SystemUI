@@ -24,6 +24,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -41,6 +42,7 @@ import com.android.systemui.R;
  */
 public abstract class ActivatableNotificationView extends ExpandableOutlineView {
 
+    public static final String TAG = "ActivatableNotificationView";
     private static final long DOUBLETAP_TIMEOUT_MS = 1200;
     private static final int BACKGROUND_ANIMATION_LENGTH_MS = 220;
     private static final int ACTIVATE_ANIMATION_LENGTH = 220;
@@ -156,6 +158,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mBackgroundNormal = (NotificationBackgroundView) findViewById(R.id.backgroundNormal);
         mBackgroundDimmed = (NotificationBackgroundView) findViewById(R.id.backgroundDimmed);
         mBackgroundNormal.setCustomBackground(R.drawable.notification_material_bg);
@@ -167,12 +170,14 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     private final Runnable mTapTimeoutRunnable = new Runnable() {
         @Override
         public void run() {
+            Log.d(TAG, "mTapTimeoutRunnable: run: ");
             makeInactive(true /* animate */);
         }
     };
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onTouchEvent: ");
         if (mDimmed) {
             return handleTouchEventDimmed(event);
         } else {
@@ -182,6 +187,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
 
     @Override
     public void drawableHotspotChanged(float x, float y) {
+        Log.d(TAG, "drawableHotspotChanged: ");
         if (!mDimmed){
             mBackgroundNormal.drawableHotspotChanged(x, y);
         }
@@ -190,6 +196,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     @Override
     protected void drawableStateChanged() {
         super.drawableStateChanged();
+        Log.d(TAG, "drawableStateChanged: ");
         if (mDimmed) {
             mBackgroundDimmed.setState(getDrawableState());
         } else {
@@ -198,6 +205,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     }
 
     private boolean handleTouchEventDimmed(MotionEvent event) {
+        Log.d(TAG, "handleTouchEventDimmed: ");
         int action = event.getActionMasked();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
@@ -238,6 +246,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     }
 
     private void makeActive() {
+        Log.d(TAG, "makeActive: ");
         startActivateAnimation(false /* reverse */);
         mActivated = true;
         if (mOnActivatedListener != null) {
@@ -246,6 +255,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     }
 
     private void startActivateAnimation(boolean reverse) {
+        Log.d(TAG, "startActivateAnimation: ");
         if (!isAttachedToWindow()) {
             return;
         }
@@ -297,6 +307,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
      * Cancels the hotspot and makes the notification inactive.
      */
     public void makeInactive(boolean animate) {
+        Log.d(TAG, "makeInactive: ");
         if (mActivated) {
             if (mDimmed) {
                 if (animate) {
@@ -314,11 +325,13 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     }
 
     private boolean isWithinTouchSlop(MotionEvent event) {
+        Log.d(TAG, "isWithinTouchSlop: ");
         return Math.abs(event.getX() - mDownX) < mTouchSlop
                 && Math.abs(event.getY() - mDownY) < mTouchSlop;
     }
 
     public void setDimmed(boolean dimmed, boolean fade) {
+        Log.d(TAG, "setDimmed: ");
         if (mDimmed != dimmed) {
             mDimmed = dimmed;
             if (fade) {
@@ -330,6 +343,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     }
 
     public void setDark(boolean dark, boolean fade, long delay) {
+        Log.d(TAG, "setDark: ");
         super.setDark(dark, fade, delay);
         if (mDark == dark) {
             return;
@@ -354,6 +368,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
      }
 
     public void setShowingLegacyBackground(boolean showing) {
+        Log.d(TAG, "setShowingLegacyBackground: ");
         mShowingLegacyBackground = showing;
         updateBackgroundTint();
     }
@@ -361,6 +376,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     @Override
     public void setBelowSpeedBump(boolean below) {
         super.setBelowSpeedBump(below);
+        Log.d(TAG, "setBelowSpeedBump: ");
         if (below != mIsBelowSpeedBump) {
             mIsBelowSpeedBump = below;
             updateBackgroundTint();
@@ -371,11 +387,13 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
      * Sets the tint color of the background
      */
     public void setTintColor(int color) {
+        Log.d(TAG, "setTintColor: ");
         mBgTint = color;
         updateBackgroundTint();
     }
 
     private void updateBackgroundTint() {
+        Log.d(TAG, "updateBackgroundTint: ");
         int color = getBgColor();
         int rippleColor = getRippleColor();
         if (color == mNormalColor) {
@@ -392,6 +410,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
      * Fades in the background when exiting dark mode.
      */
     private void fadeInFromDark(long delay) {
+        Log.d(TAG, "fadeInFromDark: ");
         final View background = mDimmed ? mBackgroundDimmed : mBackgroundNormal;
         background.setAlpha(0f);
         background.setPivotX(mBackgroundDimmed.getWidth() / 2f);
@@ -421,6 +440,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
      * Fades the background when the dimmed state changes.
      */
     private void fadeDimmedBackground() {
+        Log.d(TAG, "fadeDimmedBackground: ");
         mBackgroundDimmed.animate().cancel();
         mBackgroundNormal.animate().cancel();
         if (mDimmed) {
@@ -462,6 +482,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     }
 
     private void updateBackground() {
+        Log.d(TAG, "updateBackground: ");
         cancelFadeAnimations();
         if (mDark) {
             mBackgroundDimmed.setVisibility(View.INVISIBLE);
@@ -478,6 +499,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     }
 
     private void cancelFadeAnimations() {
+        Log.d(TAG, "cancelFadeAnimations: ");
         if (mBackgroundAnimator != null) {
             mBackgroundAnimator.cancel();
         }
@@ -488,12 +510,14 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+        Log.d(TAG, "onLayout: ");
         setPivotX(getWidth() / 2);
     }
 
     @Override
     public void setActualHeight(int actualHeight, boolean notifyListeners) {
         super.setActualHeight(actualHeight, notifyListeners);
+        Log.d(TAG, "setActualHeight: ");
         setPivotY(actualHeight / 2);
         mBackgroundNormal.setActualHeight(actualHeight);
         mBackgroundDimmed.setActualHeight(actualHeight);
@@ -502,6 +526,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     @Override
     public void setClipTopAmount(int clipTopAmount) {
         super.setClipTopAmount(clipTopAmount);
+        Log.d(TAG, "setClipTopAmount: ");
         mBackgroundNormal.setClipTopAmount(clipTopAmount);
         mBackgroundDimmed.setClipTopAmount(clipTopAmount);
     }
@@ -509,6 +534,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     @Override
     public void performRemoveAnimation(long duration, float translationDirection,
             Runnable onFinishedRunnable) {
+        Log.d(TAG, "performRemoveAnimation: ");
         enableAppearDrawing(true);
         if (mDrawingAppearAnimation) {
             startAppearAnimation(false /* isAppearing */, translationDirection,
@@ -520,6 +546,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
 
     @Override
     public void performAddAnimation(long delay, long duration) {
+        Log.d(TAG, "performAddAnimation: ");
         enableAppearDrawing(true);
         if (mDrawingAppearAnimation) {
             startAppearAnimation(true /* isAppearing */, -1.0f, delay, duration, null);
@@ -528,6 +555,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
 
     private void startAppearAnimation(boolean isAppearing, float translationDirection, long delay,
             long duration, final Runnable onFinishedRunnable) {
+        Log.d(TAG, "startAppearAnimation: ");
         cancelAppearAnimation();
         mAnimationTranslationY = translationDirection * getActualHeight();
         if (mAppearAnimationFraction == -1.0f) {
@@ -600,17 +628,20 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     }
 
     private void cancelAppearAnimation() {
+        Log.d(TAG, "cancelAppearAnimation: ");
         if (mAppearAnimator != null) {
             mAppearAnimator.cancel();
         }
     }
 
     public void cancelAppearDrawing() {
+        Log.d(TAG, "cancelAppearDrawing: ");
         cancelAppearAnimation();
         enableAppearDrawing(false);
     }
 
     private void updateAppearRect() {
+        Log.d(TAG, "updateAppearRect: ");
         float inverseFraction = (1.0f - mAppearAnimationFraction);
         float translationFraction = mCurrentAppearInterpolator.getInterpolation(inverseFraction);
         float translateYTotalAmount = translationFraction * mAnimationTranslationY;
@@ -649,6 +680,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     }
 
     private void updateAppearAnimationAlpha() {
+        Log.d(TAG, "updateAppearAnimationAlpha: ");
         float contentAlphaProgress = mAppearAnimationFraction;
         contentAlphaProgress = contentAlphaProgress / (1.0f - ALPHA_ANIMATION_END);
         contentAlphaProgress = Math.min(1.0f, contentAlphaProgress);
@@ -657,6 +689,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     }
 
     private void setContentAlpha(float contentAlpha) {
+        Log.d(TAG, "setContentAlpha: ");
         View contentView = getContentView();
         if (contentView.hasOverlappingRendering()) {
             int layerType = contentAlpha == 0.0f || contentAlpha == 1.0f ? LAYER_TYPE_NONE
@@ -672,6 +705,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     protected abstract View getContentView();
 
     private int getBgColor() {
+        Log.d(TAG, "getBgColor: ");
         if (mBgTint != 0) {
             return mBgTint;
         } else if (mShowingLegacyBackground) {
@@ -684,6 +718,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     }
 
     protected int getRippleColor() {
+        Log.d(TAG, "getRippleColor: ");
         if (mBgTint != 0) {
             return mTintedRippleColor;
         } else if (mShowingLegacyBackground) {
@@ -703,6 +738,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
      * @param enable Should it be enabled.
      */
     private void enableAppearDrawing(boolean enable) {
+        Log.d(TAG, "enableAppearDrawing: ");
         if (enable != mDrawingAppearAnimation) {
             mDrawingAppearAnimation = enable;
             if (!enable) {
@@ -714,6 +750,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
+        Log.d(TAG, "dispatchDraw: ");
         if (mDrawingAppearAnimation) {
             canvas.save();
             canvas.translate(0, mAppearAnimationTranslation);
@@ -725,10 +762,12 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     }
 
     public void setOnActivatedListener(OnActivatedListener onActivatedListener) {
+        Log.d(TAG, "setOnActivatedListener: ");
         mOnActivatedListener = onActivatedListener;
     }
 
     public void reset() {
+        Log.d(TAG, "reset: ");
         setTintColor(0);
         setShowingLegacyBackground(false);
         setBelowSpeedBump(false);
