@@ -19,11 +19,13 @@ package com.android.systemui.statusbar;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.android.systemui.R;
 
 public class DismissView extends StackScrollerDecorView {
+    public static final String TAG = "DismissView";
     private boolean mDismissAllInProgress;
     private DismissViewButton mDismissButton;
 
@@ -33,20 +35,24 @@ public class DismissView extends StackScrollerDecorView {
 
     @Override
     protected View findContentView() {
+        Log.d(TAG, "findContentView: ");
         return findViewById(R.id.dismiss_text);
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mDismissButton = (DismissViewButton) findContentView();
     }
 
     public void setOnButtonClickListener(OnClickListener listener) {
+        Log.d(TAG, "setOnButtonClickListener: ");
         mContent.setOnClickListener(listener);
     }
 
     public boolean isOnEmptySpace(float touchX, float touchY) {
+        Log.d(TAG, "isOnEmptySpace: ");
         return touchX < mContent.getX()
                 || touchX > mContent.getX() + mContent.getWidth()
                 || touchY < mContent.getY()
@@ -54,10 +60,12 @@ public class DismissView extends StackScrollerDecorView {
     }
 
     public void showClearButton() {
+        Log.d(TAG, "showClearButton: ");
         mDismissButton.showButton();
     }
 
     public void setDismissAllInProgress(boolean dismissAllInProgress) {
+        Log.d(TAG, "setDismissAllInProgress: ");
         if (dismissAllInProgress) {
             setClipBounds(null);
         }
@@ -66,6 +74,7 @@ public class DismissView extends StackScrollerDecorView {
 
     @Override
     public void setClipBounds(Rect clipBounds) {
+        Log.d(TAG, "setClipBounds: ");
         if (mDismissAllInProgress) {
             // we don't want any clipping to happen!
             return;
@@ -74,6 +83,7 @@ public class DismissView extends StackScrollerDecorView {
     }
 
     public boolean isButtonVisible() {
+        Log.d(TAG, "isButtonVisible: ");
         return mDismissButton.isButtonStatic();
     }
 }
