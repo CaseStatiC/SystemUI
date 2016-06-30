@@ -18,12 +18,14 @@ package com.android.systemui.statusbar;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.Button;
 
 /**
  * A Button which doesn't have overlapping drawing commands
  */
 public class AlphaOptimizedButton extends Button {
+    public static final String TAG = "AlphaOptimizedButton";
     public AlphaOptimizedButton(Context context) {
         super(context);
     }
@@ -43,6 +45,7 @@ public class AlphaOptimizedButton extends Button {
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 }
