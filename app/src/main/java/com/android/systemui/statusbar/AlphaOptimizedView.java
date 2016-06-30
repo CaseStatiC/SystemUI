@@ -18,6 +18,7 @@ package com.android.systemui.statusbar;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -26,6 +27,7 @@ import android.view.View;
  */
 public class AlphaOptimizedView extends View
 {
+    public static final String TAG = "AlphaOptimizedView";
     public AlphaOptimizedView(Context context) {
         super(context);
     }
@@ -45,6 +47,7 @@ public class AlphaOptimizedView extends View
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 }
