@@ -21,6 +21,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -35,7 +36,7 @@ import com.android.systemui.R;
  * the notification where the drag started.
  */
 public class DragDownHelper implements Gefingerpoken {
-
+    public static final String TAG = "DragDownHelper";
     private static final float RUBBERBAND_FACTOR_EXPANDABLE = 0.5f;
     private static final float RUBBERBAND_FACTOR_STATIC = 0.15f;
 
@@ -69,6 +70,7 @@ public class DragDownHelper implements Gefingerpoken {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onInterceptTouchEvent: ");
         final float x = event.getX();
         final float y = event.getY();
 
@@ -98,6 +100,7 @@ public class DragDownHelper implements Gefingerpoken {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onTouchEvent: ");
         if (!mDraggingDown) {
             return false;
         }
@@ -145,6 +148,7 @@ public class DragDownHelper implements Gefingerpoken {
     }
 
     private void captureStartingChild(float x, float y) {
+        Log.d(TAG, "captureStartingChild: ");
         if (mStartingChild == null) {
             mStartingChild = findView(x, y);
             if (mStartingChild != null) {
@@ -154,6 +158,7 @@ public class DragDownHelper implements Gefingerpoken {
     }
 
     private void handleExpansion(float heightDelta, ExpandableView child) {
+        Log.d(TAG, "handleExpansion: ");
         if (heightDelta < 0) {
             heightDelta = 0;
         }
@@ -171,6 +176,7 @@ public class DragDownHelper implements Gefingerpoken {
     }
 
     private void cancelExpansion(final ExpandableView child) {
+        Log.d(TAG, "cancelExpansion: ");
         if (child.getContentHeight() == child.getMinHeight()) {
             return;
         }
@@ -188,6 +194,7 @@ public class DragDownHelper implements Gefingerpoken {
     }
 
     private void cancelExpansion() {
+        Log.d(TAG, "cancelExpansion: ");
         ValueAnimator anim = ValueAnimator.ofFloat(mLastHeight, 0);
         anim.setInterpolator(mInterpolator);
         anim.setDuration(SPRING_BACK_ANIMATION_LENGTH_MS);
@@ -201,6 +208,7 @@ public class DragDownHelper implements Gefingerpoken {
     }
 
     private void stopDragging() {
+        Log.d(TAG, "stopDragging: ");
         if (mStartingChild != null) {
             cancelExpansion(mStartingChild);
         } else {
@@ -211,6 +219,7 @@ public class DragDownHelper implements Gefingerpoken {
     }
 
     private ExpandableView findView(float x, float y) {
+        Log.d(TAG, "findView: ");
         mHost.getLocationOnScreen(mTemp2);
         x += mTemp2[0];
         y += mTemp2[1];
