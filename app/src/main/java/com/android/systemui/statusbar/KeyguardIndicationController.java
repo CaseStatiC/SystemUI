@@ -94,6 +94,7 @@ public class KeyguardIndicationController {
     }
 
     public void setVisible(boolean visible) {
+        Log.d(TAG, "setVisible: ");
         mVisible = visible;
         mTextView.setVisibility(visible ? View.VISIBLE : View.GONE);
         if (visible) {
@@ -106,6 +107,7 @@ public class KeyguardIndicationController {
      * Sets the indication that is shown if nothing else is showing.
      */
     public void setRestingIndication(String restingIndication) {
+        Log.d(TAG, "setRestingIndication: ");
         mRestingIndication = restingIndication;
         updateIndication();
     }
@@ -114,6 +116,7 @@ public class KeyguardIndicationController {
      * Hides transient indication in {@param delayMs}.
      */
     public void hideTransientIndicationDelayed(long delayMs) {
+        Log.d(TAG, "hideTransientIndicationDelayed: ");
         mHandler.sendMessageDelayed(
                 mHandler.obtainMessage(MSG_HIDE_TRANSIENT), delayMs);
     }
@@ -122,6 +125,7 @@ public class KeyguardIndicationController {
      * Shows {@param transientIndication} until it is hidden by {@link #hideTransientIndication}.
      */
     public void showTransientIndication(int transientIndication) {
+        Log.d(TAG, "showTransientIndication: ");
         showTransientIndication(mContext.getResources().getString(transientIndication));
     }
 
@@ -129,6 +133,7 @@ public class KeyguardIndicationController {
      * Shows {@param transientIndication} until it is hidden by {@link #hideTransientIndication}.
      */
     public void showTransientIndication(String transientIndication) {
+        Log.d(TAG, "showTransientIndication: ");
         showTransientIndication(transientIndication, Color.WHITE);
     }
 
@@ -136,6 +141,7 @@ public class KeyguardIndicationController {
      * Shows {@param transientIndication} until it is hidden by {@link #hideTransientIndication}.
      */
     public void showTransientIndication(String transientIndication, int textColor) {
+        Log.d(TAG, "showTransientIndication: ");
         mTransientIndication = transientIndication;
         mTransientTextColor = textColor;
         mHandler.removeMessages(MSG_HIDE_TRANSIENT);
@@ -146,6 +152,7 @@ public class KeyguardIndicationController {
      * Hides transient indication.
      */
     public void hideTransientIndication() {
+        Log.d(TAG, "hideTransientIndication: ");
         if (mTransientIndication != null) {
             mTransientIndication = null;
             mHandler.removeMessages(MSG_HIDE_TRANSIENT);
@@ -154,6 +161,7 @@ public class KeyguardIndicationController {
     }
 
     private void updateIndication() {
+        Log.d(TAG, "updateIndication: ");
         if (mVisible) {
             mTextView.switchIndication(computeIndication());
             mTextView.setTextColor(computeColor());
@@ -161,6 +169,7 @@ public class KeyguardIndicationController {
     }
 
     private int computeColor() {
+        Log.d(TAG, "computeColor: ");
         if (!TextUtils.isEmpty(mTransientIndication)) {
             return mTransientTextColor;
         }
@@ -168,6 +177,7 @@ public class KeyguardIndicationController {
     }
 
     private String computeIndication() {
+        Log.d(TAG, "computeIndication: ");
         if (!TextUtils.isEmpty(mTransientIndication)) {
             return mTransientIndication;
         }
@@ -182,6 +192,7 @@ public class KeyguardIndicationController {
     }
 
     private String computePowerIndication() {
+        Log.d(TAG, "computePowerIndication: ");
         if (mPowerCharged) {
             return mContext.getResources().getString(R.string.keyguard_charged);
         }
@@ -227,6 +238,7 @@ public class KeyguardIndicationController {
     KeyguardUpdateMonitorCallback mUpdateMonitor = new KeyguardUpdateMonitorCallback() {
         @Override
         public void onRefreshBatteryInfo(KeyguardUpdateMonitor.BatteryStatus status) {
+            Log.d(TAG, "mUpdateMonitor: onRefreshBatteryInfo: ");
             boolean isChargingOrFull = status.status == BatteryManager.BATTERY_STATUS_CHARGING
                     || status.status == BatteryManager.BATTERY_STATUS_FULL;
             mPowerPluggedIn = status.isPluggedIn() && isChargingOrFull;
@@ -238,6 +250,7 @@ public class KeyguardIndicationController {
 
         @Override
         public void onFingerprintHelp(int msgId, String helpString) {
+            Log.d(TAG, "mUpdateMonitor: onFingerprintHelp: ");
             KeyguardUpdateMonitor updateMonitor = KeyguardUpdateMonitor.getInstance(mContext);
             if (!updateMonitor.isUnlockingWithFingerprintAllowed()) {
                 return;
@@ -256,6 +269,7 @@ public class KeyguardIndicationController {
 
         @Override
         public void onFingerprintError(int msgId, String errString) {
+            Log.d(TAG, "mUpdateMonitor: onFingerprintError: ");
             KeyguardUpdateMonitor updateMonitor = KeyguardUpdateMonitor.getInstance(mContext);
             if (!updateMonitor.isUnlockingWithFingerprintAllowed()
                     || msgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
@@ -276,6 +290,7 @@ public class KeyguardIndicationController {
 
         @Override
         public void onScreenTurnedOn() {
+            Log.d(TAG, "mUpdateMonitor: onScreenTurnedOn: ");
             if (mMessageToShowOnScreenOn != null) {
                 int errorColor = mContext.getResources().getColor(R.color.system_warning_color,
                         null);
@@ -289,6 +304,7 @@ public class KeyguardIndicationController {
 
         @Override
         public void onFingerprintRunningStateChanged(boolean running) {
+            Log.d(TAG, "mUpdateMonitor: onFingerprintRunningStateChanged: ");
             if (running) {
                 mMessageToShowOnScreenOn = null;
             }
@@ -298,6 +314,7 @@ public class KeyguardIndicationController {
     BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "mReceiver: onReceive: ");
             if (mVisible) {
                 updateIndication();
             }
@@ -307,6 +324,7 @@ public class KeyguardIndicationController {
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            Log.d(TAG, "mHandler: handleMessage: ");
             if (msg.what == MSG_HIDE_TRANSIENT && mTransientIndication != null) {
                 mTransientIndication = null;
                 updateIndication();
@@ -319,6 +337,7 @@ public class KeyguardIndicationController {
 
     public void setStatusBarKeyguardViewManager(
             StatusBarKeyguardViewManager statusBarKeyguardViewManager) {
+        Log.d(TAG, "setStatusBarKeyguardViewManager: ");
         mStatusBarKeyguardViewManager = statusBarKeyguardViewManager;
     }
 }
