@@ -18,6 +18,7 @@ package com.android.systemui.statusbar;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.util.Log;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
@@ -28,6 +29,7 @@ import android.view.animation.PathInterpolator;
  */
 public class FlingAnimationUtils {
 
+    public static final String TAG = "FlingAnimationUtils";
     private static final float LINEAR_OUT_SLOW_IN_X2 = 0.35f;
     private static final float LINEAR_OUT_FASTER_IN_X2 = 0.5f;
     private static final float LINEAR_OUT_FASTER_IN_Y2_MIN = 0.4f;
@@ -73,6 +75,7 @@ public class FlingAnimationUtils {
      * @param velocity the current velocity of the motion
      */
     public void apply(Animator animator, float currValue, float endValue, float velocity) {
+        Log.d(TAG, "apply: ");
         apply(animator, currValue, endValue, velocity, Math.abs(endValue - currValue));
     }
 
@@ -87,6 +90,7 @@ public class FlingAnimationUtils {
      */
     public void apply(ViewPropertyAnimator animator, float currValue, float endValue,
             float velocity) {
+        Log.d(TAG, "apply: ");
         apply(animator, currValue, endValue, velocity, Math.abs(endValue - currValue));
     }
 
@@ -103,6 +107,7 @@ public class FlingAnimationUtils {
      */
     public void apply(Animator animator, float currValue, float endValue, float velocity,
             float maxDistance) {
+        Log.d(TAG, "apply: ");
         AnimatorProperties properties = getProperties(currValue, endValue, velocity,
                 maxDistance);
         animator.setDuration(properties.duration);
@@ -122,6 +127,7 @@ public class FlingAnimationUtils {
      */
     public void apply(ViewPropertyAnimator animator, float currValue, float endValue,
             float velocity, float maxDistance) {
+        Log.d(TAG, "apply: ");
         AnimatorProperties properties = getProperties(currValue, endValue, velocity,
                 maxDistance);
         animator.setDuration(properties.duration);
@@ -130,6 +136,7 @@ public class FlingAnimationUtils {
 
     private AnimatorProperties getProperties(float currValue,
             float endValue, float velocity, float maxDistance) {
+        Log.d(TAG, "getProperties: ");
         float maxLengthSeconds = (float) (mMaxLengthSeconds
                 * Math.sqrt(Math.abs(endValue - currValue) / maxDistance));
         float diff = Math.abs(endValue - currValue);
@@ -170,6 +177,7 @@ public class FlingAnimationUtils {
      */
     public void applyDismissing(Animator animator, float currValue, float endValue,
             float velocity, float maxDistance) {
+        Log.d(TAG, "applyDismissing: ");
         AnimatorProperties properties = getDismissingProperties(currValue, endValue, velocity,
                 maxDistance);
         animator.setDuration(properties.duration);
@@ -190,6 +198,7 @@ public class FlingAnimationUtils {
      */
     public void applyDismissing(ViewPropertyAnimator animator, float currValue, float endValue,
             float velocity, float maxDistance) {
+        Log.d(TAG, "applyDismissing: ");
         AnimatorProperties properties = getDismissingProperties(currValue, endValue, velocity,
                 maxDistance);
         animator.setDuration(properties.duration);
@@ -198,6 +207,7 @@ public class FlingAnimationUtils {
 
     private AnimatorProperties getDismissingProperties(float currValue, float endValue,
             float velocity, float maxDistance) {
+        Log.d(TAG, "getDismissingProperties: ");
         float maxLengthSeconds = (float) (mMaxLengthSeconds
                 * Math.pow(Math.abs(endValue - currValue) / maxDistance, 0.5f));
         float diff = Math.abs(endValue - currValue);
@@ -237,6 +247,7 @@ public class FlingAnimationUtils {
      * @return the y2 control point for a cubic bezier path interpolator
      */
     private float calculateLinearOutFasterInY2(float velocity) {
+        Log.d(TAG, "calculateLinearOutFasterInY2: ");
         float t = (velocity - mMinVelocityPxPerSecond)
                 / (mHighVelocityPxPerSecond - mMinVelocityPxPerSecond);
         t = Math.max(0, Math.min(1, t));
@@ -247,6 +258,7 @@ public class FlingAnimationUtils {
      * @return the minimum velocity a gesture needs to have to be considered a fling
      */
     public float getMinVelocityPxPerSecond() {
+        Log.d(TAG, "getMinVelocityPxPerSecond: ");
         return mMinVelocityPxPerSecond;
     }
 
@@ -291,6 +303,7 @@ public class FlingAnimationUtils {
 
         @Override
         public float getInterpolation(float input) {
+            Log.d(TAG, "VelocityInterpolator: getInterpolation: ");
             float time = input * mDurationSeconds;
             return time * mVelocity / mDiff;
         }
