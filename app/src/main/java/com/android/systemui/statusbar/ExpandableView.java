@@ -19,6 +19,7 @@ package com.android.systemui.statusbar;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
  * An abstract view for expandable views.
  */
 public abstract class ExpandableView extends FrameLayout {
-
+    public static final String TAG = "ExpandableView";
     private final int mBottomDecorHeight;
     protected OnHeightChangedListener mOnHeightChangedListener;
     protected int mMaxViewHeight;
@@ -54,12 +55,14 @@ public abstract class ExpandableView extends FrameLayout {
     }
 
     protected int resolveBottomDecorHeight() {
+        Log.d(TAG, "resolveBottomDecorHeight: ");
         return getResources().getDimensionPixelSize(
                 R.dimen.notification_bottom_decor_height);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.d(TAG, "onMeasure: ");
         int ownMaxHeight = mMaxViewHeight;
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         boolean hasFixedHeight = heightMode == MeasureSpec.EXACTLY;
@@ -112,6 +115,7 @@ public abstract class ExpandableView extends FrameLayout {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+        Log.d(TAG, "onLayout: ");
         if (!mActualHeightInitialized && mActualHeight == 0) {
             int initialHeight = getInitialHeight();
             if (initialHeight != 0) {
@@ -125,6 +129,7 @@ public abstract class ExpandableView extends FrameLayout {
      * Resets the height of the view on the next layout pass
      */
     protected void resetActualHeight() {
+        Log.d(TAG, "resetActualHeight: ");
         mActualHeight = 0;
         mActualHeightInitialized = false;
         requestLayout();
@@ -136,6 +141,7 @@ public abstract class ExpandableView extends FrameLayout {
 
     @Override
     public boolean dispatchGenericMotionEvent(MotionEvent ev) {
+        Log.d(TAG, "dispatchGenericMotionEvent: ");
         if (filterMotionEvent(ev)) {
             return super.dispatchGenericMotionEvent(ev);
         }
@@ -144,6 +150,7 @@ public abstract class ExpandableView extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "dispatchTouchEvent: ");
         if (filterMotionEvent(ev)) {
             return super.dispatchTouchEvent(ev);
         }
@@ -151,6 +158,7 @@ public abstract class ExpandableView extends FrameLayout {
     }
 
     protected boolean filterMotionEvent(MotionEvent event) {
+        Log.d(TAG, "filterMotionEvent: ");
         return event.getActionMasked() != MotionEvent.ACTION_DOWN
                 && event.getActionMasked() != MotionEvent.ACTION_HOVER_ENTER
                 && event.getActionMasked() != MotionEvent.ACTION_HOVER_MOVE
@@ -165,6 +173,7 @@ public abstract class ExpandableView extends FrameLayout {
      * @param notifyListeners Whether the listener should be informed about the change.
      */
     public void setActualHeight(int actualHeight, boolean notifyListeners) {
+        Log.d(TAG, "setActualHeight: ");
         mActualHeightInitialized = true;
         mActualHeight = actualHeight;
         updateClipping();
@@ -174,6 +183,7 @@ public abstract class ExpandableView extends FrameLayout {
     }
 
     public void setContentHeight(int contentHeight) {
+        Log.d(TAG, "setContentHeight: ");
         setActualHeight(contentHeight + getBottomDecorHeight(), true);
     }
 
@@ -183,6 +193,7 @@ public abstract class ExpandableView extends FrameLayout {
      * @return The current actual height of this notification.
      */
     public int getActualHeight() {
+        Log.d(TAG, "getActualHeight: ");
         return mActualHeight;
     }
 
@@ -192,6 +203,7 @@ public abstract class ExpandableView extends FrameLayout {
      * @return the height of the decor if it currently has one
      */
     public int getBottomDecorHeight() {
+        Log.d(TAG, "getBottomDecorHeight: ");
         return hasBottomDecor() ? mBottomDecorHeight : 0;
     }
 
@@ -200,6 +212,7 @@ public abstract class ExpandableView extends FrameLayout {
      *         itself higher than just it's content
      */
     protected boolean canHaveBottomDecor() {
+        Log.d(TAG, "canHaveBottomDecor: ");
         return false;
     }
 
@@ -208,6 +221,7 @@ public abstract class ExpandableView extends FrameLayout {
      *         height from {@link #getIntrinsicHeight()} higher as well
      */
     protected boolean hasBottomDecor() {
+        Log.d(TAG, "hasBottomDecor: ");
         return false;
     }
 
@@ -215,6 +229,7 @@ public abstract class ExpandableView extends FrameLayout {
      * @return The maximum height of this notification.
      */
     public int getMaxContentHeight() {
+        Log.d(TAG, "getMaxContentHeight: ");
         return getHeight();
     }
 
@@ -222,6 +237,7 @@ public abstract class ExpandableView extends FrameLayout {
      * @return The minimum content height of this notification.
      */
     public int getMinHeight() {
+        Log.d(TAG, "getMinHeight: ");
         return getHeight();
     }
 
@@ -232,6 +248,7 @@ public abstract class ExpandableView extends FrameLayout {
      * @param fade Whether an animation should be played to change the state.
      */
     public void setDimmed(boolean dimmed, boolean fade) {
+        Log.d(TAG, "setDimmed: ");
     }
 
     /**
@@ -242,6 +259,7 @@ public abstract class ExpandableView extends FrameLayout {
      * @param delay If fading, the delay of the animation.
      */
     public void setDark(boolean dark, boolean fade, long delay) {
+        Log.d(TAG, "setDark: ");
         mDark = dark;
     }
 
@@ -257,6 +275,7 @@ public abstract class ExpandableView extends FrameLayout {
      * calculations.
      */
     public void setHideSensitiveForIntrinsicHeight(boolean hideSensitive) {
+        Log.d(TAG, "setHideSensitiveForIntrinsicHeight: ");
     }
 
     /**
@@ -270,6 +289,7 @@ public abstract class ExpandableView extends FrameLayout {
      * @return The desired notification height.
      */
     public int getIntrinsicHeight() {
+        Log.d(TAG, "getIntrinsicHeight: ");
         return getHeight();
     }
 
@@ -280,14 +300,17 @@ public abstract class ExpandableView extends FrameLayout {
      * @param clipTopAmount The amount of pixels this view should be clipped from top.
      */
     public void setClipTopAmount(int clipTopAmount) {
+        Log.d(TAG, "setClipTopAmount: ");
         mClipTopAmount = clipTopAmount;
     }
 
     public int getClipTopAmount() {
+        Log.d(TAG, "getClipTopAmount: ");
         return mClipTopAmount;
     }
 
     public void setOnHeightChangedListener(OnHeightChangedListener listener) {
+        Log.d(TAG, "setOnHeightChangedListener: ");
         mOnHeightChangedListener = listener;
     }
 
@@ -295,16 +318,19 @@ public abstract class ExpandableView extends FrameLayout {
      * @return Whether we can expand this views content.
      */
     public boolean isContentExpandable() {
+        Log.d(TAG, "isContentExpandable: ");
         return false;
     }
 
     public void notifyHeightChanged(boolean needsAnimation) {
+        Log.d(TAG, "notifyHeightChanged: ");
         if (mOnHeightChangedListener != null) {
             mOnHeightChangedListener.onHeightChanged(this, needsAnimation);
         }
     }
 
     public boolean isTransparent() {
+        Log.d(TAG, "isTransparent: ");
         return false;
     }
 
@@ -325,9 +351,11 @@ public abstract class ExpandableView extends FrameLayout {
     public abstract void performAddAnimation(long delay, long duration);
 
     public void setBelowSpeedBump(boolean below) {
+        Log.d(TAG, "setBelowSpeedBump: ");
     }
 
     public void onHeightReset() {
+        Log.d(TAG, "onHeightReset: ");
         if (mOnHeightChangedListener != null) {
             mOnHeightChangedListener.onReset(this);
         }
@@ -345,6 +373,7 @@ public abstract class ExpandableView extends FrameLayout {
     @Override
     public void getDrawingRect(Rect outRect) {
         super.getDrawingRect(outRect);
+        Log.d(TAG, "getDrawingRect: ");
         outRect.left += getTranslationX();
         outRect.right += getTranslationX();
         outRect.bottom = (int) (outRect.top + getTranslationY() + getActualHeight());
@@ -354,11 +383,13 @@ public abstract class ExpandableView extends FrameLayout {
     @Override
     public void getBoundsOnScreen(Rect outRect, boolean clipToParent) {
         super.getBoundsOnScreen(outRect, clipToParent);
+        Log.d(TAG, "getBoundsOnScreen: ");
         outRect.bottom = outRect.top + getActualHeight();
         outRect.top += getClipTopOptimization();
     }
 
     public int getContentHeight() {
+        Log.d(TAG, "getContentHeight: ");
         return mActualHeight - getBottomDecorHeight();
     }
 
@@ -366,14 +397,17 @@ public abstract class ExpandableView extends FrameLayout {
      * @return whether the given child can be ignored for layouting and measuring purposes
      */
     protected boolean isChildInvisible(View child) {
+        Log.d(TAG, "isChildInvisible: ");
         return false;
     }
 
     public boolean areChildrenExpanded() {
+        Log.d(TAG, "areChildrenExpanded: ");
         return false;
     }
 
     private void updateClipping() {
+        Log.d(TAG, "updateClipping: ");
         int top = mClipTopOptimization;
         if (top >= getActualHeight()) {
             top = getActualHeight() - 1;
@@ -383,6 +417,7 @@ public abstract class ExpandableView extends FrameLayout {
     }
 
     public int getClipTopOptimization() {
+        Log.d(TAG, "getClipTopOptimization: ");
         return mClipTopOptimization;
     }
 
@@ -393,23 +428,28 @@ public abstract class ExpandableView extends FrameLayout {
      * @param clipTopOptimization the amount to clip from the top
      */
     public void setClipTopOptimization(int clipTopOptimization) {
+        Log.d(TAG, "setClipTopOptimization: ");
         mClipTopOptimization = clipTopOptimization;
         updateClipping();
     }
 
     public boolean willBeGone() {
+        Log.d(TAG, "willBeGone: ");
         return mWillBeGone;
     }
 
     public void setWillBeGone(boolean willBeGone) {
+        Log.d(TAG, "setWillBeGone: ");
         mWillBeGone = willBeGone;
     }
 
     public int getMinClipTopAmount() {
+        Log.d(TAG, "getMinClipTopAmount: ");
         return mMinClipTopAmount;
     }
 
     public void setMinClipTopAmount(int minClipTopAmount) {
+        Log.d(TAG, "setMinClipTopAmount: ");
         mMinClipTopAmount = minClipTopAmount;
     }
 
