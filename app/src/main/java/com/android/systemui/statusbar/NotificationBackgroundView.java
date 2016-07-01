@@ -23,13 +23,14 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
  * A view that can be used for both the dimmed and normal background of an notification.
  */
 public class NotificationBackgroundView extends View {
-
+    public static final String TAG = " NotificationBackgroundView";
     private Drawable mBackground;
     private int mClipTopAmount;
     private int mActualHeight;
@@ -40,10 +41,12 @@ public class NotificationBackgroundView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.d(TAG, "onDraw: ");
         draw(canvas, mBackground);
     }
 
     private void draw(Canvas canvas, Drawable drawable) {
+        Log.d(TAG, "draw: ");
         if (drawable != null && mActualHeight > mClipTopAmount) {
             drawable.setBounds(0, mClipTopAmount, getWidth(), mActualHeight);
             drawable.draw(canvas);
@@ -52,15 +55,18 @@ public class NotificationBackgroundView extends View {
 
     @Override
     protected boolean verifyDrawable(Drawable who) {
+        Log.d(TAG, "verifyDrawable: ");
         return super.verifyDrawable(who) || who == mBackground;
     }
 
     @Override
     protected void drawableStateChanged() {
+        Log.d(TAG, "drawableStateChanged: ");
         drawableStateChanged(mBackground);
     }
 
     private void drawableStateChanged(Drawable d) {
+        Log.d(TAG, "drawableStateChanged: ");
         if (d != null && d.isStateful()) {
             d.setState(getDrawableState());
         }
@@ -68,6 +74,7 @@ public class NotificationBackgroundView extends View {
 
     @Override
     public void drawableHotspotChanged(float x, float y) {
+        Log.d(TAG, "drawableHotspotChanged: ");
         if (mBackground != null) {
             mBackground.setHotspot(x, y);
         }
@@ -78,6 +85,7 @@ public class NotificationBackgroundView extends View {
      * the notion of a background independently of the regular View background..
      */
     public void setCustomBackground(Drawable background) {
+        Log.d(TAG, "setCustomBackground: ");
         if (mBackground != null) {
             mBackground.setCallback(null);
             unscheduleDrawable(mBackground);
@@ -93,11 +101,13 @@ public class NotificationBackgroundView extends View {
     }
 
     public void setCustomBackground(int drawableResId) {
+        Log.d(TAG, "setCustomBackground: ");
         final Drawable d = mContext.getDrawable(drawableResId);
         setCustomBackground(d);
     }
 
     public void setTint(int tintColor) {
+        Log.d(TAG, "setTint: ");
         if (tintColor != 0) {
             mBackground.setColorFilter(tintColor, PorterDuff.Mode.SRC_ATOP);
         } else {
@@ -107,31 +117,37 @@ public class NotificationBackgroundView extends View {
     }
 
     public void setActualHeight(int actualHeight) {
+        Log.d(TAG, "setActualHeight: ");
         mActualHeight = actualHeight;
         invalidate();
     }
 
     public int getActualHeight() {
+        Log.d(TAG, "getActualHeight: ");
         return mActualHeight;
     }
 
     public void setClipTopAmount(int clipTopAmount) {
+        Log.d(TAG, "setClipTopAmount: ");
         mClipTopAmount = clipTopAmount;
         invalidate();
     }
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
 
         // Prevents this view from creating a layer when alpha is animating.
         return false;
     }
 
     public void setState(int[] drawableState) {
+        Log.d(TAG, "setState: ");
         mBackground.setState(drawableState);
     }
 
     public void setRippleColor(int color) {
+        Log.d(TAG, "setRippleColor: ");
         if (mBackground instanceof RippleDrawable) {
             RippleDrawable ripple = (RippleDrawable) mBackground;
             ripple.setColor(ColorStateList.valueOf(color));
