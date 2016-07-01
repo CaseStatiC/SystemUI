@@ -45,10 +45,12 @@ public class GestureRecorder {
         public class MotionEventRecord extends Record {
             public MotionEvent event;
             public MotionEventRecord(long when, MotionEvent event) {
+                Log.d(TAG, "MotionEventRecord: ");
                 this.time = when;
                 this.event = MotionEvent.obtain(event);
             }
             String actionName(int action) {
+                Log.d(TAG, "actionName: actionName: ");
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
                         return "down";
@@ -63,6 +65,7 @@ public class GestureRecorder {
                 }
             }
             public String toJson() {
+                Log.d(TAG, "MotionEventRecord: actionName: toJson: ");
                 return String.format(
                         ("{\"type\":\"motion\", \"time\":%d, \"action\":\"%s\", "
                             + "\"x\":%.2f, \"y\":%.2f, \"s\":%.2f, \"p\":%.2f}"),
@@ -83,6 +86,7 @@ public class GestureRecorder {
                 this.info = info;
             }
             public String toJson() {
+                Log.d(TAG, "TagRecord: toJson: ");
                 return String.format("{\"type\":\"tag\", \"time\":%d, \"tag\":\"%s\", \"info\":\"%s\"}",
                         this.time,
                         this.tag,
@@ -96,6 +100,7 @@ public class GestureRecorder {
         boolean mComplete = false;
 
         public void add(MotionEvent ev) {
+            Log.d(TAG, "add: ");
             mRecords.add(new MotionEventRecord(ev.getEventTime(), ev));
             if (mDownTime < 0) {
                 mDownTime = ev.getDownTime();
@@ -145,6 +150,7 @@ public class GestureRecorder {
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            Log.d(TAG, "mHandler: handleMessage: ");
             if (msg.what == SAVE_MESSAGE) {
                 save();
             }
@@ -158,6 +164,7 @@ public class GestureRecorder {
     }
 
     public void add(MotionEvent ev) {
+        Log.d(TAG, "add: ");
         synchronized (mGestures) {
             if (mCurrentGesture == null || mCurrentGesture.isComplete()) {
                 mCurrentGesture = new Gesture();
@@ -169,6 +176,7 @@ public class GestureRecorder {
     }
 
     public void tag(long when, String tag, String info) {
+        Log.d(TAG, "tag: ");
         synchronized (mGestures) {
             if (mCurrentGesture == null) {
                 mCurrentGesture = new Gesture();
@@ -180,14 +188,17 @@ public class GestureRecorder {
     }
 
     public void tag(long when, String tag) {
+        Log.d(TAG, "tag: ");
         tag(when, tag, null);
     }
 
     public void tag(String tag) {
+        Log.d(TAG, "tag: ");
         tag(SystemClock.uptimeMillis(), tag, null);
     }
 
     public void tag(String tag, String info) {
+        Log.d(TAG, "tag: ");
         tag(SystemClock.uptimeMillis(), tag, info);
     }
 
@@ -196,6 +207,7 @@ public class GestureRecorder {
      * Not threadsafe; call with a lock.
      */
     public String toJsonLocked() {
+        Log.d(TAG, "toJsonLocked: ");
         StringBuilder sb = new StringBuilder();
         boolean first = true;
         sb.append("[");
@@ -213,6 +225,7 @@ public class GestureRecorder {
     }
 
     public String toJson() {
+        Log.d(TAG, "toJson: ");
         String s;
         synchronized (mGestures) {
             s = toJsonLocked();
@@ -221,11 +234,13 @@ public class GestureRecorder {
     }
 
     public void saveLater() {
+        Log.d(TAG, "saveLater: ");
         mHandler.removeMessages(SAVE_MESSAGE);
         mHandler.sendEmptyMessageDelayed(SAVE_MESSAGE, SAVE_DELAY);
     }
 
     public void save() {
+        Log.d(TAG, "save: ");
         synchronized (mGestures) {
             try {
                 BufferedWriter w = new BufferedWriter(new FileWriter(mLogfile, /*append=*/ true));
@@ -247,6 +262,7 @@ public class GestureRecorder {
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         save();
         if (mLastSaveLen >= 0) {
             pw.println(String.valueOf(mLastSaveLen) + " gestures written to " + mLogfile);
