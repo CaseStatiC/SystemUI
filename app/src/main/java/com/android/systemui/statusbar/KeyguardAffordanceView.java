@@ -29,6 +29,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.DisplayListCanvas;
 import android.view.RenderNodeAnimator;
 import android.view.View;
@@ -46,7 +47,9 @@ import com.android.systemui.statusbar.phone.PhoneStatusBar;
  * layer when alpha is changed.
  */
 public class KeyguardAffordanceView extends ImageView {
-
+    
+    public static final String TAG = "KeyguardAffordanceView";
+    
     private static final long CIRCLE_APPEAR_DURATION = 80;
     private static final long CIRCLE_DISAPPEAR_MAX_DURATION = 200;
     private static final long NORMAL_ANIMATION_DURATION = 200;
@@ -90,29 +93,34 @@ public class KeyguardAffordanceView extends ImageView {
     private AnimatorListenerAdapter mClipEndListener = new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
+            Log.d(TAG, "mClipEndListener: onAnimationEnd: ");
             mPreviewClipper = null;
         }
     };
     private AnimatorListenerAdapter mCircleEndListener = new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
+            Log.d(TAG, "mCircleEndListener: onAnimationEnd: ");
             mCircleAnimator = null;
         }
     };
     private AnimatorListenerAdapter mScaleEndListener = new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
+            Log.d(TAG, "mScaleEndListener: onAnimationEnd: ");
             mScaleAnimator = null;
         }
     };
     private AnimatorListenerAdapter mAlphaEndListener = new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
+            Log.d(TAG, "mAlphaEndListener: onAnimationEnd: ");
             mAlphaAnimator = null;
         }
     };
 
     public KeyguardAffordanceView(Context context) {
+        Log.d(TAG, "KeyguardAffordanceView: ");
         this(context, null);
     }
 
@@ -147,6 +155,7 @@ public class KeyguardAffordanceView extends ImageView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+        Log.d(TAG, "onLayout: ");
         mCenterX = getWidth() / 2;
         mCenterY = getHeight() / 2;
         mMaxCircleSize = getMaxCircleSize();
@@ -154,6 +163,7 @@ public class KeyguardAffordanceView extends ImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.d(TAG, "onDraw: ");
         mSupportHardware = false;//canvas.isHardwareAccelerated();
         drawBackgroundCircle(canvas);
         canvas.save();
@@ -163,6 +173,7 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     public void setPreviewView(View v) {
+        Log.d(TAG, "setPreviewView: ");
         View oldPreviewView = mPreviewView;
         mPreviewView = v;
         if (mPreviewView != null) {
@@ -172,6 +183,7 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     private void updateIconColor() {
+        Log.d(TAG, "updateIconColor: ");
         Drawable drawable = getDrawable().mutate();
         float alpha = mCircleRadius / mMinBackgroundRadius;
         alpha = Math.min(1.0f, alpha);
@@ -180,6 +192,7 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     private void drawBackgroundCircle(Canvas canvas) {
+        Log.d(TAG, "drawBackgroundCircle: ");
         if (mCircleRadius > 0 || mFinishing) {
             if (mFinishing && mSupportHardware) {
                 DisplayListCanvas displayListCanvas = (DisplayListCanvas) canvas;
@@ -193,6 +206,7 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     private void updateCircleColor() {
+        Log.d(TAG, "updateCircleColor: ");
         float fraction = 0.5f + 0.5f * Math.max(0.0f, Math.min(1.0f,
                 (mCircleRadius - mMinBackgroundRadius) / (0.5f * mMinBackgroundRadius)));
         if (mPreviewView != null && mPreviewView.getVisibility() == VISIBLE) {
@@ -207,6 +221,7 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     public void finishAnimation(float velocity, final Runnable mAnimationEndRunnable) {
+        Log.d(TAG, "finishAnimation: ");
         cancelAnimator(mCircleAnimator);
         cancelAnimator(mPreviewClipper);
         mFinishing = true;
@@ -225,6 +240,7 @@ public class KeyguardAffordanceView extends ImageView {
         animatorToRadius.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
+                Log.d(TAG, "finishAnimation: onAnimationEnd: ");
                 mAnimationEndRunnable.run();
                 mFinishing = false;
                 mCircleRadius = maxCircleSize;
@@ -253,6 +269,7 @@ public class KeyguardAffordanceView extends ImageView {
      * alpha 0 in the beginning.
      */
     private void startRtAlphaFadeIn() {
+        Log.d(TAG, "startRtAlphaFadeIn: ");
         if (mCircleRadius == 0 && mPreviewView == null) {
             Paint modifiedPaint = new Paint(mCirclePaint);
             modifiedPaint.setColor(mCircleColor);
@@ -268,6 +285,7 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     public void instantFinishAnimation() {
+        Log.d(TAG, "instantFinishAnimation: ");
         cancelAnimator(mPreviewClipper);
         if (mPreviewView != null) {
             mPreviewView.setClipBounds(null);
@@ -279,6 +297,7 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     private void startRtCircleFadeOut(long duration) {
+        Log.d(TAG, "startRtCircleFadeOut: ");
         RenderNodeAnimator animator = new RenderNodeAnimator(mHwCirclePaint,
                 RenderNodeAnimator.PAINT_ALPHA, 0);
         animator.setDuration(duration);
@@ -288,12 +307,14 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     private Animator getRtAnimatorToRadius(float circleRadius) {
+        Log.d(TAG, "getRtAnimatorToRadius: ");
         RenderNodeAnimator animator = new RenderNodeAnimator(mHwCircleRadius, circleRadius);
         animator.setTarget(this);
         return animator;
     }
 
     private void initHwProperties() {
+        Log.d(TAG, "initHwProperties: ");
         mHwCenterX = CanvasProperty.createFloat(mCenterX);
         mHwCenterY = CanvasProperty.createFloat(mCenterY);
         mHwCirclePaint = CanvasProperty.createPaint(mCirclePaint);
@@ -301,6 +322,7 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     private float getMaxCircleSize() {
+        Log.d(TAG, "getMaxCircleSize: ");
         getLocationInWindow(mTempPoint);
         float rootWidth = getRootView().getWidth();
         float width = mTempPoint[0] + mCenterX;
@@ -310,20 +332,23 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     public void setCircleRadius(float circleRadius) {
+        Log.d(TAG, "setCircleRadius: ");
         setCircleRadius(circleRadius, false, false);
     }
 
     public void setCircleRadius(float circleRadius, boolean slowAnimation) {
+        Log.d(TAG, "setCircleRadius: ");
         setCircleRadius(circleRadius, slowAnimation, false);
     }
 
     public void setCircleRadiusWithoutAnimation(float circleRadius) {
+        Log.d(TAG, "setCircleRadiusWithoutAnimation: ");
         cancelAnimator(mCircleAnimator);
         setCircleRadius(circleRadius, false ,true);
     }
 
     private void setCircleRadius(float circleRadius, boolean slowAnimation, boolean noAnimation) {
-
+        Log.d(TAG, "setCircleRadius: ");
         // Check if we need a new animation
         boolean radiusHidden = (mCircleAnimator != null && mCircleWillBeHidden)
                 || (mCircleAnimator == null && mCircleRadius == 0.0f);
@@ -384,6 +409,7 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     private ValueAnimator getAnimatorToRadius(float circleRadius) {
+        Log.d(TAG, "getAnimatorToRadius: ");
         ValueAnimator animator = ValueAnimator.ofFloat(mCircleRadius, circleRadius);
         mCircleAnimator = animator;
         mCircleStartValue = mCircleRadius;
@@ -401,12 +427,14 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     private void cancelAnimator(Animator animator) {
+        Log.d(TAG, "cancelAnimator: ");
         if (animator != null) {
             animator.cancel();
         }
     }
 
     public void setImageScale(float imageScale, boolean animate) {
+        Log.d(TAG, "setImageScale: ");
         setImageScale(imageScale, animate, -1, null);
     }
 
@@ -421,6 +449,7 @@ public class KeyguardAffordanceView extends ImageView {
      */
     public void setImageScale(float imageScale, boolean animate, long duration,
             Interpolator interpolator) {
+        Log.d(TAG, "setImageScale: ");
         cancelAnimator(mScaleAnimator);
         if (!animate) {
             mImageScale = imageScale;
@@ -454,6 +483,7 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     public void setRestingAlpha(float alpha) {
+        Log.d(TAG, "setRestingAlpha: ");
         mRestingAlpha = alpha;
 
         // TODO: Handle the case an animation is playing.
@@ -461,10 +491,12 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     public float getRestingAlpha() {
+        Log.d(TAG, "getRestingAlpha: ");
         return mRestingAlpha;
     }
 
     public void setImageAlpha(float alpha, boolean animate) {
+        Log.d(TAG, "setImageAlpha: ");
         setImageAlpha(alpha, animate, -1, null, null);
     }
 
@@ -479,6 +511,7 @@ public class KeyguardAffordanceView extends ImageView {
      */
     public void setImageAlpha(float alpha, boolean animate, long duration,
             Interpolator interpolator, Runnable runnable) {
+        Log.d(TAG, "setImageAlpha: ");
         cancelAnimator(mAlphaAnimator);
         alpha = mLaunchingAffordance ? 0 : alpha;
         int endAlpha = (int) (alpha * 255);
@@ -519,6 +552,7 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     private Animator.AnimatorListener getEndListener(final Runnable runnable) {
+        Log.d(TAG, "getEndListener: ");
         return new AnimatorListenerAdapter() {
             boolean mCancelled;
             @Override
@@ -536,11 +570,13 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     public float getCircleRadius() {
+        Log.d(TAG, "getCircleRadius: ");
         return mCircleRadius;
     }
 
     @Override
     public boolean performClick() {
+        Log.d(TAG, "performClick: ");
         if (isClickable()) {
             return super.performClick();
         } else {
@@ -549,6 +585,7 @@ public class KeyguardAffordanceView extends ImageView {
     }
 
     public void setLaunchingAffordance(boolean launchingAffordance) {
+        Log.d(TAG, "setLaunchingAffordance: ");
         mLaunchingAffordance = launchingAffordance;
     }
 }
