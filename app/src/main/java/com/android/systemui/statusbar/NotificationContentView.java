@@ -23,6 +23,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
@@ -39,7 +40,8 @@ import com.android.systemui.R;
  * switching between the expanded, contracted and the heads up view depending on its clipped size.
  */
 public class NotificationContentView extends FrameLayout {
-
+    
+    public static final String TAG = "NotificationContentView";
     private static final long ANIMATION_DURATION_LENGTH = 170;
     private static final int VISIBLE_TYPE_CONTRACTED = 0;
     private static final int VISIBLE_TYPE_EXPANDED = 1;
@@ -73,6 +75,7 @@ public class NotificationContentView extends FrameLayout {
             = new ViewTreeObserver.OnPreDrawListener() {
         @Override
         public boolean onPreDraw() {
+            Log.d(TAG, "mEnableAnimationPredrawListener: onPreDraw: ");
             mAnimate = true;
             getViewTreeObserver().removeOnPreDrawListener(this);
             return true;
@@ -82,6 +85,7 @@ public class NotificationContentView extends FrameLayout {
     private final ViewOutlineProvider mOutlineProvider = new ViewOutlineProvider() {
         @Override
         public void getOutline(View view, Outline outline) {
+            Log.d(TAG, "mEnableAnimationPredrawListener: getOutline: ");
             outline.setRoundRect(0, 0, view.getWidth(), mUnrestrictedContentHeight,
                     mRoundRectRadius);
         }
@@ -102,6 +106,7 @@ public class NotificationContentView extends FrameLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.d(TAG, "onMeasure: ");
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         boolean hasFixedHeight = heightMode == MeasureSpec.EXACTLY;
         boolean isHeightLimited = heightMode == MeasureSpec.AT_MOST;
@@ -148,6 +153,7 @@ public class NotificationContentView extends FrameLayout {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+        Log.d(TAG, "onLayout: ");
         updateClipping();
         invalidateOutline();
     }
@@ -155,10 +161,12 @@ public class NotificationContentView extends FrameLayout {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        Log.d(TAG, "onAttachedToWindow: ");
         updateVisibility();
     }
 
     public void reset(boolean resetActualHeight) {
+        Log.d(TAG, "reset: ");
         if (mContractedChild != null) {
             mContractedChild.animate().cancel();
         }
@@ -179,18 +187,22 @@ public class NotificationContentView extends FrameLayout {
     }
 
     public View getContractedChild() {
+        Log.d(TAG, "getContractedChild: ");
         return mContractedChild;
     }
 
     public View getExpandedChild() {
+        Log.d(TAG, "getExpandedChild: ");
         return mExpandedChild;
     }
 
     public View getHeadsUpChild() {
+        Log.d(TAG, "getHeadsUpChild: ");
         return mHeadsUpChild;
     }
 
     public void setContractedChild(View child) {
+        Log.d(TAG, "setContractedChild: ");
         if (mContractedChild != null) {
             mContractedChild.animate().cancel();
             removeView(mContractedChild);
@@ -204,6 +216,7 @@ public class NotificationContentView extends FrameLayout {
     }
 
     public void setExpandedChild(View child) {
+        Log.d(TAG, "setExpandedChild: ");
         if (mExpandedChild != null) {
             mExpandedChild.animate().cancel();
             removeView(mExpandedChild);
@@ -216,6 +229,7 @@ public class NotificationContentView extends FrameLayout {
     }
 
     public void setHeadsUpChild(View child) {
+        Log.d(TAG, "setHeadsUpChild: ");
         if (mHeadsUpChild != null) {
             mHeadsUpChild.animate().cancel();
             removeView(mHeadsUpChild);
@@ -230,14 +244,17 @@ public class NotificationContentView extends FrameLayout {
     @Override
     protected void onVisibilityChanged(View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
+        Log.d(TAG, "onVisibilityChanged: ");
         updateVisibility();
     }
 
     private void updateVisibility() {
+        Log.d(TAG, "updateVisibility: ");
         setVisible(isShown());
     }
 
     private void setVisible(final boolean isVisible) {
+        Log.d(TAG, "setVisible: ");
         if (isVisible) {
 
             // We only animate if we are drawn at least once, otherwise the view might animate when
@@ -250,6 +267,7 @@ public class NotificationContentView extends FrameLayout {
     }
 
     public void setContentHeight(int contentHeight) {
+        Log.d(TAG, "setContentHeight: ");
         mContentHeight = Math.max(Math.min(contentHeight, getHeight()), getMinHeight());;
         mUnrestrictedContentHeight = Math.max(contentHeight, getMinHeight());
         selectLayout(mAnimate /* animate */, false /* force */);
@@ -258,10 +276,12 @@ public class NotificationContentView extends FrameLayout {
     }
 
     public int getContentHeight() {
+        Log.d(TAG, "getContentHeight: ");
         return mContentHeight;
     }
 
     public int getMaxHeight() {
+        Log.d(TAG, "getMaxHeight: ");
         if (mIsHeadsUp && mHeadsUpChild != null) {
             return mHeadsUpChild.getHeight();
         } else if (mExpandedChild != null) {
@@ -271,20 +291,24 @@ public class NotificationContentView extends FrameLayout {
     }
 
     public int getMinHeight() {
+        Log.d(TAG, "getMinHeight: ");
         return mSmallHeight;
     }
 
     public void setClipTopAmount(int clipTopAmount) {
+        Log.d(TAG, "setClipTopAmount: ");
         mClipTopAmount = clipTopAmount;
         updateClipping();
     }
 
     private void updateRoundRectClipping() {
+        Log.d(TAG, "updateRoundRectClipping: ");
         boolean enabled = needsRoundRectClipping();
         setClipToOutline(enabled);
     }
 
     private boolean needsRoundRectClipping() {
+        Log.d(TAG, "needsRoundRectClipping: ");
         if (!mRoundRectClippingEnabled) {
             return false;
         }
@@ -301,11 +325,13 @@ public class NotificationContentView extends FrameLayout {
     }
 
     private void updateClipping() {
+        Log.d(TAG, "updateClipping: ");
         mClipBounds.set(0, mClipTopAmount, getWidth(), mContentHeight);
         setClipBounds(mClipBounds);
     }
 
     private void selectLayout(boolean animate, boolean force) {
+        Log.d(TAG, "selectLayout: ");
         if (mContractedChild == null) {
             return;
         }
@@ -323,6 +349,7 @@ public class NotificationContentView extends FrameLayout {
     }
 
     private void updateViewVisibilities(int visibleType) {
+        Log.d(TAG, "updateViewVisibilities: ");
         boolean contractedVisible = visibleType == VISIBLE_TYPE_CONTRACTED;
         mContractedChild.setVisibility(contractedVisible ? View.VISIBLE : View.INVISIBLE);
         mContractedChild.setAlpha(contractedVisible ? 1f : 0f);
@@ -344,6 +371,7 @@ public class NotificationContentView extends FrameLayout {
     }
 
     private void runSwitchAnimation(int visibleType) {
+        Log.d(TAG, "runSwitchAnimation: ");
         View shownView = getViewForVisibleType(visibleType);
         View hiddenView = getViewForVisibleType(mVisibleType);
         shownView.setVisibility(View.VISIBLE);
@@ -374,6 +402,7 @@ public class NotificationContentView extends FrameLayout {
      * @return the corresponding view according to the given visible type
      */
     private View getViewForVisibleType(int visibleType) {
+        Log.d(TAG, "getViewForVisibleType: ");
         switch (visibleType) {
             case VISIBLE_TYPE_EXPANDED:
                 return mExpandedChild;
@@ -388,6 +417,7 @@ public class NotificationContentView extends FrameLayout {
      * @return one of the static enum types in this view, calculated form the current state
      */
     private int calculateVisibleType() {
+        Log.d(TAG, "calculateVisibleType: ");
         boolean noExpandedChild = mExpandedChild == null;
         if (mIsHeadsUp && mHeadsUpChild != null) {
             if (mContentHeight <= mHeadsUpChild.getHeight() || noExpandedChild) {
@@ -405,6 +435,7 @@ public class NotificationContentView extends FrameLayout {
     }
 
     public void notifyContentUpdated() {
+        Log.d(TAG, "notifyContentUpdated: ");
         selectLayout(false /* animate */, true /* force */);
         if (mContractedChild != null) {
             mContractedWrapper.notifyContentUpdated();
@@ -417,22 +448,26 @@ public class NotificationContentView extends FrameLayout {
     }
 
     public boolean isContentExpandable() {
+        Log.d(TAG, "isContentExpandable: ");
         return mExpandedChild != null;
     }
 
     public void setDark(boolean dark, boolean fade, long delay) {
+        Log.d(TAG, "setDark: ");
         if (mDark == dark || mContractedChild == null) return;
         mDark = dark;
         mContractedWrapper.setDark(dark && !mShowingLegacyBackground, fade, delay);
     }
 
     public void setHeadsUp(boolean headsUp) {
+        Log.d(TAG, "setHeadsUp: ");
         mIsHeadsUp = headsUp;
         selectLayout(false /* animate */, true /* force */);
     }
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
 
         // This is not really true, but good enough when fading from the contracted to the expanded
         // layout, and saves us some layers.
@@ -440,6 +475,7 @@ public class NotificationContentView extends FrameLayout {
     }
 
     public void setShowingLegacyBackground(boolean showing) {
+        Log.d(TAG, "setShowingLegacyBackground: ");
         mShowingLegacyBackground = showing;
     }
 }
