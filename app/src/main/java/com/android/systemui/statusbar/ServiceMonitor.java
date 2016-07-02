@@ -49,6 +49,7 @@ import java.util.Arrays;
 public class ServiceMonitor {
     private static final int RECHECK_DELAY = 2000;
     private static final int WAIT_FOR_STOP = 500;
+    public static final String TAG = "ServiceMonitor";
 
     public interface Callbacks {
         /** The service does not exist or failed to bind */
@@ -115,6 +116,7 @@ public class ServiceMonitor {
         private IBinder mService;
 
         public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.d(TAG, "SC: onServiceConnected: ");
             if (mDebug) Log.d(mTag, "onServiceConnected name=" + name + " service=" + service);
             mName = name;
             mService = service;
@@ -126,6 +128,7 @@ public class ServiceMonitor {
         }
 
         public void onServiceDisconnected(ComponentName name) {
+            Log.d(TAG, "SC: onServiceDisconnected: ");
             if (mDebug) Log.d(mTag, "onServiceDisconnected name=" + name);
             boolean unlinked = mService.unlinkToDeath(this, 0);
             if (mDebug) Log.d(mTag, "  unlinked=" + unlinked);
@@ -133,6 +136,7 @@ public class ServiceMonitor {
         }
 
         public void binderDied() {
+            Log.d(TAG, "SC: binderDied: ");
             if (mDebug) Log.d(mTag, "binderDied");
             mHandler.sendMessage(mHandler.obtainMessage(MSG_SERVICE_DISCONNECTED, mName));
         }
@@ -140,6 +144,7 @@ public class ServiceMonitor {
 
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "mBroadcastReceiver: onReceive: ");
             String pkg = intent.getData().getSchemeSpecificPart();
             if (mServiceName != null && mServiceName.getPackageName().equals(pkg)) {
                 mHandler.sendMessage(mHandler.obtainMessage(MSG_PACKAGE_INTENT, intent));
@@ -168,6 +173,7 @@ public class ServiceMonitor {
     }
 
     public void start() {
+        Log.d(TAG, "start: ");
         // listen for setting changes
         ContentResolver cr = mContext.getContentResolver();
         cr.registerContentObserver(Settings.Secure.getUriFor(mSettingKey),
@@ -185,6 +191,7 @@ public class ServiceMonitor {
     }
 
     private ComponentName getComponentNameFromSetting() {
+        Log.d(TAG, "getComponentNameFromSetting: ");
         String cn = Settings.Secure.getStringForUser(mContext.getContentResolver(),
                 mSettingKey, UserHandle.USER_CURRENT);
         return cn == null ? null : ComponentName.unflattenFromString(cn);
@@ -193,6 +200,7 @@ public class ServiceMonitor {
     // everything below is called on the handler
 
     private void packageIntent(Intent intent) {
+        Log.d(TAG, "packageIntent: ");
         if (mDebug) Log.d(mTag, "packageIntent intent=" + intent
                 + " extras=" + bundleToString(intent.getExtras()));
         if (Intent.ACTION_PACKAGE_ADDED.equals(intent.getAction())) {
@@ -215,6 +223,7 @@ public class ServiceMonitor {
     }
 
     private void stopService() {
+        Log.d(TAG, "stopService: ");
         if (mDebug) Log.d(mTag, "stopService");
         boolean stopped = mContext.stopService(new Intent().setComponent(mServiceName));
         if (mDebug) Log.d(mTag, "  stopped=" + stopped);
@@ -223,6 +232,7 @@ public class ServiceMonitor {
     }
 
     private void startService() {
+        Log.d(TAG, "startService: ");
         mServiceName = getComponentNameFromSetting();
         if (mDebug) Log.d(mTag, "startService mServiceName=" + mServiceName);
         if (mServiceName == null) {
@@ -235,6 +245,7 @@ public class ServiceMonitor {
     }
 
     private void continueStartService() {
+        Log.d(TAG, "continueStartService: ");
         if (mDebug) Log.d(mTag, "continueStartService");
         Intent intent = new Intent().setComponent(mServiceName);
         try {
@@ -250,6 +261,7 @@ public class ServiceMonitor {
     }
 
     private void serviceDisconnected(ComponentName serviceName) {
+        Log.d(TAG, "serviceDisconnected: ");
         if (mDebug) Log.d(mTag, "serviceDisconnected serviceName=" + serviceName
                 + " mServiceName=" + mServiceName);
         if (serviceName.equals(mServiceName)) {
@@ -259,6 +271,7 @@ public class ServiceMonitor {
     }
 
     private void checkBound() {
+        Log.d(TAG, "checkBound: ");
         if (mDebug) Log.d(mTag, "checkBound mBound=" + mBound);
         if (!mBound) {
             startService();
@@ -266,11 +279,13 @@ public class ServiceMonitor {
     }
 
     private void scheduleCheckBound() {
+        Log.d(TAG, "scheduleCheckBound: ");
         mHandler.removeMessages(MSG_CHECK_BOUND);
         mHandler.sendEmptyMessageDelayed(MSG_CHECK_BOUND, RECHECK_DELAY);
     }
 
     private static String bundleToString(Bundle bundle) {
+        Log.d(TAG, "bundleToString: ");
         if (bundle == null) return null;
         StringBuilder sb = new StringBuilder('{');
         for (String key : bundle.keySet()) {
@@ -283,16 +298,19 @@ public class ServiceMonitor {
     }
 
     public ComponentName getComponent() {
+        Log.d(TAG, "getComponent: ");
         return getComponentNameFromSetting();
     }
 
     public void setComponent(ComponentName component) {
+        Log.d(TAG, "setComponent: ");
         final String setting = component == null ? null : component.flattenToShortString();
         Settings.Secure.putStringForUser(mContext.getContentResolver(),
                 mSettingKey, setting, UserHandle.USER_CURRENT);
     }
 
     public boolean isPackageAvailable() {
+        Log.d(TAG, "isPackageAvailable: ");
         final ComponentName component = getComponent();
         if (component == null) return false;
         try {
