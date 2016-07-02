@@ -24,6 +24,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Interpolator;
 
@@ -32,6 +33,7 @@ import android.view.animation.Interpolator;
  */
 public class ScrimView extends View
 {
+    public static final String TAG = "ScrimView";
     private int mScrimColor;
     private boolean mIsEmpty = true;
     private boolean mDrawAsSrc;
@@ -53,6 +55,7 @@ public class ScrimView extends View
     };
 
     public ScrimView(Context context) {
+        Log.d(TAG, "ScrimView: ");
         this(context, null);
     }
 
@@ -70,6 +73,7 @@ public class ScrimView extends View
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.d(TAG, "onDraw: ");
         if (mDrawAsSrc || (!mIsEmpty && mViewAlpha > 0f)) {
             PorterDuff.Mode mode = mDrawAsSrc ? PorterDuff.Mode.SRC : PorterDuff.Mode.SRC_OVER;
             int color = mScrimColor;
@@ -80,11 +84,13 @@ public class ScrimView extends View
     }
 
     public void setDrawAsSrc(boolean asSrc) {
+        Log.d(TAG, "setDrawAsSrc: ");
         mDrawAsSrc = asSrc;
         invalidate();
     }
 
     public void setScrimColor(int color) {
+        Log.d(TAG, "setScrimColor: ");
         if (color != mScrimColor) {
             mIsEmpty = Color.alpha(color) == 0;
             mScrimColor = color;
@@ -93,15 +99,18 @@ public class ScrimView extends View
     }
 
     public int getScrimColor() {
+        Log.d(TAG, "getScrimColor: ");
         return mScrimColor;
     }
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 
     public void setViewAlpha(float alpha) {
+        Log.d(TAG, "setViewAlpha: ");
         if (mAlphaAnimator != null) {
             mAlphaAnimator.cancel();
         }
@@ -110,6 +119,7 @@ public class ScrimView extends View
     }
 
     public void animateViewAlpha(float alpha, long durationOut, Interpolator interpolator) {
+        Log.d(TAG, "animateViewAlpha: ");
         if (mAlphaAnimator != null) {
             mAlphaAnimator.cancel();
         }
