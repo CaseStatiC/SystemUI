@@ -18,6 +18,7 @@ package com.android.systemui.statusbar;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class NotificationOverflowContainer extends ActivatableNotificationView {
     private ViewInvertHelper mViewInvertHelper;
     private boolean mDark;
     private View mContent;
+    public static final String TAG = "NotificationOverflowContainer";
 
     public NotificationOverflowContainer(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -42,6 +44,7 @@ public class NotificationOverflowContainer extends ActivatableNotificationView {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mIconsView = (NotificationOverflowIconsView) findViewById(R.id.overflow_icons_view);
         mIconsView.setMoreText((TextView) findViewById(R.id.more_text));
         mIconsView.setOverflowIndicator(findViewById(R.id.more_icon_overflow));
@@ -53,6 +56,7 @@ public class NotificationOverflowContainer extends ActivatableNotificationView {
     @Override
     public void setDark(boolean dark, boolean fade, long delay) {
         super.setDark(dark, fade, delay);
+        Log.d(TAG, "setDark: ");
         if (mDark == dark) return;
         mDark = dark;
         if (fade) {
@@ -64,10 +68,12 @@ public class NotificationOverflowContainer extends ActivatableNotificationView {
 
     @Override
     protected View getContentView() {
+        Log.d(TAG, "getContentView: ");
         return mContent;
     }
 
     public NotificationOverflowIconsView getIconsView() {
+        Log.d(TAG, "getIconsView: ");
         return mIconsView;
     }
 
