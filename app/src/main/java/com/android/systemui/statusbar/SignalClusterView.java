@@ -110,6 +110,7 @@ public class SignalClusterView
 
     @Override
     public void onTuningChanged(String key, String newValue) {
+        Log.d(TAG, "onTuningChanged: ");
         if (!StatusBarIconController.ICON_BLACKLIST.equals(key)) {
             return;
         }
@@ -132,11 +133,13 @@ public class SignalClusterView
     }
 
     public void setNetworkController(NetworkControllerImpl nc) {
+        Log.d(TAG, "setNetworkController: ");
         if (DEBUG) Log.d(TAG, "NetworkController=" + nc);
         mNC = nc;
     }
 
     public void setSecurityController(SecurityController sc) {
+        Log.d(TAG, "setSecurityController: ");
         if (DEBUG) Log.d(TAG, "SecurityController=" + sc);
         mSC = sc;
         mSC.addCallback(this);
@@ -146,6 +149,7 @@ public class SignalClusterView
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mWideTypeIconStartPadding = getContext().getResources().getDimensionPixelSize(
                 R.dimen.wide_type_icon_start_padding);
         mSecondaryTelephonyPadding = getContext().getResources().getDimensionPixelSize(
@@ -158,6 +162,7 @@ public class SignalClusterView
 
     @Override
     protected void onAttachedToWindow() {
+        Log.d(TAG, "onAttachedToWindow: ");
         super.onAttachedToWindow();
 
         mVpn            = (ImageView) findViewById(R.id.vpn);
@@ -185,6 +190,7 @@ public class SignalClusterView
 
     @Override
     protected void onDetachedFromWindow() {
+        Log.d(TAG, "onDetachedFromWindow: ");
         mVpn            = null;
         mEthernetGroup  = null;
         mEthernet       = null;
@@ -201,6 +207,7 @@ public class SignalClusterView
     // From SecurityController.
     @Override
     public void onStateChanged() {
+        Log.d(TAG, "onStateChanged: ");
         post(new Runnable() {
             @Override
             public void run() {
@@ -213,6 +220,7 @@ public class SignalClusterView
     @Override
     public void setWifiIndicators(boolean enabled, IconState statusIcon, IconState qsIcon,
             boolean activityIn, boolean activityOut, String description) {
+        Log.d(TAG, "setWifiIndicators: ");
         mWifiVisible = statusIcon.visible && !mBlockWifi;
         mWifiStrengthId = statusIcon.icon;
         mWifiDescription = statusIcon.contentDescription;
@@ -224,6 +232,7 @@ public class SignalClusterView
     public void setMobileDataIndicators(IconState statusIcon, IconState qsIcon, int statusType,
             int qsType, boolean activityIn, boolean activityOut, String typeContentDescription,
             String description, boolean isWide, int subId) {
+        Log.d(TAG, "setMobileDataIndicators: ");
         PhoneState state = getState(subId);
         if (state == null) {
             return;
@@ -240,6 +249,7 @@ public class SignalClusterView
 
     @Override
     public void setEthernetIndicators(IconState state) {
+        Log.d(TAG, "setEthernetIndicators: ");
         mEthernetVisible = state.visible && !mBlockEthernet;
         mEthernetIconId = state.icon;
         mEthernetDescription = state.contentDescription;
@@ -249,12 +259,14 @@ public class SignalClusterView
 
     @Override
     public void setNoSims(boolean show) {
+        Log.d(TAG, "setNoSims: ");
         mNoSimsVisible = show && !mBlockMobile;
         apply();
     }
 
     @Override
     public void setSubs(List<SubscriptionInfo> subs) {
+        Log.d(TAG, "setSubs: ");
         if (hasCorrectSubs(subs)) {
             return;
         }
@@ -273,6 +285,7 @@ public class SignalClusterView
     }
 
     private boolean hasCorrectSubs(List<SubscriptionInfo> subs) {
+        Log.d(TAG, "hasCorrectSubs: ");
         final int N = subs.size();
         if (N != mPhoneStates.size()) {
             return false;
@@ -286,6 +299,7 @@ public class SignalClusterView
     }
 
     private PhoneState getState(int subId) {
+        Log.d(TAG, "getState: ");
         for (PhoneState state : mPhoneStates) {
             if (state.mSubId == subId) {
                 return state;
@@ -296,6 +310,7 @@ public class SignalClusterView
     }
 
     private PhoneState inflatePhoneState(int subId) {
+        Log.d(TAG, "inflatePhoneState: ");
         PhoneState state = new PhoneState(subId, mContext);
         if (mMobileSignalGroup != null) {
             mMobileSignalGroup.addView(state.mMobileGroup);
@@ -306,6 +321,7 @@ public class SignalClusterView
 
     @Override
     public void setIsAirplaneMode(IconState icon) {
+        Log.d(TAG, "setIsAirplaneMode: ");
         mIsAirplaneMode = icon.visible && !mBlockAirplane;
         mAirplaneIconId = icon.icon;
         mAirplaneContentDescription = icon.contentDescription;
@@ -315,11 +331,13 @@ public class SignalClusterView
 
     @Override
     public void setMobileDataEnabled(boolean enabled) {
+        Log.d(TAG, "setMobileDataEnabled: ");
         // Don't care.
     }
 
     @Override
     public boolean dispatchPopulateAccessibilityEventInternal(AccessibilityEvent event) {
+        Log.d(TAG, "dispatchPopulateAccessibilityEventInternal: ");
         // Standard group layout onPopulateAccessibilityEvent() implementations
         // ignore content description, so populate manually
         if (mEthernetVisible && mEthernetGroup != null &&
@@ -336,7 +354,7 @@ public class SignalClusterView
     @Override
     public void onRtlPropertiesChanged(int layoutDirection) {
         super.onRtlPropertiesChanged(layoutDirection);
-
+        Log.d(TAG, "onRtlPropertiesChanged: ");
         if (mEthernet != null) {
             mEthernet.setImageDrawable(null);
             mEthernetDark.setImageDrawable(null);
@@ -371,11 +389,13 @@ public class SignalClusterView
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 
     // Run after each indicator change.
     private void apply() {
+        Log.d(TAG, "apply: ");
         if (mWifiGroup == null) return;
 
         mVpn.setVisibility(mVpnVisible ? View.VISIBLE : View.GONE);
@@ -457,6 +477,7 @@ public class SignalClusterView
     }
 
     public void setIconTint(int tint, float darkIntensity) {
+        Log.d(TAG, "setIconTint: ");
         boolean changed = tint != mIconTint || darkIntensity != mDarkIntensity;
         mIconTint = tint;
         mDarkIntensity = darkIntensity;
@@ -466,6 +487,7 @@ public class SignalClusterView
     }
 
     private void applyIconTint() {
+        Log.d(TAG, "applyIconTint: ");
         setTint(mVpn, mIconTint);
         setTint(mAirplane, mIconTint);
         applyDarkIntensity(mDarkIntensity, mNoSims, mNoSimsDark);
@@ -477,11 +499,13 @@ public class SignalClusterView
     }
 
     private void applyDarkIntensity(float darkIntensity, View lightIcon, View darkIcon) {
+        Log.d(TAG, "applyDarkIntensity: ");
         lightIcon.setAlpha(1 - darkIntensity);
         darkIcon.setAlpha(darkIntensity);
     }
 
     private void setTint(ImageView v, int tint) {
+        Log.d(TAG, "setTint: ");
         v.setImageTintList(ColorStateList.valueOf(tint));
     }
 
@@ -505,6 +529,7 @@ public class SignalClusterView
         }
 
         public void setViews(ViewGroup root) {
+            Log.d(TAG, "PhoneState: setViews: ");
             mMobileGroup    = root;
             mMobile         = (ImageView) root.findViewById(R.id.mobile_signal);
             mMobileDark     = (ImageView) root.findViewById(R.id.mobile_signal_dark);
@@ -512,6 +537,7 @@ public class SignalClusterView
         }
 
         public boolean apply(boolean isSecondaryIcon) {
+            Log.d(TAG, "PhoneState: apply: ");
             if (mMobileVisible && !mIsAirplaneMode) {
                 if (mLastMobileStrengthId != mMobileStrengthId) {
                     updateAnimatableIcon(mMobile, mMobileStrengthId);
@@ -547,12 +573,14 @@ public class SignalClusterView
         }
 
         private void updateAnimatableIcon(ImageView view, int resId) {
+            Log.d(TAG, "PhoneState: updateAnimatableIcon: ");
             maybeStopAnimatableDrawable(view);
             view.setImageResource(resId);
             maybeStartAnimatableDrawable(view);
         }
 
         private void maybeStopAnimatableDrawable(ImageView view) {
+            Log.d(TAG, "PhoneState: maybeStopAnimatableDrawable: ");
             Drawable drawable = view.getDrawable();
             if (drawable instanceof Animatable) {
                 Animatable ad = (Animatable) drawable;
@@ -563,6 +591,7 @@ public class SignalClusterView
         }
 
         private void maybeStartAnimatableDrawable(ImageView view) {
+            Log.d(TAG, "PhoneState: maybeStartAnimatableDrawable: ");
             Drawable drawable = view.getDrawable();
             if (drawable instanceof Animatable) {
                 Animatable ad = (Animatable) drawable;
@@ -573,6 +602,7 @@ public class SignalClusterView
         }
 
         public void populateAccessibilityEvent(AccessibilityEvent event) {
+            Log.d(TAG, "PhoneState: populateAccessibilityEvent: ");
             if (mMobileVisible && mMobileGroup != null
                     && mMobileGroup.getContentDescription() != null) {
                 event.getText().add(mMobileGroup.getContentDescription());
@@ -580,6 +610,7 @@ public class SignalClusterView
         }
 
         public void setIconTint(int tint, float darkIntensity) {
+            Log.d(TAG, "PhoneState: setIconTint: ");
             applyDarkIntensity(darkIntensity, mMobile, mMobileDark);
             setTint(mMobileType, tint);
         }
