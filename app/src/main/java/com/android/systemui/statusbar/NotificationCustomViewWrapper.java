@@ -16,6 +16,7 @@
 
 package com.android.systemui.statusbar;
 
+import android.util.Log;
 import android.view.View;
 
 import com.android.systemui.ViewInvertHelper;
@@ -25,7 +26,7 @@ import com.android.systemui.statusbar.phone.NotificationPanelView;
  * Wraps a notification containing a custom view.
  */
 public class NotificationCustomViewWrapper extends NotificationViewWrapper {
-
+    public static final String TAG = "NotificationCustomViewWrapper";
     private final ViewInvertHelper mInvertHelper;
 
     protected NotificationCustomViewWrapper(View view) {
@@ -35,6 +36,7 @@ public class NotificationCustomViewWrapper extends NotificationViewWrapper {
 
     @Override
     public void setDark(boolean dark, boolean fade, long delay) {
+        Log.d(TAG, "setDark: ");
         if (fade) {
             mInvertHelper.fade(dark, delay);
         } else {
@@ -44,6 +46,7 @@ public class NotificationCustomViewWrapper extends NotificationViewWrapper {
 
     @Override
     public boolean needsRoundRectClipping() {
+        Log.d(TAG, "needsRoundRectClipping: ");
         return true;
     }
 }
