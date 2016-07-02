@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.FrameLayout;
 import com.android.systemui.R;
 
@@ -28,10 +29,11 @@ import com.android.systemui.R;
  */
 public class NotificationGuts extends FrameLayout {
 
+    public static final String TAG = "NotificationGuts";
     private Drawable mBackground;
     private int mClipTopAmount;
     private int mActualHeight;
-
+    
     public NotificationGuts(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
@@ -39,10 +41,12 @@ public class NotificationGuts extends FrameLayout {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.d(TAG, "onDraw: ");
         draw(canvas, mBackground);
     }
 
     private void draw(Canvas canvas, Drawable drawable) {
+        Log.d(TAG, "draw: ");
         if (drawable != null) {
             drawable.setBounds(0, mClipTopAmount, getWidth(), mActualHeight);
             drawable.draw(canvas);
@@ -52,6 +56,7 @@ public class NotificationGuts extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mBackground = mContext.getDrawable(R.drawable.notification_guts_bg);
         if (mBackground != null) {
             mBackground.setCallback(this);
@@ -60,15 +65,18 @@ public class NotificationGuts extends FrameLayout {
 
     @Override
     protected boolean verifyDrawable(Drawable who) {
+        Log.d(TAG, "verifyDrawable: ");
         return super.verifyDrawable(who) || who == mBackground;
     }
 
     @Override
     protected void drawableStateChanged() {
+        Log.d(TAG, "drawableStateChanged: ");
         drawableStateChanged(mBackground);
     }
 
     private void drawableStateChanged(Drawable d) {
+        Log.d(TAG, "drawableStateChanged: ");
         if (d != null && d.isStateful()) {
             d.setState(getDrawableState());
         }
@@ -76,17 +84,20 @@ public class NotificationGuts extends FrameLayout {
 
     @Override
     public void drawableHotspotChanged(float x, float y) {
+        Log.d(TAG, "drawableHotspotChanged: ");
         if (mBackground != null) {
             mBackground.setHotspot(x, y);
         }
     }
 
     public void setActualHeight(int actualHeight) {
+        Log.d(TAG, "setActualHeight: ");
         mActualHeight = actualHeight;
         invalidate();
     }
 
     public int getActualHeight() {
+        Log.d(TAG, "getActualHeight: ");
         return mActualHeight;
     }
 
@@ -97,7 +108,7 @@ public class NotificationGuts extends FrameLayout {
 
     @Override
     public boolean hasOverlappingRendering() {
-
+        Log.d(TAG, "hasOverlappingRendering: ");
         // Prevents this view from creating a layer when alpha is animating.
         return false;
     }
