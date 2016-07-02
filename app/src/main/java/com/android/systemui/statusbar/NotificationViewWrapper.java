@@ -17,6 +17,7 @@
 package com.android.systemui.statusbar;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -24,7 +25,7 @@ import android.view.View;
  * the individual templates and custom views.
  */
 public abstract class NotificationViewWrapper {
-
+    public static final String TAG = "NotificationViewWrapper";
     private static final String TAG_BIG_MEDIA_NARROW = "bigMediaNarrow";
     private static final String TAG_MEDIA = "media";
     private static final String TAG_BIG_PICTURE = "bigPicture";
@@ -48,6 +49,7 @@ public abstract class NotificationViewWrapper {
     }
 
     protected NotificationViewWrapper(View view) {
+        Log.d(TAG, "NotificationViewWrapper: ");
         mView = view;
     }
 
