@@ -17,20 +17,21 @@
 package com.android.systemui.statusbar;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 /**
  * Wraps a media notification.
  */
 public class NotificationMediaViewWrapper extends NotificationTemplateViewWrapper {
-
+    public static final String TAG = "NotificationMediaViewWrapper";
     protected NotificationMediaViewWrapper(Context ctx, View view) {
         super(ctx, view);
     }
 
     @Override
     public void setDark(boolean dark, boolean fade, long delay) {
-
+        Log.d(TAG, "setDark: ");
         // Only update the large icon, because the rest is already inverted.
         setPictureGrayscale(dark, fade, delay);
     }
