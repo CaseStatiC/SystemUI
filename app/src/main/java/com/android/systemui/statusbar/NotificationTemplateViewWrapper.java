@@ -27,6 +27,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
@@ -40,7 +41,7 @@ import com.android.systemui.statusbar.phone.NotificationPanelView;
  * Wraps a notification view inflated from a template.
  */
 public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
-
+    public static final String TAG = "NotificationTemplateViewWrapper";
     private final ColorMatrix mGrayscaleColorMatrix = new ColorMatrix();
     private final PorterDuffColorFilter mIconColorFilter = new PorterDuffColorFilter(
             0, PorterDuff.Mode.SRC_ATOP);
@@ -58,6 +59,7 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
 
     protected NotificationTemplateViewWrapper(Context ctx, View view) {
         super(view);
+        Log.d(TAG, "NotificationTemplateViewWrapper: ");
         mIconDarkAlpha = ctx.getResources().getInteger(R.integer.doze_small_icon_alpha);
         mIconBackgroundDarkColor =
                 ctx.getColor(R.color.doze_small_icon_background_color);
@@ -67,6 +69,7 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
     }
 
     private void resolveViews() {
+        Log.d(TAG, "resolveViews: ");
         View mainColumn = mView.findViewById(com.android.internal.R.id.notification_main_column);
         mInvertHelper = mainColumn != null
                 ? new ViewInvertHelper(mainColumn, NotificationPanelView.DOZE_ANIMATION_DURATION)
@@ -84,18 +87,21 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
     }
 
     private ImageView resolveIcon(ImageView largeIcon, ImageView rightIcon) {
+        Log.d(TAG, "resolveIcon: ");
         return largeIcon != null && largeIcon.getBackground() != null ? largeIcon
                 : rightIcon != null && rightIcon.getVisibility() == View.VISIBLE ? rightIcon
                 : null;
     }
 
     private ImageView resolvePicture(ImageView largeIcon) {
+        Log.d(TAG, "resolvePicture: ");
         return largeIcon != null && largeIcon.getBackground() == null
                 ? largeIcon
                 : null;
     }
 
     private int resolveBackgroundColor(ImageView icon) {
+        Log.d(TAG, "resolveBackgroundColor: ");
         if (icon != null && icon.getBackground() != null) {
             ColorFilter filter = icon.getBackground().getColorFilter();
             if (filter instanceof PorterDuffColorFilter) {
@@ -108,6 +114,7 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
     @Override
     public void notifyContentUpdated() {
         super.notifyContentUpdated();
+        Log.d(TAG, "notifyContentUpdated: ");
 
         // Reinspect the notification.
         resolveViews();
@@ -115,6 +122,7 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
 
     @Override
     public void setDark(boolean dark, boolean fade, long delay) {
+        Log.d(TAG, "setDark: ");
         if (mInvertHelper != null) {
             if (fade) {
                 mInvertHelper.fade(dark, delay);
@@ -141,6 +149,7 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
     }
 
     protected void setPictureGrayscale(boolean grayscale, boolean fade, long delay) {
+        Log.d(TAG, "setPictureGrayscale: ");
         if (mPicture != null) {
             if (fade) {
                 fadeGrayscale(mPicture, grayscale, delay);
@@ -152,6 +161,7 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
 
     private void startIntensityAnimation(ValueAnimator.AnimatorUpdateListener updateListener,
             boolean dark, long delay, Animator.AnimatorListener listener) {
+        Log.d(TAG, "startIntensityAnimation: ");
         float startIntensity = dark ? 0f : 1f;
         float endIntensity = dark ? 1f : 0f;
         ValueAnimator animator = ValueAnimator.ofFloat(startIntensity, endIntensity);
@@ -166,6 +176,7 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
     }
 
     private void fadeIconColorFilter(final ImageView target, boolean dark, long delay) {
+        Log.d(TAG, "fadeIconColorFilter: ");
         startIntensityAnimation(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -175,6 +186,7 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
     }
 
     private void fadeIconAlpha(final ImageView target, boolean dark, long delay) {
+        Log.d(TAG, "fadeIconAlpha: ");
         startIntensityAnimation(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -185,6 +197,7 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
     }
 
     protected void fadeGrayscale(final ImageView target, final boolean dark, long delay) {
+        Log.d(TAG, "fadeGrayscale: ");
         startIntensityAnimation(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -202,10 +215,12 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
     }
 
     private void updateIconColorFilter(ImageView target, boolean dark) {
+        Log.d(TAG, "updateIconColorFilter: ");
         updateIconColorFilter(target, dark ? 1f : 0f);
     }
 
     private void updateIconColorFilter(ImageView target, float intensity) {
+        Log.d(TAG, "updateIconColorFilter: ");
         int color = interpolateColor(mIconBackgroundColor, mIconBackgroundDarkColor, intensity);
         mIconColorFilter.setColor(color);
         Drawable background = target.getBackground();
@@ -222,6 +237,7 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
     }
 
     protected void updateGrayscale(ImageView target, boolean dark) {
+        Log.d(TAG, "updateGrayscale: ");
         if (dark) {
             updateGrayscaleMatrix(1f);
             target.setColorFilter(new ColorMatrixColorFilter(mGrayscaleColorMatrix));
@@ -231,10 +247,12 @@ public class NotificationTemplateViewWrapper extends NotificationViewWrapper {
     }
 
     private void updateGrayscaleMatrix(float intensity) {
+        Log.d(TAG, "updateGrayscaleMatrix: ");
         mGrayscaleColorMatrix.setSaturation(1 - intensity);
     }
 
     private static int interpolateColor(int source, int target, float t) {
+        Log.d(TAG, "interpolateColor: ");
         int aSource = Color.alpha(source);
         int rSource = Color.red(source);
         int gSource = Color.green(source);
