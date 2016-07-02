@@ -18,6 +18,7 @@ package com.android.systemui.statusbar;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import com.android.systemui.R;
@@ -43,22 +44,26 @@ public class SpeedBumpView extends ExpandableView {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mLine = (AlphaOptimizedView) findViewById(R.id.speedbump_line);
     }
 
     @Override
     protected int getInitialHeight() {
+        Log.d(TAG, "getInitialHeight: ");
         return mSpeedBumpHeight;
     }
 
     @Override
     public int getIntrinsicHeight() {
+        Log.d(TAG, "getIntrinsicHeight: ");
         return mSpeedBumpHeight;
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+        Log.d(TAG, "onLayout: ");
         mLine.setPivotX(mLine.getWidth() / 2);
         mLine.setPivotY(mLine.getHeight() / 2);
         setOutlineProvider(null);
@@ -66,6 +71,7 @@ public class SpeedBumpView extends ExpandableView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.d(TAG, "onMeasure: ");
         measureChildren(widthMeasureSpec, heightMeasureSpec);
         int height = mSpeedBumpHeight;
         setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), height);
@@ -73,10 +79,12 @@ public class SpeedBumpView extends ExpandableView {
 
     @Override
     public boolean isTransparent() {
+        Log.d(TAG, "isTransparent: ");
         return true;
     }
 
     public void performVisibilityAnimation(boolean nowVisible, long delay) {
+        Log.d(TAG, "performVisibilityAnimation: ");
         animateDivider(nowVisible, delay, null /* onFinishedRunnable */);
     }
 
@@ -89,6 +97,7 @@ public class SpeedBumpView extends ExpandableView {
      *        finished.
      */
     public void animateDivider(boolean nowVisible, long delay, Runnable onFinishedRunnable) {
+        Log.d(TAG, "animateDivider: ");
         if (nowVisible != mIsVisible) {
             // Animate dividers
             float endValue = nowVisible ? 1.0f : 0.0f;
@@ -108,6 +117,7 @@ public class SpeedBumpView extends ExpandableView {
     }
 
     public void setInvisible() {
+        Log.d(TAG, "setInvisible: ");
         mLine.setAlpha(0.0f);
         mLine.setScaleX(0.0f);
         mLine.setScaleY(0.0f);
@@ -117,12 +127,14 @@ public class SpeedBumpView extends ExpandableView {
     @Override
     public void performRemoveAnimation(long duration, float translationDirection,
             Runnable onFinishedRunnable) {
+        Log.d(TAG, "performRemoveAnimation: ");
         // TODO: Use duration
         performVisibilityAnimation(false, 0 /* delay */);
     }
 
     @Override
     public void performAddAnimation(long delay, long duration) {
+        Log.d(TAG, "performAddAnimation: ");
         // TODO: Use duration
         performVisibilityAnimation(true, delay);
     }
