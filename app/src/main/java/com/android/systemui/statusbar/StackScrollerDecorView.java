@@ -18,6 +18,7 @@ package com.android.systemui.statusbar;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Interpolator;
 
@@ -28,7 +29,7 @@ import com.android.systemui.statusbar.phone.PhoneStatusBar;
  * background.
  */
 public abstract class StackScrollerDecorView extends ExpandableView {
-
+    public static final String TAG = "StackScrollerDecorView";
     protected View mContent;
     private boolean mIsVisible;
     private boolean mAnimating;
@@ -40,6 +41,7 @@ public abstract class StackScrollerDecorView extends ExpandableView {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mContent = findContentView();
         setInvisible();
     }
@@ -47,23 +49,28 @@ public abstract class StackScrollerDecorView extends ExpandableView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+        Log.d(TAG, "onLayout: ");
         setOutlineProvider(null);
     }
 
     @Override
     public boolean isTransparent() {
+        Log.d(TAG, "isTransparent: ");
         return true;
     }
 
     public void performVisibilityAnimation(boolean nowVisible) {
+        Log.d(TAG, "performVisibilityAnimation: ");
         animateText(nowVisible, null /* onFinishedRunnable */);
     }
 
     public void performVisibilityAnimation(boolean nowVisible, Runnable onFinishedRunnable) {
+        Log.d(TAG, "performVisibilityAnimation: ");
         animateText(nowVisible, onFinishedRunnable);
     }
 
     public boolean isVisible() {
+        Log.d(TAG, "isVisible: ");
         return mIsVisible || mAnimating;
     }
 
@@ -75,6 +82,7 @@ public abstract class StackScrollerDecorView extends ExpandableView {
      *        finished.
      */
     private void animateText(boolean nowVisible, final Runnable onFinishedRunnable) {
+        Log.d(TAG, "animateText: ");
         if (nowVisible != mIsVisible) {
             // Animate text
             float endValue = nowVisible ? 1.0f : 0.0f;
@@ -107,6 +115,7 @@ public abstract class StackScrollerDecorView extends ExpandableView {
     }
 
     public void setInvisible() {
+        Log.d(TAG, "setInvisible: ");
         mContent.setAlpha(0.0f);
         mIsVisible = false;
     }
@@ -114,22 +123,26 @@ public abstract class StackScrollerDecorView extends ExpandableView {
     @Override
     public void performRemoveAnimation(long duration, float translationDirection,
             Runnable onFinishedRunnable) {
+        Log.d(TAG, "performRemoveAnimation: ");
         // TODO: Use duration
         performVisibilityAnimation(false);
     }
 
     @Override
     public void performAddAnimation(long delay, long duration) {
+        Log.d(TAG, "performAddAnimation: ");
         // TODO: use delay and duration
         performVisibilityAnimation(true);
     }
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 
     public void cancelAnimation() {
+        Log.d(TAG, "cancelAnimation: ");
         mContent.animate().cancel();
     }
 
