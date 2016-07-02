@@ -23,6 +23,7 @@ import android.service.notification.NotificationListenerService.Ranking;
 import android.service.notification.NotificationListenerService.RankingMap;
 import android.service.notification.StatusBarNotification;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.view.View;
 
 import com.android.systemui.statusbar.phone.NotificationGroupManager;
@@ -37,7 +38,8 @@ import java.util.Comparator;
  * The list of currently displaying notifications.
  */
 public class NotificationData {
-
+    
+    public static final String TAG = "NotificationData";
     private final Environment mEnvironment;
     private HeadsUpManager mHeadsUpManager;
 
@@ -61,10 +63,12 @@ public class NotificationData {
         }
 
         public void setInterruption() {
+            Log.d(TAG, "Entry: setInterruption: ");
             interruption = true;
         }
 
         public boolean hasInterrupted() {
+            Log.d(TAG, "Entry: hasInterrupted: ");
             return interruption;
         }
 
@@ -72,6 +76,7 @@ public class NotificationData {
          * Resets the notification entry to be re-used.
          */
         public void reset() {
+            Log.d(TAG, "Entry: reset: ");
             // NOTE: Icon needs to be preserved for now.
             // We should fix this at some point.
             autoRedacted = false;
@@ -83,26 +88,32 @@ public class NotificationData {
         }
 
         public View getContentView() {
+            Log.d(TAG, "Entry: getContentView: ");
             return row.getPrivateLayout().getContractedChild();
         }
 
         public View getExpandedContentView() {
+            Log.d(TAG, "Entry: getExpandedContentView: ");
             return row.getPrivateLayout().getExpandedChild();
         }
 
         public View getHeadsUpContentView() {
+            Log.d(TAG, "Entry: getHeadsUpContentView: ");
             return row.getPrivateLayout().getHeadsUpChild();
         }
 
         public View getPublicContentView() {
+            Log.d(TAG, "Entry: getPublicContentView: ");
             return row.getPublicLayout().getContractedChild();
         }
 
         public void notifyFullScreenIntentLaunched() {
+            Log.d(TAG, "Entry: notifyFullScreenIntentLaunched: ");
             lastFullScreenIntentLaunchTime = SystemClock.elapsedRealtime();
         }
 
         public boolean hasJustLaunchedFullScreenIntent() {
+            Log.d(TAG, "Entry: hasJustLaunchedFullScreenIntent: ");
             return SystemClock.elapsedRealtime() < lastFullScreenIntentLaunchTime + LAUNCH_COOLDOWN;
         }
     }
@@ -125,6 +136,7 @@ public class NotificationData {
 
         @Override
         public int compare(Entry a, Entry b) {
+            Log.d(TAG, "mRankingComparator: compare: ");
             final StatusBarNotification na = a.notification;
             final StatusBarNotification nb = b.notification;
             final int aPriority = na.getNotification().priority;
@@ -188,16 +200,19 @@ public class NotificationData {
     }
 
     public Entry get(String key) {
+        Log.d(TAG, "get: ");
         return mEntries.get(key);
     }
 
     public void add(Entry entry, RankingMap ranking) {
+        Log.d(TAG, "add: ");
         mEntries.put(entry.notification.getKey(), entry);
         updateRankingAndSort(ranking);
         mGroupManager.onEntryAdded(entry);
     }
 
     public Entry remove(String key, RankingMap ranking) {
+        Log.d(TAG, "remove: ");
         Entry removed = mEntries.remove(key);
         if (removed == null) return null;
         updateRankingAndSort(ranking);
@@ -206,10 +221,12 @@ public class NotificationData {
     }
 
     public void updateRanking(RankingMap ranking) {
+        Log.d(TAG, "updateRanking: ");
         updateRankingAndSort(ranking);
     }
 
     public boolean isAmbient(String key) {
+        Log.d(TAG, "isAmbient: ");
         if (mRankingMap != null) {
             mRankingMap.getRanking(key, mTmpRanking);
             return mTmpRanking.isAmbient();
@@ -218,6 +235,7 @@ public class NotificationData {
     }
 
     public int getVisibilityOverride(String key) {
+        Log.d(TAG, "getVisibilityOverride: ");
         if (mRankingMap != null) {
             mRankingMap.getRanking(key, mTmpRanking);
             return mTmpRanking.getVisibilityOverride();
@@ -226,6 +244,7 @@ public class NotificationData {
     }
 
     private void updateRankingAndSort(RankingMap ranking) {
+        Log.d(TAG, "updateRankingAndSort: ");
         if (ranking != null) {
             mRankingMap = ranking;
         }
@@ -235,6 +254,7 @@ public class NotificationData {
     // TODO: This should not be public. Instead the Environment should notify this class when
     // anything changed, and this class should call back the UI so it updates itself.
     public void filterAndSort() {
+        Log.d(TAG, "filterAndSort: ");
         mSortedAndFiltered.clear();
 
         final int N = mEntries.size();
@@ -253,6 +273,7 @@ public class NotificationData {
     }
 
     boolean shouldFilterOut(StatusBarNotification sbn) {
+        Log.d(TAG, "shouldFilterOut: ");
         if (!(mEnvironment.isDeviceProvisioned() ||
                 showNotificationEvenIfUnprovisioned(sbn))) {
             return true;
@@ -278,6 +299,7 @@ public class NotificationData {
      * Return whether there are any clearable notifications (that aren't errors).
      */
     public boolean hasActiveClearableNotifications() {
+        Log.d(TAG, "hasActiveClearableNotifications: ");
         for (Entry e : mSortedAndFiltered) {
             if (e.getContentView() != null) { // the view successfully inflated
                 if (e.notification.isClearable()) {
@@ -292,11 +314,13 @@ public class NotificationData {
     // A: Almost none! Only things coming from the system (package is "android") that also
     // have special "kind" tags marking them as relevant for setup (see below).
     public static boolean showNotificationEvenIfUnprovisioned(StatusBarNotification sbn) {
+        Log.d(TAG, "showNotificationEvenIfUnprovisioned: ");
         return "android".equals(sbn.getPackageName())
                 && sbn.getNotification().extras.getBoolean(Notification.EXTRA_ALLOW_DURING_SETUP);
     }
 
     public void dump(PrintWriter pw, String indent) {
+        Log.d(TAG, "dump: ");
         int N = mSortedAndFiltered.size();
         pw.print(indent);
         pw.println("active notifications: " + N);
@@ -320,6 +344,7 @@ public class NotificationData {
     }
 
     private void dumpEntry(PrintWriter pw, String indent, int i, Entry e) {
+        Log.d(TAG, "dumpEntry: ");
         pw.print(indent);
         pw.println("  [" + i + "] key=" + e.key + " icon=" + e.icon);
         StatusBarNotification n = e.notification;
@@ -333,6 +358,7 @@ public class NotificationData {
     }
 
     private static boolean isSystemNotification(StatusBarNotification sbn) {
+        Log.d(TAG, "isSystemNotification: ");
         String sbnPackage = sbn.getPackageName();
         return "android".equals(sbnPackage) || "com.android.systemui".equals(sbnPackage);
     }
