@@ -20,6 +20,7 @@ import android.app.Notification;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,7 +32,7 @@ import com.android.systemui.statusbar.phone.IconMerger;
  * A view to display all the overflowing icons on Keyguard.
  */
 public class NotificationOverflowIconsView extends IconMerger {
-
+    public static final String TAG = "NotificationOverflowIconsView";
     private TextView mMoreText;
     private int mTintColor;
     private int mIconSize;
@@ -44,6 +45,7 @@ public class NotificationOverflowIconsView extends IconMerger {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mNotificationColorUtil = NotificationColorUtil.getInstance(getContext());
         mTintColor = getContext().getColor(R.color.keyguard_overflow_content_color);
         mIconSize = getResources().getDimensionPixelSize(
@@ -51,10 +53,12 @@ public class NotificationOverflowIconsView extends IconMerger {
     }
 
     public void setMoreText(TextView moreText) {
+        Log.d(TAG, "setMoreText: ");
         mMoreText = moreText;
     }
 
     public void addNotification(NotificationData.Entry notification) {
+        Log.d(TAG, "addNotification: ");
         StatusBarIconView v = new StatusBarIconView(getContext(), "",
                 notification.notification.getNotification());
         v.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -65,10 +69,12 @@ public class NotificationOverflowIconsView extends IconMerger {
     }
 
     private void applyColor(Notification notification, StatusBarIconView view) {
+        Log.d(TAG, "applyColor: ");
         view.setColorFilter(mTintColor, PorterDuff.Mode.MULTIPLY);
     }
 
     private void updateMoreText() {
+        Log.d(TAG, "updateMoreText: ");
         mMoreText.setText(
                 getResources().getString(R.string.keyguard_more_overflow_text, getChildCount()));
     }
