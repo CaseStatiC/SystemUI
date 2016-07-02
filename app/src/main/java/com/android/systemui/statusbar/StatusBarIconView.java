@@ -80,12 +80,14 @@ public class StatusBarIconView extends AnimatedImageView {
     }
 
     public void setNotification(Notification notification) {
+        Log.d(TAG, "setNotification: ");
         mNotification = notification;
         setContentDescription(notification);
     }
 
     public StatusBarIconView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        Log.d(TAG, "StatusBarIconView: ");
         mBlocked = false;
         final Resources res = context.getResources();
         final int outerBounds = res.getDimensionPixelSize(R.dimen.status_bar_icon_size);
@@ -96,6 +98,7 @@ public class StatusBarIconView extends AnimatedImageView {
     }
 
     private static boolean streq(String a, String b) {
+        Log.d(TAG, "streq: ");
         if (a == b) {
             return true;
         }
@@ -109,6 +112,7 @@ public class StatusBarIconView extends AnimatedImageView {
     }
 
     public boolean equalIcons(Icon a, Icon b) {
+        Log.d(TAG, "equalIcons: ");
         if (a == b) return true;
         if (a.getType() != b.getType()) return false;
         switch (a.getType()) {
@@ -124,6 +128,7 @@ public class StatusBarIconView extends AnimatedImageView {
      * Returns whether the set succeeded.
      */
     public boolean set(StatusBarIcon icon) {
+        Log.d(TAG, "set: ");
         final boolean iconEquals = mIcon != null && equalIcons(mIcon.icon, icon.icon);
         final boolean levelEquals = iconEquals
                 && mIcon.iconLevel == icon.iconLevel;
@@ -161,10 +166,12 @@ public class StatusBarIconView extends AnimatedImageView {
     }
 
     public void updateDrawable() {
+        Log.d(TAG, "updateDrawable: ");
         updateDrawable(true /* with clear */);
     }
 
     private boolean updateDrawable(boolean withClear) {
+        Log.d(TAG, "updateDrawable: ");
         if (mIcon == null) {
             return false;
         }
@@ -181,6 +188,7 @@ public class StatusBarIconView extends AnimatedImageView {
     }
 
     private Drawable getIcon(StatusBarIcon icon) {
+        Log.d(TAG, "getIcon: ");
         return getIcon(getContext(), icon);
     }
 
@@ -238,11 +246,13 @@ public class StatusBarIconView extends AnimatedImageView {
     @Override
     protected void debug(int depth) {
         super.debug(depth);
+        Log.d(TAG, "debug: ");
         Log.d("View", debugIndent(depth) + "slot=" + mSlot);
         Log.d("View", debugIndent(depth) + "icon=" + mIcon);
     }
 
     void placeNumber() {
+        Log.d(TAG, "placeNumber: ");
         final String str;
         final int tooBig = getContext().getResources().getInteger(
                 android.R.integer.status_bar_notification_info_maxnum);
@@ -276,6 +286,7 @@ public class StatusBarIconView extends AnimatedImageView {
     }
 
     private void setContentDescription(Notification notification) {
+        Log.d(TAG, "setContentDescription: ");
         if (notification != null) {
             CharSequence tickerText = notification.tickerText;
             if (!TextUtils.isEmpty(tickerText)) {
@@ -285,11 +296,13 @@ public class StatusBarIconView extends AnimatedImageView {
     }
 
     public String toString() {
+        Log.d(TAG, "toString: ");
         return "StatusBarIconView(slot=" + mSlot + " icon=" + mIcon
             + " notification=" + mNotification + ")";
     }
 
     public String getSlot() {
+        Log.d(TAG, "getSlot: ");
         return mSlot;
     }
 }
