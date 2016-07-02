@@ -46,6 +46,7 @@ public class SystemBars extends SystemUI implements ServiceMonitor.Callbacks {
 
     @Override
     public void start() {
+        Log.d(TAG, "start: ");
         if (DEBUG) Log.d(TAG, "start");
         mServiceMonitor = new ServiceMonitor(TAG, DEBUG,
                 mContext, Settings.Secure.BAR_SERVICE_COMPONENT, this);
@@ -54,12 +55,14 @@ public class SystemBars extends SystemUI implements ServiceMonitor.Callbacks {
 
     @Override
     public void onNoService() {
+        Log.d(TAG, "onNoService: ");
         if (DEBUG) Log.d(TAG, "onNoService");
         createStatusBarFromConfig();  // fallback to using an in-process implementation
     }
 
     @Override
     public long onServiceStartAttempt() {
+        Log.d(TAG, "onServiceStartAttempt: ");
         if (DEBUG) Log.d(TAG, "onServiceStartAttempt mStatusBar="+mStatusBar);
         if (mStatusBar != null) {
             // tear down the in-process version, we'll recreate it again if needed
@@ -72,6 +75,7 @@ public class SystemBars extends SystemUI implements ServiceMonitor.Callbacks {
 
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
+        Log.d(TAG, "onConfigurationChanged: ");
         if (mStatusBar != null) {
             mStatusBar.onConfigurationChanged(newConfig);
         }
@@ -79,12 +83,14 @@ public class SystemBars extends SystemUI implements ServiceMonitor.Callbacks {
 
     @Override
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         if (mStatusBar != null) {
             mStatusBar.dump(fd, pw, args);
         }
     }
 
     private void createStatusBarFromConfig() {
+        Log.d(TAG, "createStatusBarFromConfig: ");
         if (DEBUG) Log.d(TAG, "createStatusBarFromConfig");
         final String clsName = mContext.getString(R.string.config_statusBarComponent);
         if (clsName == null || clsName.length() == 0) {
@@ -108,6 +114,7 @@ public class SystemBars extends SystemUI implements ServiceMonitor.Callbacks {
     }
 
     private RuntimeException andLog(String msg, Throwable t) {
+        Log.d(TAG, "andLog: ");
         Log.w(TAG, msg, t);
         throw new RuntimeException(msg, t);
     }
