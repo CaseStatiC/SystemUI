@@ -28,6 +28,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.internal.logging.MetricsLogger;
@@ -69,7 +70,7 @@ public class BrightnessController implements ToggleSlider.Listener {
 
     /** ContentObserver to watch brightness **/
     private class BrightnessObserver extends ContentObserver {
-
+        
         private final Uri BRIGHTNESS_MODE_URI =
                 Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS_MODE);
         private final Uri BRIGHTNESS_URI =
@@ -78,16 +79,19 @@ public class BrightnessController implements ToggleSlider.Listener {
                 Settings.System.getUriFor(Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ);
 
         public BrightnessObserver(Handler handler) {
+            Log.d(TAG, "BrightnessObserver: ");
             super(handler);
         }
 
         @Override
         public void onChange(boolean selfChange) {
+            Log.d(TAG, "BrightnessObserver: onChange: ");
             onChange(selfChange, null);
         }
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
+            Log.d(TAG, "BrightnessObserver: onChange: ");
             if (selfChange) return;
             try {
                 mExternalChange = true;
@@ -111,6 +115,7 @@ public class BrightnessController implements ToggleSlider.Listener {
         }
 
         public void startObserving() {
+            Log.d(TAG, "BrightnessObserver: startObserving: ");
             final ContentResolver cr = mContext.getContentResolver();
             cr.unregisterContentObserver(this);
             cr.registerContentObserver(
@@ -125,6 +130,7 @@ public class BrightnessController implements ToggleSlider.Listener {
         }
 
         public void stopObserving() {
+            Log.d(TAG, "BrightnessObserver: stopObserving: ");
             final ContentResolver cr = mContext.getContentResolver();
             cr.unregisterContentObserver(this);
         }
@@ -155,19 +161,23 @@ public class BrightnessController implements ToggleSlider.Listener {
     }
 
     public void addStateChangedCallback(BrightnessStateChangeCallback cb) {
+        Log.d(TAG, "addStateChangedCallback: ");
         mChangeCallbacks.add(cb);
     }
 
     public boolean removeStateChangedCallback(BrightnessStateChangeCallback cb) {
+        Log.d(TAG, "removeStateChangedCallback: ");
         return mChangeCallbacks.remove(cb);
     }
 
     @Override
     public void onInit(ToggleSlider control) {
+        Log.d(TAG, "onInit: ");
         // Do nothing
     }
 
     public void registerCallbacks() {
+        Log.d(TAG, "registerCallbacks: ");
         if (mListening) {
             return;
         }
@@ -186,6 +196,7 @@ public class BrightnessController implements ToggleSlider.Listener {
 
     /** Unregister all call backs, both to and from the controller */
     public void unregisterCallbacks() {
+        Log.d(TAG, "unregisterCallbacks: ");
         if (!mListening) {
             return;
         }
@@ -199,6 +210,7 @@ public class BrightnessController implements ToggleSlider.Listener {
     @Override
     public void onChanged(ToggleSlider view, boolean tracking, boolean automatic, int value,
             boolean stopTracking) {
+        Log.d(TAG, "onChanged: ");
         updateIcon(mAutomatic);
         if (mExternalChange) return;
 
@@ -240,12 +252,14 @@ public class BrightnessController implements ToggleSlider.Listener {
     }
 
     private void setMode(int mode) {
+        Log.d(TAG, "setMode: ");
         Settings.System.putIntForUser(mContext.getContentResolver(),
                 Settings.System.SCREEN_BRIGHTNESS_MODE, mode,
                 mUserTracker.getCurrentUserId());
     }
 
     private void setBrightness(int brightness) {
+        Log.d(TAG, "setBrightness: ");
         try {
             mPower.setTemporaryScreenBrightnessSettingOverride(brightness);
         } catch (RemoteException ex) {
@@ -253,6 +267,7 @@ public class BrightnessController implements ToggleSlider.Listener {
     }
 
     private void setBrightnessAdj(float adj) {
+        Log.d(TAG, "setBrightnessAdj: ");
         try {
             mPower.setTemporaryScreenAutoBrightnessAdjustmentSettingOverride(adj);
         } catch (RemoteException ex) {
@@ -260,6 +275,7 @@ public class BrightnessController implements ToggleSlider.Listener {
     }
 
     private void updateIcon(boolean automatic) {
+        Log.d(TAG, "updateIcon: ");
         if (mIcon != null) {
             mIcon.setImageResource(automatic && SHOW_AUTOMATIC_ICON ?
                     com.android.systemui.R.drawable.ic_qs_brightness_auto_on :
@@ -269,6 +285,7 @@ public class BrightnessController implements ToggleSlider.Listener {
 
     /** Fetch the brightness mode from the system settings and update the icon */
     private void updateMode() {
+        Log.d(TAG, "updateMode: ");
         if (mAutomaticAvailable) {
             int automatic;
             automatic = Settings.System.getIntForUser(mContext.getContentResolver(),
@@ -285,6 +302,7 @@ public class BrightnessController implements ToggleSlider.Listener {
 
     /** Fetch the brightness from the system settings and update the slider */
     private void updateSlider() {
+        Log.d(TAG, "updateSlider: ");
         if (mAutomatic) {
             float value = Settings.System.getFloatForUser(mContext.getContentResolver(),
                     Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0,
