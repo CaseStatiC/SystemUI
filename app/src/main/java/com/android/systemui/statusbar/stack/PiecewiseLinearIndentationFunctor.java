@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * quadratic function
  */
 public class PiecewiseLinearIndentationFunctor extends StackIndentationFunctor {
-    public static final String TAG = "PiecewiseLinearIndentationFunctor";.
+    public static final String TAG = "PiecewiseLinearIndentationFunctor";
     private final ArrayList<Float> mBaseValues;
     private final float mLinearPart;
 

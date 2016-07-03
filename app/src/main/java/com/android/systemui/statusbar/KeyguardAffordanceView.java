@@ -120,8 +120,8 @@ public class KeyguardAffordanceView extends ImageView {
     };
 
     public KeyguardAffordanceView(Context context) {
-        Log.d(TAG, "KeyguardAffordanceView: ");
         this(context, null);
+        Log.d(TAG, "KeyguardAffordanceView: ");
     }
 
     public KeyguardAffordanceView(Context context, AttributeSet attrs) {

@@ -661,8 +661,8 @@ public class UserSwitcherController {
             DialogInterface.OnClickListener {
 
         public AddUserDialog(Context context) {
-            Log.d(TAG, "AddUserDialog: ");
             super(context);
+            Log.d(TAG, "AddUserDialog: ");
             setTitle(R.string.user_add_user_title);
             setMessage(context.getString(R.string.user_add_user_message_short));
             setButton(DialogInterface.BUTTON_NEGATIVE,

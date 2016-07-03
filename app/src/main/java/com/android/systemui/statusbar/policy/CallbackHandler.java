@@ -55,8 +55,8 @@ public class CallbackHandler extends Handler implements EmergencyListener, Signa
 
     @VisibleForTesting
     CallbackHandler(Looper looper) {
-        Log.d(TAG, "CallbackHandler: ");
         super(looper);
+        Log.d(TAG, "CallbackHandler: ");
     }
 
     @Override

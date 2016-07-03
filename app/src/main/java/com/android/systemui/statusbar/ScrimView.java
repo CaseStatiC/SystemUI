@@ -55,8 +55,8 @@ public class ScrimView extends View
     };
 
     public ScrimView(Context context) {
-        Log.d(TAG, "ScrimView: ");
         this(context, null);
+        Log.d(TAG, "ScrimView: ");
     }
 
     public ScrimView(Context context, AttributeSet attrs) {

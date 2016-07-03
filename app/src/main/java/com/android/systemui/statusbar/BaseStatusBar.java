@@ -464,7 +464,7 @@ public abstract class BaseStatusBar extends SystemUI implements
             if (DEBUG) Log.d(TAG, "onListenerConnected");
             final StatusBarNotification[] notifications = getActiveNotifications();
             final RankingMap currentRanking = getCurrentRanking();
-            Log.d(TAG, "mNotificationListener: onListenerConnected: RankingMap = " + RankingMap);
+            Log.d(TAG, "mNotificationListener: onListenerConnected: RankingMap = " + currentRanking);
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -481,7 +481,7 @@ public abstract class BaseStatusBar extends SystemUI implements
         public void onNotificationPosted(final StatusBarNotification sbn,
                 final RankingMap rankingMap) {
             Log.d(TAG, "mNotificationListener: onNotificationPosted: sbn = " + sbn);
-            Log.d(TAG, "mNotificationListener: onNotificationPosted: RankingMap = " + RankingMap);
+            Log.d(TAG, "mNotificationListener: onNotificationPosted: RankingMap = " + rankingMap);
             if (DEBUG) Log.d(TAG, "onNotificationPosted: " + sbn);
             if (sbn != null) {
                 mHandler.post(new Runnable() {
@@ -1627,7 +1627,7 @@ public abstract class BaseStatusBar extends SystemUI implements
 
                             // TODO: Dismiss Keyguard.
                         }
-                        Log.d(TAG, "startPendingIntentDismissingKeyguard: new Thread: run: intent.isActivity = " + intent.isActivity);
+                        Log.d(TAG, "startPendingIntentDismissingKeyguard: new Thread: run: intent.isActivity = " + intent.isActivity());
                         if (intent.isActivity()) {
                             mAssistManager.hideAssist();
                             overrideActivityPendingAppTransition(keyguardShowing

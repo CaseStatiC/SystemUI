@@ -280,8 +280,8 @@ public class ZenModeControllerImpl implements ZenModeController {
         private boolean mRegistered;
 
         public SetupObserver(Handler handler) {
-            Log.d(TAG, "SetupObserver: SetupObserver: ");
             super(handler);
+            Log.d(TAG, "SetupObserver: SetupObserver: ");
             mResolver = mContext.getContentResolver();
         }
 
