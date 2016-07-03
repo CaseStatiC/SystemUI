@@ -18,6 +18,7 @@ package com.android.systemui.settings;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Window;
@@ -29,13 +30,13 @@ import com.android.systemui.R;
 
 /** A dialog that provides controls for adjusting the screen brightness. */
 public class BrightnessDialog extends Activity {
-
+    public static final String TAG = "BrightnessDialog";
     private BrightnessController mBrightnessController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d(TAG, "onCreate: ");
         final Window window = getWindow();
 
         window.setGravity(Gravity.TOP);
@@ -52,6 +53,7 @@ public class BrightnessDialog extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart: ");
         mBrightnessController.registerCallbacks();
         MetricsLogger.visible(this, MetricsLogger.BRIGHTNESS_DIALOG);
     }
@@ -59,12 +61,14 @@ public class BrightnessDialog extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
+        Log.d(TAG, "onStop: ");
         MetricsLogger.hidden(this, MetricsLogger.BRIGHTNESS_DIALOG);
         mBrightnessController.unregisterCallbacks();
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.d(TAG, "onKeyDown: ");
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN
                 || keyCode == KeyEvent.KEYCODE_VOLUME_UP
                 || keyCode == KeyEvent.KEYCODE_VOLUME_MUTE) {
