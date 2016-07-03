@@ -23,6 +23,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.util.Log;
 
 public class TakeScreenshotService extends Service {
     private static final String TAG = "TakeScreenshotService";
@@ -32,6 +33,7 @@ public class TakeScreenshotService extends Service {
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            Log.d(TAG, "handleMessage: ");
             switch (msg.what) {
                 case 1:
                     final Messenger callback = msg.replyTo;
@@ -53,6 +55,7 @@ public class TakeScreenshotService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
+        Log.d(TAG, "onBind: ");
         return new Messenger(mHandler).getBinder();
     }
 }
