@@ -46,6 +46,7 @@ import android.os.Environment;
 import android.os.Process;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -70,6 +71,7 @@ import java.util.Date;
  * POD used in the AsyncTask which saves an image in the background.
  */
 class SaveImageInBackgroundData {
+    public static final String TAG = "SaveImageInBackgroundData";
     Context context;
     Bitmap image;
     Uri imageUri;
@@ -80,11 +82,13 @@ class SaveImageInBackgroundData {
     int previewheight;
 
     void clearImage() {
+        Log.d(TAG, "clearImage: ");
         image = null;
         imageUri = null;
         iconSize = 0;
     }
     void clearContext() {
+        Log.d(TAG, "clearContext: ");
         context = null;
     }
 }
@@ -120,6 +124,7 @@ class SaveImageInBackgroundTask extends AsyncTask<SaveImageInBackgroundData, Voi
 
     SaveImageInBackgroundTask(Context context, SaveImageInBackgroundData data,
             NotificationManager nManager, int nId) {
+        Log.d(TAG, "SaveImageInBackgroundTask: ");
         Resources r = context.getResources();
 
         // Prepare all the output metadata
@@ -210,6 +215,7 @@ class SaveImageInBackgroundTask extends AsyncTask<SaveImageInBackgroundData, Voi
 
     @Override
     protected SaveImageInBackgroundData doInBackground(SaveImageInBackgroundData... params) {
+        Log.d(TAG, "doInBackground: ");
         if (params.length != 1) return null;
         if (isCancelled()) {
             params[0].clearImage();
@@ -305,6 +311,7 @@ class SaveImageInBackgroundTask extends AsyncTask<SaveImageInBackgroundData, Voi
 
     @Override
     protected void onPostExecute(SaveImageInBackgroundData params) {
+        Log.d(TAG, "onPostExecute: ");
         if (isCancelled()) {
             params.finisher.run();
             params.clearImage();
@@ -435,6 +442,7 @@ class GlobalScreenshot {
      * @param context everything needs a context :(
      */
     public GlobalScreenshot(Context context) {
+        Log.d(TAG, "GlobalScreenshot: ");
         Resources r = context.getResources();
         mContext = context;
         LayoutInflater layoutInflater = (LayoutInflater)
@@ -502,6 +510,7 @@ class GlobalScreenshot {
      * Creates a new worker thread and saves the screenshot to the media store.
      */
     private void saveScreenshotInWorkerThread(Runnable finisher) {
+        Log.d(TAG, "saveScreenshotInWorkerThread: ");
         SaveImageInBackgroundData data = new SaveImageInBackgroundData();
         data.context = mContext;
         data.image = mScreenBitmap;
@@ -520,6 +529,7 @@ class GlobalScreenshot {
      * @return the current display rotation in degrees
      */
     private float getDegreesForRotation(int value) {
+        Log.d(TAG, "getDegreesForRotation: ");
         switch (value) {
         case Surface.ROTATION_90:
             return 360f - 90f;
@@ -537,6 +547,7 @@ class GlobalScreenshot {
     void takeScreenshot(Runnable finisher, boolean statusBarVisible, boolean navBarVisible) {
         // We need to orient the screenshot correctly (and the Surface api seems to take screenshots
         // only in the natural orientation of the device :!)
+        Log.d(TAG, "takeScreenshot: ");
         mDisplay.getRealMetrics(mDisplayMetrics);
         float[] dims = {mDisplayMetrics.widthPixels, mDisplayMetrics.heightPixels};
         float degrees = getDegreesForRotation(mDisplay.getRotation());
@@ -588,6 +599,7 @@ class GlobalScreenshot {
      */
     private void startAnimation(final Runnable finisher, int w, int h, boolean statusBarVisible,
             boolean navBarVisible) {
+        Log.d(TAG, "startAnimation: ");
         // Add the view for the animation
         mScreenshotView.setImageBitmap(mScreenBitmap);
         mScreenshotLayout.requestFocus();
@@ -607,6 +619,7 @@ class GlobalScreenshot {
         mScreenshotAnimation.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
+                Log.d(TAG, "addListener: onAnimationEnd: ");
                 // Save the screenshot once we have a bit of time now
                 saveScreenshotInWorkerThread(finisher);
                 mWindowManager.removeView(mScreenshotLayout);
@@ -619,6 +632,7 @@ class GlobalScreenshot {
         mScreenshotLayout.post(new Runnable() {
             @Override
             public void run() {
+                Log.d(TAG, "addListener: run: ");
                 // Play the shutter sound to notify that we've taken a screenshot
                 mCameraSound.play(MediaActionSound.SHUTTER_CLICK);
 
@@ -629,12 +643,14 @@ class GlobalScreenshot {
         });
     }
     private ValueAnimator createScreenshotDropInAnimation() {
+        Log.d(TAG, "createScreenshotDropInAnimation: ");
         final float flashPeakDurationPct = ((float) (SCREENSHOT_FLASH_TO_PEAK_DURATION)
                 / SCREENSHOT_DROP_IN_DURATION);
         final float flashDurationPct = 2f * flashPeakDurationPct;
         final Interpolator flashAlphaInterpolator = new Interpolator() {
             @Override
             public float getInterpolation(float x) {
+                Log.d(TAG, "flashAlphaInterpolator: getInterpolation: ");
                 // Flash the flash view in and out quickly
                 if (x <= flashDurationPct) {
                     return (float) Math.sin(Math.PI * (x / flashDurationPct));
@@ -645,6 +661,7 @@ class GlobalScreenshot {
         final Interpolator scaleInterpolator = new Interpolator() {
             @Override
             public float getInterpolation(float x) {
+                Log.d(TAG, "scaleInterpolator: getInterpolation: ");
                 // We start scaling when the flash is at it's peak
                 if (x < flashPeakDurationPct) {
                     return 0;
@@ -676,6 +693,7 @@ class GlobalScreenshot {
         anim.addUpdateListener(new AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
+                Log.d(TAG, " addUpdateListener: onAnimationUpdate: ");
                 float t = (Float) animation.getAnimatedValue();
                 float scaleT = (SCREENSHOT_SCALE + mBgPaddingScale)
                     - scaleInterpolator.getInterpolation(t)
@@ -691,6 +709,7 @@ class GlobalScreenshot {
     }
     private ValueAnimator createScreenshotDropOutAnimation(int w, int h, boolean statusBarVisible,
             boolean navBarVisible) {
+        Log.d(TAG, "createScreenshotDropOutAnimation: ");
         ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
         anim.setStartDelay(SCREENSHOT_DROP_OUT_DELAY);
         anim.addListener(new AnimatorListenerAdapter() {
@@ -763,7 +782,7 @@ class GlobalScreenshot {
 
     static void notifyScreenshotError(Context context, NotificationManager nManager) {
         Resources r = context.getResources();
-
+        Log.d(TAG, "notifyScreenshotError: ");
         // Clear all existing notification, compose the new notification and show it
         Notification.Builder b = new Notification.Builder(context)
             .setTicker(r.getString(R.string.screenshot_failed_title))
@@ -789,6 +808,7 @@ class GlobalScreenshot {
     public static class TargetChosenReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "onReceive: ");
             if (!intent.hasExtra(CANCEL_ID)) {
                 return;
             }
@@ -807,6 +827,7 @@ class GlobalScreenshot {
     public static class DeleteScreenshotReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "DeleteScreenshotReceiver: onReceive: ");
             if (!intent.hasExtra(CANCEL_ID) || !intent.hasExtra(SCREENSHOT_URI_ID)) {
                 return;
             }
