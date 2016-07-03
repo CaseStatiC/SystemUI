@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -33,6 +34,7 @@ import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.BrightnessMirrorController;
 
 public class ToggleSlider extends RelativeLayout {
+    public static final String TAG = "ToggleSlider";
     public interface Listener {
         public void onInit(ToggleSlider v);
         public void onChanged(ToggleSlider v, boolean tracking, boolean checked, int value,
@@ -81,6 +83,7 @@ public class ToggleSlider extends RelativeLayout {
     }
 
     public void setMirror(ToggleSlider toggleSlider) {
+        Log.d(TAG, "setMirror: ");
         mMirror = toggleSlider;
         if (mMirror != null) {
             mMirror.setChecked(mToggle.isChecked());
@@ -90,11 +93,13 @@ public class ToggleSlider extends RelativeLayout {
     }
 
     public void setMirrorController(BrightnessMirrorController c) {
+        Log.d(TAG, "setMirrorController: ");
         mMirrorController = c;
     }
 
     @Override
     protected void onAttachedToWindow() {
+        Log.d(TAG, "onAttachedToWindow: ");
         super.onAttachedToWindow();
         if (mListener != null) {
             mListener.onInit(this);
@@ -102,18 +107,22 @@ public class ToggleSlider extends RelativeLayout {
     }
 
     public void setOnChangedListener(Listener l) {
+        Log.d(TAG, "setOnChangedListener: ");
         mListener = l;
     }
 
     public void setChecked(boolean checked) {
+        Log.d(TAG, "setChecked: ");
         mToggle.setChecked(checked);
     }
 
     public boolean isChecked() {
+        Log.d(TAG, "isChecked: ");
         return mToggle.isChecked();
     }
 
     public void setMax(int max) {
+        Log.d(TAG, "setMax: ");
         mSlider.setMax(max);
         if (mMirror != null) {
             mMirror.setMax(max);
@@ -121,6 +130,7 @@ public class ToggleSlider extends RelativeLayout {
     }
 
     public void setValue(int value) {
+        Log.d(TAG, "setValue: ");
         mSlider.setProgress(value);
         if (mMirror != null) {
             mMirror.setValue(value);
@@ -129,6 +139,7 @@ public class ToggleSlider extends RelativeLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "dispatchTouchEvent: ");
         if (mMirror != null) {
             MotionEvent copy = ev.copy();
             mMirror.dispatchTouchEvent(copy);
@@ -140,6 +151,7 @@ public class ToggleSlider extends RelativeLayout {
     private final OnCheckedChangeListener mCheckListener = new OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton toggle, boolean checked) {
+            Log.d(TAG, "mCheckListener: onCheckedChanged: ");
             mSlider.setEnabled(!checked);
 
             if (mListener != null) {
@@ -156,6 +168,7 @@ public class ToggleSlider extends RelativeLayout {
     private final OnSeekBarChangeListener mSeekListener = new OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            Log.d(TAG, "mSeekListener: onProgressChanged: ");
             if (mListener != null) {
                 mListener.onChanged(
                         ToggleSlider.this, mTracking, mToggle.isChecked(), progress, false);
@@ -164,6 +177,7 @@ public class ToggleSlider extends RelativeLayout {
 
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
+            Log.d(TAG, "mSeekListener: onStartTrackingTouch: ");
             mTracking = true;
 
             if (mListener != null) {
@@ -181,6 +195,7 @@ public class ToggleSlider extends RelativeLayout {
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
+            Log.d(TAG, "mSeekListener: onStopTrackingTouch: ");
             mTracking = false;
 
             if (mListener != null) {
