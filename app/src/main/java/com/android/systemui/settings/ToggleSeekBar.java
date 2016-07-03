@@ -18,12 +18,14 @@ package com.android.systemui.settings;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.SeekBar;
 
 public class ToggleSeekBar extends SeekBar {
+    public static final String TAG = "ToggleSeekBar";
     private String mAccessibilityLabel;
 
     public ToggleSeekBar(Context context) {
@@ -40,6 +42,7 @@ public class ToggleSeekBar extends SeekBar {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onTouchEvent: ");
         if (!isEnabled()) {
             setEnabled(true);
         }
@@ -48,12 +51,14 @@ public class ToggleSeekBar extends SeekBar {
     }
 
     public void setAccessibilityLabel(String label) {
+        Log.d(TAG, "setAccessibilityLabel: ");
         mAccessibilityLabel = label;
     }
 
     @Override
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
+        Log.d(TAG, "onInitializeAccessibilityNodeInfo: ");
         if (mAccessibilityLabel != null) {
             info.setText(mAccessibilityLabel);
         }
