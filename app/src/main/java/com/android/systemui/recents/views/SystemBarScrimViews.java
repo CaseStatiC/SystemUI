@@ -17,13 +17,14 @@
 package com.android.systemui.recents.views;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import com.android.systemui.R;
 import com.android.systemui.recents.RecentsConfiguration;
 
 /** Manages the scrims for the various system bars. */
 public class SystemBarScrimViews {
-
+    public  static final String TAG = "SystemBarScrimViews";
     RecentsConfiguration mConfig;
 
     View mStatusBarScrimView;
@@ -45,6 +46,7 @@ public class SystemBarScrimViews {
      * the first draw.
      */
     public void prepareEnterRecentsAnimation() {
+        Log.d(TAG, "prepareEnterRecentsAnimation: ");
         mHasNavBarScrim = mConfig.hasNavBarScrim();
         mShouldAnimateNavBarScrim = mConfig.shouldAnimateNavBarScrim();
         mHasStatusBarScrim = mConfig.hasStatusBarScrim();
@@ -60,6 +62,7 @@ public class SystemBarScrimViews {
      * Starts animating the scrim views when entering Recents.
      */
     public void startEnterRecentsAnimation() {
+        Log.d(TAG, "startEnterRecentsAnimation: ");
         if (mHasStatusBarScrim && mShouldAnimateStatusBarScrim) {
             mStatusBarScrimView.setTranslationY(-mStatusBarScrimView.getMeasuredHeight());
             mStatusBarScrimView.animate()
@@ -101,6 +104,7 @@ public class SystemBarScrimViews {
      * going home).
      */
     public void startExitRecentsAnimation() {
+        Log.d(TAG, "startExitRecentsAnimation: ");
         if (mHasStatusBarScrim && mShouldAnimateStatusBarScrim) {
             mStatusBarScrimView.animate()
                     .translationY(-mStatusBarScrimView.getMeasuredHeight())
