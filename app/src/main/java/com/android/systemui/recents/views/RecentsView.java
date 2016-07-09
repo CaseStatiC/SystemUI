@@ -102,16 +102,19 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Sets the callbacks */
     public void setCallbacks(RecentsViewCallbacks cb) {
+        Log.d(TAG, "setCallbacks: ");
         mCb = cb;
     }
 
     /** Sets the debug overlay */
     public void setDebugOverlay(DebugOverlayView overlay) {
+        Log.d(TAG, "setDebugOverlay: ");
         mDebugOverlay = overlay;
     }
 
     /** Set/get the bsp root node */
     public void setTaskStacks(ArrayList<TaskStack> stacks) {
+        Log.d(TAG, "setTaskStacks: ");
         int numStacks = stacks.size();
 
         // Remove all/extra stack views
@@ -155,11 +158,13 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Gets the list of task views */
     List<TaskStackView> getTaskStackViews() {
+        Log.d(TAG, "getTaskStackViews: ");
         return mTaskStackViews;
     }
 
     /** Gets the next task in the stack - or if the last - the top task */
     public Task getNextTaskOrTopTask(Task taskToSearch) {
+        Log.d(TAG, "getNextTaskOrTopTask: ");
         Task returnTask = null; 
         boolean found = false;
         List<TaskStackView> stackViews = getTaskStackViews();
@@ -185,6 +190,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Launches the focused task from the first stack if possible */
     public boolean launchFocusedTask() {
+        Log.d(TAG, "launchFocusedTask: ");
         // Get the first stack view
         List<TaskStackView> stackViews = getTaskStackViews();
         int stackCount = stackViews.size();
@@ -208,6 +214,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Launches a given task. */
     public boolean launchTask(Task task) {
+        Log.d(TAG, "launchTask: ");
         // Get the first stack view
         List<TaskStackView> stackViews = getTaskStackViews();
         int stackCount = stackViews.size();
@@ -230,6 +237,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Launches the task that Recents was launched from, if possible */
     public boolean launchPreviousTask() {
+        Log.d(TAG, "launchPreviousTask: ");
         // Get the first stack view
         List<TaskStackView> stackViews = getTaskStackViews();
         int stackCount = stackViews.size();
@@ -256,6 +264,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Requests all task stacks to start their enter-recents animation */
     public void startEnterRecentsAnimation(ViewAnimation.TaskViewEnterContext ctx) {
+        Log.d(TAG, "startEnterRecentsAnimation: ");
         // We have to increment/decrement the post animation trigger in case there are no children
         // to ensure that it runs
         ctx.postAnimationTrigger.increment();
@@ -271,6 +280,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Requests all task stacks to start their exit-recents animation */
     public void startExitToHomeAnimation(ViewAnimation.TaskViewExitContext ctx) {
+        Log.d(TAG, "startExitToHomeAnimation: ");
         // We have to increment/decrement the post animation trigger in case there are no children
         // to ensure that it runs
         ctx.postAnimationTrigger.increment();
@@ -288,6 +298,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Adds the search bar */
     public void setSearchBar(RecentsAppWidgetHostView searchBar) {
+        Log.d(TAG, "setSearchBar: ");
         // Remove the previous search bar if one exists
         if (mSearchBar != null && indexOfChild(mSearchBar) > -1) {
             removeView(mSearchBar);
@@ -301,11 +312,13 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Returns whether there is currently a search bar */
     public boolean hasValidSearchBar() {
+        Log.d(TAG, "hasValidSearchBar: ");
         return mSearchBar != null && !mSearchBar.isReinflateRequired();
     }
 
     /** Sets the visibility of the search bar */
     public void setSearchBarVisibility(int visibility) {
+        Log.d(TAG, "setSearchBarVisibility: ");
         if (mSearchBar != null) {
             mSearchBar.setVisibility(visibility);
             // Always bring the search bar to the top
@@ -318,6 +331,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.d(TAG, "onMeasure: ");
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
 
@@ -359,6 +373,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
      */
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        Log.d(TAG, "onLayout: ");
         // Get the search bar bounds so that we lay it out
         if (mSearchBar != null) {
             Rect searchBarSpaceBounds = new Rect();
@@ -383,6 +398,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        Log.d(TAG, "onApplyWindowInsets: ");
         // Update the configuration with the latest system insets and trigger a relayout
         mConfig.updateSystemInsets(insets.getSystemWindowInsets());
         requestLayout();
@@ -391,6 +407,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Notifies each task view of the user interaction. */
     public void onUserInteraction() {
+        Log.d(TAG, "onUserInteraction: ");
         // Get the first stack view
         List<TaskStackView> stackViews = getTaskStackViews();
         int stackCount = stackViews.size();
@@ -402,6 +419,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Focuses the next task in the first stack view */
     public void focusNextTask(boolean forward) {
+        Log.d(TAG, "focusNextTask: ");
         // Get the first stack view
         List<TaskStackView> stackViews = getTaskStackViews();
         if (!stackViews.isEmpty()) {
@@ -411,6 +429,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Dismisses the focused task. */
     public void dismissFocusedTask() {
+        Log.d(TAG, "dismissFocusedTask: ");
         // Get the first stack view
         List<TaskStackView> stackViews = getTaskStackViews();
         if (!stackViews.isEmpty()) {
@@ -420,6 +439,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     /** Unfilters any filtered stacks */
     public boolean unfilterFilteredStacks() {
+        Log.d(TAG, "unfilterFilteredStacks: ");
         if (mStacks != null) {
             // Check if there are any filtered stacks and unfilter them before we back out of Recents
             boolean stacksUnfiltered = false;
@@ -437,13 +457,14 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
     }
 
     public void disableLayersForOneFrame() {
+        Log.d(TAG, "disableLayersForOneFrame: ");
         List<TaskStackView> stackViews = getTaskStackViews();
         for (int i = 0; i < stackViews.size(); i++) {
             stackViews.get(i).disableLayersForOneFrame();
         }
     }
 
-    private void postDrawHeaderThumbnailTransitionRunnable(final TaskView tv, final int offsetX,
+    private void postDrawHeaderThumbnailTransitionRunnable(final TaskView tv, final int offsetX
             final int offsetY, final TaskViewTransform transform,
             final ActivityOptions.OnAnimationStartedListener animStartedListener) {
         Runnable r = new Runnable() {
@@ -504,7 +525,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
     @Override
     public void onTaskViewClicked(final TaskStackView stackView, final TaskView tv,
                                   final TaskStack stack, final Task task, final boolean lockToTask) {
-
+        Log.d(TAG, "onTaskViewClicked: ");
         // Notify any callbacks of the launching of a new task
         if (mCb != null) {
             mCb.onTaskViewClicked();
@@ -624,6 +645,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     @Override
     public void onTaskViewAppInfoClicked(Task t) {
+        Log.d(TAG, "onTaskViewAppInfoClicked: ");
         // Create a new task stack with the application info details activity
         Intent baseIntent = t.key.baseIntent;
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
@@ -636,6 +658,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
 
     @Override
     public void onTaskViewDismissed(Task t) {
+        Log.d(TAG, "onTaskViewDismissed: ");
         // Remove any stored data from the loader.  We currently don't bother notifying the views
         // that the data has been unloaded because at the point we call onTaskViewDismissed(), the views
         // either don't need to be updated, or have already been removed.
