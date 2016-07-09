@@ -40,6 +40,8 @@ import com.android.systemui.recents.RecentsConfiguration;
  */
 class FakeShadowDrawable extends Drawable {
     // used to calculate content padding
+    
+    public static final String TAG = "FakeShadowDrawable";
     final static double COS_45 = Math.cos(Math.toRadians(45));
 
     final static float SHADOW_MULTIPLIER = 1.5f;
@@ -97,6 +99,7 @@ class FakeShadowDrawable extends Drawable {
 
     @Override
     public void setAlpha(int alpha) {
+        Log.d(TAG, "setAlpha: ");
         mCornerShadowPaint.setAlpha(alpha);
         mEdgeShadowPaint.setAlpha(alpha);
     }
@@ -104,10 +107,12 @@ class FakeShadowDrawable extends Drawable {
     @Override
     protected void onBoundsChange(Rect bounds) {
         super.onBoundsChange(bounds);
+        Log.d(TAG, "onBoundsChange: ");
         mDirty = true;
     }
 
     void setShadowSize(float shadowSize, float maxShadowSize) {
+        Log.d(TAG, "setShadowSize: ");
         if (shadowSize < 0 || maxShadowSize < 0) {
             throw new IllegalArgumentException("invalid shadow size");
         }
@@ -132,6 +137,7 @@ class FakeShadowDrawable extends Drawable {
 
     @Override
     public boolean getPadding(Rect padding) {
+        Log.d(TAG, "getPadding: ");
         int vOffset = (int) Math.ceil(calculateVerticalPadding(mRawMaxShadowSize, mCornerRadius,
                 mAddPaddingForCorners));
         int hOffset = (int) Math.ceil(calculateHorizontalPadding(mRawMaxShadowSize, mCornerRadius,
@@ -142,6 +148,7 @@ class FakeShadowDrawable extends Drawable {
 
     static float calculateVerticalPadding(float maxShadowSize, float cornerRadius,
             boolean addPaddingForCorners) {
+        Log.d(TAG, "calculateVerticalPadding: ");
         if (addPaddingForCorners) {
             return (float) (maxShadowSize * SHADOW_MULTIPLIER + (1 - COS_45) * cornerRadius);
         } else {
@@ -151,6 +158,7 @@ class FakeShadowDrawable extends Drawable {
 
     static float calculateHorizontalPadding(float maxShadowSize, float cornerRadius,
             boolean addPaddingForCorners) {
+        Log.d(TAG, "calculateHorizontalPadding: ");
         if (addPaddingForCorners) {
             return (float) (maxShadowSize + (1 - COS_45) * cornerRadius);
         } else {
@@ -160,17 +168,20 @@ class FakeShadowDrawable extends Drawable {
 
     @Override
     public void setColorFilter(ColorFilter colorFilter) {
+        Log.d(TAG, "setColorFilter: ");
         mCornerShadowPaint.setColorFilter(colorFilter);
         mEdgeShadowPaint.setColorFilter(colorFilter);
     }
 
     @Override
     public int getOpacity() {
+        Log.d(TAG, "getOpacity: ");
         return PixelFormat.OPAQUE;
     }
 
     @Override
     public void draw(Canvas canvas) {
+        Log.d(TAG, "draw: ");
         if (mDirty) {
             buildComponents(getBounds());
             mDirty = false;
@@ -181,6 +192,7 @@ class FakeShadowDrawable extends Drawable {
     }
 
     private void drawShadow(Canvas canvas) {
+        Log.d(TAG, "drawShadow: ");
         final float edgeShadowTop = -mCornerRadius - mShadowSize;
         final float inset = mCornerRadius + mInsetShadow + mRawShadowSize / 2;
         final boolean drawHorizontalEdges = mCardBounds.width() - 2 * inset > 0;
@@ -229,6 +241,7 @@ class FakeShadowDrawable extends Drawable {
     }
 
     private void buildShadowCorners() {
+        Log.d(TAG, "buildShadowCorners: ");
         RectF innerBounds = new RectF(-mCornerRadius, -mCornerRadius, mCornerRadius, mCornerRadius);
         RectF outerBounds = new RectF(innerBounds);
         outerBounds.inset(-mShadowSize, -mShadowSize);
@@ -263,6 +276,7 @@ class FakeShadowDrawable extends Drawable {
     }
 
     private void buildComponents(Rect bounds) {
+        Log.d(TAG, "buildComponents: ");
         // Card is offset SHADOW_MULTIPLIER * maxShadowSize to account for the shadow shift.
         // We could have different top-bottom offsets to avoid extra gap above but in that case
         // center aligning Views inside the CardView would be problematic.
@@ -273,12 +287,14 @@ class FakeShadowDrawable extends Drawable {
     }
 
     float getMinWidth() {
+        Log.d(TAG, "getMinWidth: ");
         final float content = 2 *
                 Math.max(mRawMaxShadowSize, mCornerRadius + mInsetShadow + mRawMaxShadowSize / 2);
         return content + (mRawMaxShadowSize + mInsetShadow) * 2;
     }
 
     float getMinHeight() {
+        Log.d(TAG, "getMinHeight: ");
         final float content = 2 * Math.max(mRawMaxShadowSize, mCornerRadius + mInsetShadow
                         + mRawMaxShadowSize * SHADOW_MULTIPLIER / 2);
         return content + (mRawMaxShadowSize * SHADOW_MULTIPLIER + mInsetShadow) * 2;
