@@ -17,6 +17,8 @@
 package com.android.systemui.recents.views;
 
 import android.graphics.Rect;
+import android.util.Log;
+
 import com.android.systemui.recents.Constants;
 import com.android.systemui.recents.RecentsConfiguration;
 import com.android.systemui.recents.misc.Utilities;
@@ -32,7 +34,7 @@ import java.util.HashMap;
  * stack rect), and p = 1 at the start of the curve and the bottom of the stack rect.
  */
 public class TaskStackViewLayoutAlgorithm {
-
+    public static final String TAG = "TaskStackViewLayoutAlgorithm";
     // These are all going to change
     static final float StackPeekMinScale = 0.8f; // The min scale of the last card in the peek area
 
@@ -80,6 +82,7 @@ public class TaskStackViewLayoutAlgorithm {
 
     /** Computes the stack and task rects */
     public void computeRects(int windowWidth, int windowHeight, Rect taskStackBounds) {
+        Log.d(TAG, "computeRects: ");
         // Compute the stack rects
         mViewRect.set(0, 0, windowWidth, windowHeight);
         mStackRect.set(taskStackBounds);
@@ -106,6 +109,7 @@ public class TaskStackViewLayoutAlgorithm {
      * the RecentsConfiguration is set, so we need to pass in the alt-tab state. */
     void computeMinMaxScroll(ArrayList<Task> tasks, boolean launchedWithAltTab,
             boolean launchedFromHome) {
+        Log.d(TAG, "computeMinMaxScroll: ");
         // Clear the progress map
         mTaskProgressMap.clear();
 
@@ -171,6 +175,7 @@ public class TaskStackViewLayoutAlgorithm {
      * computeMinMaxScroll() is called first.
      */
     public VisibilityReport computeStackVisibilityReport(ArrayList<Task> tasks) {
+        Log.d(TAG, "computeStackVisibilityReport: ");
         if (tasks.size() <= 1) {
             return new VisibilityReport(1, 1);
         }
@@ -220,6 +225,7 @@ public class TaskStackViewLayoutAlgorithm {
     /** Update/get the transform */
     public TaskViewTransform getStackTransform(Task task, float stackScroll,
             TaskViewTransform transformOut, TaskViewTransform prevTransform) {
+        Log.d(TAG, "getStackTransform: ");
         // Return early if we have an invalid index
         if (task == null || !mTaskProgressMap.containsKey(task.key)) {
             transformOut.reset();
@@ -232,6 +238,7 @@ public class TaskStackViewLayoutAlgorithm {
     /** Update/get the transform */
     public TaskViewTransform getStackTransform(float taskProgress, float stackScroll,
             TaskViewTransform transformOut, TaskViewTransform prevTransform) {
+        Log.d(TAG, "getStackTransform: ");
         float pTaskRelative = taskProgress - stackScroll;
         float pBounded = Math.max(0, Math.min(pTaskRelative, 1f));
         // If the task top is outside of the bounds below the screen, then immediately reset it
@@ -267,6 +274,7 @@ public class TaskStackViewLayoutAlgorithm {
 
     /** Returns the untransformed task view size. */
     public Rect getUntransformedTaskViewSize() {
+        Log.d(TAG, "getUntransformedTaskViewSize: ");
         Rect tvSize = new Rect(mTaskRect);
         tvSize.offsetTo(0, 0);
         return tvSize;
@@ -274,12 +282,14 @@ public class TaskStackViewLayoutAlgorithm {
 
     /** Returns the scroll to such task top = 1f; */
     float getStackScrollForTask(Task t) {
+        Log.d(TAG, "getStackScrollForTask: ");
         if (!mTaskProgressMap.containsKey(t.key)) return 0f;
         return mTaskProgressMap.get(t.key);
     }
 
     /** Initializes the curve. */
     public static void initializeCurve() {
+        Log.d(TAG, "initializeCurve: ");
         if (xp != null && px != null) return;
         xp = new float[PrecisionSteps + 1];
         px = new float[PrecisionSteps + 1];
@@ -335,19 +345,23 @@ public class TaskStackViewLayoutAlgorithm {
 
     /** Reverses and scales out x. */
     static float reverse(float x) {
+        Log.d(TAG, "reverse: ");
         return (-x * XScale) + 1;
     }
     /** The log function describing the curve. */
     static float logFunc(float x) {
+        Log.d(TAG, "logFunc: ");
         return 1f - (float) (Math.pow(LogBase, reverse(x))) / (LogBase);
     }
     /** The inverse of the log function describing the curve. */
     float invLogFunc(float y) {
+        Log.d(TAG, "invLogFunc: ");
         return (float) (Math.log((1f - reverse(y)) * (LogBase - 1) + 1) / Math.log(LogBase));
     }
 
     /** Converts from the progress along the curve to a screen coordinate. */
     int curveProgressToScreenY(float p) {
+        Log.d(TAG, "curveProgressToScreenY: ");
         if (p < 0 || p > 1) return mStackVisibleRect.top + (int) (p * mStackVisibleRect.height());
         float pIndex = p * PrecisionSteps;
         int pFloorIndex = (int) Math.floor(pIndex);
@@ -363,6 +377,7 @@ public class TaskStackViewLayoutAlgorithm {
 
     /** Converts from the progress along the curve to a scale. */
     float curveProgressToScale(float p) {
+        Log.d(TAG, "curveProgressToScale: ");
         if (p < 0) return StackPeekMinScale;
         if (p > 1) return 1f;
         float scaleRange = (1f - StackPeekMinScale);
@@ -372,6 +387,7 @@ public class TaskStackViewLayoutAlgorithm {
 
     /** Converts from a screen coordinate to the progress along the curve. */
     float screenYToCurveProgress(int screenY) {
+        Log.d(TAG, "screenYToCurveProgress: ");
         float x = (float) (screenY - mStackVisibleRect.top) / mStackVisibleRect.height();
         if (x < 0 || x > 1) return x;
         float xIndex = x * PrecisionSteps;
