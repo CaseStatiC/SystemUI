@@ -21,6 +21,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
  * most layer.
  */
 public class DebugOverlayView extends FrameLayout implements SeekBar.OnSeekBarChangeListener {
-
+    public static final String TAG = "DebugOverlayView";
     public interface DebugOverlayViewCallbacks {
         public void onPrimarySeekBarChanged(float progress);
         public void onSecondarySeekBarChanged(float progress);
@@ -78,11 +79,13 @@ public class DebugOverlayView extends FrameLayout implements SeekBar.OnSeekBarCh
     }
 
     public void setCallbacks(DebugOverlayViewCallbacks cb) {
+        Log.d(TAG, "setCallbacks: ");
         mCb = cb;
     }
 
     @Override
     protected void onFinishInflate() {
+        Log.d(TAG, "onFinishInflate: ");
         mPrimarySeekBar = (SeekBar) findViewById(R.id.debug_seek_bar_1);
         mPrimarySeekBar.setOnSeekBarChangeListener(this);
         mSecondarySeekBar = (SeekBar) findViewById(R.id.debug_seek_bar_2);
@@ -91,29 +94,34 @@ public class DebugOverlayView extends FrameLayout implements SeekBar.OnSeekBarCh
 
     /** Enables the debug overlay drawing. */
     public void enable() {
+        Log.d(TAG, "enable: ");
         mEnabled = true;
         setVisibility(View.VISIBLE);
     }
 
     /** Disables the debug overlay drawing. */
     public void disable() {
+        Log.d(TAG, "disable: ");
         mEnabled = false;
         setVisibility(View.GONE);
     }
 
     /** Clears all debug rects. */
     public void clear() {
+        Log.d(TAG, "clear: ");
         mRects.clear();
     }
 
     /** Adds a rect to be drawn. */
     void addRect(Rect r, int color) {
+        Log.d(TAG, "addRect: ");
         mRects.add(new Pair<Rect, Integer>(r, color));
         invalidate();
     }
 
     /** Adds a view's global rect to be drawn. */
     void addViewRect(View v, int color) {
+        Log.d(TAG, "addViewRect: ");
         Rect vr = new Rect();
         v.getGlobalVisibleRect(vr);
         mRects.add(new Pair<Rect, Integer>(vr, color));
@@ -122,6 +130,7 @@ public class DebugOverlayView extends FrameLayout implements SeekBar.OnSeekBarCh
 
     /** Adds a rect, relative to a given view to be drawn. */
     void addRectRelativeToView(View v, Rect r, int color) {
+        Log.d(TAG, "addRectRelativeToView: ");
         Rect vr = new Rect();
         v.getGlobalVisibleRect(vr);
         r.offsetTo(vr.left, vr.top);
@@ -131,6 +140,7 @@ public class DebugOverlayView extends FrameLayout implements SeekBar.OnSeekBarCh
 
     /** Sets the debug text at the bottom of the screen. */
     void setText(String message) {
+        Log.d(TAG, "setText: ");
         mText = message;
         invalidate();
     }
@@ -138,6 +148,7 @@ public class DebugOverlayView extends FrameLayout implements SeekBar.OnSeekBarCh
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        Log.d(TAG, "onMeasure: ");
         addRect(new Rect(0, 0, sCornerRectSize, sCornerRectSize), 0xFFff0000);
         addRect(new Rect(getMeasuredWidth() - sCornerRectSize, getMeasuredHeight() - sCornerRectSize,
                 getMeasuredWidth(), getMeasuredHeight()), 0xFFff0000);
@@ -145,6 +156,7 @@ public class DebugOverlayView extends FrameLayout implements SeekBar.OnSeekBarCh
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.d(TAG, "onDraw: ");
         if (mEnabled) {
             // Draw the outline
             canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), mDebugOutline);
@@ -171,16 +183,19 @@ public class DebugOverlayView extends FrameLayout implements SeekBar.OnSeekBarCh
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
+        Log.d(TAG, "onStopTrackingTouch: ");
         // Do nothing
     }
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
+        Log.d(TAG, "onStartTrackingTouch: ");
         // Do nothing
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        Log.d(TAG, "onProgressChanged: ");
         if (seekBar == mPrimarySeekBar) {
             mCb.onPrimarySeekBarChanged((float) progress / mPrimarySeekBar.getMax());
         } else if (seekBar == mSecondarySeekBar) {
