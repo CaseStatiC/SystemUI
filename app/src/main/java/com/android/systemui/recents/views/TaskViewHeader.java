@@ -37,6 +37,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.FrameLayout;
@@ -53,7 +54,7 @@ import com.android.systemui.recents.model.Task;
 
 /* The task bar view */
 public class TaskViewHeader extends FrameLayout {
-
+    public static final String TAG = "TaskViewHeader";
     RecentsConfiguration mConfig;
     private SystemServicesProxy mSsp;
 
@@ -127,6 +128,7 @@ public class TaskViewHeader extends FrameLayout {
 
     @Override
     protected void onFinishInflate() {
+        Log.d(TAG, "onFinishInflate: ");
         // Initialize the icon and description views
         mApplicationIcon = (ImageView) findViewById(R.id.application_icon);
         mActivityDescription = (TextView) findViewById(R.id.activity_description);
@@ -153,6 +155,7 @@ public class TaskViewHeader extends FrameLayout {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.d(TAG, "onDraw: ");
         // Draw the highlight at the top edge (but put the bottom edge just out of view)
         float offset = (float) Math.ceil(mConfig.taskViewHighlightPx / 2f);
         float radius = mConfig.taskViewRoundedCornerRadiusPx;
@@ -165,6 +168,7 @@ public class TaskViewHeader extends FrameLayout {
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 
@@ -173,6 +177,7 @@ public class TaskViewHeader extends FrameLayout {
      * (see RecentsConfiguration.useHardwareLayers)
      */
     void setDimAlpha(int alpha) {
+        Log.d(TAG, "setDimAlpha: ");
         mDimColorFilter.setColor(Color.argb(alpha, 0, 0, 0));
         mDimLayerPaint.setColorFilter(mDimColorFilter);
         if (!mLayersDisabled) {
@@ -182,12 +187,14 @@ public class TaskViewHeader extends FrameLayout {
 
     /** Returns the secondary color for a primary color. */
     int getSecondaryColor(int primaryColor, boolean useLightOverlayColor) {
+        Log.d(TAG, "getSecondaryColor: ");
         int overlayColor = useLightOverlayColor ? Color.WHITE : Color.BLACK;
         return Utilities.getColorWithOverlay(primaryColor, overlayColor, 0.8f);
     }
 
     /** Binds the bar view to the task */
     public void rebindToTask(Task t) {
+        Log.d(TAG, "rebindToTask: ");
         // If an activity icon is defined, then we use that as the primary icon to show in the bar,
         // otherwise, we fall back to the application icon
         if (t.activityIcon != null) {
@@ -223,6 +230,7 @@ public class TaskViewHeader extends FrameLayout {
 
     /** Updates the resize task bar button. */
     void updateResizeTaskBarIcon(Task t) {
+        Log.d(TAG, "updateResizeTaskBarIcon: ");
         Rect display = mSsp.getWindowRect();
         Rect taskRect = mSsp.getTaskBounds(t.key.stackId);
         int resId = R.drawable.star;
@@ -256,11 +264,13 @@ public class TaskViewHeader extends FrameLayout {
 
     /** Unbinds the bar view from the task */
     void unbindFromTask() {
+        Log.d(TAG, "unbindFromTask: ");
         mApplicationIcon.setImageDrawable(null);
     }
 
     /** Animates this task bar dismiss button when launching a task. */
     void startLaunchTaskDismissAnimation() {
+        Log.d(TAG, "startLaunchTaskDismissAnimation: ");
         if (mDismissButton.getVisibility() == View.VISIBLE) {
             mDismissButton.animate().cancel();
             mDismissButton.animate()
@@ -274,6 +284,7 @@ public class TaskViewHeader extends FrameLayout {
 
     /** Animates this task bar if the user does not interact with the stack after a certain time. */
     void startNoUserInteractionAnimation() {
+        Log.d(TAG, "startNoUserInteractionAnimation: ");
         if (mDismissButton.getVisibility() != View.VISIBLE) {
             mDismissButton.setVisibility(View.VISIBLE);
             mDismissButton.setAlpha(0f);
@@ -288,6 +299,7 @@ public class TaskViewHeader extends FrameLayout {
 
     /** Mark this task view that the user does has not interacted with the stack after a certain time. */
     void setNoUserInteractionState() {
+        Log.d(TAG, "setNoUserInteractionState: ");
         if (mDismissButton.getVisibility() != View.VISIBLE) {
             mDismissButton.animate().cancel();
             mDismissButton.setVisibility(View.VISIBLE);
@@ -297,11 +309,13 @@ public class TaskViewHeader extends FrameLayout {
 
     /** Resets the state tracking that the user has not interacted with the stack after a certain time. */
     void resetNoUserInteractionState() {
+        Log.d(TAG, "resetNoUserInteractionState: ");
         mDismissButton.setVisibility(View.INVISIBLE);
     }
 
     @Override
     protected int[] onCreateDrawableState(int extraSpace) {
+        Log.d(TAG, "onCreateDrawableState: ");
 
         // Don't forward our state to the drawable - we do it manually in onTaskViewFocusChanged.
         // This is to prevent layer trashing when the view is pressed.
@@ -311,6 +325,7 @@ public class TaskViewHeader extends FrameLayout {
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
+        Log.d(TAG, "dispatchDraw: ");
         if (mLayersDisabled) {
             mLayersDisabled = false;
             postOnAnimation(new Runnable() {
@@ -324,6 +339,7 @@ public class TaskViewHeader extends FrameLayout {
     }
 
     public void disableLayersForOneFrame() {
+        Log.d(TAG, "disableLayersForOneFrame: ");
         mLayersDisabled = true;
 
         // Disable layer for a frame so we can draw our first frame faster.
@@ -332,6 +348,7 @@ public class TaskViewHeader extends FrameLayout {
 
     /** Notifies the associated TaskView has been focused. */
     void onTaskViewFocusChanged(boolean focused, boolean animateFocusedState) {
+        Log.d(TAG, "onTaskViewFocusChanged: ");
         // If we are not animating the visible state, just return
         if (!animateFocusedState) return;
 
