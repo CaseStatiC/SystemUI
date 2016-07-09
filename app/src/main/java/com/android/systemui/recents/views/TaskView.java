@@ -22,6 +22,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.*;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 import android.view.View;
 import android.view.ViewOutlineProvider;
@@ -38,7 +39,7 @@ import com.android.systemui.statusbar.phone.PhoneStatusBar;
 /* A task view */
 public class TaskView extends FrameLayout implements Task.TaskCallbacks,
         View.OnClickListener, View.OnLongClickListener {
-
+    public static final String TAG = "TaskView";
     /** The TaskView callbacks */
     interface TaskViewCallbacks {
         public void onTaskViewAppIconClicked(TaskView tv);
@@ -113,11 +114,13 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Set callback */
     void setCallbacks(TaskViewCallbacks cb) {
+        Log.d(TAG, "setCallbacks: ");
         mCb = cb;
     }
 
     /** Resets this TaskView for reuse. */
     void reset() {
+        Log.d(TAG, "reset: ");
         resetViewProperties();
         resetNoUserInteractionState();
         setClipViewInStack(false);
@@ -126,16 +129,19 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Gets the task */
     Task getTask() {
+        Log.d(TAG, "getTask: ");
         return mTask;
     }
 
     /** Returns the view bounds. */
     AnimateableViewBounds getViewBounds() {
+        Log.d(TAG, "getViewBounds: ");
         return mViewBounds;
     }
 
     @Override
     protected void onFinishInflate() {
+        Log.d(TAG, "onFinishInflate: ");
         // Bind the views
         mContent = findViewById(R.id.task_view_content);
         mHeaderView = (TaskViewHeader) findViewById(R.id.task_view_bar);
@@ -154,6 +160,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.d(TAG, "onMeasure: ");
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
 
@@ -180,11 +187,13 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Synchronizes this view's properties with the task's transform */
     void updateViewPropertiesToTaskTransform(TaskViewTransform toTransform, int duration) {
+        Log.d(TAG, "updateViewPropertiesToTaskTransform: ");
         updateViewPropertiesToTaskTransform(toTransform, duration, null);
     }
 
     void updateViewPropertiesToTaskTransform(TaskViewTransform toTransform, int duration,
                                              ValueAnimator.AnimatorUpdateListener updateCallback) {
+        Log.d(TAG, "updateViewPropertiesToTaskTransform: ");
         // Apply the transform
         toTransform.applyToTaskView(this, duration, mConfig.fastOutSlowInInterpolator, false,
                 !mConfig.fakeShadows, updateCallback);
@@ -203,6 +212,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Resets this view's properties */
     void resetViewProperties() {
+        Log.d(TAG, "resetViewProperties: ");
         setDim(0);
         setLayerType(View.LAYER_TYPE_NONE, null);
         TaskViewTransform.reset(this);
@@ -219,6 +229,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
      * in order to hide the task.
      */
     void prepareTaskTransformForFilterTaskHidden(TaskViewTransform toTransform) {
+        Log.d(TAG, "prepareTaskTransformForFilterTaskHidden: ");
         // Fade the view out and slide it away
         toTransform.alpha = 0f;
         toTransform.translationY += 200;
@@ -230,6 +241,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
      * in order to show the task.
      */
     void prepareTaskTransformForFilterTaskVisible(TaskViewTransform fromTransform) {
+        Log.d(TAG, "prepareTaskTransformForFilterTaskVisible: ");
         // Fade the view in
         fromTransform.alpha = 0f;
     }
@@ -238,6 +250,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
      * first layout because the actual animation into recents may take a long time. */
     void prepareEnterRecentsAnimation(boolean isTaskViewLaunchTargetTask,
                                              boolean occludesLaunchTarget, int offscreenY) {
+        Log.d(TAG, "prepareEnterRecentsAnimation: ");
         int initialDim = getDim();
         if (mConfig.launchedHasConfigurationChanged) {
             // Just load the views as-is
@@ -267,6 +280,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Animates this task view as it enters recents */
     void startEnterRecentsAnimation(final ViewAnimation.TaskViewEnterContext ctx) {
+        Log.d(TAG, "startEnterRecentsAnimation: ");
         final TaskViewTransform transform = ctx.currentTaskTransform;
         int startDelay = 0;
 
@@ -360,6 +374,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
     }
 
     public void fadeInActionButton(int delay, int duration) {
+        Log.d(TAG, "fadeInActionButton: ");
         // Hide the action button
         mActionButtonView.setAlpha(0f);
 
@@ -373,6 +388,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Animates this task view as it leaves recents by pressing home. */
     void startExitToHomeAnimation(ViewAnimation.TaskViewExitContext ctx) {
+        Log.d(TAG, "startExitToHomeAnimation: ");
         animate()
                 .translationY(ctx.offscreenTranslationY)
                 .setStartDelay(0)
@@ -386,6 +402,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Animates this task view away when dismissing all tasks. */
     void startDismissAllAnimation() {
+        Log.d(TAG, "startDismissAllAnimation: ");
         dismissTask();
     }
 
@@ -436,6 +453,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Animates the deletion of this task view */
     void startDeleteTaskAnimation(final Runnable r, int delay) {
+        Log.d(TAG, "startDeleteTaskAnimation: ");
         // Disabling clipping with the stack while the view is animating away
         setClipViewInStack(false);
 
@@ -461,26 +479,31 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Enables/disables handling touch on this task view. */
     void setTouchEnabled(boolean enabled) {
+        Log.d(TAG, "setTouchEnabled: ");
         setOnClickListener(enabled ? this : null);
     }
 
     /** Animates this task view if the user does not interact with the stack after a certain time. */
     void startNoUserInteractionAnimation() {
+        Log.d(TAG, "startNoUserInteractionAnimation: ");
         mHeaderView.startNoUserInteractionAnimation();
     }
 
     /** Mark this task view that the user does has not interacted with the stack after a certain time. */
     void setNoUserInteractionState() {
+        Log.d(TAG, "setNoUserInteractionState: ");
         mHeaderView.setNoUserInteractionState();
     }
 
     /** Resets the state tracking that the user has not interacted with the stack after a certain time. */
     void resetNoUserInteractionState() {
+        Log.d(TAG, "resetNoUserInteractionState: ");
         mHeaderView.resetNoUserInteractionState();
     }
 
     /** Dismisses this task. */
     void dismissTask() {
+        Log.d(TAG, "dismissTask: ");
         // Animate out the view and call the callback
         final TaskView tv = this;
         startDeleteTaskAnimation(new Runnable() {
@@ -498,11 +521,13 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
      * view.
      */
     boolean shouldClipViewInStack() {
+        Log.d(TAG, "shouldClipViewInStack: ");
         return mClipViewInStack && (getVisibility() == View.VISIBLE);
     }
 
     /** Sets whether this view should be clipped, or clipped against. */
     void setClipViewInStack(boolean clip) {
+        Log.d(TAG, "setClipViewInStack: ");
         if (clip != mClipViewInStack) {
             mClipViewInStack = clip;
             if (mCb != null) {
@@ -513,6 +538,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Sets the current task progress. */
     public void setTaskProgress(float p) {
+        Log.d(TAG, "setTaskProgress: ");
         mTaskProgress = p;
         mViewBounds.setAlpha(p);
         updateDimFromTaskProgress();
@@ -520,11 +546,13 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Returns the current task progress. */
     public float getTaskProgress() {
+        Log.d(TAG, "getTaskProgress: ");
         return mTaskProgress;
     }
 
     /** Returns the current dim. */
     public void setDim(int dim) {
+        Log.d(TAG, "setDim: ");
         mDimAlpha = dim;
         if (mConfig.useHardwareLayers) {
             // Defer setting hardware layers if we have not yet measured, or there is no dim to draw
@@ -546,11 +574,13 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Returns the current dim. */
     public int getDim() {
+        Log.d(TAG, "getDim: ");
         return mDimAlpha;
     }
 
     /** Animates the dim to the task progress. */
     void animateDimToProgress(int delay, int duration, Animator.AnimatorListener postAnimRunnable) {
+        Log.d(TAG, "animateDimToProgress: ");
         // Animate the dim into view as well
         int toDim = getDimFromTaskProgress();
         if (toDim != getDim()) {
@@ -566,12 +596,14 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Compute the dim as a function of the scale of this view. */
     int getDimFromTaskProgress() {
+        Log.d(TAG, "getDimFromTaskProgress: ");
         float dim = mMaxDimScale * mDimInterpolator.getInterpolation(1f - mTaskProgress);
         return (int) (dim * 255);
     }
 
     /** Update the dim as a function of the scale of this view. */
     void updateDimFromTaskProgress() {
+        Log.d(TAG, "updateDimFromTaskProgress: ");
         setDim(getDimFromTaskProgress());
     }
 
@@ -583,6 +615,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
      * track of focus).
      */
     public void setFocusedTask(boolean animateFocusedState) {
+        Log.d(TAG, "setFocusedTask: ");
         mIsFocused = true;
         if (mFocusAnimationsEnabled) {
             // Focus the header bar
@@ -607,6 +640,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
      * Unsets the focused task explicitly.
      */
     void unsetFocusedTask() {
+        Log.d(TAG, "unsetFocusedTask: ");
         mIsFocused = false;
         if (mFocusAnimationsEnabled) {
             // Un-focus the header bar
@@ -628,6 +662,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
     @Override
     protected void onFocusChanged(boolean gainFocus, int direction, Rect previouslyFocusedRect) {
         super.onFocusChanged(gainFocus, direction, previouslyFocusedRect);
+        Log.d(TAG, "onFocusChanged: ");
         if (!gainFocus) {
             unsetFocusedTask();
         }
@@ -637,11 +672,13 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
      * Returns whether we have explicitly been focused.
      */
     public boolean isFocusedTask() {
+        Log.d(TAG, "isFocusedTask: ");
         return mIsFocused || isFocused();
     }
 
     /** Enables all focus animations. */
     void enableFocusAnimations() {
+        Log.d(TAG, "enableFocusAnimations: ");
         boolean wasFocusAnimationsEnabled = mFocusAnimationsEnabled;
         mFocusAnimationsEnabled = true;
         if (mIsFocused && !wasFocusAnimationsEnabled) {
@@ -651,6 +688,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
     }
 
     public void disableLayersForOneFrame() {
+        Log.d(TAG, "disableLayersForOneFrame: ");
         mHeaderView.disableLayersForOneFrame();
     }
 
@@ -658,6 +696,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     /** Binds this task view to the task */
     public void onTaskBound(Task t) {
+        Log.d(TAG, "onTaskBound: ");
         mTask = t;
         mTask.setCallbacks(this);
 
@@ -671,6 +710,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     @Override
     public void onTaskDataLoaded() {
+        Log.d(TAG, "onTaskDataLoaded: ");
         if (mThumbnailView != null && mHeaderView != null) {
             // Bind each of the views to the new task data
             mThumbnailView.rebindToTask(mTask);
@@ -693,6 +733,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     @Override
     public void onTaskDataUnloaded() {
+        Log.d(TAG, "onTaskDataUnloaded: ");
         if (mThumbnailView != null && mHeaderView != null) {
             // Unbind each of the views from the task data and remove the task callback
             mTask.setCallbacks(null);
@@ -712,6 +753,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     @Override
     public void onMultiStackDebugTaskStackIdChanged() {
+        Log.d(TAG, "onMultiStackDebugTaskStackIdChanged: ");
         mHeaderView.rebindToTask(mTask);
     }
 
@@ -719,6 +761,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     @Override
      public void onClick(final View v) {
+        Log.d(TAG, "onClick: ");
         final TaskView tv = this;
         final boolean delayViewClick = (v != this) && (v != mActionButtonView);
         if (delayViewClick) {
@@ -767,6 +810,7 @@ public class TaskView extends FrameLayout implements Task.TaskCallbacks,
 
     @Override
     public boolean onLongClick(View v) {
+        Log.d(TAG, "onLongClick: ");
         if (v == mHeaderView.mApplicationIcon) {
             if (mCb != null) {
                 mCb.onTaskViewAppInfoClicked(this);
