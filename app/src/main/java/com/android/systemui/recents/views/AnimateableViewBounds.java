@@ -18,6 +18,7 @@ package com.android.systemui.recents.views;
 
 import android.graphics.Outline;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import com.android.systemui.recents.RecentsConfiguration;
@@ -33,8 +34,10 @@ public class AnimateableViewBounds extends ViewOutlineProvider {
     int mCornerRadius;
     float mAlpha = 1f;
     final float mMinAlpha = 0.25f;
-
+    public static final String TAG = "AnimateableViewBounds";
+    
     public AnimateableViewBounds(TaskView source, int cornerRadius) {
+        Log.d(TAG, "AnimateableViewBounds: ");
         mConfig = RecentsConfiguration.getInstance();
         mSourceView = source;
         mCornerRadius = cornerRadius;
@@ -43,6 +46,7 @@ public class AnimateableViewBounds extends ViewOutlineProvider {
 
     @Override
     public void getOutline(View view, Outline outline) {
+        Log.d(TAG, "getOutline: ");
         outline.setAlpha(mMinAlpha + mAlpha / (1f - mMinAlpha));
         outline.setRoundRect(mClipRect.left, mClipRect.top,
                 mSourceView.getWidth() - mClipRect.right,
@@ -52,6 +56,7 @@ public class AnimateableViewBounds extends ViewOutlineProvider {
 
     /** Sets the view outline alpha. */
     void setAlpha(float alpha) {
+        Log.d(TAG, "setAlpha: ");
         if (Float.compare(alpha, mAlpha) != 0) {
             mAlpha = alpha;
             mSourceView.invalidateOutline();
@@ -60,6 +65,7 @@ public class AnimateableViewBounds extends ViewOutlineProvider {
 
     /** Sets the bottom clip. */
     public void setClipBottom(int bottom) {
+        Log.d(TAG, "setClipBottom: ");
         if (bottom != mClipRect.bottom) {
             mClipRect.bottom = bottom;
             mSourceView.invalidateOutline();
@@ -73,10 +79,12 @@ public class AnimateableViewBounds extends ViewOutlineProvider {
 
     /** Returns the bottom clip. */
     public int getClipBottom() {
+        Log.d(TAG, "getClipBottom: ");
         return mClipRect.bottom;
     }
 
     private void updateClipBounds() {
+        Log.d(TAG, "updateClipBounds: ");
         mClipBounds.set(mClipRect.left, mClipRect.top,
                 mSourceView.getWidth() - mClipRect.right,
                 mSourceView.getHeight() - mClipRect.bottom);
