@@ -17,6 +17,7 @@
 package com.android.systemui.recents.views;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.InputDevice;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -32,6 +33,7 @@ import java.util.List;
 
 /* Handles touch events for a TaskStackView. */
 class TaskStackViewTouchHandler implements SwipeHelper.Callback {
+    public static final String TAG = "TaskStackViewTouchHandler";
     static int INACTIVE_POINTER_ID = -1;
 
     RecentsConfiguration mConfig;
@@ -80,6 +82,7 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
 
     /** Velocity tracker helpers */
     void initOrResetVelocityTracker() {
+        Log.d(TAG, "initOrResetVelocityTracker: ");
         if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
         } else {
@@ -87,11 +90,13 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
         }
     }
     void initVelocityTrackerIfNotExists() {
+        Log.d(TAG, "initVelocityTrackerIfNotExists: ");
         if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
         }
     }
     void recycleVelocityTracker() {
+        Log.d(TAG, "recycleVelocityTracker: ");
         if (mVelocityTracker != null) {
             mVelocityTracker.recycle();
             mVelocityTracker = null;
@@ -100,6 +105,7 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
 
     /** Returns the view at the specified coordinates */
     TaskView findViewAtPoint(int x, int y) {
+        Log.d(TAG, "findViewAtPoint: ");
         List<TaskView> taskViews = mSv.getTaskViews();
         int taskViewCount = taskViews.size();
         for (int i = taskViewCount - 1; i >= 0; i--) {
@@ -115,6 +121,7 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
 
     /** Constructs a simulated motion event for the current stack scroll. */
     MotionEvent createMotionEventForStackScroll(MotionEvent ev) {
+        Log.d(TAG, "createMotionEventForStackScroll: ");
         MotionEvent pev = MotionEvent.obtainNoHistory(ev);
         pev.setLocation(0, mScroller.progressToScrollRange(mScroller.getStackScroll()));
         return pev;
@@ -122,6 +129,7 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
 
     /** Touch preprocessing for handling below */
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "onInterceptTouchEvent: ");
         // Return early if we have no children
         boolean hasTaskViews = (mSv.getTaskViews().size() > 0);
         if (!hasTaskViews) {
@@ -228,6 +236,7 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
 
     /** Handles touch events once we have intercepted them */
     public boolean onTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "onTouchEvent: ");
         // Short circuit if we have no children
         boolean hasTaskViews = (mSv.getTaskViews().size() > 0);
         if (!hasTaskViews) {
@@ -383,6 +392,7 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
 
     /** Hides recents if the up event at (x, y) is a tap on the background area. */
     void maybeHideRecentsFromBackgroundTap(int x, int y) {
+        Log.d(TAG, "maybeHideRecentsFromBackgroundTap: ");
         // Ignore the up event if it's too far from its start position. The user might have been
         // trying to scroll or swipe.
         int dx = Math.abs(mInitialMotionX - x);
@@ -411,6 +421,7 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
 
     /** Handles generic motion events */
     public boolean onGenericMotionEvent(MotionEvent ev) {
+        Log.d(TAG, "onGenericMotionEvent: ");
         if ((ev.getSource() & InputDevice.SOURCE_CLASS_POINTER) ==
                 InputDevice.SOURCE_CLASS_POINTER) {
             int action = ev.getAction();
@@ -437,16 +448,19 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
 
     @Override
     public View getChildAtPosition(MotionEvent ev) {
+        Log.d(TAG, "getChildAtPosition: ");
         return findViewAtPoint((int) ev.getX(), (int) ev.getY());
     }
 
     @Override
     public boolean canChildBeDismissed(View v) {
+        Log.d(TAG, "canChildBeDismissed: ");
         return true;
     }
 
     @Override
     public void onBeginDrag(View v) {
+        Log.d(TAG, "onBeginDrag: ");
         TaskView tv = (TaskView) v;
         // Disable clipping with the stack while we are swiping
         tv.setClipViewInStack(false);
@@ -463,11 +477,13 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
 
     @Override
     public void onSwipeChanged(View v, float delta) {
+        Log.d(TAG, "onSwipeChanged: ");
         // Do nothing
     }
 
     @Override
     public void onChildDismissed(View v) {
+        Log.d(TAG, "onChildDismissed: ");
         TaskView tv = (TaskView) v;
         // Re-enable clipping with the stack (we will reuse this view)
         tv.setClipViewInStack(true);
@@ -482,6 +498,7 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
 
     @Override
     public void onSnapBackCompleted(View v) {
+        Log.d(TAG, "onSnapBackCompleted: ");
         TaskView tv = (TaskView) v;
         // Re-enable clipping with the stack
         tv.setClipViewInStack(true);
@@ -493,6 +510,7 @@ class TaskStackViewTouchHandler implements SwipeHelper.Callback {
 
     @Override
     public void onDragCancelled(View v) {
+        Log.d(TAG, "onDragCancelled: ");
         // Do nothing
     }
 }
