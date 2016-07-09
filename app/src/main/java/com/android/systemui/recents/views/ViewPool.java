@@ -17,6 +17,7 @@
 package com.android.systemui.recents.views;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -24,6 +25,7 @@ import java.util.LinkedList;
 
 /* A view pool to manage more views than we can visibly handle */
 public class ViewPool<V, T> {
+    public static final String TAG = "ViewPool";
 
     /* An interface to the consumer of a view pool */
     public interface ViewPoolConsumer<V, T> {
@@ -45,12 +47,14 @@ public class ViewPool<V, T> {
 
     /** Returns a view into the pool */
     void returnViewToPool(V v) {
+        Log.d(TAG, "returnViewToPool: ");
         mViewCreator.prepareViewToEnterPool(v);
         mPool.push(v);
     }
 
     /** Gets a view from the pool and prepares it */
     V pickUpViewFromPool(T preferredData, T prepareData) {
+        Log.d(TAG, "pickUpViewFromPool: ");
         V v = null;
         boolean isNewView = false;
         if (mPool.isEmpty()) {
