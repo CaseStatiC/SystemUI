@@ -18,6 +18,7 @@ package com.android.systemui.recents.views;
 
 import android.animation.ValueAnimator;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.Interpolator;
@@ -25,6 +26,7 @@ import android.view.animation.Interpolator;
 
 /* The transform state for a task view */
 public class TaskViewTransform {
+    public static final String TAG = "TaskViewTransform";
     public int startDelay = 0;
     public int translationY = 0;
     public float translationZ = 0;
@@ -51,6 +53,7 @@ public class TaskViewTransform {
 
     /** Resets the current transform */
     public void reset() {
+        Log.d(TAG, "reset: ");
         startDelay = 0;
         translationY = 0;
         translationZ = 0;
@@ -63,21 +66,26 @@ public class TaskViewTransform {
 
     /** Convenience functions to compare against current property values */
     public boolean hasAlphaChangedFrom(float v) {
+        Log.d(TAG, "hasAlphaChangedFrom: ");
         return (Float.compare(alpha, v) != 0);
     }
     public boolean hasScaleChangedFrom(float v) {
+        Log.d(TAG, "hasScaleChangedFrom: ");
         return (Float.compare(scale, v) != 0);
     }
     public boolean hasTranslationYChangedFrom(float v) {
+        Log.d(TAG, "hasTranslationYChangedFrom: ");
         return (Float.compare(translationY, v) != 0);
     }
     public boolean hasTranslationZChangedFrom(float v) {
+        Log.d(TAG, "hasTranslationZChangedFrom: ");
         return (Float.compare(translationZ, v) != 0);
     }
 
     /** Applies this transform to a view. */
     public void applyToTaskView(View v, int duration, Interpolator interp, boolean allowLayers,
             boolean allowShadows, ValueAnimator.AnimatorUpdateListener updateCallback) {
+        Log.d(TAG, "applyToTaskView: ");
         // Check to see if any properties have changed, and update the task view
         if (duration > 0) {
             ViewPropertyAnimator anim = v.animate();
@@ -132,6 +140,7 @@ public class TaskViewTransform {
 
     /** Reset the transform on a view. */
     public static void reset(View v) {
+        Log.d(TAG, "reset: ");
         // Cancel any running animations
         v.animate().cancel();
         v.setTranslationX(0f);
@@ -144,6 +153,7 @@ public class TaskViewTransform {
 
     @Override
     public String toString() {
+        Log.d(TAG, "toString: ");
         return "TaskViewTransform delay: " + startDelay + " y: " + translationY + " z: " + translationZ +
                 " scale: " + scale + " alpha: " + alpha + " visible: " + visible + " rect: " + rect +
                 " p: " + p;
