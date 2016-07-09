@@ -24,6 +24,7 @@ import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -84,14 +85,17 @@ public class SwipeHelper {
     }
 
     public void setDensityScale(float densityScale) {
+        Log.d(TAG, "setDensityScale: ");
         mDensityScale = densityScale;
     }
 
     public void setPagingTouchSlop(float pagingTouchSlop) {
+        Log.d(TAG, "setPagingTouchSlop: ");
         mPagingTouchSlop = pagingTouchSlop;
     }
 
     public void cancelOngoingDrag() {
+        Log.d(TAG, "cancelOngoingDrag: ");
         if (mDragging) {
             if (mCurrView != null) {
                 mCallback.onDragCancelled(mCurrView);
@@ -104,34 +108,41 @@ public class SwipeHelper {
     }
 
     public void resetTranslation(View v) {
+        Log.d(TAG, "resetTranslation: ");
         setTranslation(v, 0);
     }
 
     private float getPos(MotionEvent ev) {
+        Log.d(TAG, "getPos: ");
         return mSwipeDirection == X ? ev.getX() : ev.getY();
     }
 
     private float getTranslation(View v) {
+        Log.d(TAG, "getTranslation: ");
         return mSwipeDirection == X ? v.getTranslationX() : v.getTranslationY();
     }
 
     private float getVelocity(VelocityTracker vt) {
+        Log.d(TAG, "getVelocity: ");
         return mSwipeDirection == X ? vt.getXVelocity() :
                 vt.getYVelocity();
     }
 
     private ObjectAnimator createTranslationAnimation(View v, float newPos) {
+        Log.d(TAG, "createTranslationAnimation: ");
         ObjectAnimator anim = ObjectAnimator.ofFloat(v,
                 mSwipeDirection == X ? View.TRANSLATION_X : View.TRANSLATION_Y, newPos);
         return anim;
     }
 
     private float getPerpendicularVelocity(VelocityTracker vt) {
+        Log.d(TAG, "getPerpendicularVelocity: ");
         return mSwipeDirection == X ? vt.getYVelocity() :
                 vt.getXVelocity();
     }
 
     private void setTranslation(View v, float translate) {
+        Log.d(TAG, "setTranslation: ");
         if (mSwipeDirection == X) {
             v.setTranslationX(translate);
         } else {
@@ -140,15 +151,18 @@ public class SwipeHelper {
     }
 
     private float getSize(View v) {
+        Log.d(TAG, "getSize: ");
         final DisplayMetrics dm = v.getContext().getResources().getDisplayMetrics();
         return mSwipeDirection == X ? dm.widthPixels : dm.heightPixels;
     }
 
     public void setMinAlpha(float minAlpha) {
+        Log.d(TAG, "setMinAlpha: ");
         mMinAlpha = minAlpha;
     }
 
     float getAlphaForOffset(View view) {
+        Log.d(TAG, "getAlphaForOffset: ");
         float viewSize = getSize(view);
         final float fadeSize = ALPHA_FADE_END * viewSize;
         float result = 1.0f;
@@ -168,6 +182,7 @@ public class SwipeHelper {
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static boolean isLayoutRtl(View view) {
+        Log.d(TAG, "isLayoutRtl: ");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             return View.LAYOUT_DIRECTION_RTL == view.getLayoutDirection();
         } else {
@@ -176,6 +191,7 @@ public class SwipeHelper {
     }
 
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "onInterceptTouchEvent: ");
         final int action = ev.getAction();
 
         switch (action) {
@@ -261,6 +277,7 @@ public class SwipeHelper {
     }
 
     private void snapChild(final View view, float velocity) {
+        Log.d(TAG, "snapChild: ");
         final boolean canAnimViewBeDismissed = mCallback.canChildBeDismissed(view);
         ValueAnimator anim = createTranslationAnimation(view, 0);
         int duration = SNAP_ANIM_LEN;
@@ -288,6 +305,7 @@ public class SwipeHelper {
     }
 
     public boolean onTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "onTouchEvent: ");
         if (!mDragging) {
             if (!onInterceptTouchEvent(ev)) {
                 return mCanCurrViewBeDimissed;
@@ -316,6 +334,7 @@ public class SwipeHelper {
     }
 
     private void setSwipeAmount(float amount) {
+        Log.d(TAG, "setSwipeAmount: ");
         // don't let items that can't be dismissed be dragged more than
         // maxScrollDistance
         if (CONSTRAIN_SWIPE
@@ -336,6 +355,7 @@ public class SwipeHelper {
     }
 
     private boolean isValidSwipeDirection(float amount) {
+        Log.d(TAG, "isValidSwipeDirection: ");
         if (mSwipeDirection == X) {
             if (mRtl) {
                 return (amount <= 0) ? mAllowSwipeTowardsEnd : mAllowSwipeTowardsStart;
@@ -349,6 +369,7 @@ public class SwipeHelper {
     }
 
     private void endSwipe(VelocityTracker velocityTracker) {
+        Log.d(TAG, "endSwipe: ");
         velocityTracker.computeCurrentVelocity(1000 /* px/sec */);
         float velocity = getVelocity(velocityTracker);
         float perpendicularVelocity = getPerpendicularVelocity(velocityTracker);
