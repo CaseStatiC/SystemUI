@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 
 /**
@@ -27,7 +28,7 @@ import android.widget.ImageView;
  * setting the image to Null.
  */
 public class FixedSizeImageView extends ImageView {
-
+    public static final String TAG = "FixedSizeImageView";
     boolean mAllowRelayout = true;
     boolean mAllowInvalidate = true;
 
@@ -49,6 +50,7 @@ public class FixedSizeImageView extends ImageView {
 
     @Override
     public void requestLayout() {
+        Log.d(TAG, "requestLayout: ");
         if (mAllowRelayout) {
             super.requestLayout();
         }
@@ -56,6 +58,7 @@ public class FixedSizeImageView extends ImageView {
 
     @Override
     public void invalidate() {
+        Log.d(TAG, "invalidate: ");
         if (mAllowInvalidate) {
             super.invalidate();
         }
@@ -63,6 +66,7 @@ public class FixedSizeImageView extends ImageView {
 
     @Override
     public void setImageDrawable(Drawable drawable) {
+        Log.d(TAG, "setImageDrawable: ");
         boolean isNullBitmapDrawable = (drawable instanceof BitmapDrawable) &&
                 (((BitmapDrawable) drawable).getBitmap() == null);
         if (drawable == null || isNullBitmapDrawable) {
@@ -76,6 +80,7 @@ public class FixedSizeImageView extends ImageView {
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 }
