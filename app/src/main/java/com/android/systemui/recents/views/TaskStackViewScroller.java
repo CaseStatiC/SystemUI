@@ -21,12 +21,14 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.util.Log;
 import android.widget.OverScroller;
 import com.android.systemui.recents.RecentsConfiguration;
 import com.android.systemui.recents.misc.Utilities;
 
 /* The scrolling logic for a TaskStackView */
 public class TaskStackViewScroller {
+    public static final String TAG = "TaskStackViewScroller";
     public interface TaskStackViewScrollerCallbacks {
         public void onScrollChanged(float p);
     }
@@ -50,21 +52,25 @@ public class TaskStackViewScroller {
 
     /** Resets the task scroller. */
     void reset() {
+        Log.d(TAG, "reset: ");
         mStackScrollP = 0f;
     }
 
     /** Sets the callbacks */
     void setCallbacks(TaskStackViewScrollerCallbacks cb) {
+        Log.d(TAG, "setCallbacks: ");
         mCb = cb;
     }
 
     /** Gets the current stack scroll */
     public float getStackScroll() {
+        Log.d(TAG, "getStackScroll: ");
         return mStackScrollP;
     }
 
     /** Sets the current stack scroll */
     public void setStackScroll(float s) {
+        Log.d(TAG, "setStackScroll: ");
         mStackScrollP = s;
         if (mCb != null) {
             mCb.onScrollChanged(mStackScrollP);
@@ -73,6 +79,7 @@ public class TaskStackViewScroller {
 
     /** Sets the current stack scroll without calling the callback. */
     void setStackScrollRaw(float s) {
+        Log.d(TAG, "setStackScrollRaw: ");
         mStackScrollP = s;
     }
 
@@ -81,6 +88,7 @@ public class TaskStackViewScroller {
      * @return whether the stack progress changed.
      */
     public boolean setStackScrollToInitialState() {
+        Log.d(TAG, "setStackScrollToInitialState: ");
         float prevStackScrollP = mStackScrollP;
         setStackScroll(getBoundedStackScroll(mLayoutAlgorithm.mInitialScrollP));
         return Float.compare(prevStackScrollP, mStackScrollP) != 0;
@@ -88,6 +96,7 @@ public class TaskStackViewScroller {
 
     /** Bounds the current scroll if necessary */
     public boolean boundScroll() {
+        Log.d(TAG, "boundScroll: ");
         float curScroll = getStackScroll();
         float newScroll = getBoundedStackScroll(curScroll);
         if (Float.compare(newScroll, curScroll) != 0) {
@@ -99,11 +108,13 @@ public class TaskStackViewScroller {
 
     /** Returns the bounded stack scroll */
     float getBoundedStackScroll(float scroll) {
+        Log.d(TAG, "getBoundedStackScroll: ");
         return Math.max(mLayoutAlgorithm.mMinScrollP, Math.min(mLayoutAlgorithm.mMaxScrollP, scroll));
     }
 
     /** Returns the amount that the absolute value of how much the scroll is out of bounds. */
     float getScrollAmountOutOfBounds(float scroll) {
+        Log.d(TAG, "getScrollAmountOutOfBounds: ");
         if (scroll < mLayoutAlgorithm.mMinScrollP) {
             return Math.abs(scroll - mLayoutAlgorithm.mMinScrollP);
         } else if (scroll > mLayoutAlgorithm.mMaxScrollP) {
@@ -114,11 +125,13 @@ public class TaskStackViewScroller {
 
     /** Returns whether the specified scroll is out of bounds */
     boolean isScrollOutOfBounds() {
+        Log.d(TAG, "isScrollOutOfBounds: ");
         return Float.compare(getScrollAmountOutOfBounds(mStackScrollP), 0f) != 0;
     }
 
     /** Animates the stack scroll into bounds */
     ObjectAnimator animateBoundScroll() {
+        Log.d(TAG, "animateBoundScroll: ");
         float curScroll = getStackScroll();
         float newScroll = getBoundedStackScroll(curScroll);
         if (Float.compare(newScroll, curScroll) != 0) {
@@ -131,6 +144,7 @@ public class TaskStackViewScroller {
     /** Animates the stack scroll */
     void animateScroll(float curScroll, float newScroll, final Runnable postRunnable) {
         // Finish any current scrolling animations
+        Log.d(TAG, "animateScroll: ");
         if (mScrollAnimator != null && mScrollAnimator.isRunning()) {
             setStackScroll(mFinalAnimatedScroll);
             mScroller.startScroll(0, progressToScrollRange(mFinalAnimatedScroll), 0, 0, 0);
@@ -162,21 +176,25 @@ public class TaskStackViewScroller {
 
     /** Aborts any current stack scrolls */
     void stopBoundScrollAnimation() {
+        Log.d(TAG, "stopBoundScrollAnimation: ");
         Utilities.cancelAnimationWithoutCallbacks(mScrollAnimator);
     }
 
     /**** OverScroller ****/
 
     int progressToScrollRange(float p) {
+        Log.d(TAG, "progressToScrollRange: ");
         return (int) (p * mLayoutAlgorithm.mStackVisibleRect.height());
     }
 
     float scrollRangeToProgress(int s) {
+        Log.d(TAG, "scrollRangeToProgress: ");
         return (float) s / mLayoutAlgorithm.mStackVisibleRect.height();
     }
 
     /** Called from the view draw, computes the next scroll. */
     boolean computeScroll() {
+        Log.d(TAG, "computeScroll: ");
         if (mScroller.computeScrollOffset()) {
             float scroll = scrollRangeToProgress(mScroller.getCurrY());
             setStackScrollRaw(scroll);
@@ -190,11 +208,13 @@ public class TaskStackViewScroller {
 
     /** Returns whether the overscroller is scrolling. */
     boolean isScrolling() {
+        Log.d(TAG, "isScrolling: ");
         return !mScroller.isFinished();
     }
 
     /** Stops the scroller and any current fling. */
     void stopScroller() {
+        Log.d(TAG, "stopScroller: ");
         if (!mScroller.isFinished()) {
             mScroller.abortAnimation();
         }
