@@ -31,6 +31,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import com.android.systemui.recents.RecentsConfiguration;
 import com.android.systemui.recents.misc.Utilities;
@@ -42,7 +43,7 @@ import com.android.systemui.recents.model.Task;
  * alpha of the thumbnail image.
  */
 public class TaskViewThumbnail extends View {
-
+    public static final String TAG = "TaskViewThumbnail";
     RecentsConfiguration mConfig;
 
     // Drawing
@@ -97,6 +98,7 @@ public class TaskViewThumbnail extends View {
 
     @Override
     protected void onFinishInflate() {
+        Log.d(TAG, "onFinishInflate: ");
         mThumbnailAlpha = mConfig.taskViewThumbnailAlpha;
         updateThumbnailPaintFilter();
     }
@@ -104,6 +106,7 @@ public class TaskViewThumbnail extends View {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+        Log.d(TAG, "onLayout: ");
         if (changed) {
             mLayoutRect.set(0, 0, getWidth(), getHeight());
             updateThumbnailScale();
@@ -112,6 +115,7 @@ public class TaskViewThumbnail extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.d(TAG, "onDraw: ");
         if (mInvisible) {
             return;
         }
@@ -123,6 +127,7 @@ public class TaskViewThumbnail extends View {
 
     /** Sets the thumbnail to a given bitmap. */
     void setThumbnail(Bitmap bm) {
+        Log.d(TAG, "setThumbnail: ");
         if (bm != null) {
             mBitmapShader = new BitmapShader(bm, Shader.TileMode.CLAMP,
                     Shader.TileMode.CLAMP);
@@ -138,6 +143,7 @@ public class TaskViewThumbnail extends View {
 
     /** Updates the paint to draw the thumbnail. */
     void updateThumbnailPaintFilter() {
+        Log.d(TAG, "updateThumbnailPaintFilter: ");
         if (mInvisible) {
             return;
         }
@@ -158,6 +164,7 @@ public class TaskViewThumbnail extends View {
 
     /** Updates the thumbnail shader's scale transform. */
     void updateThumbnailScale() {
+        Log.d(TAG, "updateThumbnailScale: ");
         if (mBitmapShader != null) {
             mScaleMatrix.setRectToRect(mBitmapRect, mLayoutRect, Matrix.ScaleToFit.FILL);
             mBitmapShader.setLocalMatrix(mScaleMatrix);
@@ -166,6 +173,7 @@ public class TaskViewThumbnail extends View {
 
     /** Updates the clip rect based on the given task bar. */
     void updateClipToTaskBar(View taskBar) {
+        Log.d(TAG, "updateClipToTaskBar: ");
         mTaskBar = taskBar;
         int top = (int) Math.max(0, taskBar.getTranslationY() +
                 taskBar.getMeasuredHeight() - 1);
@@ -175,6 +183,7 @@ public class TaskViewThumbnail extends View {
 
     /** Updates the visibility of the the thumbnail. */
     void updateThumbnailVisibility(int clipBottom) {
+        Log.d(TAG, "updateThumbnailVisibility: ");
         boolean invisible = mTaskBar != null && (getHeight() - clipBottom) <= mTaskBar.getHeight();
         if (invisible != mInvisible) {
             mInvisible = invisible;
@@ -190,12 +199,14 @@ public class TaskViewThumbnail extends View {
      * (see RecentsConfiguration.useHardwareLayers)
      */
     public void setDimAlpha(float dimAlpha) {
+        Log.d(TAG, "setDimAlpha: ");
         mDimAlpha = dimAlpha;
         updateThumbnailPaintFilter();
     }
 
     /** Binds the thumbnail view to the task */
     void rebindToTask(Task t) {
+        Log.d(TAG, "rebindToTask: ");
         if (t.thumbnail != null) {
             setThumbnail(t.thumbnail);
         } else {
@@ -205,11 +216,13 @@ public class TaskViewThumbnail extends View {
 
     /** Unbinds the thumbnail view from the task */
     void unbindFromTask() {
+        Log.d(TAG, "unbindFromTask: ");
         setThumbnail(null);
     }
 
     /** Handles focus changes. */
     void onFocusChanged(boolean focused) {
+        Log.d(TAG, "onFocusChanged: ");
         if (focused) {
             if (Float.compare(getAlpha(), 1f) != 0) {
                 startFadeAnimation(1f, 0, 150, null);
@@ -226,6 +239,7 @@ public class TaskViewThumbnail extends View {
      * is first visible and will be followed by a startEnterRecentsAnimation() call.
      */
     void prepareEnterRecentsAnimation(boolean isTaskViewLaunchTargetTask) {
+        Log.d(TAG, "prepareEnterRecentsAnimation: ");
         if (isTaskViewLaunchTargetTask) {
             mThumbnailAlpha = 1f;
         } else {
@@ -236,17 +250,20 @@ public class TaskViewThumbnail extends View {
 
     /** Animates this task thumbnail as it enters Recents. */
     void startEnterRecentsAnimation(int delay, Runnable postAnimRunnable) {
+        Log.d(TAG, "startEnterRecentsAnimation: ");
         startFadeAnimation(mConfig.taskViewThumbnailAlpha, delay,
                 mConfig.taskViewEnterFromAppDuration, postAnimRunnable);
     }
 
     /** Animates this task thumbnail as it exits Recents. */
     void startLaunchTaskAnimation(Runnable postAnimRunnable) {
+        Log.d(TAG, "startLaunchTaskAnimation: ");
         startFadeAnimation(1f, 0, mConfig.taskViewExitToAppDuration, postAnimRunnable);
     }
 
     /** Starts a new thumbnail alpha animation. */
     void startFadeAnimation(float finalAlpha, int delay, int duration, final Runnable postAnimRunnable) {
+        Log.d(TAG, "startFadeAnimation: ");
         Utilities.cancelAnimationWithoutCallbacks(mThumbnailAlphaAnimator);
         mThumbnailAlphaAnimator = ValueAnimator.ofFloat(mThumbnailAlpha, finalAlpha);
         mThumbnailAlphaAnimator.setStartDelay(delay);
