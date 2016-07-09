@@ -17,6 +17,8 @@
 package com.android.systemui.recents.views;
 
 import android.graphics.Rect;
+import android.util.Log;
+
 import com.android.systemui.recents.RecentsConfiguration;
 import com.android.systemui.recents.model.TaskStack;
 
@@ -25,7 +27,7 @@ import java.util.List;
 
 /* The layout logic for the RecentsView. */
 public class RecentsViewLayoutAlgorithm {
-
+    public static final String TAG = "RecentsViewLayoutAlgorithm";
     RecentsConfiguration mConfig;
 
     public RecentsViewLayoutAlgorithm(RecentsConfiguration config) {
@@ -34,6 +36,7 @@ public class RecentsViewLayoutAlgorithm {
 
     /** Return the relative coordinate given coordinates in another size. */
     private int getRelativeCoordinate(int availableOffset, int availableSize, int otherCoord, int otherSize) {
+        Log.d(TAG, "getRelativeCoordinate: ");
         float relPos = (float) otherCoord / otherSize;
         return availableOffset + (int) (relPos * availableSize);
     }
@@ -42,6 +45,7 @@ public class RecentsViewLayoutAlgorithm {
      * Computes and returns the bounds that each of the stack views should take up.
      */
     List<Rect> computeStackRects(List<TaskStackView> stackViews, Rect availableBounds) {
+        Log.d(TAG, "computeStackRects: ");
         ArrayList<Rect> bounds = new ArrayList<Rect>(stackViews.size());
         int stackViewsCount = stackViews.size();
         for (int i = 0; i < stackViewsCount; i++) {
