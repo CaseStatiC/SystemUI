@@ -17,6 +17,7 @@
 package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.systemui.R;
 
@@ -25,10 +26,12 @@ import com.android.systemui.R;
  */
 public class VelocityTrackerFactory {
 
+    public static final String TAG = "VelocityTrackerFactory";
     public static final String PLATFORM_IMPL = "platform";
     public static final String NOISY_IMPL = "noisy";
 
     public static VelocityTrackerInterface obtain(Context ctx) {
+        Log.d(TAG, "obtain: ");
         String tracker = ctx.getResources().getString(R.string.velocity_tracker_impl);
         switch (tracker) {
             case NOISY_IMPL:
