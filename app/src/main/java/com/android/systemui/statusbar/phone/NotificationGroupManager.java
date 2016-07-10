@@ -18,6 +18,7 @@ package com.android.systemui.statusbar.phone;
 
 import android.app.Notification;
 import android.service.notification.StatusBarNotification;
+import android.util.Log;
 
 import com.android.systemui.statusbar.ExpandableNotificationRow;
 import com.android.systemui.statusbar.NotificationData;
@@ -31,15 +32,18 @@ import java.util.HashSet;
  */
 public class NotificationGroupManager {
 
+    public static final String TAG = "NotificationGroupManager";
     private final HashMap<String, NotificationGroup> mGroupMap = new HashMap<>();
     private OnGroupChangeListener mListener;
     private int mBarState = -1;
 
     public void setOnGroupChangeListener(OnGroupChangeListener listener) {
+        Log.d(TAG, "setOnGroupChangeListener: ");
         mListener = listener;
     }
 
     public boolean isGroupExpanded(StatusBarNotification sbn) {
+        Log.d(TAG, "isGroupExpanded: ");
         NotificationGroup group = mGroupMap.get(sbn.getGroupKey());
         if (group == null) {
             return false;
@@ -48,6 +52,7 @@ public class NotificationGroupManager {
     }
 
     public void setGroupExpanded(StatusBarNotification sbn, boolean expanded) {
+        Log.d(TAG, "setGroupExpanded: ");
         NotificationGroup group = mGroupMap.get(sbn.getGroupKey());
         if (group == null) {
             return;
@@ -56,6 +61,7 @@ public class NotificationGroupManager {
     }
 
     private void setGroupExpanded(NotificationGroup group, boolean expanded) {
+        Log.d(TAG, "setGroupExpanded: ");
         group.expanded = expanded;
         if (group.summary != null) {
             mListener.onGroupExpansionChanged(group.summary.row, expanded);
@@ -63,6 +69,7 @@ public class NotificationGroupManager {
     }
 
     public void onEntryRemoved(NotificationData.Entry removed) {
+        Log.d(TAG, "onEntryRemoved: ");
         onEntryRemovedInternal(removed, removed.notification);
     }
 
@@ -75,6 +82,7 @@ public class NotificationGroupManager {
      */
     private void onEntryRemovedInternal(NotificationData.Entry removed,
             final StatusBarNotification sbn) {
+        Log.d(TAG, "onEntryRemovedInternal: ");
         Notification notif = sbn.getNotification();
         String groupKey = sbn.getGroupKey();
         final NotificationGroup group = mGroupMap.get(groupKey);
@@ -113,6 +121,7 @@ public class NotificationGroupManager {
     }
 
     public void onEntryAdded(NotificationData.Entry added) {
+        Log.d(TAG, "onEntryAdded: ");
         StatusBarNotification sbn = added.notification;
         Notification notif = sbn.getNotification();
         String groupKey = sbn.getGroupKey();
@@ -137,6 +146,7 @@ public class NotificationGroupManager {
 
     public void onEntryUpdated(NotificationData.Entry entry,
             StatusBarNotification oldNotification) {
+        Log.d(TAG, "onEntryUpdated: ");
         if (mGroupMap.get(oldNotification.getGroupKey()) != null) {
             onEntryRemovedInternal(entry, oldNotification);
         }
@@ -144,6 +154,7 @@ public class NotificationGroupManager {
     }
 
     public boolean isVisible(StatusBarNotification sbn) {
+        Log.d(TAG, "isVisible: ");
         if (!sbn.getNotification().isGroupChild()) {
             return true;
         }
@@ -155,6 +166,7 @@ public class NotificationGroupManager {
     }
 
     public boolean hasGroupChildren(StatusBarNotification sbn) {
+        Log.d(TAG, "hasGroupChildren: ");
         if (areGroupsProhibited()) {
             return false;
         }
@@ -169,6 +181,7 @@ public class NotificationGroupManager {
     }
 
     public void setStatusBarState(int newState) {
+        Log.d(TAG, "setStatusBarState: ");
         if (mBarState == newState) {
             return;
         }
@@ -188,6 +201,7 @@ public class NotificationGroupManager {
     }
 
     private boolean areGroupsProhibited() {
+        Log.d(TAG, "areGroupsProhibited: ");
         return mBarState == StatusBarState.KEYGUARD;
     }
 
@@ -195,6 +209,7 @@ public class NotificationGroupManager {
      * @return whether a given notification is a child in a group which has a summary
      */
     public boolean isChildInGroupWithSummary(StatusBarNotification sbn) {
+        Log.d(TAG, "isChildInGroupWithSummary: ");
         if (!sbn.getNotification().isGroupChild()) {
             return false;
         }
@@ -207,6 +222,7 @@ public class NotificationGroupManager {
 
     public ExpandableNotificationRow getGroupSummary(StatusBarNotification sbn) {
         NotificationGroup group = mGroupMap.get(sbn.getGroupKey());
+        Log.d(TAG, "getGroupSummary: ");
         return group == null ? null
                 : group.summary == null ? null
                 : group.summary.row;
