@@ -34,6 +34,7 @@ import android.view.animation.LinearInterpolator;
 import com.android.systemui.R;
 
 public class BarTransitions {
+    public static final String TAG = "BarTransitions";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_COLORS = false;
 
@@ -67,10 +68,12 @@ public class BarTransitions {
     }
 
     public int getMode() {
+        Log.d(TAG, "getMode: ");
         return mMode;
     }
 
     public void transitionTo(int mode, boolean animate) {
+        Log.d(TAG, "transitionTo: ");
         // low-end devices do not support translucent modes, fallback to opaque
         if (!HIGH_END && (mode == MODE_SEMI_TRANSPARENT || mode == MODE_TRANSLUCENT
                 || mode == MODE_TRANSPARENT)) {
@@ -88,18 +91,21 @@ public class BarTransitions {
     }
 
     protected void onTransition(int oldMode, int newMode, boolean animate) {
+        Log.d(TAG, "onTransition: ");
         if (HIGH_END) {
             applyModeBackground(oldMode, newMode, animate);
         }
     }
 
     protected void applyModeBackground(int oldMode, int newMode, boolean animate) {
+        Log.d(TAG, "applyModeBackground: ");
         if (DEBUG) Log.d(mTag, String.format("applyModeBackground oldMode=%s newMode=%s animate=%s",
                 modeToString(oldMode), modeToString(newMode), animate));
         mBarBackground.applyModeBackground(oldMode, newMode, animate);
     }
 
     public static String modeToString(int mode) {
+        Log.d(TAG, "modeToString: ");
         if (mode == MODE_OPAQUE) return "MODE_OPAQUE";
         if (mode == MODE_SEMI_TRANSPARENT) return "MODE_SEMI_TRANSPARENT";
         if (mode == MODE_TRANSLUCENT) return "MODE_TRANSLUCENT";
@@ -111,10 +117,12 @@ public class BarTransitions {
     }
 
     public void finishAnimations() {
+        Log.d(TAG, "finishAnimations: ");
         mBarBackground.finishAnimation();
     }
 
     protected boolean isLightsOut(int mode) {
+        Log.d(TAG, "isLightsOut: ");
         return mode == MODE_LIGHTS_OUT || mode == MODE_LIGHTS_OUT_TRANSPARENT;
     }
 
@@ -156,21 +164,25 @@ public class BarTransitions {
 
         @Override
         public void setAlpha(int alpha) {
+            Log.d(TAG, "BarBackgroundDrawable: setAlpha: ");
             // noop
         }
 
         @Override
         public void setColorFilter(ColorFilter colorFilter) {
+            Log.d(TAG, "BarBackgroundDrawable: setColorFilter: ");
             // noop
         }
 
         @Override
         protected void onBoundsChange(Rect bounds) {
             super.onBoundsChange(bounds);
+            Log.d(TAG, "BarBackgroundDrawable: onBoundsChange: ");
             mGradient.setBounds(bounds);
         }
 
         public void applyModeBackground(int oldMode, int newMode, boolean animate) {
+            Log.d(TAG, "BarBackgroundDrawable: applyModeBackground: ");
             if (mMode == newMode) return;
             mMode = newMode;
             mAnimating = animate;
@@ -186,10 +198,12 @@ public class BarTransitions {
 
         @Override
         public int getOpacity() {
+            Log.d(TAG, "BarBackgroundDrawable: getOpacity: ");
             return PixelFormat.TRANSLUCENT;
         }
 
         public void finishAnimation() {
+            Log.d(TAG, "BarBackgroundDrawable: finishAnimation: ");
             if (mAnimating) {
                 mAnimating = false;
                 invalidateSelf();
@@ -198,6 +212,7 @@ public class BarTransitions {
 
         @Override
         public void draw(Canvas canvas) {
+            Log.d(TAG, "BarBackgroundDrawable: draw: ");
             int targetGradientAlpha = 0, targetColor = 0;
             if (mMode == MODE_WARNING) {
                 targetColor = mWarning;
