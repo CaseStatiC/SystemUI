@@ -19,6 +19,7 @@ package com.android.systemui.statusbar.phone;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,7 +27,7 @@ import android.widget.TextView;
  * A view to show hints on Keyguard ("Swipe up to unlock", "Tap again to open").
  */
 public class KeyguardIndicationTextView extends TextView {
-
+    public static final String TAG = "KeyguardIndicationTextView";
     public KeyguardIndicationTextView(Context context) {
         super(context);
     }
@@ -50,7 +51,7 @@ public class KeyguardIndicationTextView extends TextView {
      * @param text The text to show.
      */
     public void switchIndication(CharSequence text) {
-
+        Log.d(TAG, "switchIndication: ");
         // TODO: Animation, make sure that we will show one indication long enough.
         if (TextUtils.isEmpty(text)) {
             setVisibility(View.INVISIBLE);
@@ -64,6 +65,7 @@ public class KeyguardIndicationTextView extends TextView {
      * See {@link #switchIndication}.
      */
     public void switchIndication(int textResId) {
+        Log.d(TAG, "switchIndication: ");
         switchIndication(getResources().getText(textResId));
     }
 }
