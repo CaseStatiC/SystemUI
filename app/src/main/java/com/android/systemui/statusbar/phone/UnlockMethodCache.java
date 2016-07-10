@@ -17,6 +17,7 @@
 package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.keyguard.KeyguardUpdateMonitor;
@@ -52,6 +53,7 @@ public class UnlockMethodCache {
     }
 
     public static UnlockMethodCache getInstance(Context context) {
+        Log.d(TAG, "getInstance: ");
         if (sInstance == null) {
             sInstance = new UnlockMethodCache(context);
         }
@@ -62,10 +64,12 @@ public class UnlockMethodCache {
      * @return whether the user configured a secure unlock method like PIN, password, etc.
      */
     public boolean isMethodSecure() {
+        Log.d(TAG, "isMethodSecure: ");
         return mSecure;
     }
 
     public boolean isTrusted() {
+        Log.d(TAG, "isTrusted: ");
         return mTrusted;
     }
 
@@ -73,18 +77,22 @@ public class UnlockMethodCache {
      * @return whether the lockscreen is currently insecure, and the bouncer won't be shown
      */
     public boolean canSkipBouncer() {
+        Log.d(TAG, "canSkipBouncer: ");
         return mCanSkipBouncer;
     }
 
     public void addListener(OnUnlockMethodChangedListener listener) {
+        Log.d(TAG, "addListener: ");
         mListeners.add(listener);
     }
 
     public void removeListener(OnUnlockMethodChangedListener listener) {
+        Log.d(TAG, "removeListener: ");
         mListeners.remove(listener);
     }
 
     private void update(boolean updateAlways) {
+        Log.d(TAG, "update: ");
         int user = KeyguardUpdateMonitor.getCurrentUser();
         boolean secure = mLockPatternUtils.isSecure(user);
         boolean canSkipBouncer = !secure ||  mKeyguardUpdateMonitor.getUserCanSkipBouncer(user);
@@ -105,6 +113,7 @@ public class UnlockMethodCache {
     }
 
     private void notifyListeners() {
+        Log.d(TAG, "notifyListeners: ");
         for (OnUnlockMethodChangedListener listener : mListeners) {
             listener.onUnlockMethodStateChanged();
         }
@@ -113,26 +122,31 @@ public class UnlockMethodCache {
     private final KeyguardUpdateMonitorCallback mCallback = new KeyguardUpdateMonitorCallback() {
         @Override
         public void onUserSwitchComplete(int userId) {
+            Log.d(TAG, "mCallback: onUserSwitchComplete: ");
             update(false /* updateAlways */);
         }
 
         @Override
         public void onTrustChanged(int userId) {
+            Log.d(TAG, "mCallback: onTrustChanged: ");
             update(false /* updateAlways */);
         }
 
         @Override
         public void onTrustManagedChanged(int userId) {
+            Log.d(TAG, "mCallback: onTrustManagedChanged: ");
             update(false /* updateAlways */);
         }
 
         @Override
         public void onStartedWakingUp() {
+            Log.d(TAG, "mCallback: onStartedWakingUp: ");
             update(false /* updateAlways */);
         }
 
         @Override
         public void onFingerprintAuthenticated(int userId) {
+            Log.d(TAG, "mCallback: onFingerprintAuthenticated: ");
             if (!mKeyguardUpdateMonitor.isUnlockingWithFingerprintAllowed()) {
                 return;
             }
@@ -141,6 +155,7 @@ public class UnlockMethodCache {
 
         @Override
         public void onFaceUnlockStateChanged(boolean running, int userId) {
+            Log.d(TAG, "mCallback: onFaceUnlockStateChanged: ");
             update(false /* updateAlways */);
         }
 
@@ -151,10 +166,12 @@ public class UnlockMethodCache {
     };
 
     public boolean isTrustManaged() {
+        Log.d(TAG, "isTrustManaged: ");
         return mTrustManaged;
     }
 
     public boolean isFaceUnlockRunning() {
+        Log.d(TAG, "isFaceUnlockRunning: ");
         return mFaceUnlockRunning;
     }
 
