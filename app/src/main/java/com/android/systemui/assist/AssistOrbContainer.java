@@ -19,6 +19,7 @@ package com.android.systemui.assist;
 import android.annotation.Nullable;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
@@ -28,6 +29,7 @@ import com.android.systemui.R;
 
 public class AssistOrbContainer extends FrameLayout {
 
+    public static final String TAG = "AssistOrbContainer";
     private static final long EXIT_START_DELAY = 150;
 
     private final Interpolator mLinearOutSlowInInterpolator;
@@ -58,12 +60,14 @@ public class AssistOrbContainer extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mScrim = findViewById(R.id.assist_orb_scrim);
         mNavbarScrim = findViewById(R.id.assist_orb_navbar_scrim);
         mOrb = (AssistOrbView) findViewById(R.id.assist_orb);
     }
 
     public void show(final boolean show, boolean animate) {
+        Log.d(TAG, "show: ");
         if (show) {
             if (getVisibility() != View.VISIBLE) {
                 setVisibility(View.VISIBLE);
@@ -89,6 +93,7 @@ public class AssistOrbContainer extends FrameLayout {
     }
 
     private void reset() {
+        Log.d(TAG, "reset: ");
         mAnimatingOut = false;
         mOrb.reset();
         mScrim.setAlpha(1f);
@@ -96,6 +101,7 @@ public class AssistOrbContainer extends FrameLayout {
     }
 
     private void startEnterAnimation() {
+        Log.d(TAG, "startEnterAnimation: ");
         if (mAnimatingOut) {
             return;
         }
@@ -120,6 +126,7 @@ public class AssistOrbContainer extends FrameLayout {
     }
 
     private void startExitAnimation(final Runnable endRunnable) {
+        Log.d(TAG, "startExitAnimation: ");
         if (mAnimatingOut) {
             if (endRunnable != null) {
                 endRunnable.run();
@@ -146,10 +153,12 @@ public class AssistOrbContainer extends FrameLayout {
      * when the animation is done.
      */
     public boolean isShowing() {
+        Log.d(TAG, "isShowing: ");
         return getVisibility() == View.VISIBLE && !mAnimatingOut;
     }
 
     public AssistOrbView getOrb() {
+        Log.d(TAG, "getOrb: ");
         return mOrb;
     }
 }
