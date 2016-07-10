@@ -31,12 +31,14 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 
 public class TrustDrawable extends Drawable {
 
+    public static final String TAG = "TrustDrawable";
     private static final long ENTERING_FROM_UNSET_START_DELAY = 200;
     private static final long VISIBLE_DURATION = 1000;
     private static final long EXIT_DURATION = 500;
@@ -100,6 +102,7 @@ public class TrustDrawable extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
+        Log.d(TAG, "draw: ");
         int newAlpha = (mCurAlpha * mAlpha) / 256;
         if (newAlpha == 0) {
             return;
@@ -111,25 +114,30 @@ public class TrustDrawable extends Drawable {
 
     @Override
     public void setAlpha(int alpha) {
+        Log.d(TAG, "setAlpha: ");
         mAlpha = alpha;
     }
 
     @Override
     public int getAlpha() {
+        Log.d(TAG, "getAlpha: ");
         return mAlpha;
     }
 
     @Override
     public void setColorFilter(ColorFilter colorFilter) {
+        Log.d(TAG, "setColorFilter: ");
         throw new UnsupportedOperationException("not implemented");
     }
 
     @Override
     public int getOpacity() {
+        Log.d(TAG, "getOpacity: ");
         return PixelFormat.TRANSLUCENT;
     }
 
     public void start() {
+        Log.d(TAG, "start: ");
         if (!mAnimating) {
             mAnimating = true;
             updateState(true);
@@ -138,6 +146,7 @@ public class TrustDrawable extends Drawable {
     }
 
     public void stop() {
+        Log.d(TAG, "stop: ");
         if (mAnimating) {
             mAnimating = false;
             if (mCurAnimator != null) {
@@ -152,12 +161,14 @@ public class TrustDrawable extends Drawable {
     }
 
     public void setTrustManaged(boolean trustManaged) {
+        Log.d(TAG, "setTrustManaged: ");
         if (trustManaged == mTrustManaged && mState != STATE_UNSET) return;
         mTrustManaged = trustManaged;
         updateState(true);
     }
 
     private void updateState(boolean allowTransientState) {
+        Log.d(TAG, "updateState: ");
         if (!mAnimating) {
             return;
         }
@@ -210,6 +221,7 @@ public class TrustDrawable extends Drawable {
     }
 
     private Animator makeVisibleAnimator() {
+        Log.d(TAG, "makeVisibleAnimator: ");
         return makeAnimators(mInnerRadiusVisibleMax, mInnerRadiusVisibleMin,
                 ALPHA_VISIBLE_MAX, ALPHA_VISIBLE_MIN, VISIBLE_DURATION,
                 mAccelerateDecelerateInterpolator,
@@ -217,12 +229,14 @@ public class TrustDrawable extends Drawable {
     }
 
     private Animator makeEnterAnimator(float radius, int alpha) {
+        Log.d(TAG, "makeEnterAnimator: ");
         return makeAnimators(radius, mInnerRadiusVisibleMax,
                 alpha, ALPHA_VISIBLE_MAX, ENTER_DURATION, mLinearOutSlowInInterpolator,
                 false /* repeating */, true /* stateUpdateListener */);
     }
 
     private Animator makeExitAnimator(float radius, int alpha) {
+        Log.d(TAG, "makeExitAnimator: ");
         return makeAnimators(radius, mInnerRadiusExit,
                 alpha, 0, EXIT_DURATION, mFastOutSlowInInterpolator,
                 false /* repeating */, true /* stateUpdateListener */);
@@ -231,6 +245,7 @@ public class TrustDrawable extends Drawable {
     private Animator makeAnimators(float startRadius, float endRadius,
             int startAlpha, int endAlpha, long duration, Interpolator interpolator,
             boolean repeating, boolean stateUpdateListener) {
+        Log.d(TAG, "makeAnimators: ");
         ValueAnimator alphaAnimator = configureAnimator(
                 ValueAnimator.ofInt(startAlpha, endAlpha),
                 duration, mAlphaUpdateListener, interpolator, repeating);
@@ -249,6 +264,7 @@ public class TrustDrawable extends Drawable {
     private ValueAnimator configureAnimator(ValueAnimator animator, long duration,
             ValueAnimator.AnimatorUpdateListener updateListener, Interpolator interpolator,
             boolean repeating) {
+        Log.d(TAG, "configureAnimator: ");
         animator.setDuration(duration);
         animator.addUpdateListener(updateListener);
         animator.setInterpolator(interpolator);
