@@ -27,6 +27,7 @@ import android.graphics.Rect;
 import android.media.session.MediaSessionLegacyHelper;
 import android.os.IBinder;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -65,6 +66,7 @@ public class StatusBarWindowView extends FrameLayout {
 
     @Override
     protected boolean fitSystemWindows(Rect insets) {
+        Log.d(TAG, "fitSystemWindows: ");
         if (getFitsSystemWindows()) {
             boolean paddingChanged = insets.left != getPaddingLeft()
                     || insets.top != getPaddingTop()
@@ -100,6 +102,7 @@ public class StatusBarWindowView extends FrameLayout {
     }
 
     private void applyMargins() {
+        Log.d(TAG, "applyMargins: ");
         final int N = getChildCount();
         for (int i = 0; i < N; i++) {
             View child = getChildAt(i);
@@ -120,11 +123,13 @@ public class StatusBarWindowView extends FrameLayout {
 
     @Override
     protected FrameLayout.LayoutParams generateDefaultLayoutParams() {
+        Log.d(TAG, "generateDefaultLayoutParams: ");
         return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
     }
 
     @Override
     protected void onFinishInflate() {
+        Log.d(TAG, "onFinishInflate: ");
         super.onFinishInflate();
         mStackScrollLayout = (NotificationStackScrollLayout) findViewById(
                 R.id.notification_stack_scroller);
@@ -133,6 +138,7 @@ public class StatusBarWindowView extends FrameLayout {
     }
 
     public void setService(PhoneStatusBar service) {
+        Log.d(TAG, "setService: ");
         mService = service;
         mDragDownHelper = new DragDownHelper(getContext(), this, mStackScrollLayout, mService);
     }
@@ -140,7 +146,7 @@ public class StatusBarWindowView extends FrameLayout {
     @Override
     protected void onAttachedToWindow () {
         super.onAttachedToWindow();
-
+        Log.d(TAG, "onAttachedToWindow: ");
         // We really need to be able to animate while window animations are going on
         // so that activities may be started asynchronously from panel animations
         final ViewRootImpl root = getViewRootImpl();
@@ -165,6 +171,7 @@ public class StatusBarWindowView extends FrameLayout {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        Log.d(TAG, "dispatchKeyEvent: ");
         boolean down = event.getAction() == KeyEvent.ACTION_DOWN;
         switch (event.getKeyCode()) {
             case KeyEvent.KEYCODE_BACK:
@@ -197,6 +204,7 @@ public class StatusBarWindowView extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "dispatchTouchEvent: ");
         if (mBrightnessMirror != null && mBrightnessMirror.getVisibility() == VISIBLE) {
             // Disallow new pointers while the brightness mirror is visible. This is so that you
             // can't touch anything other than the brightness slider while the mirror is showing
@@ -210,6 +218,7 @@ public class StatusBarWindowView extends FrameLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "onInterceptTouchEvent: ");
         boolean intercept = false;
         if (mNotificationPanel.isFullyExpanded()
                 && mStackScrollLayout.getVisibility() == View.VISIBLE
@@ -236,6 +245,7 @@ public class StatusBarWindowView extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "onTouchEvent: ");
         boolean handled = false;
         if (mService.getBarState() == StatusBarState.KEYGUARD) {
             handled = mDragDownHelper.onTouchEvent(ev);
@@ -253,6 +263,7 @@ public class StatusBarWindowView extends FrameLayout {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        Log.d(TAG, "onDraw: ");
         if (mService.isScrimSrcModeEnabled()) {
             // We need to ensure that our window is always drawn fully even when we have paddings,
             // since we simulate it to be opaque.
@@ -283,6 +294,7 @@ public class StatusBarWindowView extends FrameLayout {
     }
 
     public void cancelExpandHelper() {
+        Log.d(TAG, "cancelExpandHelper: ");
         if (mStackScrollLayout != null) {
             mStackScrollLayout.cancelExpandHelper();
         }
