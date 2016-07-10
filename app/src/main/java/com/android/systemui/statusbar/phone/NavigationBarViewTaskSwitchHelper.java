@@ -18,6 +18,7 @@ package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
@@ -26,6 +27,7 @@ import com.android.systemui.statusbar.BaseStatusBar;
 
 public class NavigationBarViewTaskSwitchHelper extends GestureDetector.SimpleOnGestureListener {
 
+    public static final String TAG = "NavigationBarViewTaskSwitchHelper";
     private BaseStatusBar mBar;
     private boolean mIsVertical;
     private boolean mIsRTL;
@@ -45,15 +47,18 @@ public class NavigationBarViewTaskSwitchHelper extends GestureDetector.SimpleOnG
     }
 
     public void setBar(BaseStatusBar phoneStatusBar) {
+        Log.d(TAG, "setBar: ");
         mBar = phoneStatusBar;
     }
 
     public void setBarState(boolean isVertical, boolean isRTL) {
+        Log.d(TAG, "setBarState: ");
         mIsVertical = isVertical;
         mIsRTL = isRTL;
     }
 
     public boolean onInterceptTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onInterceptTouchEvent: ");
         // If we move more than a fixed amount, then start capturing for the
         // task switcher detector
         mTaskSwitcherDetector.onTouchEvent(event);
@@ -86,11 +91,13 @@ public class NavigationBarViewTaskSwitchHelper extends GestureDetector.SimpleOnG
     }
 
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onTouchEvent: ");
         return mTaskSwitcherDetector.onTouchEvent(event);
     }
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        Log.d(TAG, "onFling: ");
         float absVelX = Math.abs(velocityX);
         float absVelY = Math.abs(velocityY);
         boolean isValidFling = absVelX > mMinFlingVelocity &&
