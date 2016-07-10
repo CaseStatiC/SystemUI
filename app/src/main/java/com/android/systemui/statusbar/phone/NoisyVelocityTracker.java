@@ -31,6 +31,7 @@ public class NoisyVelocityTracker implements VelocityTrackerInterface {
     private static final Pools.SynchronizedPool<NoisyVelocityTracker> sNoisyPool =
             new Pools.SynchronizedPool<>(2);
 
+    public static final String TAG = "NoisyVelocityTracker";
     private static final float DECAY = 0.75f;
     private static final boolean DEBUG = false;
 
@@ -40,6 +41,7 @@ public class NoisyVelocityTracker implements VelocityTrackerInterface {
 
     private static class MotionEventCopy {
         public MotionEventCopy(float x2, float y2, long eventTime) {
+            Log.d(TAG, "MotionEventCopy: MotionEventCopy: ");
             this.x = x2;
             this.y = y2;
             this.t = eventTime;
@@ -49,6 +51,7 @@ public class NoisyVelocityTracker implements VelocityTrackerInterface {
     }
 
     public static NoisyVelocityTracker obtain() {
+        Log.d(TAG, "obtain: ");
         NoisyVelocityTracker instance = sNoisyPool.acquire();
         return (instance != null) ? instance : new NoisyVelocityTracker();
     }
@@ -57,6 +60,7 @@ public class NoisyVelocityTracker implements VelocityTrackerInterface {
     }
 
     public void addMovement(MotionEvent event) {
+        Log.d(TAG, "addMovement: ");
         if (mEventBuf.size() == MAX_EVENTS) {
             mEventBuf.remove();
         }
@@ -64,6 +68,7 @@ public class NoisyVelocityTracker implements VelocityTrackerInterface {
     }
 
     public void computeCurrentVelocity(int units) {
+        Log.d(TAG, "computeCurrentVelocity: ");
         if (NoisyVelocityTracker.DEBUG) {
             Log.v("FlingTracker", "computing velocities for " + mEventBuf.size() + " events");
         }
@@ -115,6 +120,7 @@ public class NoisyVelocityTracker implements VelocityTrackerInterface {
     }
 
     public float getXVelocity() {
+        Log.d(TAG, "getXVelocity: ");
         if (Float.isNaN(mVX) || Float.isInfinite(mVX)) {
             mVX = 0;
         }
@@ -122,6 +128,7 @@ public class NoisyVelocityTracker implements VelocityTrackerInterface {
     }
 
     public float getYVelocity() {
+        Log.d(TAG, "getYVelocity: ");
         if (Float.isNaN(mVY) || Float.isInfinite(mVX)) {
             mVY = 0;
         }
@@ -129,6 +136,7 @@ public class NoisyVelocityTracker implements VelocityTrackerInterface {
     }
 
     public void recycle() {
+        Log.d(TAG, "recycle: ");
         mEventBuf.clear();
         sNoisyPool.release(this);
     }
