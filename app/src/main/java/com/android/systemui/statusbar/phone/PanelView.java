@@ -363,6 +363,7 @@ public abstract class PanelView extends FrameLayout {
     }
 
     private void endMotionEvent(MotionEvent event, float x, float y, boolean forceCancel) {
+        Log.d(TAG, "endMotionEvent: ");
         mTrackingPointer = -1;
         if ((mTracking && mTouchSlopExceeded)
                 || Math.abs(x - mInitialTouchX) > mTouchSlop
@@ -411,6 +412,7 @@ public abstract class PanelView extends FrameLayout {
     }
 
     private int getFalsingThreshold() {
+        Log.d(TAG, "getFalsingThreshold: ");
         float factor = mStatusBar.isWakeUpComingFromTouch() ? 1.5f : 1.0f;
         return (int) (mUnlockFalsingThreshold * factor);
     }
@@ -531,6 +533,7 @@ public abstract class PanelView extends FrameLayout {
     protected abstract boolean isInContentBounds(float x, float y);
 
     protected void cancelHeightAnimator() {
+        Log.d(TAG, "cancelHeightAnimator: ");
         if (mHeightAnimator != null) {
             mHeightAnimator.cancel();
         }
@@ -538,6 +541,7 @@ public abstract class PanelView extends FrameLayout {
     }
 
     private void endClosing() {
+        Log.d(TAG, "endClosing: ");
         if (mClosing) {
             mClosing = false;
             onClosingFinished();
@@ -545,6 +549,7 @@ public abstract class PanelView extends FrameLayout {
     }
 
     private void initVelocityTracker() {
+        Log.d(TAG, "initVelocityTracker: ");
         if (mVelocityTracker != null) {
             mVelocityTracker.recycle();
         }
@@ -556,6 +561,7 @@ public abstract class PanelView extends FrameLayout {
     }
 
     protected float getContentHeight() {
+        Log.d(TAG, "getContentHeight: ");
         return mExpandedHeight;
     }
 
@@ -577,6 +583,7 @@ public abstract class PanelView extends FrameLayout {
      * @return whether a fling should expands the panel; contracts otherwise
      */
     protected boolean flingExpands(float vel, float vectorVel, float x, float y) {
+        Log.d(TAG, "flingExpands: ");
         if (isFalseTouch(x, y)) {
             return true;
         }
@@ -606,15 +613,18 @@ public abstract class PanelView extends FrameLayout {
     }
 
     protected void fling(float vel, boolean expand) {
+        Log.d(TAG, "fling: ");
         fling(vel, expand, 1.0f /* collapseSpeedUpFactor */, false);
     }
 
     protected void fling(float vel, boolean expand, boolean expandBecauseOfFalsing) {
+        Log.d(TAG, "fling: ");
         fling(vel, expand, 1.0f /* collapseSpeedUpFactor */, expandBecauseOfFalsing);
     }
 
     protected void fling(float vel, boolean expand, float collapseSpeedUpFactor,
             boolean expandBecauseOfFalsing) {
+        Log.d(TAG, "fling: ");
         cancelPeek();
         float target = expand ? getMaxPanelHeight() : 0.0f;
         if (!expand) {
@@ -625,6 +635,7 @@ public abstract class PanelView extends FrameLayout {
 
     protected void flingToHeight(float vel, boolean expand, float target,
             float collapseSpeedUpFactor, boolean expandBecauseOfFalsing) {
+        Log.d(TAG, "flingToHeight: ");
         // Hack to make the expand transition look nice when clear all button is visible - we make
         // the animation only to the last notification, and then jump to the maximum panel height so
         // clear all just fades in and the decelerating motion is towards the last notification.
@@ -690,6 +701,7 @@ public abstract class PanelView extends FrameLayout {
     }
 
     public String getName() {
+        Log.d(TAG, "getName: ");
         return mViewName;
     }
 
@@ -775,10 +787,12 @@ public abstract class PanelView extends FrameLayout {
     }
 
     public float getExpandedHeight() {
+        Log.d(TAG, "getExpandedHeight: ");
         return mExpandedHeight;
     }
 
     public float getExpandedFraction() {
+        Log.d(TAG, "getExpandedFraction: ");
         return mExpandedFraction;
     }
 
@@ -803,6 +817,7 @@ public abstract class PanelView extends FrameLayout {
     }
 
     public void collapse(boolean delayed, float speedUpFactor) {
+        Log.d(TAG, "collapse: ");
         if (DEBUG) logf("collapse: " + this);
         if (mPeekPending || mPeekAnimator != null) {
             mCollapseAfterPeek = true;
@@ -837,6 +852,7 @@ public abstract class PanelView extends FrameLayout {
     };
 
     public void expand() {
+        Log.d(TAG, "expand: ");
         if (DEBUG) logf("expand: " + this);
         if (isFullyCollapsed()) {
             mBar.startOpeningPanel(this);
@@ -848,6 +864,7 @@ public abstract class PanelView extends FrameLayout {
     }
 
     public void cancelPeek() {
+        Log.d(TAG, "cancelPeek: ");
         if (mPeekAnimator != null) {
             mPeekAnimator.cancel();
         }
@@ -860,6 +877,7 @@ public abstract class PanelView extends FrameLayout {
     }
 
     public void instantExpand() {
+        Log.d(TAG, "instantExpand: ");
         mInstantExpanding = true;
         mUpdateFlingOnLayout = false;
         abortAnimations();
@@ -892,6 +910,7 @@ public abstract class PanelView extends FrameLayout {
     }
 
     public void instantCollapse() {
+        Log.d(TAG, "instantCollapse: ");
         abortAnimations();
         setExpandedFraction(0f);
         if (mExpanding) {
@@ -900,6 +919,7 @@ public abstract class PanelView extends FrameLayout {
     }
 
     private void abortAnimations() {
+        Log.d(TAG, "abortAnimations: ");
         cancelPeek();
         cancelHeightAnimator();
         removeCallbacks(mPostCollapseRunnable);
@@ -997,6 +1017,7 @@ public abstract class PanelView extends FrameLayout {
     }
 
     private ValueAnimator createHeightAnimator(float targetHeight) {
+        Log.d(TAG, "createHeightAnimator: ");
         ValueAnimator animator = ValueAnimator.ofFloat(mExpandedHeight, targetHeight);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -1039,6 +1060,7 @@ public abstract class PanelView extends FrameLayout {
     protected abstract boolean isDozing();
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println(String.format("[PanelView(%s): expandedHeight=%f maxPanelHeight=%d closing=%s"
                 + " tracking=%s justPeeked=%s peekAnim=%s%s timeAnim=%s%s touchDisabled=%s"
                 + "]",
