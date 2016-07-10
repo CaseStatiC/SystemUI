@@ -19,6 +19,7 @@ package com.android.systemui.statusbar.phone;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.EventLog;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
@@ -26,7 +27,7 @@ import com.android.systemui.EventLogTags;
 
 public class PanelHolder extends FrameLayout {
     public static final boolean DEBUG_GESTURES = true;
-
+    public static final String tag = "PanelHolder";
     private int mSelectedPanelIndex = -1;
     private PanelBar mBar;
 
@@ -37,11 +38,13 @@ public class PanelHolder extends FrameLayout {
 
     @Override
     protected void onFinishInflate() {
+        Log.d(TAG, "onFinishInflate: ");
         super.onFinishInflate();
         setChildrenDrawingOrderEnabled(true);
     }
 
     public int getPanelIndex(PanelView pv) {
+        Log.d(TAG, "getPanelIndex: ");
         final int N = getChildCount();
         for (int i=0; i<N; i++) {
             final PanelView v = (PanelView) getChildAt(i);
@@ -51,11 +54,13 @@ public class PanelHolder extends FrameLayout {
     }
 
     public void setSelectedPanel(PanelView pv) {
+        Log.d(TAG, "setSelectedPanel: ");
         mSelectedPanelIndex = getPanelIndex(pv);
     }
 
     @Override
     protected int getChildDrawingOrder(int childCount, int i) {
+        Log.d(TAG, "getChildDrawingOrder: ");
         if (mSelectedPanelIndex == -1) {
             return i;
         } else {
@@ -71,6 +76,7 @@ public class PanelHolder extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onTouchEvent: ");
         if (DEBUG_GESTURES) {
             if (event.getActionMasked() != MotionEvent.ACTION_MOVE) {
                 EventLog.writeEvent(EventLogTags.SYSUI_PANELHOLDER_TOUCH,
@@ -81,6 +87,7 @@ public class PanelHolder extends FrameLayout {
     }
 
     public void setBar(PanelBar panelBar) {
+        Log.d(TAG, "setBar: ");
         mBar = panelBar;
     }
 }
