@@ -103,6 +103,7 @@ public class AssistManager {
     }
 
     public void onConfigurationChanged() {
+        Log.d(TAG, "onConfigurationChanged: ");
         boolean visible = false;
         if (mView != null) {
             visible = mView.isShowing();
@@ -123,6 +124,7 @@ public class AssistManager {
     }
 
     public void startAssist(Bundle args) {
+        Log.d(TAG, "startAssist: ");
         updateAssistInfo();
         if (mAssistComponent == null) {
             return;
@@ -139,10 +141,12 @@ public class AssistManager {
     }
 
     public void hideAssist() {
+        Log.d(TAG, "hideAssist: ");
         mAssistUtils.hideCurrentSession();
     }
 
     private WindowManager.LayoutParams getLayoutParams() {
+        Log.d(TAG, "getLayoutParams: ");
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 mContext.getResources().getDimensionPixelSize(R.dimen.assist_orb_scrim_height),
@@ -162,11 +166,13 @@ public class AssistManager {
     }
 
     private void showOrb() {
+        Log.d(TAG, "showOrb: ");
         maybeSwapSearchIcon();
         mView.show(true /* show */, true /* animate */);
     }
 
     private void startAssistInternal(Bundle args) {
+        Log.d(TAG, "startAssistInternal: ");
         if (mAssistComponent != null) {
             if (isAssistantService()) {
                 startVoiceInteractor(args);
@@ -177,6 +183,7 @@ public class AssistManager {
     }
 
     private void startAssistActivity(Bundle args) {
+        Log.d(TAG, "startAssistActivity: ");
         if (!mBar.isDeviceProvisioned()) {
             return;
         }
@@ -219,31 +226,38 @@ public class AssistManager {
     }
 
     private void startVoiceInteractor(Bundle args) {
+        Log.d(TAG, "startVoiceInteractor: ");
         mAssistUtils.showSessionForActiveService(args,
                 VoiceInteractionSession.SHOW_SOURCE_ASSIST_GESTURE, mShowCallback, null);
     }
 
     public void launchVoiceAssistFromKeyguard() {
+        Log.d(TAG, "launchVoiceAssistFromKeyguard: ");
         mAssistUtils.launchVoiceAssistFromKeyguard();
     }
 
     public boolean canVoiceAssistBeLaunchedFromKeyguard() {
+        Log.d(TAG, "canVoiceAssistBeLaunchedFromKeyguard: ");
         return mAssistUtils.activeServiceSupportsLaunchFromKeyguard();
     }
 
     public ComponentName getVoiceInteractorComponentName() {
+        Log.d(TAG, "getVoiceInteractorComponentName: ");
         return mAssistUtils.getActiveServiceComponentName();
     }
 
     private boolean isVoiceSessionRunning() {
+        Log.d(TAG, "isVoiceSessionRunning: ");
         return mAssistUtils.isSessionRunning();
     }
 
     public void destroy() {
+        Log.d(TAG, "destroy: ");
         mWindowManager.removeViewImmediate(mView);
     }
 
     private void maybeSwapSearchIcon() {
+        Log.d(TAG, "maybeSwapSearchIcon: ");
         if (mAssistComponent != null) {
             replaceDrawable(mView.getOrb().getLogo(), mAssistComponent, ASSIST_ICON_METADATA_NAME,
                     isAssistantService());
@@ -254,6 +268,7 @@ public class AssistManager {
 
     public void replaceDrawable(ImageView v, ComponentName component, String name,
             boolean isService) {
+        Log.d(TAG, "replaceDrawable: ");
         if (component != null) {
             try {
                 PackageManager packageManager = mContext.getPackageManager();
@@ -284,28 +299,34 @@ public class AssistManager {
     }
 
     private boolean isAssistantService() {
+        Log.d(TAG, "isAssistantService: ");
         return mAssistComponent == null ?
                 false : mAssistComponent.equals(getVoiceInteractorComponentName());
     }
 
     private void updateAssistInfo() {
+        Log.d(TAG, "updateAssistInfo: ");
         mAssistComponent = mAssistUtils.getAssistComponentForUser(UserHandle.USER_CURRENT);
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println("AssistManager state:");
         pw.print("  mAssistComponent="); pw.println(mAssistComponent);
     }
 
     public void showDisclosure() {
+        Log.d(TAG, "showDisclosure: ");
         mAssistDisclosure.postShow();
     }
 
     public void onUserSwitched(int newUserId) {
+        Log.d(TAG, "onUserSwitched: ");
         updateAssistInfo();
     }
 
     public void onLockscreenShown() {
+        Log.d(TAG, "onLockscreenShown: ");
         mAssistUtils.onLockscreenShown();
     }
 }
