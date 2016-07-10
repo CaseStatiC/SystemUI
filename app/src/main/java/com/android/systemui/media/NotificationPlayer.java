@@ -41,6 +41,7 @@ public class NotificationPlayer implements OnCompletionListener, OnErrorListener
     private static final int PLAY = 1;
     private static final int STOP = 2;
     private static final boolean mDebug = false;
+    public static final String TAG = "NotificationPlayer";
 
     private static final class Command {
         int code;
@@ -74,6 +75,7 @@ public class NotificationPlayer implements OnCompletionListener, OnErrorListener
         }
 
         public void run() {
+            Log.d(TAG, "CreationAndCompletionThread: run: ");
             Looper.prepare();
             mLooper = Looper.myLooper();
             synchronized(this) {
@@ -130,6 +132,7 @@ public class NotificationPlayer implements OnCompletionListener, OnErrorListener
     };
 
     private void startSound(Command cmd) {
+        Log.d(TAG, "startSound: ");
         // Preparing can be slow, so if there is something else
         // is playing, let it continue until we're done, so there
         // is less of a glitch.
@@ -225,6 +228,7 @@ public class NotificationPlayer implements OnCompletionListener, OnErrorListener
     }
 
     public void onCompletion(MediaPlayer mp) {
+        Log.d(TAG, "onCompletion: ");
         synchronized(mQueueAudioFocusLock) {
             if (mAudioManagerWithAudioFocus != null) {
                 if (mDebug) Log.d(mTag, "onCompletion() abandonning AudioFocus");
@@ -248,6 +252,7 @@ public class NotificationPlayer implements OnCompletionListener, OnErrorListener
     }
 
     public boolean onError(MediaPlayer mp, int what, int extra) {
+        Log.d(TAG, "onError: ");
         Log.e(mTag, "error " + what + " (extra=" + extra + ") playing notification");
         // error happened, handle it just like a completion
         onCompletion(mp);
@@ -296,6 +301,7 @@ public class NotificationPlayer implements OnCompletionListener, OnErrorListener
      */
     @Deprecated
     public void play(Context context, Uri uri, boolean looping, int stream) {
+        Log.d(TAG, "play: ");
         Command cmd = new Command();
         cmd.requestTime = SystemClock.uptimeMillis();
         cmd.code = PLAY;
@@ -323,6 +329,7 @@ public class NotificationPlayer implements OnCompletionListener, OnErrorListener
      *          (see {@link MediaPlayer#setAudioAttributes(AudioAttributes)})
      */
     public void play(Context context, Uri uri, boolean looping, AudioAttributes attributes) {
+        Log.d(TAG, "play: ");
         Command cmd = new Command();
         cmd.requestTime = SystemClock.uptimeMillis();
         cmd.code = PLAY;
@@ -341,6 +348,7 @@ public class NotificationPlayer implements OnCompletionListener, OnErrorListener
      * at this point.  Calling this multiple times has no ill effects.
      */
     public void stop() {
+        Log.d(TAG, "stop: ");
         synchronized (mCmdQueue) {
             // This check allows stop to be called multiple times without starting
             // a thread that ends up doing nothing.
@@ -355,6 +363,7 @@ public class NotificationPlayer implements OnCompletionListener, OnErrorListener
     }
 
     private void enqueueLocked(Command cmd) {
+        Log.d(TAG, "enqueueLocked: ");
         mCmdQueue.add(cmd);
         if (mThread == null) {
             acquireWakeLock();
@@ -377,6 +386,7 @@ public class NotificationPlayer implements OnCompletionListener, OnErrorListener
      * @hide
      */
     public void setUsesWakeLock(Context context) {
+        Log.d(TAG, "setUsesWakeLock: ");
         if (mWakeLock != null || mThread != null) {
             // if either of these has happened, we've already played something.
             // and our releases will be out of sync.
@@ -388,12 +398,14 @@ public class NotificationPlayer implements OnCompletionListener, OnErrorListener
     }
 
     private void acquireWakeLock() {
+        Log.d(TAG, "acquireWakeLock: ");
         if (mWakeLock != null) {
             mWakeLock.acquire();
         }
     }
 
     private void releaseWakeLock() {
+        Log.d(TAG, "releaseWakeLock: ");
         if (mWakeLock != null) {
             mWakeLock.release();
         }
