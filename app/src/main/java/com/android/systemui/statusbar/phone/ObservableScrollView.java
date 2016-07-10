@@ -18,6 +18,7 @@ package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ScrollView;
@@ -27,6 +28,7 @@ import android.widget.ScrollView;
  */
 public class ObservableScrollView extends ScrollView {
 
+    public static final String TAG = "ObservableScrollView";
     private Listener mListener;
     private int mLastOverscrollAmount;
     private boolean mTouchEnabled = true;
@@ -41,22 +43,27 @@ public class ObservableScrollView extends ScrollView {
     }
 
     public void setListener(Listener listener) {
+        Log.d(TAG, "setListener: ");
         mListener = listener;
     }
 
     public void setTouchEnabled(boolean touchEnabled) {
+        Log.d(TAG, "setTouchEnabled: ");
         mTouchEnabled = touchEnabled;
     }
 
     public boolean isScrolledToBottom() {
+        Log.d(TAG, "isScrolledToBottom: ");
         return getScrollY() == getMaxScrollY();
     }
 
     public boolean isHandlingTouchEvent() {
+        Log.d(TAG, "isHandlingTouchEvent: ");
         return mHandlingTouchEvent;
     }
 
     private int getMaxScrollY() {
+        Log.d(TAG, "getMaxScrollY: ");
         int scrollRange = 0;
         if (getChildCount() > 0) {
             View child = getChildAt(0);
@@ -68,6 +75,7 @@ public class ObservableScrollView extends ScrollView {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "onTouchEvent: ");
         mHandlingTouchEvent = true;
         mLastX = ev.getX();
         mLastY = ev.getY();
@@ -78,6 +86,7 @@ public class ObservableScrollView extends ScrollView {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "onInterceptTouchEvent: ");
         mHandlingTouchEvent = true;
         mLastX = ev.getX();
         mLastY = ev.getY();
@@ -88,6 +97,7 @@ public class ObservableScrollView extends ScrollView {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "dispatchTouchEvent: ");
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             if (!mTouchEnabled) {
                 mTouchCancelled = true;
@@ -110,6 +120,7 @@ public class ObservableScrollView extends ScrollView {
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
+        Log.d(TAG, "onScrollChanged: ");
         if (mListener != null) {
             mListener.onScrollChanged();
         }
@@ -119,17 +130,20 @@ public class ObservableScrollView extends ScrollView {
     protected boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY,
             int scrollRangeX, int scrollRangeY, int maxOverScrollX, int maxOverScrollY,
             boolean isTouchEvent) {
+        Log.d(TAG, "overScrollBy: ");
         mLastOverscrollAmount = Math.max(0, scrollY + deltaY - getMaxScrollY());
         return super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX, scrollRangeY,
                         maxOverScrollX, maxOverScrollY, isTouchEvent);
     }
 
     public void setBlockFlinging(boolean blockFlinging) {
+        Log.d(TAG, "setBlockFlinging: ");
         mBlockFlinging = blockFlinging;
     }
 
     @Override
     public void fling(int velocityY) {
+        Log.d(TAG, "fling: ");
         if (!mBlockFlinging) {
             super.fling(velocityY);
         }
@@ -138,6 +152,7 @@ public class ObservableScrollView extends ScrollView {
     @Override
     protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {
         super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
+        Log.d(TAG, "onOverScrolled: ");
         if (mListener != null && mLastOverscrollAmount > 0) {
             mListener.onOverscrolled(mLastX, mLastY, mLastOverscrollAmount);
         }
