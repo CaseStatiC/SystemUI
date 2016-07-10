@@ -54,6 +54,7 @@ public class RingtonePlayer extends SystemUI {
 
     @Override
     public void start() {
+        Log.d(TAG, "start: ");
         mAsyncPlayer.setUsesWakeLock(mContext);
 
         mAudioService = IAudioService.Stub.asInterface(
@@ -94,6 +95,7 @@ public class RingtonePlayer extends SystemUI {
         @Override
         public void play(IBinder token, Uri uri, AudioAttributes aa, float volume, boolean looping)
                 throws RemoteException {
+            Log.d(TAG, "mCallback: play: ");
             if (LOGD) {
                 Log.d(TAG, "play(token=" + token + ", uri=" + uri + ", uid="
                         + Binder.getCallingUid() + ")");
@@ -115,6 +117,7 @@ public class RingtonePlayer extends SystemUI {
 
         @Override
         public void stop(IBinder token) {
+            Log.d(TAG, "mCallback: stop: ");
             if (LOGD) Log.d(TAG, "stop(token=" + token + ")");
             Client client;
             synchronized (mClients) {
@@ -128,6 +131,7 @@ public class RingtonePlayer extends SystemUI {
 
         @Override
         public boolean isPlaying(IBinder token) {
+            Log.d(TAG, "mCallback: isPlaying: ");
             if (LOGD) Log.d(TAG, "isPlaying(token=" + token + ")");
             Client client;
             synchronized (mClients) {
@@ -142,6 +146,7 @@ public class RingtonePlayer extends SystemUI {
 
         @Override
         public void setPlaybackProperties(IBinder token, float volume, boolean looping) {
+            Log.d(TAG, "mCallback: setPlaybackProperties: ");
             Client client;
             synchronized (mClients) {
                 client = mClients.get(token);
@@ -155,6 +160,7 @@ public class RingtonePlayer extends SystemUI {
 
         @Override
         public void playAsync(Uri uri, UserHandle user, boolean looping, AudioAttributes aa) {
+            Log.d(TAG, "mCallback: playAsync: ");
             if (LOGD) Log.d(TAG, "playAsync(uri=" + uri + ", user=" + user + ")");
             if (Binder.getCallingUid() != Process.SYSTEM_UID) {
                 throw new SecurityException("Async playback only available from system UID.");
@@ -167,6 +173,7 @@ public class RingtonePlayer extends SystemUI {
 
         @Override
         public void stopAsync() {
+            Log.d(TAG, "mCallback: stopAsync: ");
             if (LOGD) Log.d(TAG, "stopAsync()");
             if (Binder.getCallingUid() != Process.SYSTEM_UID) {
                 throw new SecurityException("Async playback only available from system UID.");
@@ -176,6 +183,7 @@ public class RingtonePlayer extends SystemUI {
 
         @Override
         public String getTitle(Uri uri) {
+            Log.d(TAG, "mCallback: getTitle: ");
             final UserHandle user = Binder.getCallingUserHandle();
             return Ringtone.getTitle(getContextForUser(user), uri,
                     false /*followSettingsUri*/, false /*allowRemote*/);
@@ -183,6 +191,7 @@ public class RingtonePlayer extends SystemUI {
     };
 
     private Context getContextForUser(UserHandle user) {
+        Log.d(TAG, "getContextForUser: ");
         try {
             return mContext.createPackageContextAsUser(mContext.getPackageName(), 0, user);
         } catch (NameNotFoundException e) {
@@ -192,6 +201,7 @@ public class RingtonePlayer extends SystemUI {
 
     @Override
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println("Clients:");
         synchronized (mClients) {
             for (Client client : mClients.values()) {
