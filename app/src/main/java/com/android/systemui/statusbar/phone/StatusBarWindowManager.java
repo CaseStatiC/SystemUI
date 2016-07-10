@@ -21,6 +21,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.PixelFormat;
 import android.os.SystemProperties;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ import java.lang.reflect.Field;
  */
 public class StatusBarWindowManager {
 
+    public static final String TAG = "StatusBarWindowManager";
     private final Context mContext;
     private final WindowManager mWindowManager;
     private View mStatusBarView;
@@ -60,6 +62,7 @@ public class StatusBarWindowManager {
     }
 
     private boolean shouldEnableKeyguardScreenRotation() {
+        Log.d(TAG, "shouldEnableKeyguardScreenRotation: ");
         Resources res = mContext.getResources();
         return SystemProperties.getBoolean("lockscreen.rot_override", false)
                 || res.getBoolean(R.bool.config_enableLockScreenRotation);
@@ -72,6 +75,7 @@ public class StatusBarWindowManager {
      * @param barHeight The height of the status bar in collapsed state.
      */
     public void add(View statusBarView, int barHeight) {
+        Log.d(TAG, "add: ");
 
         // Now that the status bar window encompasses the sliding panel and its
         // translucent backdrop, the entire thing is made TRANSLUCENT and is
@@ -99,6 +103,7 @@ public class StatusBarWindowManager {
     }
 
     private void applyKeyguardFlags(State state) {
+        Log.d(TAG, "applyKeyguardFlags: ");
         if (state.keyguardShowing) {
             mLpChanged.flags |= WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER;
             mLpChanged.privateFlags |= WindowManager.LayoutParams.PRIVATE_FLAG_KEYGUARD;
@@ -109,6 +114,7 @@ public class StatusBarWindowManager {
     }
 
     private void adjustScreenOrientation(State state) {
+        Log.d(TAG, "adjustScreenOrientation: ");
         if (state.isKeyguardShowingAndNotOccluded()) {
             if (mKeyguardScreenRotation) {
                 mLpChanged.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_USER;
@@ -121,6 +127,7 @@ public class StatusBarWindowManager {
     }
 
     private void applyFocusableFlag(State state) {
+        Log.d(TAG, "applyFocusableFlag: ");
         boolean panelFocusable = state.statusBarFocusable && state.panelExpanded;
         if (state.keyguardShowing && state.keyguardNeedsInput && state.bouncerShowing) {
             mLpChanged.flags &= ~WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
@@ -135,6 +142,7 @@ public class StatusBarWindowManager {
     }
 
     private void applyHeight(State state) {
+        Log.d(TAG, "applyHeight: ");
         boolean expanded = isExpanded(state);
         if (expanded) {
             mLpChanged.height = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -144,16 +152,19 @@ public class StatusBarWindowManager {
     }
 
     private boolean isExpanded(State state) {
+        Log.d(TAG, "isExpanded: ");
         return !state.forceCollapsed && (state.isKeyguardShowingAndNotOccluded()
                 || state.panelVisible || state.keyguardFadingAway || state.bouncerShowing
                 || state.headsUpShowing);
     }
 
     private void applyFitsSystemWindows(State state) {
+        Log.d(TAG, "applyFitsSystemWindows: ");
         mStatusBarView.setFitsSystemWindows(!state.isKeyguardShowingAndNotOccluded());
     }
 
     private void applyUserActivityTimeout(State state) {
+        Log.d(TAG, "applyUserActivityTimeout: ");
         if (state.isKeyguardShowingAndNotOccluded()
                 && state.statusBarState == StatusBarState.KEYGUARD
                 && !state.qsExpanded) {
@@ -164,6 +175,7 @@ public class StatusBarWindowManager {
     }
 
     private void applyInputFeatures(State state) {
+        Log.d(TAG, "applyInputFeatures: ");
         if (state.isKeyguardShowingAndNotOccluded()
                 && state.statusBarState == StatusBarState.KEYGUARD
                 && !state.qsExpanded) {
@@ -176,6 +188,7 @@ public class StatusBarWindowManager {
     }
 
     private void apply(State state) {
+        Log.d(TAG, "apply: ");
         applyKeyguardFlags(state);
         applyForceStatusBarVisibleFlag(state);
         applyFocusableFlag(state);
@@ -192,6 +205,7 @@ public class StatusBarWindowManager {
     }
 
     private void applyForceStatusBarVisibleFlag(State state) {
+        Log.d(TAG, "applyForceStatusBarVisibleFlag: ");
         if (state.forceStatusBarVisible) {
             mLpChanged.privateFlags |= WindowManager
                     .LayoutParams.PRIVATE_FLAG_FORCE_STATUS_BAR_VISIBLE_TRANSPARENT;
@@ -202,6 +216,7 @@ public class StatusBarWindowManager {
     }
 
     private void applyModalFlag(State state) {
+        Log.d(TAG, "applyModalFlag: ");
         if (state.headsUpShowing) {
             mLpChanged.flags |= WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
         } else {
@@ -210,6 +225,7 @@ public class StatusBarWindowManager {
     }
 
     private void applyBrightness(State state) {
+        Log.d(TAG, "applyBrightness: ");
         if (state.forceDozeBrightness) {
             mLpChanged.screenBrightness = mScreenBrightnessDoze;
         } else {
@@ -218,47 +234,56 @@ public class StatusBarWindowManager {
     }
 
     public void setKeyguardShowing(boolean showing) {
+        Log.d(TAG, "setKeyguardShowing: ");
         mCurrentState.keyguardShowing = showing;
         apply(mCurrentState);
     }
 
     public void setKeyguardOccluded(boolean occluded) {
+        Log.d(TAG, "setKeyguardOccluded: ");
         mCurrentState.keyguardOccluded = occluded;
         apply(mCurrentState);
     }
 
     public void setKeyguardNeedsInput(boolean needsInput) {
+        Log.d(TAG, "setKeyguardNeedsInput: ");
         mCurrentState.keyguardNeedsInput = needsInput;
         apply(mCurrentState);
     }
 
     public void setPanelVisible(boolean visible) {
+        Log.d(TAG, "setPanelVisible: ");
         mCurrentState.panelVisible = visible;
         mCurrentState.statusBarFocusable = visible;
         apply(mCurrentState);
     }
 
     public void setStatusBarFocusable(boolean focusable) {
+        Log.d(TAG, "setStatusBarFocusable: ");
         mCurrentState.statusBarFocusable = focusable;
         apply(mCurrentState);
     }
 
     public void setBouncerShowing(boolean showing) {
+        Log.d(TAG, "setBouncerShowing: ");
         mCurrentState.bouncerShowing = showing;
         apply(mCurrentState);
     }
 
     public void setKeyguardFadingAway(boolean keyguardFadingAway) {
+        Log.d(TAG, "setKeyguardFadingAway: ");
         mCurrentState.keyguardFadingAway = keyguardFadingAway;
         apply(mCurrentState);
     }
 
     public void setQsExpanded(boolean expanded) {
+        Log.d(TAG, "setQsExpanded: ");
         mCurrentState.qsExpanded = expanded;
         apply(mCurrentState);
     }
 
     public void setHeadsUpShowing(boolean showing) {
+        Log.d(TAG, "setHeadsUpShowing: ");
         mCurrentState.headsUpShowing = showing;
         apply(mCurrentState);
     }
@@ -267,11 +292,13 @@ public class StatusBarWindowManager {
      * @param state The {@link StatusBarState} of the status bar.
      */
     public void setStatusBarState(int state) {
+        Log.d(TAG, "setStatusBarState: ");
         mCurrentState.statusBarState = state;
         apply(mCurrentState);
     }
 
     public void setForceStatusBarVisible(boolean forceStatusBarVisible) {
+        Log.d(TAG, "setForceStatusBarVisible: ");
         mCurrentState.forceStatusBarVisible = forceStatusBarVisible;
         apply(mCurrentState);
     }
@@ -282,11 +309,13 @@ public class StatusBarWindowManager {
      * be computed.
      */
     public void setForceWindowCollapsed(boolean force) {
+        Log.d(TAG, "setForceWindowCollapsed: ");
         mCurrentState.forceCollapsed = force;
         apply(mCurrentState);
     }
 
     public void setPanelExpanded(boolean isExpanded) {
+        Log.d(TAG, "setPanelExpanded: ");
         mCurrentState.panelExpanded = isExpanded;
         apply(mCurrentState);
     }
@@ -296,11 +325,13 @@ public class StatusBarWindowManager {
      * bar window.
      */
     public void setForceDozeBrightness(boolean forceDozeBrightness) {
+        Log.d(TAG, "setForceDozeBrightness: ");
         mCurrentState.forceDozeBrightness = forceDozeBrightness;
         apply(mCurrentState);
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println("StatusBarWindowManager state:");
         pw.println(mCurrentState);
     }
