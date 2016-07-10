@@ -20,6 +20,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.View;
 
 import com.android.systemui.R;
@@ -43,6 +44,7 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
     }
 
     public void init() {
+        Log.d(TAG, "init: ");
         mLeftSide = mView.findViewById(R.id.notification_icon_area);
         mStatusIcons = mView.findViewById(R.id.statusIcons);
         mSignalCluster = mView.findViewById(R.id.signal_cluster);
@@ -53,21 +55,25 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
     }
 
     public ObjectAnimator animateTransitionTo(View v, float toAlpha) {
+        Log.d(TAG, "animateTransitionTo: ");
         return ObjectAnimator.ofFloat(v, "alpha", v.getAlpha(), toAlpha);
     }
 
     private float getNonBatteryClockAlphaFor(int mode) {
+        Log.d(TAG, "getNonBatteryClockAlphaFor: ");
         return isLightsOut(mode) ? ICON_ALPHA_WHEN_LIGHTS_OUT_NON_BATTERY_CLOCK
                 : !isOpaque(mode) ? ICON_ALPHA_WHEN_NOT_OPAQUE
                 : mIconAlphaWhenOpaque;
     }
 
     private float getBatteryClockAlpha(int mode) {
+        Log.d(TAG, "getBatteryClockAlpha: ");
         return isLightsOut(mode) ? ICON_ALPHA_WHEN_LIGHTS_OUT_BATTERY_CLOCK
                 : getNonBatteryClockAlphaFor(mode);
     }
 
     private boolean isOpaque(int mode) {
+        Log.d(TAG, "isOpaque: ");
         return !(mode == MODE_SEMI_TRANSPARENT || mode == MODE_TRANSLUCENT
                 || mode == MODE_TRANSPARENT || mode == MODE_LIGHTS_OUT_TRANSPARENT);
     }
@@ -75,10 +81,12 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
     @Override
     protected void onTransition(int oldMode, int newMode, boolean animate) {
         super.onTransition(oldMode, newMode, animate);
+        Log.d(TAG, "onTransition: ");
         applyMode(newMode, animate);
     }
 
     private void applyMode(int mode, boolean animate) {
+        Log.d(TAG, "applyMode: ");
         if (mLeftSide == null) return; // pre-init
         float newAlpha = getNonBatteryClockAlphaFor(mode);
         float newAlphaBC = getBatteryClockAlpha(mode);
