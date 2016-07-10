@@ -190,6 +190,7 @@ public class NavigationBarView extends LinearLayout {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        Log.d(TAG, "onAttachedToWindow: ");
         ViewRootImpl root = getViewRootImpl();
         if (root != null) {
             root.setDrawDuringWindowsAnimating(true);
@@ -197,20 +198,24 @@ public class NavigationBarView extends LinearLayout {
     }
 
     public BarTransitions getBarTransitions() {
+        Log.d(TAG, "getBarTransitions: ");
         return mBarTransitions;
     }
 
     public void setBar(PhoneStatusBar phoneStatusBar) {
+        Log.d(TAG, "setBar: ");
         mTaskSwitchHelper.setBar(phoneStatusBar);
     }
 
     public void setOnVerticalChangedListener(OnVerticalChangedListener onVerticalChangedListener) {
+        Log.d(TAG, "setOnVerticalChangedListener: ");
         mOnVerticalChangedListener = onVerticalChangedListener;
         notifyVerticalChangedListener(mVertical);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onTouchEvent: ");
         if (mTaskSwitchHelper.onTouchEvent(event)) {
             return true;
         }
@@ -222,40 +227,49 @@ public class NavigationBarView extends LinearLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onInterceptTouchEvent: ");
         return mTaskSwitchHelper.onInterceptTouchEvent(event);
     }
 
     public void abortCurrentGesture() {
+        Log.d(TAG, "abortCurrentGesture: ");
         getHomeButton().abortCurrentGesture();
     }
 
     private H mHandler = new H();
 
     public View getCurrentView() {
+        Log.d(TAG, "getCurrentView: ");
         return mCurrentView;
     }
 
     public View getRecentsButton() {
+        Log.d(TAG, "getRecentsButton: ");
         return mCurrentView.findViewById(R.id.recent_apps);
     }
 
     public View getMenuButton() {
+        Log.d(TAG, "getMenuButton: ");
         return mCurrentView.findViewById(R.id.menu);
     }
 
     public View getBackButton() {
+        Log.d(TAG, "getBackButton: ");
         return mCurrentView.findViewById(R.id.back);
     }
 
     public KeyButtonView getHomeButton() {
+        Log.d(TAG, "getHomeButton: ");
         return (KeyButtonView) mCurrentView.findViewById(R.id.home);
     }
 
     public View getImeSwitchButton() {
+        Log.d(TAG, "getImeSwitchButton: ");
         return mCurrentView.findViewById(R.id.ime_switcher);
     }
 
     private void getIcons(Resources res) {
+        Log.d(TAG, "getIcons: ");
         mBackIcon = res.getDrawable(R.drawable.ic_sysbar_back);
         mBackLandIcon = mBackIcon;
         mBackAltIcon = res.getDrawable(R.drawable.ic_sysbar_back_ime);
@@ -266,21 +280,25 @@ public class NavigationBarView extends LinearLayout {
 
     @Override
     public void setLayoutDirection(int layoutDirection) {
+        Log.d(TAG, "setLayoutDirection: ");
         getIcons(getContext().getResources());
 
         super.setLayoutDirection(layoutDirection);
     }
 
     public void notifyScreenOn(boolean screenOn) {
+        Log.d(TAG, "notifyScreenOn: ");
         mScreenOn = screenOn;
         setDisabledFlags(mDisabledFlags, true);
     }
 
     public void setNavigationIconHints(int hints) {
+        Log.d(TAG, "setNavigationIconHints: ");
         setNavigationIconHints(hints, false);
     }
 
     public void setNavigationIconHints(int hints, boolean force) {
+        Log.d(TAG, "setNavigationIconHints: ");
         if (!force && hints == mNavigationIconHints) return;
         final boolean backAlt = (hints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) != 0;
         if ((mNavigationIconHints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) != 0 && !backAlt) {
@@ -310,10 +328,12 @@ public class NavigationBarView extends LinearLayout {
     }
 
     public void setDisabledFlags(int disabledFlags) {
+        Log.d(TAG, "setDisabledFlags: ");
         setDisabledFlags(disabledFlags, false);
     }
 
     public void setDisabledFlags(int disabledFlags, boolean force) {
+        Log.d(TAG, "setDisabledFlags: ");
         if (!force && mDisabledFlags == disabledFlags) return;
 
         mDisabledFlags = disabledFlags;
@@ -349,6 +369,7 @@ public class NavigationBarView extends LinearLayout {
     }
 
     private boolean inLockTask() {
+        Log.d(TAG, "inLockTask: ");
         try {
             return ActivityManagerNative.getDefault().isInLockTaskMode();
         } catch (RemoteException e) {
@@ -357,23 +378,27 @@ public class NavigationBarView extends LinearLayout {
     }
 
     private void setVisibleOrGone(View view, boolean visible) {
+        Log.d(TAG, "setVisibleOrGone: ");
         if (view != null) {
             view.setVisibility(visible ? VISIBLE : GONE);
         }
     }
 
     public void setLayoutTransitionsEnabled(boolean enabled) {
+        Log.d(TAG, "setLayoutTransitionsEnabled: ");
         mLayoutTransitionsEnabled = enabled;
         updateLayoutTransitionsEnabled();
     }
 
     public void setWakeAndUnlocking(boolean wakeAndUnlocking) {
+        Log.d(TAG, "setWakeAndUnlocking: ");
         setUseFadingAnimations(wakeAndUnlocking);
         mWakeAndUnlocking = wakeAndUnlocking;
         updateLayoutTransitionsEnabled();
     }
 
     private void updateLayoutTransitionsEnabled() {
+        Log.d(TAG, "updateLayoutTransitionsEnabled: ");
         boolean enabled = !mWakeAndUnlocking && mLayoutTransitionsEnabled;
         ViewGroup navButtons = (ViewGroup) mCurrentView.findViewById(R.id.nav_buttons);
         LayoutTransition lt = navButtons.getLayoutTransition();
@@ -393,6 +418,7 @@ public class NavigationBarView extends LinearLayout {
     }
 
     private void setUseFadingAnimations(boolean useFadingAnimations) {
+        Log.d(TAG, "setUseFadingAnimations: ");
         WindowManager.LayoutParams lp = (WindowManager.LayoutParams) getLayoutParams();
         if (lp != null) {
             boolean old = lp.windowAnimations != 0;
@@ -409,6 +435,7 @@ public class NavigationBarView extends LinearLayout {
     }
 
     public void setSlippery(boolean newSlippery) {
+        Log.d(TAG, "setSlippery: ");
         WindowManager.LayoutParams lp = (WindowManager.LayoutParams) getLayoutParams();
         if (lp != null) {
             boolean oldSlippery = (lp.flags & WindowManager.LayoutParams.FLAG_SLIPPERY) != 0;
@@ -425,10 +452,12 @@ public class NavigationBarView extends LinearLayout {
     }
 
     public void setMenuVisibility(final boolean show) {
+        Log.d(TAG, "setMenuVisibility: ");
         setMenuVisibility(show, false);
     }
 
     public void setMenuVisibility(final boolean show, final boolean force) {
+        Log.d(TAG, "setMenuVisibility: ");
         if (!force && mShowMenu == show) return;
 
         mShowMenu = show;
@@ -441,6 +470,7 @@ public class NavigationBarView extends LinearLayout {
 
     @Override
     public void onFinishInflate() {
+        Log.d(TAG, "onFinishInflate: ");
         mRotatedViews[Surface.ROTATION_0] =
         mRotatedViews[Surface.ROTATION_180] = findViewById(R.id.rot0);
 
@@ -456,10 +486,12 @@ public class NavigationBarView extends LinearLayout {
     }
 
     public boolean isVertical() {
+        Log.d(TAG, "isVertical: ");
         return mVertical;
     }
 
     public void reorient() {
+        Log.d(TAG, "reorient: ");
         final int rot = mDisplay.getRotation();
         for (int i=0; i<4; i++) {
             mRotatedViews[i].setVisibility(View.GONE);
@@ -487,12 +519,14 @@ public class NavigationBarView extends LinearLayout {
     }
 
     private void updateTaskSwitchHelper() {
+        Log.d(TAG, "updateTaskSwitchHelper: ");
         boolean isRtl = (getLayoutDirection() == View.LAYOUT_DIRECTION_RTL);
         mTaskSwitchHelper.setBarState(mVertical, isRtl);
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        Log.d(TAG, "onSizeChanged: ");
         if (DEBUG) Log.d(TAG, String.format(
                     "onSizeChanged: (%dx%d) old: (%dx%d)", w, h, oldw, oldh));
 
@@ -509,6 +543,7 @@ public class NavigationBarView extends LinearLayout {
     }
 
     private void notifyVerticalChangedListener(boolean newVertical) {
+        Log.d(TAG, "notifyVerticalChangedListener: ");
         if (mOnVerticalChangedListener != null) {
             mOnVerticalChangedListener.onVerticalChanged(newVertical);
         }
@@ -517,6 +552,7 @@ public class NavigationBarView extends LinearLayout {
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        Log.d(TAG, "onConfigurationChanged: ");
         updateRTLOrder();
         updateTaskSwitchHelper();
     }
@@ -526,6 +562,7 @@ public class NavigationBarView extends LinearLayout {
      * have to do it manually
      */
     private void updateRTLOrder() {
+        Log.d(TAG, "updateRTLOrder: ");
         boolean isLayoutRtl = getResources().getConfiguration()
                 .getLayoutDirection() == LAYOUT_DIRECTION_RTL;
         if (mIsLayoutRtl != isLayoutRtl) {
@@ -545,6 +582,7 @@ public class NavigationBarView extends LinearLayout {
     }
 
     private void adjustExtraKeyGravity(View navBar, boolean isLayoutRtl) {
+        Log.d(TAG, "adjustExtraKeyGravity: ");
         View menu = navBar.findViewById(R.id.menu);
         View imeSwitcher = navBar.findViewById(R.id.ime_switcher);
         if (menu != null) {
@@ -565,6 +603,7 @@ public class NavigationBarView extends LinearLayout {
      * @param group The LinearLayout to swap the children from.
      */
     private void swapChildrenOrderIfVertical(View group) {
+        Log.d(TAG, "swapChildrenOrderIfVertical: ");
         if (group instanceof LinearLayout) {
             LinearLayout linearLayout = (LinearLayout) group;
             if (linearLayout.getOrientation() == VERTICAL) {
@@ -604,6 +643,7 @@ public class NavigationBarView extends LinearLayout {
 
 
     private String getResourceName(int resId) {
+        Log.d(TAG, "getResourceName: ");
         if (resId != 0) {
             final android.content.res.Resources res = getContext().getResources();
             try {
@@ -617,10 +657,12 @@ public class NavigationBarView extends LinearLayout {
     }
 
     private void postCheckForInvalidLayout(final String how) {
+        Log.d(TAG, "postCheckForInvalidLayout: ");
         mHandler.obtainMessage(MSG_CHECK_INVALID_LAYOUT, 0, 0, how).sendToTarget();
     }
 
     private static String visibilityToString(int vis) {
+        Log.d(TAG, "visibilityToString: ");
         switch (vis) {
             case View.INVISIBLE:
                 return "INVISIBLE";
@@ -632,6 +674,7 @@ public class NavigationBarView extends LinearLayout {
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println("NavigationBarView {");
         final Rect r = new Rect();
         final Point size = new Point();
@@ -666,6 +709,7 @@ public class NavigationBarView extends LinearLayout {
     }
 
     private static void dumpButton(PrintWriter pw, String caption, View button) {
+        Log.d(TAG, "dumpButton: ");
         pw.print("      " + caption + ": ");
         if (button == null) {
             pw.print("null");
