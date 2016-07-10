@@ -20,6 +20,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.os.ServiceManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -42,6 +43,7 @@ public final class NavigationBarTransitions extends BarTransitions {
     }
 
     public void init() {
+        Log.d(TAG, "init: ");
         applyModeBackground(-1, getMode(), false /*animate*/);
         applyMode(getMode(), false /*animate*/, true /*force*/);
     }
@@ -49,16 +51,19 @@ public final class NavigationBarTransitions extends BarTransitions {
     @Override
     protected void onTransition(int oldMode, int newMode, boolean animate) {
         super.onTransition(oldMode, newMode, animate);
+        Log.d(TAG, "onTransition: ");
         applyMode(newMode, animate, false /*force*/);
     }
 
     private void applyMode(int mode, boolean animate, boolean force) {
+        Log.d(TAG, "applyMode: ");
 
         // apply to lights out
         applyLightsOut(isLightsOut(mode), animate, force);
     }
 
     private void applyLightsOut(boolean lightsOut, boolean animate, boolean force) {
+        Log.d(TAG, "applyLightsOut: ");
         if (!force && lightsOut == mLightsOut) return;
 
         mLightsOut = lightsOut;
