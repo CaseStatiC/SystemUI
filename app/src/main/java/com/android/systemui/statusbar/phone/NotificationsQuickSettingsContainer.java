@@ -19,6 +19,7 @@ package com.android.systemui.statusbar.phone;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.WindowInsets;
@@ -31,7 +32,7 @@ import com.android.systemui.R;
  */
 public class NotificationsQuickSettingsContainer extends FrameLayout
         implements ViewStub.OnInflateListener {
-
+    public static final String TAG = "NotificationsQuickSettingsContainer";
     private View mScrollView;
     private View mUserSwitcher;
     private View mStackScroller;
@@ -46,6 +47,7 @@ public class NotificationsQuickSettingsContainer extends FrameLayout
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mScrollView = findViewById(R.id.scroll_view);
         mStackScroller = findViewById(R.id.notification_stack_scroller);
         mKeyguardStatusBar = findViewById(R.id.keyguard_header);
@@ -56,12 +58,14 @@ public class NotificationsQuickSettingsContainer extends FrameLayout
 
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        Log.d(TAG, "onApplyWindowInsets: ");
         setPadding(0, 0, 0, insets.getSystemWindowInsetBottom());
         return insets;
     }
 
     @Override
     protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
+        Log.d(TAG, "drawChild: ");
         boolean userSwitcherVisible = mInflated && mUserSwitcher.getVisibility() == View.VISIBLE;
         boolean statusBarVisible = mKeyguardStatusBar.getVisibility() == View.VISIBLE;
 
@@ -96,6 +100,7 @@ public class NotificationsQuickSettingsContainer extends FrameLayout
 
     @Override
     public void onInflate(ViewStub stub, View inflated) {
+        Log.d(TAG, "onInflate: ");
         if (stub == mUserSwitcher) {
             mUserSwitcher = inflated;
             mInflated = true;
@@ -103,6 +108,7 @@ public class NotificationsQuickSettingsContainer extends FrameLayout
     }
 
     public void setQsExpanded(boolean expanded) {
+        Log.d(TAG, "setQsExpanded: ");
         if (mQsExpanded != expanded) {
             mQsExpanded = expanded;
             invalidate();
