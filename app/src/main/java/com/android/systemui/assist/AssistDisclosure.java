@@ -30,6 +30,7 @@ import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
@@ -39,6 +40,7 @@ import android.view.animation.AnimationUtils;
  * Visually discloses that contextual data was provided to an assistant.
  */
 public class AssistDisclosure {
+    public static final String TAG = "AssistDisclosure";
     private final Context mContext;
     private final WindowManager mWm;
     private final Handler mHandler;
@@ -53,11 +55,13 @@ public class AssistDisclosure {
     }
 
     public void postShow() {
+        Log.d(TAG, "postShow: ");
         mHandler.removeCallbacks(mShowRunnable);
         mHandler.post(mShowRunnable);
     }
 
     private void show() {
+        Log.d(TAG, "show: ");
         if (mView == null) {
             mView = new AssistDisclosureView(mContext);
         }
@@ -78,6 +82,7 @@ public class AssistDisclosure {
     }
 
     private void hide() {
+        Log.d(TAG, "hide: ");
         if (mViewAdded) {
             mWm.removeView(mView);
             mViewAdded = false;
@@ -165,7 +170,7 @@ public class AssistDisclosure {
         @Override
         protected void onAttachedToWindow() {
             super.onAttachedToWindow();
-
+            Log.d(TAG, "AssistDisclosureView: onAttachedToWindow: ");
             startAnimation();
             sendAccessibilityEvent(AccessibilityEvent.TYPE_ASSIST_READING_CONTEXT);
         }
@@ -173,7 +178,7 @@ public class AssistDisclosure {
         @Override
         protected void onDetachedFromWindow() {
             super.onDetachedFromWindow();
-
+            Log.d(TAG, "AssistDisclosureView: onDetachedFromWindow: ");
             mAnimator.cancel();
 
             mTracingProgress = 0;
@@ -181,12 +186,14 @@ public class AssistDisclosure {
         }
 
         private void startAnimation() {
+            Log.d(TAG, "AssistDisclosureView: startAnimation: ");
             mAnimator.cancel();
             mAnimator.start();
         }
 
         @Override
         protected void onDraw(Canvas canvas) {
+            Log.d(TAG, "AssistDisclosureView: onDraw: ");
             mPaint.setAlpha(mAlpha);
             mShadowPaint.setAlpha(mAlpha / 4);
 
@@ -195,6 +202,7 @@ public class AssistDisclosure {
         }
 
         private void drawGeometry(Canvas canvas, Paint paint, float padding) {
+            Log.d(TAG, "AssistDisclosureView: drawGeometry: ");
             final int width = getWidth();
             final int height = getHeight();
             float thickness = mThickness;
@@ -241,6 +249,7 @@ public class AssistDisclosure {
 
         private void drawBeam(Canvas canvas, float left, float top, float right, float bottom,
                 Paint paint, float padding) {
+            Log.d(TAG, "AssistDisclosureView: drawBeam: ");
             canvas.drawRect(left - padding,
                     top - padding,
                     right + padding,
@@ -250,6 +259,7 @@ public class AssistDisclosure {
 
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
+            Log.d(TAG, "AssistDisclosureView: onAnimationUpdate: ");
             if (animation == mAlphaOutAnimator) {
                 mAlpha = (int) mAlphaOutAnimator.getAnimatedValue();
             } else if (animation == mAlphaInAnimator) {
