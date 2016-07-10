@@ -18,6 +18,7 @@ package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -42,12 +43,14 @@ public class IconMerger extends LinearLayout {
     }
 
     public void setOverflowIndicator(View v) {
+        Log.d(TAG, "setOverflowIndicator: ");
         mMoreView = v;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        Log.d(TAG, "onMeasure: ");
         // we need to constrain this to an integral multiple of our children
         int width = getMeasuredWidth();
         setMeasuredDimension(width - (width % mIconSize), getMeasuredHeight());
@@ -56,10 +59,12 @@ public class IconMerger extends LinearLayout {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
+        Log.d(TAG, "onLayout: ");
         checkOverflow(r - l);
     }
 
     private void checkOverflow(int width) {
+        Log.d(TAG, "checkOverflow: ");
         if (mMoreView == null) return;
 
         final int N = getChildCount();
