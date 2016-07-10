@@ -18,6 +18,7 @@ package com.android.systemui.statusbar.phone;
 
 import android.content.res.Resources;
 import android.graphics.Path;
+import android.util.Log;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.PathInterpolator;
 
@@ -73,6 +74,7 @@ public class KeyguardClockPositionAlgorithm {
      * Refreshes the dimension values.
      */
     public void loadDimens(Resources res) {
+        Log.d(TAG, "loadDimens: ");
         mClockNotificationsMarginMin = res.getDimensionPixelSize(
                 R.dimen.keyguard_clock_notifications_margin_min);
         mClockNotificationsMarginMax = res.getDimensionPixelSize(
@@ -87,6 +89,7 @@ public class KeyguardClockPositionAlgorithm {
 
     public void setup(int maxKeyguardNotifications, int maxPanelHeight, float expandedHeight,
             int notificationCount, int height, int keyguardStatusHeight, float emptyDragAmount) {
+        Log.d(TAG, "setup: ");
         mMaxKeyguardNotifications = maxKeyguardNotifications;
         mMaxPanelHeight = maxPanelHeight;
         mExpandedHeight = expandedHeight;
@@ -97,6 +100,7 @@ public class KeyguardClockPositionAlgorithm {
     }
 
     public void run(Result result) {
+        Log.d(TAG, "run: ");
         int y = getClockY() - mKeyguardStatusHeight / 2;
         float clockAdjustment = getClockYExpansionAdjustment();
         float topPaddingAdjMultiplier = getTopPaddingAdjMultiplier();
@@ -113,6 +117,7 @@ public class KeyguardClockPositionAlgorithm {
     }
 
     private float getClockScale(int notificationPadding, int clockY, int startPadding) {
+        Log.d(TAG, "getClockScale: ");
         float scaleMultiplier = getNotificationAmountT() == 0 ? 6.0f : 5.0f;
         float scaleEnd = clockY - mKeyguardStatusHeight * scaleMultiplier;
         float distanceToScaleEnd = notificationPadding - scaleEnd;
@@ -124,22 +129,26 @@ public class KeyguardClockPositionAlgorithm {
     }
 
     private int getClockNotificationsPadding() {
+        Log.d(TAG, "getClockNotificationsPadding: ");
         float t = getNotificationAmountT();
         t = Math.min(t, 1.0f);
         return (int) (t * mClockNotificationsMarginMin + (1 - t) * mClockNotificationsMarginMax);
     }
 
     private float getClockYFraction() {
+        Log.d(TAG, "getClockYFraction: ");
         float t = getNotificationAmountT();
         t = Math.min(t, 1.0f);
         return (1 - t) * mClockYFractionMax + t * mClockYFractionMin;
     }
 
     private int getClockY() {
+        Log.d(TAG, "getClockY: ");
         return (int) (getClockYFraction() * mHeight);
     }
 
     private float getClockYExpansionAdjustment() {
+        Log.d(TAG, "getClockYExpansionAdjustment: ");
         float rubberbandFactor = getClockYExpansionRubberbandFactor();
         float value = (rubberbandFactor * (mMaxPanelHeight - mExpandedHeight));
         float t = value / mMaxPanelHeight;
@@ -153,6 +162,7 @@ public class KeyguardClockPositionAlgorithm {
     }
 
     private float getClockYExpansionRubberbandFactor() {
+        Log.d(TAG, "getClockYExpansionRubberbandFactor: ");
         float t = getNotificationAmountT();
         t = Math.min(t, 1.0f);
         t = (float) Math.pow(t, 0.3f);
@@ -160,6 +170,7 @@ public class KeyguardClockPositionAlgorithm {
     }
 
     private float getTopPaddingAdjMultiplier() {
+        Log.d(TAG, "getTopPaddingAdjMultiplier: ");
         float t = getNotificationAmountT();
         t = Math.min(t, 1.0f);
         return (1 - t) * CLOCK_ADJ_TOP_PADDING_MULTIPLIER_MIN
@@ -167,6 +178,7 @@ public class KeyguardClockPositionAlgorithm {
     }
 
     private float getClockAlpha(float scale) {
+        Log.d(TAG, "getClockAlpha: ");
         float fadeEnd = getNotificationAmountT() == 0.0f
                 ? CLOCK_SCALE_FADE_END_NO_NOTIFS
                 : CLOCK_SCALE_FADE_END;
@@ -179,6 +191,7 @@ public class KeyguardClockPositionAlgorithm {
      * @return a value from 0 to 1 depending on how many notification there are
      */
     private float getNotificationAmountT() {
+        Log.d(TAG, "getNotificationAmountT: ");
         return mNotificationCount
                 / (mMaxKeyguardNotifications + mMoreCardNotificationAmount);
     }
