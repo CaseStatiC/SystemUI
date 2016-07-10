@@ -23,6 +23,7 @@ import android.os.UserManager;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -36,7 +37,7 @@ import com.android.systemui.statusbar.policy.UserSwitcherController;
  * Container for image of the multi user switcher (tappable).
  */
 public class MultiUserSwitch extends FrameLayout implements View.OnClickListener {
-
+    public static final String TAG = "mKeyguardUserSwitcher";
     private QSPanel mQsPanel;
     private KeyguardUserSwitcher mKeyguardUserSwitcher;
     private boolean mKeyguardMode;
@@ -56,31 +57,37 @@ public class MultiUserSwitch extends FrameLayout implements View.OnClickListener
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         setOnClickListener(this);
         refreshContentDescription();
     }
 
     public void setQsPanel(QSPanel qsPanel) {
+        Log.d(TAG, "setQsPanel: ");
         mQsPanel = qsPanel;
         setUserSwitcherController(qsPanel.getHost().getUserSwitcherController());
     }
 
     public void setUserSwitcherController(UserSwitcherController userSwitcherController) {
+        Log.d(TAG, "setUserSwitcherController: ");
         mUserSwitcherController = userSwitcherController;
         registerListener();
         refreshContentDescription();
     }
 
     public void setKeyguardUserSwitcher(KeyguardUserSwitcher keyguardUserSwitcher) {
+        Log.d(TAG, "setKeyguardUserSwitcher: ");
         mKeyguardUserSwitcher = keyguardUserSwitcher;
     }
 
     public void setKeyguardMode(boolean keyguardShowing) {
+        Log.d(TAG, "setKeyguardMode: ");
         mKeyguardMode = keyguardShowing;
         registerListener();
     }
 
     private void registerListener() {
+        Log.d(TAG, "registerListener: ");
         if (UserSwitcherController.isUserSwitcherAvailable(mUserManager) && mUserListener == null) {
 
             final UserSwitcherController controller = mUserSwitcherController;
@@ -103,6 +110,7 @@ public class MultiUserSwitch extends FrameLayout implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+        Log.d(TAG, "onClick: ");
         if (UserSwitcherController.isUserSwitcherAvailable(mUserManager)) {
             if (mKeyguardMode) {
                 if (mKeyguardUserSwitcher != null) {
@@ -130,10 +138,12 @@ public class MultiUserSwitch extends FrameLayout implements View.OnClickListener
     @Override
     public void setClickable(boolean clickable) {
         super.setClickable(clickable);
+        Log.d(TAG, "setClickable: ");
         refreshContentDescription();
     }
 
     private void refreshContentDescription() {
+        Log.d(TAG, "refreshContentDescription: ");
         String currentUser = null;
         if (UserSwitcherController.isUserSwitcherAvailable(mUserManager)
                 && mUserSwitcherController != null) {
@@ -168,6 +178,7 @@ public class MultiUserSwitch extends FrameLayout implements View.OnClickListener
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 
