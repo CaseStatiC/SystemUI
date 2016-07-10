@@ -116,104 +116,125 @@ public class QSTileHost implements QSTile.Host, Tunable {
     }
 
     public void destroy() {
+        Log.d(TAG, "destroy: ");
         TunerService.get(mContext).removeTunable(this);
     }
 
     @Override
     public void setCallback(Callback callback) {
+        Log.d(TAG, "setCallback: ");
         mCallback = callback;
     }
 
     @Override
     public Collection<QSTile<?>> getTiles() {
+        Log.d(TAG, "getTiles: ");
         return mTiles.values();
     }
 
     @Override
     public void startActivityDismissingKeyguard(final Intent intent) {
+        Log.d(TAG, "startActivityDismissingKeyguard: ");
         mStatusBar.postStartActivityDismissingKeyguard(intent, 0);
     }
 
     @Override
     public void startActivityDismissingKeyguard(PendingIntent intent) {
+        Log.d(TAG, "startActivityDismissingKeyguard: ");
         mStatusBar.postStartActivityDismissingKeyguard(intent);
     }
 
     @Override
     public void warn(String message, Throwable t) {
+        Log.d(TAG, "warn: ");
         // already logged
     }
 
     @Override
     public void collapsePanels() {
+        Log.d(TAG, "collapsePanels: ");
         mStatusBar.postAnimateCollapsePanels();
     }
 
     @Override
     public Looper getLooper() {
+        Log.d(TAG, "getLooper: ");
         return mLooper;
     }
 
     @Override
     public Context getContext() {
+        Log.d(TAG, "getContext: ");
         return mContext;
     }
 
     @Override
     public BluetoothController getBluetoothController() {
+        Log.d(TAG, "getBluetoothController: ");
         return mBluetooth;
     }
 
     @Override
     public LocationController getLocationController() {
+        Log.d(TAG, "getLocationController: ");
         return mLocation;
     }
 
     @Override
     public RotationLockController getRotationLockController() {
+        Log.d(TAG, "getRotationLockController: ");
         return mRotation;
     }
 
     @Override
     public NetworkController getNetworkController() {
+        Log.d(TAG, "getNetworkController: ");
         return mNetwork;
     }
 
     @Override
     public ZenModeController getZenModeController() {
+        Log.d(TAG, "getZenModeController: ");
         return mZen;
     }
 
     @Override
     public HotspotController getHotspotController() {
+        Log.d(TAG, "getHotspotController: ");
         return mHotspot;
     }
 
     @Override
     public CastController getCastController() {
+        Log.d(TAG, "getCastController: ");
         return mCast;
     }
 
     @Override
     public FlashlightController getFlashlightController() {
+        Log.d(TAG, "getFlashlightController: ");
         return mFlashlight;
     }
 
     @Override
     public KeyguardMonitor getKeyguardMonitor() {
+        Log.d(TAG, "getKeyguardMonitor: ");
         return mKeyguard;
     }
 
     public UserSwitcherController getUserSwitcherController() {
+        Log.d(TAG, "getUserSwitcherController: ");
         return mUserSwitcherController;
     }
 
     public SecurityController getSecurityController() {
+        Log.d(TAG, "getSecurityController: ");
         return mSecurity;
     }
     
     @Override
     public void onTuningChanged(String key, String newValue) {
+        Log.d(TAG, "onTuningChanged: ");
         if (!TILES_SETTING.equals(key)) {
             return;
         }
@@ -249,6 +270,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
     }
 
     protected QSTile<?> createTile(String tileSpec) {
+        Log.d(TAG, "createTile: ");
         if (tileSpec.equals("wifi")) return new WifiTile(this);
         else if (tileSpec.equals("bt")) return new BluetoothTile(this);
         else if (tileSpec.equals("inversion")) return new ColorInversionTile(this);
@@ -265,6 +287,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
     }
 
     protected List<String> loadTileSpecs(String tileList) {
+        Log.d(TAG, "loadTileSpecs: ");
         final Resources res = mContext.getResources();
         final String defaultTileList = res.getString(R.string.quick_settings_tiles_default);
         if (tileList == null) {
