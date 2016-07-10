@@ -114,6 +114,7 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
 
     public void setStatusBarKeyguardViewManager(
             StatusBarKeyguardViewManager statusBarKeyguardViewManager) {
+        Log.d(TAG, "setStatusBarKeyguardViewManager: ");
         mStatusBarKeyguardViewManager = statusBarKeyguardViewManager;
     }
 
@@ -128,6 +129,7 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
     };
 
     private void releaseFingerprintWakeLock() {
+        Log.d(TAG, "releaseFingerprintWakeLock: ");
         if (mWakeLock != null) {
             mHandler.removeCallbacks(mReleaseFingerprintWakeLockRunnable);
             if (DEBUG_FP_WAKELOCK) {
@@ -140,6 +142,7 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
 
     @Override
     public void onFingerprintAcquired() {
+        Log.d(TAG, "onFingerprintAcquired: ");
         releaseFingerprintWakeLock();
         if (!mUpdateMonitor.isDeviceInteractive()) {
             mWakeLock = mPowerManager.newWakeLock(
@@ -163,6 +166,7 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
 
     @Override
     public void onFingerprintAuthenticated(int userId) {
+        Log.d(TAG, "onFingerprintAuthenticated: ");
         if (mUpdateMonitor.isGoingToSleep()) {
             mPendingAuthenticatedUserId = userId;
             return;
@@ -213,6 +217,7 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
 
     @Override
     public void onStartedGoingToSleep(int why) {
+        Log.d(TAG, "onStartedGoingToSleep: ");
         mPendingAuthenticatedUserId = -1;
     }
 
@@ -232,10 +237,12 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
     }
 
     public int getMode() {
+        Log.d(TAG, "getMode: ");
         return mMode;
     }
 
     private int calculateMode() {
+        Log.d(TAG, "calculateMode: ");
         boolean unlockingAllowed = mUpdateMonitor.isUnlockingWithFingerprintAllowed();
         if (!mUpdateMonitor.isDeviceInteractive()) {
             if (!mStatusBarKeyguardViewManager.isShowing()) {
@@ -262,15 +269,18 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
 
     @Override
     public void onFingerprintAuthFailed() {
+        Log.d(TAG, "onFingerprintAuthFailed: ");
         cleanup();
     }
 
     @Override
     public void onFingerprintError(int msgId, String errString) {
+        Log.d(TAG, "onFingerprintError: ");
         cleanup();
     }
 
     private void cleanup() {
+        Log.d(TAG, "cleanup: ");
         mMode = MODE_NONE;
         releaseFingerprintWakeLock();
         mStatusBarWindowManager.setForceDozeBrightness(false);
@@ -278,7 +288,7 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
     }
 
     public void startKeyguardFadingAway() {
-
+        Log.d(TAG, "startKeyguardFadingAway: ");
         // Disable brightness override when the ambient contents are fully invisible.
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -289,6 +299,7 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
     }
 
     public void finishKeyguardFadingAway() {
+        Log.d(TAG, "finishKeyguardFadingAway: ");
         mMode = MODE_NONE;
         if (mPhoneStatusBar.getNavigationBarView() != null) {
             mPhoneStatusBar.getNavigationBarView().setWakeAndUnlocking(false);
