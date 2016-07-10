@@ -17,6 +17,7 @@
 package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
@@ -31,7 +32,7 @@ import com.android.systemui.statusbar.stack.NotificationStackScrollLayout;
  * A helper class to handle touches on the heads-up views.
  */
 public class HeadsUpTouchHelper implements Gefingerpoken {
-
+    public static final String TAG = "HeadsUpTouchHelper";
     private HeadsUpManager mHeadsUpManager;
     private NotificationStackScrollLayout mStackScroller;
     private int mTrackingPointer;
@@ -59,11 +60,13 @@ public class HeadsUpTouchHelper implements Gefingerpoken {
     }
 
     public boolean isTrackingHeadsUp() {
+        Log.d(TAG, "isTrackingHeadsUp: ");
         return mTrackingHeadsUp;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onInterceptTouchEvent: ");
         if (!mTouchingHeadsUpView && event.getActionMasked() != MotionEvent.ACTION_DOWN) {
             return false;
         }
@@ -137,12 +140,14 @@ public class HeadsUpTouchHelper implements Gefingerpoken {
     }
 
     private void setTrackingHeadsUp(boolean tracking) {
+        Log.d(TAG, "setTrackingHeadsUp: ");
         mTrackingHeadsUp = tracking;
         mHeadsUpManager.setTrackingHeadsUp(tracking);
         mPanel.setTrackingHeadsUp(tracking);
     }
 
     public void notifyFling(boolean collapse) {
+        Log.d(TAG, "notifyFling: ");
         if (collapse && mCollapseSnoozes) {
             mHeadsUpManager.snooze();
         }
@@ -151,6 +156,7 @@ public class HeadsUpTouchHelper implements Gefingerpoken {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onTouchEvent: ");
         if (!mTrackingHeadsUp) {
             return false;
         }
@@ -165,6 +171,7 @@ public class HeadsUpTouchHelper implements Gefingerpoken {
     }
 
     private void endMotion() {
+        Log.d(TAG, "endMotion: ");
         mTrackingPointer = -1;
         mPickedChild = null;
         mTouchingHeadsUpView = false;
