@@ -21,6 +21,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.Trace;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,6 +91,7 @@ public class StatusBarKeyguardViewManager {
             ViewGroup container, StatusBarWindowManager statusBarWindowManager,
             ScrimController scrimController,
             FingerprintUnlockController fingerprintUnlockController) {
+        Log.d(TAG, "registerStatusBar: ");
         mPhoneStatusBar = phoneStatusBar;
         mContainer = container;
         mStatusBarWindowManager = statusBarWindowManager;
@@ -104,6 +106,7 @@ public class StatusBarKeyguardViewManager {
      * lazily.
      */
     public void show(Bundle options) {
+        Log.d(TAG, "show: ");
         mShowing = true;
         mStatusBarWindowManager.setKeyguardShowing(true);
         mScrimController.abortKeyguardFadingOut();
@@ -115,6 +118,7 @@ public class StatusBarKeyguardViewManager {
      * {@link KeyguardBouncer#needsFullscreenBouncer()}.
      */
     private void showBouncerOrKeyguard() {
+        Log.d(TAG, "showBouncerOrKeyguard: ");
         if (mBouncer.needsFullscreenBouncer()) {
 
             // The keyguard might be showing (already). So we need to hide it.
@@ -128,6 +132,7 @@ public class StatusBarKeyguardViewManager {
     }
 
     private void showBouncer() {
+        Log.d(TAG, "showBouncer: ");
         if (mShowing) {
             mBouncer.show(false /* resetSecuritySelection */);
         }
@@ -136,6 +141,7 @@ public class StatusBarKeyguardViewManager {
 
     public void dismissWithAction(OnDismissAction r, Runnable cancelAction,
             boolean afterKeyguardGone) {
+        Log.d(TAG, "dismissWithAction: ");
         if (mShowing) {
             if (!afterKeyguardGone) {
                 mBouncer.showWithDismissAction(r, cancelAction);
@@ -151,6 +157,7 @@ public class StatusBarKeyguardViewManager {
      * Reset the state of the view.
      */
     public void reset() {
+        Log.d(TAG, "reset: ");
         if (mShowing) {
             if (mOccluded) {
                 mPhoneStatusBar.hideKeyguard();
@@ -165,30 +172,36 @@ public class StatusBarKeyguardViewManager {
     }
 
     public void onStartedGoingToSleep() {
+        Log.d(TAG, "onStartedGoingToSleep: ");
         mPhoneStatusBar.onStartedGoingToSleep();
     }
 
     public void onFinishedGoingToSleep() {
+        Log.d(TAG, "onFinishedGoingToSleep: ");
         mDeviceInteractive = false;
         mPhoneStatusBar.onFinishedGoingToSleep();
         mBouncer.onScreenTurnedOff();
     }
 
     public void onStartedWakingUp() {
+        Log.d(TAG, "onStartedWakingUp: ");
         mDeviceInteractive = true;
         mDeviceWillWakeUp = false;
         mPhoneStatusBar.onStartedWakingUp();
     }
 
     public void onScreenTurningOn() {
+        Log.d(TAG, "onScreenTurningOn: ");
         mPhoneStatusBar.onScreenTurningOn();
     }
 
     public boolean isScreenTurnedOn() {
+        Log.d(TAG, "isScreenTurnedOn: ");
         return mScreenTurnedOn;
     }
 
     public void onScreenTurnedOn() {
+        Log.d(TAG, "onScreenTurnedOn: ");
         mScreenTurnedOn = true;
         if (mDeferScrimFadeOut) {
             mDeferScrimFadeOut = false;
@@ -200,22 +213,27 @@ public class StatusBarKeyguardViewManager {
     }
 
     public void onScreenTurnedOff() {
+        Log.d(TAG, "onScreenTurnedOff: ");
         mScreenTurnedOn = false;
     }
 
     public void notifyDeviceWakeUpRequested() {
+        Log.d(TAG, "notifyDeviceWakeUpRequested: ");
         mDeviceWillWakeUp = !mDeviceInteractive;
     }
 
     public void verifyUnlock() {
+        Log.d(TAG, "verifyUnlock: ");
         dismiss();
     }
 
     public void setNeedsInput(boolean needsInput) {
+        Log.d(TAG, "setNeedsInput: ");
         mStatusBarWindowManager.setKeyguardNeedsInput(needsInput);
     }
 
     public void setOccluded(boolean occluded) {
+        Log.d(TAG, "setOccluded: ");
         if (occluded && !mOccluded && mShowing) {
             if (mPhoneStatusBar.isInLaunchTransition()) {
                 mOccluded = true;
@@ -236,6 +254,7 @@ public class StatusBarKeyguardViewManager {
     }
 
     public boolean isOccluded() {
+        Log.d(TAG, "isOccluded: ");
         return mOccluded;
     }
 
@@ -247,6 +266,7 @@ public class StatusBarKeyguardViewManager {
      *                       no action should be run
      */
     public void startPreHideAnimation(Runnable finishRunnable) {
+        Log.d(TAG, "startPreHideAnimation: ");
         if (mBouncer.isShowing()) {
             mBouncer.startPreHideAnimation(finishRunnable);
         } else if (finishRunnable != null) {
@@ -258,6 +278,7 @@ public class StatusBarKeyguardViewManager {
      * Hides the keyguard view
      */
     public void hide(long startTime, final long fadeoutDuration) {
+        Log.d(TAG, "hide: ");
         mShowing = false;
 
         long uptimeMillis = SystemClock.uptimeMillis();
@@ -334,12 +355,14 @@ public class StatusBarKeyguardViewManager {
 
     private void animateScrimControllerKeyguardFadingOut(long delay, long duration,
             boolean skipFirstFrame) {
+        Log.d(TAG, "animateScrimControllerKeyguardFadingOut: ");
         animateScrimControllerKeyguardFadingOut(delay, duration, null /* endRunnable */,
                 skipFirstFrame);
     }
 
     private void animateScrimControllerKeyguardFadingOut(long delay, long duration,
             final Runnable endRunnable, boolean skipFirstFrame) {
+        Log.d(TAG, "animateScrimControllerKeyguardFadingOut: ");
         Trace.asyncTraceBegin(Trace.TRACE_TAG_VIEW, "Fading out", 0);
         mScrimController.animateKeyguardFadingOut(delay, duration, new Runnable() {
             @Override
@@ -358,6 +381,7 @@ public class StatusBarKeyguardViewManager {
     }
 
     private void executeAfterKeyguardGoneAction() {
+        Log.d(TAG, "executeAfterKeyguardGoneAction: ");
         if (mAfterKeyguardGoneAction != null) {
             mAfterKeyguardGoneAction.onDismiss();
             mAfterKeyguardGoneAction = null;
@@ -368,6 +392,7 @@ public class StatusBarKeyguardViewManager {
      * Dismisses the keyguard by going to the next screen or making it gone.
      */
     public void dismiss() {
+        Log.d(TAG, "dismiss: ");
         if (mDeviceInteractive || mDeviceWillWakeUp) {
             showBouncer();
         }
@@ -377,6 +402,7 @@ public class StatusBarKeyguardViewManager {
      * WARNING: This method might cause Binder calls.
      */
     public boolean isSecure() {
+        Log.d(TAG, "isSecure: ");
         return mBouncer.isSecure();
     }
 
@@ -384,6 +410,7 @@ public class StatusBarKeyguardViewManager {
      * @return Whether the keyguard is showing
      */
     public boolean isShowing() {
+        Log.d(TAG, "isShowing: ");
         return mShowing;
     }
 
@@ -393,6 +420,7 @@ public class StatusBarKeyguardViewManager {
      * @return whether the back press has been handled
      */
     public boolean onBackPressed() {
+        Log.d(TAG, "onBackPressed: ");
         if (mBouncer.isShowing()) {
             mPhoneStatusBar.endAffordanceLaunch();
             reset();
@@ -402,10 +430,12 @@ public class StatusBarKeyguardViewManager {
     }
 
     public boolean isBouncerShowing() {
+        Log.d(TAG, "isBouncerShowing: ");
         return mBouncer.isShowing();
     }
 
     private long getNavBarShowDelay() {
+        Log.d(TAG, "getNavBarShowDelay: ");
         if (mPhoneStatusBar.isKeyguardFadingAway()) {
             return mPhoneStatusBar.getKeyguardFadingAwayDelay();
         } else {
@@ -424,6 +454,7 @@ public class StatusBarKeyguardViewManager {
     };
 
     private void updateStates() {
+        Log.d(TAG, "updateStates: ");
         int vis = mContainer.getSystemUiVisibility();
         boolean showing = mShowing;
         boolean occluded = mOccluded;
@@ -482,14 +513,17 @@ public class StatusBarKeyguardViewManager {
     }
 
     public boolean onMenuPressed() {
+        Log.d(TAG, "onMenuPressed: ");
         return mBouncer.onMenuPressed();
     }
 
     public boolean interceptMediaKey(KeyEvent event) {
+        Log.d(TAG, "interceptMediaKey: ");
         return mBouncer.interceptMediaKey(event);
     }
 
     public void onActivityDrawn() {
+        Log.d(TAG, "onActivityDrawn: ");
         if (mPhoneStatusBar.isCollapsing()) {
             mPhoneStatusBar.addPostCollapseAction(new Runnable() {
                 @Override
@@ -503,26 +537,32 @@ public class StatusBarKeyguardViewManager {
     }
 
     public boolean shouldDisableWindowAnimationsForUnlock() {
+        Log.d(TAG, "shouldDisableWindowAnimationsForUnlock: ");
         return mPhoneStatusBar.isInLaunchTransition();
     }
 
     public boolean isGoingToNotificationShade() {
+        Log.d(TAG, "isGoingToNotificationShade: ");
         return mPhoneStatusBar.isGoingToNotificationShade();
     }
 
     public boolean isSecure(int userId) {
+        Log.d(TAG, "isSecure: ");
         return mBouncer.isSecure() || mLockPatternUtils.isSecure(userId);
     }
 
     public boolean isInputRestricted() {
+        Log.d(TAG, "isInputRestricted: ");
         return mViewMediatorCallback.isInputRestricted();
     }
 
     public void keyguardGoingAway() {
+        Log.d(TAG, "keyguardGoingAway: ");
         mPhoneStatusBar.keyguardGoingAway();
     }
 
     public void animateCollapsePanels(float speedUpFactor) {
+        Log.d(TAG, "animateCollapsePanels: ");
         mPhoneStatusBar.animateCollapsePanels(CommandQueue.FLAG_EXCLUDE_NONE, true /* force */,
                 false /* delayed */, speedUpFactor);
     }
@@ -532,14 +572,17 @@ public class StatusBarKeyguardViewManager {
      * fingerprint.
      */
     public void notifyKeyguardAuthenticated(boolean strongAuth) {
+        Log.d(TAG, "notifyKeyguardAuthenticated: ");
         mBouncer.notifyKeyguardAuthenticated(strongAuth);
     }
 
     public void showBouncerMessage(String message, int color) {
+        Log.d(TAG, "showBouncerMessage: ");
         mBouncer.showMessage(message, color);
     }
 
     public ViewRootImpl getViewRootImpl() {
+        Log.d(TAG, "getViewRootImpl: ");
         return mPhoneStatusBar.getStatusBarView().getViewRootImpl();
     }
 }
