@@ -28,6 +28,7 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.MathUtils;
 import android.util.TypedValue;
 import android.view.View;
@@ -60,7 +61,7 @@ import java.text.NumberFormat;
 public class StatusBarHeaderView extends RelativeLayout implements View.OnClickListener,
         BatteryController.BatteryStateChangeCallback, NextAlarmController.NextAlarmChangeCallback,
         EmergencyListener {
-
+    public static final String TAG = "StatusBarHeaderView";
     private boolean mExpanded;
     private boolean mListening;
 
@@ -135,6 +136,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mSystemIconsSuperContainer = findViewById(R.id.system_icons_super_container);
         mSystemIconsContainer = (ViewGroup) findViewById(R.id.system_icons_container);
         mSystemIconsSuperContainer.setOnClickListener(this);
@@ -196,6 +198,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
+        Log.d(TAG, "onLayout: ");
         if (mCaptureValues) {
             if (mExpanded) {
                 captureLayoutValues(mExpandedValues);
@@ -211,6 +214,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        Log.d(TAG, "onConfigurationChanged: ");
         FontSizeUtils.updateFontSize(mBatteryLevel, R.dimen.battery_level_text_size);
         FontSizeUtils.updateFontSize(mEmergencyCallsOnly,
                 R.dimen.qs_emergency_calls_only_text_size);
@@ -233,6 +237,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void updateClockCollapsedMargin() {
+        Log.d(TAG, "updateClockCollapsedMargin: ");
         Resources res = getResources();
         int padding = res.getDimensionPixelSize(R.dimen.clock_collapsed_bottom_margin);
         int largePadding = res.getDimensionPixelSize(
@@ -244,11 +249,13 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void requestCaptureValues() {
+        Log.d(TAG, "requestCaptureValues: ");
         mCaptureValues = true;
         requestLayout();
     }
 
     private void loadDimens() {
+        Log.d(TAG, "loadDimens: ");
         mCollapsedHeight = getResources().getDimensionPixelSize(R.dimen.status_bar_header_height);
         mExpandedHeight = getResources().getDimensionPixelSize(
                 R.dimen.status_bar_header_height_expanded);
@@ -273,27 +280,33 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     public void setActivityStarter(ActivityStarter activityStarter) {
+        Log.d(TAG, "setActivityStarter: ");
         mActivityStarter = activityStarter;
     }
 
     public void setBatteryController(BatteryController batteryController) {
+        Log.d(TAG, "setBatteryController: ");
         mBatteryController = batteryController;
         ((BatteryMeterView) findViewById(R.id.battery)).setBatteryController(batteryController);
     }
 
     public void setNextAlarmController(NextAlarmController nextAlarmController) {
+        Log.d(TAG, "setNextAlarmController: ");
         mNextAlarmController = nextAlarmController;
     }
 
     public int getCollapsedHeight() {
+        Log.d(TAG, "getCollapsedHeight: ");
         return mCollapsedHeight;
     }
 
     public int getExpandedHeight() {
+        Log.d(TAG, "getExpandedHeight: ");
         return mExpandedHeight;
     }
 
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
         if (listening == mListening) {
             return;
         }
@@ -302,6 +315,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     public void setExpanded(boolean expanded) {
+        Log.d(TAG, "setExpanded: ");
         boolean changed = expanded != mExpanded;
         mExpanded = expanded;
         if (changed) {
@@ -310,6 +324,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     public void updateEverything() {
+        Log.d(TAG, "updateEverything: ");
         updateHeights();
         updateVisibilities();
         updateSystemIconsLayoutParams();
@@ -322,6 +337,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void updateHeights() {
+        Log.d(TAG, "updateHeights: ");
         int height = mExpanded ? mExpandedHeight : mCollapsedHeight;
         ViewGroup.LayoutParams lp = getLayoutParams();
         if (lp.height != height) {
@@ -331,6 +347,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void updateVisibilities() {
+        Log.d(TAG, "updateVisibilities: ");
         mDateCollapsed.setVisibility(mExpanded && mAlarmShowing ? View.VISIBLE : View.INVISIBLE);
         mDateExpanded.setVisibility(mExpanded && mAlarmShowing ? View.INVISIBLE : View.VISIBLE);
         mAlarmStatus.setVisibility(mExpanded && mAlarmShowing ? View.VISIBLE : View.INVISIBLE);
@@ -346,6 +363,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void updateSignalClusterDetachment() {
+        Log.d(TAG, "updateSignalClusterDetachment: ");
         boolean detached = mExpanded;
         if (detached != mSignalClusterDetached) {
             if (detached) {
@@ -358,11 +376,13 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void reattachSignalCluster() {
+        Log.d(TAG, "reattachSignalCluster: ");
         getOverlay().remove(mSignalCluster);
         mSystemIcons.addView(mSignalCluster, 1);
     }
 
     private void updateSystemIconsLayoutParams() {
+        Log.d(TAG, "updateSystemIconsLayoutParams: ");
         RelativeLayout.LayoutParams lp = (LayoutParams) mSystemIconsSuperContainer.getLayoutParams();
         int rule = mExpanded
                 ? mSettingsContainer.getId()
@@ -374,6 +394,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void updateListeners() {
+        Log.d(TAG, "updateListeners: ");
         if (mListening) {
             mBatteryController.addStateChangedCallback(this);
             mNextAlarmController.addStateChangedCallback(this);
@@ -384,6 +405,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void updateAvatarScale() {
+        Log.d(TAG, "updateAvatarScale: ");
         if (mExpanded) {
             mMultiUserAvatar.setScaleX(1f);
             mMultiUserAvatar.setScaleY(1f);
@@ -394,6 +416,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void updateClockScale() {
+        Log.d(TAG, "updateClockScale: ");
         mTime.setTextSize(TypedValue.COMPLEX_UNIT_PX, mExpanded
                 ? mClockExpandedSize
                 : mClockCollapsedSize);
@@ -403,23 +426,27 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void updateAmPmTranslation() {
+        Log.d(TAG, "updateAmPmTranslation: ");
         boolean rtl = getLayoutDirection() == LAYOUT_DIRECTION_RTL;
         mAmPm.setTranslationX((rtl ? 1 : -1) * mTime.getWidth() * (1 - mTime.getScaleX()));
     }
 
     @Override
     public void onBatteryLevelChanged(int level, boolean pluggedIn, boolean charging) {
+        Log.d(TAG, "onBatteryLevelChanged: ");
         String percentage = NumberFormat.getPercentInstance().format((double) level / 100.0);
         mBatteryLevel.setText(percentage);
     }
 
     @Override
     public void onPowerSaveChanged() {
+        Log.d(TAG, "onPowerSaveChanged: ");
         // could not care less
     }
 
     @Override
     public void onNextAlarmChanged(AlarmManager.AlarmClockInfo nextAlarm) {
+        Log.d(TAG, "onNextAlarmChanged: ");
         mNextAlarm = nextAlarm;
         if (nextAlarm != null) {
             mAlarmStatus.setText(KeyguardStatusView.formatNextAlarm(getContext(), nextAlarm));
@@ -430,6 +457,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void updateClickTargets() {
+        Log.d(TAG, "updateClickTargets: ");
         mMultiUserSwitch.setClickable(mExpanded);
         mMultiUserSwitch.setFocusable(mExpanded);
         mSystemIconsSuperContainer.setClickable(mExpanded);
@@ -438,6 +466,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void updateClockLp() {
+        Log.d(TAG, "updateClockLp: ");
         int marginBottom = mExpanded
                 ? mClockMarginBottomExpanded
                 : mClockMarginBottomCollapsed;
@@ -449,6 +478,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void updateMultiUserSwitch() {
+        Log.d(TAG, "updateMultiUserSwitch: ");
         int marginEnd;
         int width;
         if (mExpanded) {
@@ -467,6 +497,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     public void setExpansion(float t) {
+        Log.d(TAG, "setExpansion: ");
         if (!mExpanded) {
             t = 0f;
         }
@@ -483,6 +514,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void updateLayoutValues(float t) {
+        Log.d(TAG, "updateLayoutValues: ");
         if (mCaptureValues) {
             return;
         }
@@ -491,12 +523,14 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void setClipping(float height) {
+        Log.d(TAG, "setClipping: ");
         mClipBounds.set(getPaddingLeft(), 0, getWidth() - getPaddingRight(), (int) height);
         setClipBounds(mClipBounds);
         invalidateOutline();
     }
 
     public void setUserInfoController(UserInfoController userInfoController) {
+        Log.d(TAG, "setUserInfoController: ");
         userInfoController.addListener(new UserInfoController.OnUserInfoChangedListener() {
             @Override
             public void onUserInfoChanged(String name, Drawable picture) {
@@ -507,6 +541,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+        Log.d(TAG, "onClick: ");
         if (v == mSettingsButton) {
             if (mSettingsButton.isTunerClick()) {
                 if (TunerService.isTunerEnabled(mContext)) {
@@ -534,16 +569,19 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void startSettingsActivity() {
+        Log.d(TAG, "startSettingsActivity: ");
         mActivityStarter.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS),
                 true /* dismissShade */);
     }
 
     private void startBatteryActivity() {
+        Log.d(TAG, "startBatteryActivity: ");
         mActivityStarter.startActivity(new Intent(Intent.ACTION_POWER_USAGE_SUMMARY),
                 true /* dismissShade */);
     }
 
     public void setQSPanel(QSPanel qsp) {
+        Log.d(TAG, "setQSPanel: ");
         mQSPanel = qsp;
         if (mQSPanel != null) {
             mQSPanel.setCallback(mQsPanelCallback);
@@ -553,11 +591,13 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
 
     @Override
     public boolean shouldDelayChildPressedState() {
+        Log.d(TAG, "shouldDelayChildPressedState: ");
         return true;
     }
 
     @Override
     public void setEmergencyCallsOnly(boolean show) {
+        Log.d(TAG, "setEmergencyCallsOnly: ");
         boolean changed = show != mShowEmergencyCallsOnly;
         if (changed) {
             mShowEmergencyCallsOnly = show;
@@ -570,11 +610,13 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
 
     @Override
     protected void dispatchSetPressed(boolean pressed) {
+        Log.d(TAG, "dispatchSetPressed: ");
         // We don't want that everything lights up when we click on the header, so block the request
         // here.
     }
 
     private void captureLayoutValues(LayoutValues target) {
+        Log.d(TAG, "captureLayoutValues: ");
         target.timeScale = mExpanded ? 1f : mClockCollapsedScaleFactor;
         target.clockY = mClock.getBottom();
         target.dateY = mDateGroup.getTop();
@@ -603,10 +645,12 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private float getAlphaForVisibility(View v) {
+        Log.d(TAG, "getAlphaForVisibility: ");
         return v == null || v.getVisibility() == View.VISIBLE ? 1f : 0f;
     }
 
     private void applyAlpha(View v, float alpha) {
+        Log.d(TAG, "applyAlpha: ");
         if (v == null || v.getVisibility() == View.GONE) {
             return;
         }
@@ -619,6 +663,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     }
 
     private void applyLayoutValues(LayoutValues values) {
+        Log.d(TAG, "applyLayoutValues: ");
         mTime.setScaleX(values.timeScale);
         mTime.setScaleY(values.timeScale);
         mClock.setY(values.clockY - mClock.getHeight());
