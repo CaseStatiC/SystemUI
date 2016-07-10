@@ -60,6 +60,7 @@ public class DozeScrimController {
     }
 
     public void setDozing(boolean dozing, boolean animate) {
+        Log.d(TAG, "setDozing: ");
         if (mDozing == dozing) return;
         mDozing = dozing;
         if (mDozing) {
@@ -83,6 +84,7 @@ public class DozeScrimController {
 
     /** When dozing, fade screen contents in and out using the front scrim. */
     public void pulse(@NonNull DozeHost.PulseCallback callback, int reason) {
+        Log.d(TAG, "pulse: ");
         if (callback == null) {
             throw new IllegalArgumentException("callback must not be null");
         }
@@ -104,6 +106,7 @@ public class DozeScrimController {
      * Aborts pulsing immediately.
      */
     public void abortPulsing() {
+        Log.d(TAG, "abortPulsing:");
         cancelPulsing();
         if (mDozing) {
             mScrimController.setDozeBehindAlpha(1f);
@@ -112,6 +115,7 @@ public class DozeScrimController {
     }
 
     public void onScreenTurnedOn() {
+        Log.d(TAG, "onScreenTurnedOn: ");
         if (isPulsing()) {
             final boolean pickup = mPulseReason == DozeLog.PULSE_REASON_SENSOR_PICKUP;
             startScrimAnimation(true /* inFront */, 0f,
@@ -122,14 +126,17 @@ public class DozeScrimController {
     }
 
     public boolean isPulsing() {
+        Log.d(TAG, "isPulsing: ");
         return mPulseCallback != null;
     }
 
     public boolean isDozing() {
+        Log.d(TAG, "isDozing: ");
         return mDozing;
     }
 
     private void cancelPulsing() {
+        Log.d(TAG, "cancelPulsing: ");
         if (DEBUG) Log.d(TAG, "Cancel pulsing");
 
         if (mPulseCallback != null) {
@@ -140,12 +147,14 @@ public class DozeScrimController {
     }
 
     private void pulseStarted() {
+        Log.d(TAG, "pulseStarted: ");
         if (mPulseCallback != null) {
             mPulseCallback.onPulseStarted();
         }
     }
 
     private void pulseFinished() {
+        Log.d(TAG, "pulseFinished: ");
         if (mPulseCallback != null) {
             mPulseCallback.onPulseFinished();
             mPulseCallback = null;
@@ -153,6 +162,7 @@ public class DozeScrimController {
     }
 
     private void abortAnimations() {
+        Log.d(TAG, "abortAnimations: ");
         if (mInFrontAnimator != null) {
             mInFrontAnimator.cancel();
         }
@@ -163,11 +173,13 @@ public class DozeScrimController {
 
     private void startScrimAnimation(final boolean inFront, float target, long duration,
             Interpolator interpolator) {
+        Log.d(TAG, "startScrimAnimation: ");
         startScrimAnimation(inFront, target, duration, interpolator, null /* endRunnable */);
     }
 
     private void startScrimAnimation(final boolean inFront, float target, long duration,
             Interpolator interpolator, final Runnable endRunnable) {
+        Log.d(TAG, "startScrimAnimation: ");
         Animator current = getCurrentAnimator(inFront);
         if (current != null) {
             float currentTarget = getCurrentTarget(inFront);
@@ -201,10 +213,12 @@ public class DozeScrimController {
     }
 
     private float getCurrentTarget(boolean inFront) {
+        Log.d(TAG, "getCurrentTarget: ");
         return inFront ? mInFrontTarget : mBehindTarget;
     }
 
     private void setCurrentTarget(boolean inFront, float target) {
+        Log.d(TAG, "setCurrentTarget: ");
         if (inFront) {
             mInFrontTarget = target;
         } else {
@@ -213,10 +227,12 @@ public class DozeScrimController {
     }
 
     private Animator getCurrentAnimator(boolean inFront) {
+        Log.d(TAG, "getCurrentAnimator: ");
         return inFront ? mInFrontAnimator : mBehindAnimator;
     }
 
     private void setCurrentAnimator(boolean inFront, Animator animator) {
+        Log.d(TAG, "setCurrentAnimator: ");
         if (inFront) {
             mInFrontAnimator = animator;
         } else {
@@ -225,6 +241,7 @@ public class DozeScrimController {
     }
 
     private void setDozeAlpha(boolean inFront, float alpha) {
+        Log.d(TAG, "setDozeAlpha: ");
         if (inFront) {
             mScrimController.setDozeInFrontAlpha(alpha);
         } else {
@@ -233,6 +250,7 @@ public class DozeScrimController {
     }
 
     private float getDozeAlpha(boolean inFront) {
+        Log.d(TAG, "getDozeAlpha: ");
         return inFront
                 ? mScrimController.getDozeInFrontAlpha()
                 : mScrimController.getDozeBehindAlpha();
