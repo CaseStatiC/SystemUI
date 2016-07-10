@@ -60,7 +60,7 @@ public class MediaProjectionPermissionActivity extends Activity
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
+        Log.d(TAG, "onCreate: ");
         mPackageName = getCallingPackage();
         IBinder b = ServiceManager.getService(MEDIA_PROJECTION_SERVICE);
         mService = IMediaProjectionManager.Stub.asInterface(b);
@@ -155,6 +155,7 @@ public class MediaProjectionPermissionActivity extends Activity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
         if (mDialog != null) {
             mDialog.dismiss();
         }
@@ -162,6 +163,7 @@ public class MediaProjectionPermissionActivity extends Activity
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
+        Log.d(TAG, "onClick: ");
         try {
             if (which == AlertDialog.BUTTON_POSITIVE) {
                 setResult(RESULT_OK, getMediaProjectionIntent(
@@ -180,11 +182,13 @@ public class MediaProjectionPermissionActivity extends Activity
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        Log.d(TAG, "onCheckedChanged: ");
         mPermanentGrant = isChecked;
     }
 
     private Intent getMediaProjectionIntent(int uid, String packageName, boolean permanentGrant)
             throws RemoteException {
+        Log.d(TAG, "getMediaProjectionIntent: ");
         IMediaProjection projection = mService.createProjection(uid, packageName,
                  MediaProjectionManager.TYPE_SCREEN_CAPTURE, permanentGrant);
         Intent intent = new Intent();
@@ -194,6 +198,7 @@ public class MediaProjectionPermissionActivity extends Activity
 
     @Override
     public void onCancel(DialogInterface dialog) {
+        Log.d(TAG, "onCancel: ");
         finish();
     }
 }
