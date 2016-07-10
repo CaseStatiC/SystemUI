@@ -16,6 +16,7 @@
 
 package com.android.systemui.statusbar.phone;
 
+import android.util.Log;
 import android.view.animation.Interpolator;
 
 /**
@@ -23,10 +24,12 @@ import android.view.animation.Interpolator;
  */
 public class BounceInterpolator implements Interpolator {
 
+    public static final String TAG = "BounceInterpolator";
     private final static float SCALE_FACTOR = 7.5625f;
 
     @Override
     public float getInterpolation(float t) {
+        Log.d(TAG, "getInterpolation: ");
         t *= 11f / 10f;
         if (t < 4f / 11f) {
             return SCALE_FACTOR * t * t;
