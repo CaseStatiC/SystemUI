@@ -182,11 +182,13 @@ public class PhoneStatusBarPolicy implements Callback {
     }
 
     public void setZenMode(int zen) {
+        Log.d(TAG, "setZenMode: ");
         mZen = zen;
         updateVolumeZen();
     }
 
     private void updateAlarm() {
+        Log.d(TAG, "updateAlarm: ");
         final AlarmClockInfo alarm = mAlarmManager.getNextAlarmClock(UserHandle.USER_CURRENT);
         final boolean hasAlarm = alarm != null && alarm.getTriggerTime() > 0;
         final boolean zenNone = mZen == Global.ZEN_MODE_NO_INTERRUPTIONS;
@@ -196,6 +198,7 @@ public class PhoneStatusBarPolicy implements Callback {
     }
 
     private final void updateSimState(Intent intent) {
+        Log.d(TAG, "updateSimState: ");
         String stateExtra = intent.getStringExtra(IccCardConstants.INTENT_KEY_ICC_STATE);
         if (IccCardConstants.INTENT_VALUE_ICC_ABSENT.equals(stateExtra)) {
             mSimState = IccCardConstants.State.ABSENT;
@@ -224,6 +227,7 @@ public class PhoneStatusBarPolicy implements Callback {
     }
 
     private final void updateVolumeZen() {
+        Log.d(TAG, "updateVolumeZen: ");
         AudioManager audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 
         boolean zenVisible = false;
@@ -281,15 +285,18 @@ public class PhoneStatusBarPolicy implements Callback {
 
     @Override
     public void onBluetoothDevicesChanged() {
+        Log.d(TAG, "onBluetoothDevicesChanged: ");
         updateBluetooth();
     }
 
     @Override
     public void onBluetoothStateChange(boolean enabled) {
+        Log.d(TAG, "onBluetoothStateChange: ");
         updateBluetooth();
     }
 
     private final void updateBluetooth() {
+        Log.d(TAG, "updateBluetooth: ");
         int iconId = R.drawable.stat_sys_data_bluetooth;
         String contentDescription =
                 mContext.getString(R.string.accessibility_quick_settings_bluetooth_on);
@@ -307,6 +314,7 @@ public class PhoneStatusBarPolicy implements Callback {
     }
 
     private final void updateTTY(Intent intent) {
+        Log.d(TAG, "updateTTY: ");
         int currentTtyMode = intent.getIntExtra(TelecomManager.EXTRA_CURRENT_TTY_MODE,
                 TelecomManager.TTY_MODE_OFF);
         boolean enabled = currentTtyMode != TelecomManager.TTY_MODE_OFF;
@@ -327,6 +335,7 @@ public class PhoneStatusBarPolicy implements Callback {
     }
 
     private void updateCast() {
+        Log.d(TAG, "updateCast: ");
         boolean isCasting = false;
         for (CastDevice device : mCast.getCastDevices()) {
             if (device.state == CastDevice.STATE_CONNECTING
@@ -350,6 +359,7 @@ public class PhoneStatusBarPolicy implements Callback {
     }
 
     private void profileChanged(int userId) {
+        Log.d(TAG, "profileChanged: ");
         UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         UserInfo user = null;
         if (userId == UserHandle.USER_CURRENT) {
@@ -368,6 +378,7 @@ public class PhoneStatusBarPolicy implements Callback {
     }
 
     private void updateManagedProfile() {
+        Log.d(TAG, "updateManagedProfile: ");
         if (DEBUG) Log.v(TAG, "updateManagedProfile: mManagedProfileFocused: "
                 + mManagedProfileFocused
                 + " mKeyguardVisible: " + mKeyguardVisible);
@@ -412,15 +423,18 @@ public class PhoneStatusBarPolicy implements Callback {
     };
 
     public void appTransitionStarting(long startTime, long duration) {
+        Log.d(TAG, "appTransitionStarting: ");
         updateManagedProfile();
     }
 
     public void setKeyguardShowing(boolean visible) {
+        Log.d(TAG, "setKeyguardShowing: ");
         mKeyguardVisible = visible;
         updateManagedProfile();
     }
 
     public void setCurrentUserSetup(boolean userSetup) {
+        Log.d(TAG, "setCurrentUserSetup: ");
         if (mCurrentUserSetup == userSetup) return;
         mCurrentUserSetup = userSetup;
         updateAlarm();
