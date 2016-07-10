@@ -23,6 +23,7 @@ import android.graphics.drawable.RippleDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -33,6 +34,7 @@ import com.android.keyguard.AlphaOptimizedImageButton;
 
 public class SettingsButton extends AlphaOptimizedImageButton {
 
+    public static final String TAG = "SettingsButton";
     private static final long LONG_PRESS_LENGTH = 1000;
     private static final long ACCEL_LENGTH = 750;
     private static final long FULL_SPEED_LENGTH = 375;
@@ -49,15 +51,18 @@ public class SettingsButton extends AlphaOptimizedImageButton {
     }
 
     public boolean isAnimating() {
+        Log.d(TAG, "isAnimating: ");
         return mAnimator != null && mAnimator.isRunning();
     }
 
     public boolean isTunerClick() {
+        Log.d(TAG, "isTunerClick: ");
         return mUpToSpeed;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onTouchEvent: ");
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 postDelayed(mLongPressCallback, LONG_PRESS_LENGTH);
@@ -85,12 +90,14 @@ public class SettingsButton extends AlphaOptimizedImageButton {
     }
 
     private void cancelLongClick() {
+        Log.d(TAG, "cancelLongClick: ");
         cancelAnimation();
         mUpToSpeed = false;
         removeCallbacks(mLongPressCallback);
     }
 
     private void cancelAnimation() {
+        Log.d(TAG, "cancelAnimation: ");
         if (mAnimator != null) {
             mAnimator.removeAllListeners();
             mAnimator.cancel();
@@ -99,6 +106,7 @@ public class SettingsButton extends AlphaOptimizedImageButton {
     }
 
     private void startExitAnimation() {
+        Log.d(TAG, "startExitAnimation: ");
         animate()
                 .translationX(((View) getParent().getParent()).getWidth() - getX())
                 .alpha(0)
@@ -129,6 +137,7 @@ public class SettingsButton extends AlphaOptimizedImageButton {
     }
 
     protected void startAccelSpin() {
+        Log.d(TAG, "startAccelSpin: ");
         cancelAnimation();
         mAnimator = ObjectAnimator.ofFloat(this, View.ROTATION, 0, 360);
         mAnimator.setInterpolator(AnimationUtils.loadInterpolator(mContext,
@@ -156,6 +165,7 @@ public class SettingsButton extends AlphaOptimizedImageButton {
     }
 
     protected void startContinuousSpin() {
+        Log.d(TAG, "startContinuousSpin: ");
         cancelAnimation();
         mUpToSpeed = true;
         mAnimator = ObjectAnimator.ofFloat(this, View.ROTATION, 0, 360);
