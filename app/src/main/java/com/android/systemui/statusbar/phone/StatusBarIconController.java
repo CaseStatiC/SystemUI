@@ -26,6 +26,7 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -55,6 +56,7 @@ import java.util.ArrayList;
  */
 public class StatusBarIconController implements Tunable {
 
+    public static final String TAG = "StatusBarIconController";
     public static final long DEFAULT_TINT_ANIMATION_DURATION = 120;
 
     public static final String ICON_BLACKLIST = "icon_blacklist";
@@ -133,6 +135,7 @@ public class StatusBarIconController implements Tunable {
 
     @Override
     public void onTuningChanged(String key, String newValue) {
+        Log.d(TAG, "onTuningChanged: ");
         if (!ICON_BLACKLIST.equals(key)) {
             return;
         }
@@ -151,9 +154,10 @@ public class StatusBarIconController implements Tunable {
         for (int i = 0; i < views.size(); i++) {
             addSystemIcon(views.get(i).getSlot(), i, i, views.get(i).getStatusBarIcon());
         }
-    };
+    }
 
     public void updateResources() {
+        Log.d(TAG, "updateResources: ");
         mIconSize = mContext.getResources().getDimensionPixelSize(
                 com.android.internal.R.dimen.status_bar_icon_size);
         mIconHPadding = mContext.getResources().getDimensionPixelSize(
@@ -162,6 +166,7 @@ public class StatusBarIconController implements Tunable {
     }
 
     public void addSystemIcon(String slot, int index, int viewIndex, StatusBarIcon icon) {
+        Log.d(TAG, "addSystemIcon: ");
         boolean blocked = mIconBlacklist.contains(slot);
         StatusBarIconView view = new StatusBarIconView(mContext, slot, null, blocked);
         view.set(icon);
@@ -176,6 +181,7 @@ public class StatusBarIconController implements Tunable {
 
     public void updateSystemIcon(String slot, int index, int viewIndex,
             StatusBarIcon old, StatusBarIcon icon) {
+        Log.d(TAG, "updateSystemIcon: ");
         StatusBarIconView view = (StatusBarIconView) mStatusIcons.getChildAt(viewIndex);
         view.set(icon);
         view = (StatusBarIconView) mStatusIconsKeyguard.getChildAt(viewIndex);
@@ -184,11 +190,13 @@ public class StatusBarIconController implements Tunable {
     }
 
     public void removeSystemIcon(String slot, int index, int viewIndex) {
+        Log.d(TAG, "removeSystemIcon: ");
         mStatusIcons.removeViewAt(viewIndex);
         mStatusIconsKeyguard.removeViewAt(viewIndex);
     }
 
     public void updateNotificationIcons(NotificationData notificationData) {
+        Log.d(TAG, "updateNotificationIcons: ");
         final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 mIconSize + 2*mIconHPadding, mPhoneStatusBar.getStatusBarHeight());
 
@@ -246,26 +254,32 @@ public class StatusBarIconController implements Tunable {
     }
 
     public void hideSystemIconArea(boolean animate) {
+        Log.d(TAG, "hideSystemIconArea: ");
         animateHide(mSystemIconArea, animate);
     }
 
     public void showSystemIconArea(boolean animate) {
+        Log.d(TAG, "showSystemIconArea: ");
         animateShow(mSystemIconArea, animate);
     }
 
     public void hideNotificationIconArea(boolean animate) {
+        Log.d(TAG, "hideNotificationIconArea: ");
         animateHide(mNotificationIconArea, animate);
     }
 
     public void showNotificationIconArea(boolean animate) {
+        Log.d(TAG, "showNotificationIconArea: ");
         animateShow(mNotificationIconArea, animate);
     }
 
     public void setClockVisibility(boolean visible) {
+        Log.d(TAG, "setClockVisibility: ");
         mClock.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     public void dump(PrintWriter pw) {
+        Log.d(TAG, "dump: ");
         int N = mStatusIcons.getChildCount();
         pw.println("  system icons: " + N);
         for (int i=0; i<N; i++) {
@@ -275,6 +289,7 @@ public class StatusBarIconController implements Tunable {
     }
 
     public void dispatchDemoCommand(String command, Bundle args) {
+        Log.d(TAG, "dispatchDemoCommand: ");
         if (mDemoStatusIcons == null) {
             mDemoStatusIcons = new DemoStatusIcons(mStatusIcons, mIconSize);
         }
@@ -285,6 +300,7 @@ public class StatusBarIconController implements Tunable {
      * Hides a view.
      */
     private void animateHide(final View v, boolean animate) {
+        Log.d(TAG, "animateHide: ");
         v.animate().cancel();
         if (!animate) {
             v.setAlpha(0f);
@@ -308,6 +324,7 @@ public class StatusBarIconController implements Tunable {
      * Shows a view, and synchronizes the animation with Keyguard exit animations, if applicable.
      */
     private void animateShow(View v, boolean animate) {
+        Log.d(TAG, "animateShow: ");
         v.animate().cancel();
         v.setVisibility(View.VISIBLE);
         if (!animate) {
@@ -336,6 +353,7 @@ public class StatusBarIconController implements Tunable {
     }
 
     public void setIconsDark(boolean dark, boolean animate) {
+        Log.d(TAG, "setIconsDark: ");
         if (!animate) {
             setIconTintInternal(dark ? 1.0f : 0.0f);
         } else if (mTransitionPending) {
@@ -351,6 +369,7 @@ public class StatusBarIconController implements Tunable {
 
     private void animateIconTint(float targetDarkIntensity, long delay,
             long duration) {
+        Log.d(TAG, "animateIconTint: ");
         if (mTintAnimator != null) {
             mTintAnimator.cancel();
         }
@@ -371,6 +390,7 @@ public class StatusBarIconController implements Tunable {
     }
 
     private void setIconTintInternal(float darkIntensity) {
+        Log.d(TAG, "setIconTintInternal: ");
         mDarkIntensity = darkIntensity;
         mIconTint = (int) ArgbEvaluator.getInstance().evaluate(darkIntensity,
                 mLightModeIconColorSingleTone, mDarkModeIconColorSingleTone);
@@ -378,6 +398,7 @@ public class StatusBarIconController implements Tunable {
     }
 
     private void deferIconTintChange(float darkIntensity) {
+        Log.d(TAG, "deferIconTintChange: ");
         if (mTintChangePending && darkIntensity == mPendingDarkIntensity) {
             return;
         }
@@ -386,6 +407,7 @@ public class StatusBarIconController implements Tunable {
     }
 
     private void applyIconTint() {
+        Log.d(TAG, "applyIconTint: ");
         for (int i = 0; i < mStatusIcons.getChildCount(); i++) {
             StatusBarIconView v = (StatusBarIconView) mStatusIcons.getChildAt(i);
             v.setImageTintList(ColorStateList.valueOf(mIconTint));
@@ -398,6 +420,7 @@ public class StatusBarIconController implements Tunable {
     }
 
     private void applyNotificationIconsTint() {
+        Log.d(TAG, "applyNotificationIconsTint: ");
         for (int i = 0; i < mNotificationIcons.getChildCount(); i++) {
             StatusBarIconView v = (StatusBarIconView) mNotificationIcons.getChildAt(i);
             boolean isPreL = Boolean.TRUE.equals(v.getTag(R.id.icon_is_pre_L));
@@ -409,6 +432,7 @@ public class StatusBarIconController implements Tunable {
     }
 
     private boolean isGrayscale(StatusBarIconView v) {
+        Log.d(TAG, "isGrayscale: ");
         Object isGrayscale = v.getTag(R.id.icon_is_grayscale);
         if (isGrayscale != null) {
             return Boolean.TRUE.equals(isGrayscale);
@@ -419,10 +443,12 @@ public class StatusBarIconController implements Tunable {
     }
 
     public void appTransitionPending() {
+        Log.d(TAG, "appTransitionPending: ");
         mTransitionPending = true;
     }
 
     public void appTransitionCancelled() {
+        Log.d(TAG, "appTransitionCancelled: ");
         if (mTransitionPending && mTintChangePending) {
             mTintChangePending = false;
             animateIconTint(mPendingDarkIntensity, 0 /* delay */, DEFAULT_TINT_ANIMATION_DURATION);
@@ -431,6 +457,7 @@ public class StatusBarIconController implements Tunable {
     }
 
     public void appTransitionStarting(long startTime, long duration) {
+        Log.d(TAG, "appTransitionStarting: ");
         if (mTransitionPending && mTintChangePending) {
             mTintChangePending = false;
             animateIconTint(mPendingDarkIntensity,
@@ -451,6 +478,7 @@ public class StatusBarIconController implements Tunable {
     }
 
     public static ArraySet<String> getIconBlacklist(String blackListStr) {
+        Log.d(TAG, "getIconBlacklist: ");
         ArraySet<String> ret = new ArraySet<String>();
         if (blackListStr != null) {
             String[] blacklist = blackListStr.split(",");
