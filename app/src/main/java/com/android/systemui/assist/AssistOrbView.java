@@ -25,6 +25,7 @@ import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.view.animation.AnimationUtils;
@@ -37,6 +38,7 @@ import com.android.systemui.R;
 
 public class AssistOrbView extends FrameLayout {
 
+    public static final String TAG = "AssistOrbView";
     private final int mCircleMinSize;
     private final int mBaseMargin;
     private final int mStaticOffset;
@@ -126,16 +128,19 @@ public class AssistOrbView extends FrameLayout {
     }
 
     public ImageView getLogo() {
+        Log.d(TAG, "getLogo: ");
         return mLogo;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        Log.d(TAG, "onDraw: ");
         drawBackground(canvas);
     }
 
     private void drawBackground(Canvas canvas) {
+        Log.d(TAG, "drawBackground: ");
         canvas.drawCircle(mCircleRect.centerX(), mCircleRect.centerY(), mCircleSize / 2,
                 mBackgroundPaint);
     }
@@ -143,11 +148,13 @@ public class AssistOrbView extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mLogo = (ImageView) findViewById(R.id.search_logo);
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Log.d(TAG, "onLayout: ");
         mLogo.layout(0, 0, mLogo.getMeasuredWidth(), mLogo.getMeasuredHeight());
         if (changed) {
             updateCircleRect(mStaticRect, mStaticOffset, true);
@@ -156,6 +163,7 @@ public class AssistOrbView extends FrameLayout {
 
     public void animateCircleSize(float circleSize, long duration,
             long startDelay, Interpolator interpolator) {
+        Log.d(TAG, "animateCircleSize: ");
         if (circleSize == mCircleAnimationEndValue) {
             return;
         }
@@ -173,11 +181,13 @@ public class AssistOrbView extends FrameLayout {
     }
 
     private void applyCircleSize(float circleSize) {
+        Log.d(TAG, "applyCircleSize: ");
         mCircleSize = circleSize;
         updateLayout();
     }
 
     private void updateElevation() {
+        Log.d(TAG, "updateElevation: ");
         float t = (mStaticOffset - mOffset) / (float) mStaticOffset;
         t = 1.0f - Math.max(t, 0.0f);
         float offset = t * mMaxElevation;
@@ -196,6 +206,7 @@ public class AssistOrbView extends FrameLayout {
      */
     private void animateOffset(float offset, long duration, long startDelay,
             Interpolator interpolator) {
+        Log.d(TAG, "animateOffset: ");
         if (mOffsetAnimator != null) {
             mOffsetAnimator.removeAllListeners();
             mOffsetAnimator.cancel();
@@ -215,6 +226,7 @@ public class AssistOrbView extends FrameLayout {
     }
 
     private void updateLayout() {
+        Log.d(TAG, "updateLayout: ");
         updateCircleRect();
         updateLogo();
         invalidateOutline();
@@ -223,6 +235,7 @@ public class AssistOrbView extends FrameLayout {
     }
 
     private void updateClipping() {
+        Log.d(TAG, "updateClipping: ");
         boolean clip = mCircleSize < mCircleMinSize;
         if (clip != mClipToOutline) {
             setClipToOutline(clip);
@@ -231,6 +244,7 @@ public class AssistOrbView extends FrameLayout {
     }
 
     private void updateLogo() {
+        Log.d(TAG, "updateLogo: ");
         float translationX = (mCircleRect.left + mCircleRect.right) / 2.0f - mLogo.getWidth() / 2.0f;
         float translationY = (mCircleRect.top + mCircleRect.bottom) / 2.0f
                 - mLogo.getHeight() / 2.0f - mCircleMinSize / 7f;
@@ -244,10 +258,12 @@ public class AssistOrbView extends FrameLayout {
     }
 
     private void updateCircleRect() {
+        Log.d(TAG, "updateCircleRect: ");
         updateCircleRect(mCircleRect, mOffset, false);
     }
 
     private void updateCircleRect(Rect rect, float offset, boolean useStaticSize) {
+        Log.d(TAG, "updateCircleRect: ");
         int left, top;
         float circleSize = useStaticSize ? mCircleMinSize : mCircleSize;
         left = (int) (getWidth() - circleSize) / 2;
@@ -256,11 +272,13 @@ public class AssistOrbView extends FrameLayout {
     }
 
     public void startExitAnimation(long delay) {
+        Log.d(TAG, "startExitAnimation: ");
         animateCircleSize(0, 200, delay, mDisappearInterpolator);
         animateOffset(0, 200, delay, mDisappearInterpolator);
     }
 
     public void startEnterAnimation() {
+        Log.d(TAG, "startEnterAnimation: ");
         applyCircleSize(0);
         post(new Runnable() {
             @Override
@@ -272,6 +290,7 @@ public class AssistOrbView extends FrameLayout {
     }
 
     public void reset() {
+        Log.d(TAG, "reset: ");
         mClipToOutline = false;
         mBackgroundPaint.setAlpha(255);
         mOutlineAlpha = 1.0f;
@@ -279,6 +298,7 @@ public class AssistOrbView extends FrameLayout {
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         // not really true but it's ok during an animation, as it's never permanent
         return false;
     }
