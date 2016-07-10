@@ -19,6 +19,7 @@ package com.android.systemui.statusbar.phone;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import com.android.systemui.statusbar.StatusBarIconView;
 import com.android.systemui.statusbar.policy.LocationControllerImpl;
 
 public class DemoStatusIcons extends LinearLayout implements DemoMode {
+    public static final String TAG = "DemoStatusIcons";
     private final LinearLayout mStatusIcons;
     private final int mIconSize;
 
@@ -50,6 +52,7 @@ public class DemoStatusIcons extends LinearLayout implements DemoMode {
 
     @Override
     public void dispatchDemoCommand(String command, Bundle args) {
+        Log.d(TAG, "dispatchDemoCommand: ");
         if (!mDemoMode && command.equals(COMMAND_ENTER)) {
             mDemoMode = true;
             mStatusIcons.setVisibility(View.GONE);
@@ -123,6 +126,7 @@ public class DemoStatusIcons extends LinearLayout implements DemoMode {
     }
 
     private void updateSlot(String slot, String iconPkg, int iconId) {
+        Log.d(TAG, "updateSlot: ");
         if (!mDemoMode) return;
         if (iconPkg == null) {
             iconPkg = mContext.getPackageName();
