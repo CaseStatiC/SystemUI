@@ -17,6 +17,7 @@
 package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,7 @@ import static com.android.keyguard.KeyguardSecurityModel.SecurityMode;
  * A class which manages the bouncer on the lockscreen.
  */
 public class KeyguardBouncer {
-
+    public static final String TAG = "KeyguardBouncer";
     private Context mContext;
     private ViewMediatorCallback mCallback;
     private LockPatternUtils mLockPatternUtils;
@@ -69,6 +70,7 @@ public class KeyguardBouncer {
     }
 
     public void show(boolean resetSecuritySelection) {
+        Log.d(TAG, "show: ");
         ensureView();
         if (resetSecuritySelection) {
             // showPrimarySecurityScreen() updates the current security method. This is needed in
@@ -92,6 +94,7 @@ public class KeyguardBouncer {
     private final Runnable mShowRunnable = new Runnable() {
         @Override
         public void run() {
+            Log.d(TAG, "mShowRunnable: run: ");
             mRoot.setVisibility(View.VISIBLE);
             mKeyguardView.onResume();
             showPromptReason(mBouncerPromptReason);
@@ -109,25 +112,30 @@ public class KeyguardBouncer {
      *               and {@link KeyguardSecurityView#PROMPT_REASON_RESTART}
      */
     public void showPromptReason(int reason) {
+        Log.d(TAG, "showPromptReason: ");
         mKeyguardView.showPromptReason(reason);
     }
 
     public void showMessage(String message, int color) {
+        Log.d(TAG, "showMessage: ");
         mKeyguardView.showMessage(message, color);
     }
 
     private void cancelShowRunnable() {
+        Log.d(TAG, "cancelShowRunnable: ");
         DejankUtils.removeCallbacks(mShowRunnable);
         mShowingSoon = false;
     }
 
     public void showWithDismissAction(OnDismissAction r, Runnable cancelAction) {
+        Log.d(TAG, "showWithDismissAction: ");
         ensureView();
         mKeyguardView.setOnDismissAction(r, cancelAction);
         show(false /* resetSecuritySelection */);
     }
 
     public void hide(boolean destroyView) {
+        Log.d(TAG, "hide: ");
         cancelShowRunnable();
          if (mKeyguardView != null) {
             mKeyguardView.cancelDismissAction();
@@ -144,6 +152,7 @@ public class KeyguardBouncer {
      * See {@link StatusBarKeyguardViewManager#startPreHideAnimation}.
      */
     public void startPreHideAnimation(Runnable runnable) {
+        Log.d(TAG, "startPreHideAnimation: ");
         if (mKeyguardView != null) {
             mKeyguardView.startDisappearAnimation(runnable);
         } else if (runnable != null) {
@@ -155,21 +164,25 @@ public class KeyguardBouncer {
      * Reset the state of the view.
      */
     public void reset() {
+        Log.d(TAG, "reset: ");
         cancelShowRunnable();
         inflateView();
     }
 
     public void onScreenTurnedOff() {
+        Log.d(TAG, "onScreenTurnedOff: ");
         if (mKeyguardView != null && mRoot != null && mRoot.getVisibility() == View.VISIBLE) {
             mKeyguardView.onPause();
         }
     }
 
     public boolean isShowing() {
+        Log.d(TAG, "isShowing: ");
         return mShowingSoon || (mRoot != null && mRoot.getVisibility() == View.VISIBLE);
     }
 
     public void prepare() {
+        Log.d(TAG, "prepare: ");
         boolean wasInitialized = mRoot != null;
         ensureView();
         if (wasInitialized) {
@@ -179,12 +192,14 @@ public class KeyguardBouncer {
     }
 
     private void ensureView() {
+        Log.d(TAG, "ensureView: ");
         if (mRoot == null) {
             inflateView();
         }
     }
 
     private void inflateView() {
+        Log.d(TAG, "inflateView: ");
         removeView();
         mRoot = (ViewGroup) LayoutInflater.from(mContext).inflate(R.layout.keyguard_bouncer, null);
         mKeyguardView = (KeyguardHostView) mRoot.findViewById(R.id.keyguard_host_view);
@@ -196,6 +211,7 @@ public class KeyguardBouncer {
     }
 
     private void removeView() {
+        Log.d(TAG, "removeView: ");
         if (mRoot != null && mRoot.getParent() == mContainer) {
             mContainer.removeView(mRoot);
             mRoot = null;
@@ -203,6 +219,7 @@ public class KeyguardBouncer {
     }
 
     public boolean onBackPressed() {
+        Log.d(TAG, "onBackPressed: ");
         return mKeyguardView != null && mKeyguardView.handleBackKey();
     }
 
@@ -211,6 +228,7 @@ public class KeyguardBouncer {
      * notifications on Keyguard, like SIM PIN/PUK.
      */
     public boolean needsFullscreenBouncer() {
+        Log.d(TAG, "needsFullscreenBouncer: ");
         ensureView();
         if (mKeyguardView != null) {
             SecurityMode mode = mKeyguardView.getSecurityMode();
@@ -224,6 +242,7 @@ public class KeyguardBouncer {
      * makes this method much faster.
      */
     public boolean isFullscreenBouncer() {
+        Log.d(TAG, "isFullscreenBouncer: ");
         if (mKeyguardView != null) {
             SecurityMode mode = mKeyguardView.getCurrentSecurityMode();
             return mode == SecurityMode.SimPin || mode == SecurityMode.SimPuk;
@@ -235,10 +254,12 @@ public class KeyguardBouncer {
      * WARNING: This method might cause Binder calls.
      */
     public boolean isSecure() {
+        Log.d(TAG, "isSecure: ");
         return mKeyguardView == null || mKeyguardView.getSecurityMode() != SecurityMode.None;
     }
 
     public boolean onMenuPressed() {
+        Log.d(TAG, "onMenuPressed: ");
         ensureView();
         if (mKeyguardView.handleMenuKey()) {
 
@@ -253,11 +274,13 @@ public class KeyguardBouncer {
     }
 
     public boolean interceptMediaKey(KeyEvent event) {
+        Log.d(TAG, "interceptMediaKey: ");
         ensureView();
         return mKeyguardView.interceptMediaKey(event);
     }
 
     public void notifyKeyguardAuthenticated(boolean strongAuth) {
+        Log.d(TAG, "notifyKeyguardAuthenticated: ");
         ensureView();
         mKeyguardView.finish(strongAuth);
     }
