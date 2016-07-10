@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.EventLog;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
@@ -56,25 +57,30 @@ public class PhoneStatusBarView extends PanelBar {
     }
 
     public BarTransitions getBarTransitions() {
+        Log.d(TAG, "getBarTransitions: ");
         return mBarTransitions;
     }
 
     public void setBar(PhoneStatusBar bar) {
+        Log.d(TAG, "setBar: ");
         mBar = bar;
     }
 
     public void setScrimController(ScrimController scrimController) {
+        Log.d(TAG, "setScrimController: ");
         mScrimController = scrimController;
     }
 
     @Override
     public void onFinishInflate() {
+        Log.d(TAG, "onFinishInflate: ");
         mBarTransitions.init();
     }
 
     @Override
     public void addPanel(PanelView pv) {
         super.addPanel(pv);
+        Log.d(TAG, "addPanel: ");
         if (pv.getId() == R.id.notification_panel) {
             mNotificationPanel = pv;
         }
@@ -82,11 +88,13 @@ public class PhoneStatusBarView extends PanelBar {
 
     @Override
     public boolean panelsEnabled() {
+        Log.d(TAG, "panelsEnabled: ");
         return mBar.panelsEnabled();
     }
 
     @Override
     public boolean onRequestSendAccessibilityEventInternal(View child, AccessibilityEvent event) {
+        Log.d(TAG, "onRequestSendAccessibilityEventInternal: ");
         if (super.onRequestSendAccessibilityEventInternal(child, event)) {
             // The status bar is very small so augment the view that the user is touching
             // with the content of the status bar a whole. This way an accessibility service
@@ -102,6 +110,7 @@ public class PhoneStatusBarView extends PanelBar {
 
     @Override
     public PanelView selectPanelForTouch(MotionEvent touch) {
+        Log.d(TAG, "selectPanelForTouch: ");
         // No double swiping. If either panel is open, nothing else can be pulled down.
         return mNotificationPanel.getExpandedHeight() > 0
                 ? null
@@ -110,6 +119,7 @@ public class PhoneStatusBarView extends PanelBar {
 
     @Override
     public void onPanelPeeked() {
+        Log.d(TAG, "onPanelPeeked: ");
         super.onPanelPeeked();
         mBar.makeExpandedVisible(false);
     }
@@ -117,18 +127,21 @@ public class PhoneStatusBarView extends PanelBar {
     @Override
     public void onAllPanelsCollapsed() {
         super.onAllPanelsCollapsed();
+        Log.d(TAG, "onAllPanelsCollapsed: ");
         // Close the status bar in the next frame so we can show the end of the animation.
         DejankUtils.postAfterTraversal(mHideExpandedRunnable);
         mLastFullyOpenedPanel = null;
     }
 
     public void removePendingHideExpandedRunnables() {
+        Log.d(TAG, "removePendingHideExpandedRunnables: ");
         DejankUtils.removeCallbacks(mHideExpandedRunnable);
     }
 
     @Override
     public void onPanelFullyOpened(PanelView openPanel) {
         super.onPanelFullyOpened(openPanel);
+        Log.d(TAG, "onPanelFullyOpened: ");
         if (openPanel != mLastFullyOpenedPanel) {
             openPanel.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
         }
@@ -137,6 +150,7 @@ public class PhoneStatusBarView extends PanelBar {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onTouchEvent: ");
         boolean barConsumedEvent = mBar.interceptTouchEvent(event);
 
         if (DEBUG_GESTURES) {
@@ -153,6 +167,7 @@ public class PhoneStatusBarView extends PanelBar {
     @Override
     public void onTrackingStarted(PanelView panel) {
         super.onTrackingStarted(panel);
+        Log.d(TAG, "onTrackingStarted: ");
         mBar.onTrackingStarted();
         mScrimController.onTrackingStarted();
     }
@@ -160,12 +175,14 @@ public class PhoneStatusBarView extends PanelBar {
     @Override
     public void onClosingFinished() {
         super.onClosingFinished();
+        Log.d(TAG, "onClosingFinished: ");
         mBar.onClosingFinished();
     }
 
     @Override
     public void onTrackingStopped(PanelView panel, boolean expand) {
         super.onTrackingStopped(panel, expand);
+        Log.d(TAG, "onTrackingStopped: ");
         mBar.onTrackingStopped(expand);
     }
 
@@ -177,11 +194,13 @@ public class PhoneStatusBarView extends PanelBar {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onInterceptTouchEvent: ");
         return mBar.interceptTouchEvent(event) || super.onInterceptTouchEvent(event);
     }
 
     @Override
     public void panelScrimMinFractionChanged(float minFraction) {
+        Log.d(TAG, "panelScrimMinFractionChanged: ");
         if (mMinFraction != minFraction) {
             mMinFraction = minFraction;
             updateScrimFraction();
@@ -191,11 +210,13 @@ public class PhoneStatusBarView extends PanelBar {
     @Override
     public void panelExpansionChanged(PanelView panel, float frac, boolean expanded) {
         super.panelExpansionChanged(panel, frac, expanded);
+        Log.d(TAG, "panelExpansionChanged: ");
         mPanelFraction = frac;
         updateScrimFraction();
     }
 
     private void updateScrimFraction() {
+        Log.d(TAG, "updateScrimFraction: ");
         float scrimFraction = Math.max(mPanelFraction - mMinFraction / (1.0f - mMinFraction), 0);
         mScrimController.setPanelExpansion(scrimFraction);
     }
