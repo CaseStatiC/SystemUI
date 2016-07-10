@@ -16,6 +16,7 @@
 
 package com.android.systemui.statusbar.phone;
 
+import android.util.Log;
 import android.util.Pools;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -25,13 +26,14 @@ import android.view.VelocityTracker;
  * {@link VelocityTracker}.
  */
 public class PlatformVelocityTracker implements VelocityTrackerInterface {
-
+    public static final String TAG = "PlatformVelocityTracker";
     private static final Pools.SynchronizedPool<PlatformVelocityTracker> sPool =
             new Pools.SynchronizedPool<>(2);
 
     private VelocityTracker mTracker;
 
     public static PlatformVelocityTracker obtain() {
+        Log.d(TAG, "obtain: ");
         PlatformVelocityTracker tracker = sPool.acquire();
         if (tracker == null) {
             tracker = new PlatformVelocityTracker();
@@ -41,31 +43,37 @@ public class PlatformVelocityTracker implements VelocityTrackerInterface {
     }
 
     public void setTracker(VelocityTracker tracker) {
+        Log.d(TAG, "setTracker: ");
         mTracker = tracker;
     }
 
     @Override
     public void addMovement(MotionEvent event) {
+        Log.d(TAG, "addMovement: ");
         mTracker.addMovement(event);
     }
 
     @Override
     public void computeCurrentVelocity(int units) {
+        Log.d(TAG, "computeCurrentVelocity: ");
         mTracker.computeCurrentVelocity(units);
     }
 
     @Override
     public float getXVelocity() {
+        Log.d(TAG, "getXVelocity: ");
         return mTracker.getXVelocity();
     }
 
     @Override
     public float getYVelocity() {
+        Log.d(TAG, "getYVelocity: ");
         return mTracker.getYVelocity();
     }
 
     @Override
     public void recycle() {
+        Log.d(TAG, "recycle: ");
         mTracker.recycle();
         sPool.release(this);
     }
