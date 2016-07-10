@@ -48,6 +48,7 @@ public abstract class PanelBar extends FrameLayout {
     float mPanelExpandedFractionSum;
 
     public void go(int state) {
+        Log.d(TAG, "go: ");
         if (DEBUG) LOG("go state: %d -> %d", mState, state);
         mState = state;
     }
@@ -59,9 +60,11 @@ public abstract class PanelBar extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
     }
 
     public void addPanel(PanelView pv) {
+        Log.d(TAG, "addPanel: ");
         mPanels.add(pv);
         pv.setBar(this);
     }
@@ -94,6 +97,7 @@ public abstract class PanelBar extends FrameLayout {
     }
 
     public float getBarHeight() {
+        Log.d(TAG, "getBarHeight: ");
         return getMeasuredHeight();
     }
 
@@ -108,6 +112,7 @@ public abstract class PanelBar extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onTouchEvent: ");
         // Allow subclasses to implement enable/disable semantics
         if (!panelsEnabled()) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -167,6 +172,7 @@ public abstract class PanelBar extends FrameLayout {
      *                 fraction as the panel also might be expanded if the fraction is 0
      */
     public void panelExpansionChanged(PanelView panel, float frac, boolean expanded) {
+        Log.d(TAG, "panelExpansionChanged: ");
         boolean fullyClosed = true;
         PanelView fullyOpenedPanel = null;
         if (SPEW) LOG("panelExpansionChanged: start state=%d panel=%s", mState, panel.getName());
@@ -202,6 +208,7 @@ public abstract class PanelBar extends FrameLayout {
     }
 
     public void collapseAllPanels(boolean animate, boolean delayed, float speedUpFactor) {
+        Log.d(TAG, "collapseAllPanels: ");
         boolean waiting = false;
         for (PanelView pv : mPanels) {
             if (animate && !pv.isFullyCollapsed()) {
@@ -223,30 +230,37 @@ public abstract class PanelBar extends FrameLayout {
     }
 
     public void onPanelPeeked() {
+        Log.d(TAG, "onPanelPeeked: ");
         if (DEBUG) LOG("onPanelPeeked");
     }
 
     public void onAllPanelsCollapsed() {
+        Log.d(TAG, "onAllPanelsCollapsed: ");
         if (DEBUG) LOG("onAllPanelsCollapsed");
     }
 
     public void onPanelFullyOpened(PanelView openPanel) {
+        Log.d(TAG, "onPanelFullyOpened: ");
         if (DEBUG) LOG("onPanelFullyOpened");
     }
 
     public void onTrackingStarted(PanelView panel) {
+        Log.d(TAG, "onTrackingStarted: ");
         mTracking = true;
     }
 
     public void onTrackingStopped(PanelView panel, boolean expand) {
+        Log.d(TAG, "onTrackingStopped: ");
         mTracking = false;
     }
 
     public void onExpandingFinished() {
+        Log.d(TAG, "onExpandingFinished: ");
         if (DEBUG) LOG("onExpandingFinished");
     }
 
     public void onClosingFinished() {
+        Log.d(TAG, "onClosingFinished: ");
 
     }
 }
