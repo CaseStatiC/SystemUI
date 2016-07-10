@@ -28,6 +28,7 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -35,6 +36,7 @@ import android.view.View;
  */
 public class UserAvatarView extends View {
 
+    public static final String TAG = "UserAvatarView";
     private int mActiveFrameColor;
     private int mFrameColor;
     private float mFrameWidth;
@@ -92,6 +94,7 @@ public class UserAvatarView extends View {
     }
 
     public void setBitmap(Bitmap bitmap) {
+        Log.d(TAG, "setBitmap: ");
         setDrawable(null);
         mBitmap = bitmap;
         if (mBitmap != null) {
@@ -105,21 +108,25 @@ public class UserAvatarView extends View {
     }
 
     public void setFrameColor(int frameColor) {
+        Log.d(TAG, "setFrameColor: ");
         mFrameColor = frameColor;
         invalidate();
     }
 
     public void setActiveFrameColor(int activeFrameColor) {
+        Log.d(TAG, "setActiveFrameColor: ");
         mActiveFrameColor = activeFrameColor;
         invalidate();
     }
 
     public void setFrameWidth(float frameWidth) {
+        Log.d(TAG, "setFrameWidth: ");
         mFrameWidth = frameWidth;
         invalidate();
     }
 
     public void setFramePadding(float framePadding) {
+        Log.d(TAG, "setFramePadding: ");
         mFramePadding = framePadding;
         invalidate();
     }
@@ -127,10 +134,12 @@ public class UserAvatarView extends View {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+        Log.d(TAG, "onLayout: ");
         configureBounds();
     }
 
     public void configureBounds() {
+        Log.d(TAG, "configureBounds: ");
         int vwidth = getWidth() - mPaddingLeft - mPaddingRight;
         int vheight = getHeight() - mPaddingTop - mPaddingBottom;
 
@@ -166,6 +175,7 @@ public class UserAvatarView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.d(TAG, "onDraw: ");
         int frameColor = isActivated() ? mActiveFrameColor : mFrameColor;
         float halfW = getWidth() / 2f;
         float halfH = getHeight() / 2f;
@@ -198,6 +208,7 @@ public class UserAvatarView extends View {
     }
 
     public void setDrawable(Drawable d) {
+        Log.d(TAG, "setDrawable: ");
         if (mDrawable != null) {
             mDrawable.setCallback(null);
             unscheduleDrawable(mDrawable);
@@ -220,6 +231,7 @@ public class UserAvatarView extends View {
 
     @Override
     public void invalidateDrawable(Drawable dr) {
+        Log.d(TAG, "invalidateDrawable: ");
         if (dr == mDrawable) {
             invalidate();
         } else {
@@ -229,11 +241,13 @@ public class UserAvatarView extends View {
 
     @Override
     protected boolean verifyDrawable(Drawable who) {
+        Log.d(TAG, "verifyDrawable: ");
         return who == mDrawable || super.verifyDrawable(who);
     }
 
     @Override
     protected void drawableStateChanged() {
+        Log.d(TAG, "drawableStateChanged: ");
         super.drawableStateChanged();
         if (mDrawable != null && mDrawable.isStateful()) {
             mDrawable.setState(getDrawableState());
