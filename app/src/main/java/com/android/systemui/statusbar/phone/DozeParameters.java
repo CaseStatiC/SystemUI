@@ -65,56 +65,69 @@ public class DozeParameters {
     }
 
     public boolean getDisplayStateSupported() {
+        Log.d(TAG, "getDisplayStateSupported: ");
         return getBoolean("doze.display.supported", R.bool.doze_display_state_supported);
     }
 
     public int getPulseDuration(boolean pickup) {
+        Log.d(TAG, "getPulseDuration: ");
         return getPulseInDuration(pickup) + getPulseVisibleDuration() + getPulseOutDuration();
     }
 
     public int getPulseInDuration(boolean pickup) {
+        Log.d(TAG, "getPulseInDuration: ");
         return pickup
                 ? getInt("doze.pulse.duration.in.pickup", R.integer.doze_pulse_duration_in_pickup)
                 : getInt("doze.pulse.duration.in", R.integer.doze_pulse_duration_in);
     }
 
     public int getPulseVisibleDuration() {
+        Log.d(TAG, "getPulseVisibleDuration: ");
         return getInt("doze.pulse.duration.visible", R.integer.doze_pulse_duration_visible);
     }
 
     public int getPulseOutDuration() {
+        Log.d(TAG, "getPulseOutDuration: ");
         return getInt("doze.pulse.duration.out", R.integer.doze_pulse_duration_out);
     }
 
     public boolean getPulseOnSigMotion() {
+        Log.d(TAG, "getPulseOnSigMotion: ");
         return getBoolean("doze.pulse.sigmotion", R.bool.doze_pulse_on_significant_motion);
     }
 
     public boolean getVibrateOnSigMotion() {
+        Log.d(TAG, "getVibrateOnSigMotion: ");
         return SystemProperties.getBoolean("doze.vibrate.sigmotion", false);
     }
 
     public boolean getPulseOnPickup() {
+        Log.d(TAG, "getPulseOnPickup: ");
         return getBoolean("doze.pulse.pickup", R.bool.doze_pulse_on_pick_up);
     }
 
     public boolean getVibrateOnPickup() {
+        Log.d(TAG, "getVibrateOnPickup: ");
         return SystemProperties.getBoolean("doze.vibrate.pickup", false);
     }
 
     public boolean getProxCheckBeforePulse() {
+        Log.d(TAG, "getProxCheckBeforePulse: ");
         return getBoolean("doze.pulse.proxcheck", R.bool.doze_proximity_check_before_pulse);
     }
 
     public boolean getPickupPerformsProxCheck() {
+        Log.d(TAG, "getPickupPerformsProxCheck: ");
         return getBoolean("doze.pickup.proxcheck", R.bool.doze_pickup_performs_proximity_check);
     }
 
     public boolean getPulseOnNotifications() {
+        Log.d(TAG, "getPulseOnNotifications: ");
         return getBoolean("doze.pulse.notifications", R.bool.doze_pulse_on_notifications);
     }
 
     public PulseSchedule getPulseSchedule() {
+        Log.d(TAG, "getPulseSchedule: ");
         final String spec = getString("doze.pulse.schedule", R.string.doze_pulse_schedule);
         if (sPulseSchedule == null || !sPulseSchedule.mSpec.equals(spec)) {
             sPulseSchedule = PulseSchedule.parse(spec);
@@ -123,10 +136,12 @@ public class DozeParameters {
     }
 
     public int getPulseScheduleResets() {
+        Log.d(TAG, "getPulseScheduleResets: ");
         return getInt("doze.pulse.schedule.resets", R.integer.doze_pulse_schedule_resets);
     }
 
     public int getPickupVibrationThreshold() {
+        Log.d(TAG, "getPickupVibrationThreshold: ");
         return getInt("doze.pickup.vibration.threshold", R.integer.doze_pickup_vibration_threshold);
     }
 
@@ -135,11 +150,13 @@ public class DozeParameters {
     }
 
     private int getInt(String propName, int resId) {
+        Log.d(TAG, "getInt: ");
         int value = SystemProperties.getInt(propName, mContext.getResources().getInteger(resId));
         return MathUtils.constrain(value, 0, MAX_DURATION);
     }
 
     private String getString(String propName, int resId) {
+        Log.d(TAG, "getString: ");
         return SystemProperties.get(propName, mContext.getString(resId));
     }
 
@@ -150,6 +167,7 @@ public class DozeParameters {
         private int[] mSchedule;
 
         public static PulseSchedule parse(String spec) {
+            Log.d(TAG, "PulseSchedule: parse: ");
             if (TextUtils.isEmpty(spec)) return null;
             try {
                 final PulseSchedule rt = new PulseSchedule();
@@ -171,10 +189,12 @@ public class DozeParameters {
 
         @Override
         public String toString() {
+            Log.d(TAG, "PulseSchedule: toString: ");
             return Arrays.toString(mSchedule);
         }
 
         public long getNextTime(long now, long notificationTime) {
+            Log.d(TAG, "PulseSchedule: getNextTime: ");
             for (int i = 0; i < mSchedule.length; i++) {
                 final long time = notificationTime + mSchedule[i] * 1000;
                 if (time > now) return time;
