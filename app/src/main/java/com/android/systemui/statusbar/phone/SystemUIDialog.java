@@ -20,13 +20,14 @@ import com.android.systemui.R;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.WindowManager;
 
 /**
  * Base class for dialogs that should appear over panels and keyguard.
  */
 public class SystemUIDialog extends AlertDialog {
-
+    public static final String TAG = "SystemUIDialog";
     private final Context mContext;
 
     public SystemUIDialog(Context context) {
@@ -42,7 +43,7 @@ public class SystemUIDialog extends AlertDialog {
     }
 
     public void setShowForAllUsers(boolean show) {
-        //a |= b 就是把a和b以按位或的方式赋值给a
+        Log.d(TAG, "setShowForAllUsers: ");
         //a &= b 就是把a和b以按位与的方式赋值给b
         //～是位与云集运算的非运算符
         if (show) {
@@ -55,14 +56,17 @@ public class SystemUIDialog extends AlertDialog {
     }
 
     public void setMessage(int resId) {
+        Log.d(TAG, "setMessage: ");
         setMessage(mContext.getString(resId));
     }
 
     public void setPositiveButton(int resId, OnClickListener onClick) {
+        Log.d(TAG, "setPositiveButton: ");
         setButton(BUTTON_POSITIVE, mContext.getString(resId), onClick);
     }
 
     public void setNegativeButton(int resId, OnClickListener onClick) {
+        Log.d(TAG, "setNegativeButton: ");
         setButton(BUTTON_NEGATIVE, mContext.getString(resId), onClick);
     }
 }
