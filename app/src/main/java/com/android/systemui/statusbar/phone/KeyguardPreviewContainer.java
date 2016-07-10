@@ -22,6 +22,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.WindowInsets;
 import android.widget.FrameLayout;
 
@@ -30,10 +31,11 @@ import android.widget.FrameLayout;
  * the fake navigation bar.
  */
 public class KeyguardPreviewContainer extends FrameLayout {
-
+    public static final String TAG = "KeyguardPreviewContainer";
     private Drawable mBlackBarDrawable = new Drawable() {
         @Override
         public void draw(Canvas canvas) {
+            Log.d(TAG, "draw: ");
             canvas.save();
             canvas.clipRect(0, getHeight() - getPaddingBottom(), getWidth(), getHeight());
             canvas.drawColor(Color.BLACK);
@@ -42,27 +44,32 @@ public class KeyguardPreviewContainer extends FrameLayout {
 
         @Override
         public void setAlpha(int alpha) {
+            Log.d(TAG, "setAlpha: ");
             // noop
         }
 
         @Override
         public void setColorFilter(ColorFilter colorFilter) {
+            Log.d(TAG, "setColorFilter: ");
             // noop
         }
 
         @Override
         public int getOpacity() {
+            Log.d(TAG, "getOpacity: ");
             return android.graphics.PixelFormat.OPAQUE;
         }
     };
 
     public KeyguardPreviewContainer(Context context, AttributeSet attrs) {
         super(context, attrs);
+        Log.d(TAG, "KeyguardPreviewContainer: ");
         setBackground(mBlackBarDrawable);
     }
 
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        Log.d(TAG, "onApplyWindowInsets: ");
         setPadding(0, 0, 0, insets.getStableInsetBottom());
         return super.onApplyWindowInsets(insets);
     }
