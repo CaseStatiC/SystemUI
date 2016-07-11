@@ -464,7 +464,7 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
         }
     }
 
-    private void postDrawHeaderThumbnailTransitionRunnable(final TaskView tv, final int offsetX
+    private void postDrawHeaderThumbnailTransitionRunnable(final TaskView tv, final int offsetX,
             final int offsetY, final TaskViewTransform transform,
             final ActivityOptions.OnAnimationStartedListener animStartedListener) {
         Runnable r = new Runnable() {

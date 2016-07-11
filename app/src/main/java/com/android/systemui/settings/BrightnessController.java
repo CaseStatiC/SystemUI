@@ -79,8 +79,8 @@ public class BrightnessController implements ToggleSlider.Listener {
                 Settings.System.getUriFor(Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ);
 
         public BrightnessObserver(Handler handler) {
-            Log.d(TAG, "BrightnessObserver: ");
             super(handler);
+            Log.d(TAG, "BrightnessObserver: ");
         }
 
         @Override

@@ -29,6 +29,7 @@ import com.android.systemui.R;
  */
 public class KeyguardClockPositionAlgorithm {
 
+    public static final String TAG = "KeyguardClockPositionAlgorithm";
     private static final float SLOW_DOWN_FACTOR = 0.4f;
 
     private static final float CLOCK_RUBBERBAND_FACTOR_MIN = 0.08f;

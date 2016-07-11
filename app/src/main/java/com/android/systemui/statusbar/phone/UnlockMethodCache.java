@@ -32,6 +32,7 @@ import java.util.ArrayList;
  */
 public class UnlockMethodCache {
 
+    public static final String TAG = "UnlockMethodCache";
     private static UnlockMethodCache sInstance;
 
     private final LockPatternUtils mLockPatternUtils;
