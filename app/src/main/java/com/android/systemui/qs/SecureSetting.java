@@ -21,11 +21,13 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings.Secure;
+import android.util.Log;
 
 import com.android.systemui.statusbar.policy.Listenable;
 
 /** Helper for managing a secure setting. **/
 public abstract class SecureSetting extends ContentObserver implements Listenable {
+    public static final String TAG = "SecureSetting";
     private static final int DEFAULT = 0;
 
     private final Context mContext;
@@ -45,15 +47,18 @@ public abstract class SecureSetting extends ContentObserver implements Listenabl
     }
 
     public int getValue() {
+        Log.d(TAG, "getValue: ");
         return Secure.getIntForUser(mContext.getContentResolver(), mSettingName, DEFAULT, mUserId);
     }
 
     public void setValue(int value) {
+        Log.d(TAG, "setValue: ");
         Secure.putIntForUser(mContext.getContentResolver(), mSettingName, value, mUserId);
     }
 
     @Override
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
         if (listening == mListening) return;
         mListening = listening;
         if (listening) {
@@ -68,12 +73,14 @@ public abstract class SecureSetting extends ContentObserver implements Listenabl
 
     @Override
     public void onChange(boolean selfChange) {
+        Log.d(TAG, "onChange: ");
         final int value = getValue();
         handleValueChanged(value, value != mObservedValue);
         mObservedValue = value;
     }
 
     public void setUserId(int userId) {
+        Log.d(TAG, "setUserId: ");
         mUserId = userId;
         if (mListening) {
             setListening(false);
