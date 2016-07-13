@@ -54,11 +54,13 @@ public class IntentTile extends QSTile<QSTile.State> {
 
     @Override
     protected void handleDestroy() {
+        Log.d(TAG, "handleDestroy: ");
         super.handleDestroy();
         mContext.unregisterReceiver(mReceiver);
     }
 
     public static QSTile<?> create(Host host, String spec) {
+        Log.d(TAG, "create: ");
         if (spec == null || !spec.startsWith(PREFIX) || !spec.endsWith(")")) {
             throw new IllegalArgumentException("Bad intent tile spec: " + spec);
         }
@@ -71,31 +73,37 @@ public class IntentTile extends QSTile<QSTile.State> {
 
     @Override
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
     }
 
     @Override
     protected State newTileState() {
+        Log.d(TAG, "newTileState: ");
         return new State();
     }
 
     @Override
     protected void handleUserSwitch(int newUserId) {
         super.handleUserSwitch(newUserId);
+        Log.d(TAG, "handleUserSwitch: ");
         mCurrentUserId = newUserId;
     }
 
     @Override
     protected void handleClick() {
+        Log.d(TAG, "handleClick: ");
         MetricsLogger.action(mContext, getMetricsCategory(), mIntentPackage);
         sendIntent("click", mOnClick, mOnClickUri);
     }
 
     @Override
     protected void handleLongClick() {
+        Log.d(TAG, "handleLongClick: ");
         sendIntent("long-click", mOnLongClick, mOnLongClickUri);
     }
 
     private void sendIntent(String type, PendingIntent pi, String uri) {
+        Log.d(TAG, "sendIntent: ");
         try {
             if (pi != null) {
                 if (pi.isActivity()) {
@@ -114,6 +122,7 @@ public class IntentTile extends QSTile<QSTile.State> {
 
     @Override
     protected void handleUpdateState(State state, Object arg) {
+        Log.d(TAG, "handleUpdateState: ");
         Intent intent = (Intent) arg;
         if (intent == null) {
             if (mLastIntent == null) {
@@ -156,6 +165,7 @@ public class IntentTile extends QSTile<QSTile.State> {
 
     @Override
     public int getMetricsCategory() {
+        Log.d(TAG, "getMetricsCategory: ");
         return MetricsLogger.QS_INTENT;
     }
 
@@ -175,17 +185,20 @@ public class IntentTile extends QSTile<QSTile.State> {
 
         @Override
         public Drawable getDrawable(Context context) {
+            Log.d(TAG, "BytesIcon: getDrawable: ");
             final Bitmap b = BitmapFactory.decodeByteArray(mBytes, 0, mBytes.length);
             return new BitmapDrawable(context.getResources(), b);
         }
 
         @Override
         public boolean equals(Object o) {
+            Log.d(TAG, "BytesIcon: equals: ");
             return o instanceof BytesIcon && Arrays.equals(((BytesIcon) o).mBytes, mBytes);
         }
 
         @Override
         public String toString() {
+            Log.d(TAG, "BytesIcon: toString: ");
             return String.format("BytesIcon[len=%s]", mBytes.length);
         }
     }
@@ -201,6 +214,7 @@ public class IntentTile extends QSTile<QSTile.State> {
 
         @Override
         public boolean equals(Object o) {
+            Log.d(TAG, "PackageDrawableIcon: equals: ");
             if (!(o instanceof PackageDrawableIcon)) return false;
             final PackageDrawableIcon other = (PackageDrawableIcon) o;
             return Objects.equals(other.mPackage, mPackage) && other.mResId == mResId;
@@ -208,6 +222,7 @@ public class IntentTile extends QSTile<QSTile.State> {
 
         @Override
         public Drawable getDrawable(Context context) {
+            Log.d(TAG, "PackageDrawableIcon: getDrawable: ");
             try {
                 return context.createPackageContext(mPackage, 0).getDrawable(mResId);
             } catch (Throwable t) {
@@ -218,6 +233,7 @@ public class IntentTile extends QSTile<QSTile.State> {
 
         @Override
         public String toString() {
+            Log.d(TAG, "PackageDrawableIcon: toString: ");
             return String.format("PackageDrawableIcon[pkg=%s,id=0x%08x]", mPackage, mResId);
         }
     }
