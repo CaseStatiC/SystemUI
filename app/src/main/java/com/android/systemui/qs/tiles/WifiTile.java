@@ -41,6 +41,7 @@ import java.util.List;
 
 /** Quick settings tile: Wifi **/
 public class WifiTile extends QSTile<QSTile.SignalState> {
+    public static final String TAG = "WifiTile";
     private static final Intent WIFI_SETTINGS = new Intent(Settings.ACTION_WIFI_SETTINGS);
 
     private final NetworkController mController;
@@ -59,16 +60,19 @@ public class WifiTile extends QSTile<QSTile.SignalState> {
 
     @Override
     public boolean supportsDualTargets() {
+        Log.d(TAG, "supportsDualTargets: ");
         return true;
     }
 
     @Override
     protected SignalState newTileState() {
+        Log.d(TAG, "newTileState: ");
         return new SignalState();
     }
 
     @Override
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
         if (listening) {
             mController.addSignalCallback(mSignalCallback);
         } else {
@@ -78,6 +82,7 @@ public class WifiTile extends QSTile<QSTile.SignalState> {
 
     @Override
     public void setDetailListening(boolean listening) {
+        Log.d(TAG, "setDetailListening: ");
         if (listening) {
             mWifiController.addAccessPointCallback(mDetailAdapter);
         } else {
@@ -87,16 +92,19 @@ public class WifiTile extends QSTile<QSTile.SignalState> {
 
     @Override
     public DetailAdapter getDetailAdapter() {
+        Log.d(TAG, "getDetailAdapter: ");
         return mDetailAdapter;
     }
 
     @Override
     public QSTileView createTileView(Context context) {
+        Log.d(TAG, "createTileView: ");
         return new SignalTileView(context);
     }
 
     @Override
     protected void handleClick() {
+        Log.d(TAG, "handleClick: ");
         mState.copyTo(mStateBeforeClick);
         MetricsLogger.action(mContext, getMetricsCategory(), !mState.enabled);
         mController.setWifiEnabled(!mState.enabled);
@@ -104,6 +112,7 @@ public class WifiTile extends QSTile<QSTile.SignalState> {
 
     @Override
     protected void handleSecondaryClick() {
+        Log.d(TAG, "handleSecondaryClick: ");
         if (!mWifiController.canConfigWifi()) {
             mHost.startActivityDismissingKeyguard(new Intent(Settings.ACTION_WIFI_SETTINGS));
             return;
@@ -117,6 +126,7 @@ public class WifiTile extends QSTile<QSTile.SignalState> {
 
     @Override
     protected void handleUpdateState(SignalState state, Object arg) {
+        Log.d(TAG, "handleUpdateState: ");
         state.visible = true;
         if (DEBUG) Log.d(TAG, "handleUpdateState arg=" + arg);
         CallbackInfo cb = (CallbackInfo) arg;
@@ -167,16 +177,19 @@ public class WifiTile extends QSTile<QSTile.SignalState> {
 
     @Override
     public int getMetricsCategory() {
+        Log.d(TAG, "getMetricsCategory: ");
         return MetricsLogger.QS_WIFI;
     }
 
     @Override
     protected boolean shouldAnnouncementBeDelayed() {
+        Log.d(TAG, "shouldAnnouncementBeDelayed: ");
         return mStateBeforeClick.enabled == mState.enabled;
     }
 
     @Override
     protected String composeChangeAnnouncement() {
+        Log.d(TAG, "composeChangeAnnouncement: ");
         if (mState.enabled) {
             return mContext.getString(R.string.accessibility_quick_settings_wifi_changed_on);
         } else {
@@ -185,6 +198,7 @@ public class WifiTile extends QSTile<QSTile.SignalState> {
     }
 
     private static String removeDoubleQuotes(String string) {
+        Log.d(TAG, "removeDoubleQuotes: ");
         if (string == null) return null;
         final int length = string.length();
         if ((length > 1) && (string.charAt(0) == '"') && (string.charAt(length - 1) == '"')) {
@@ -232,7 +246,8 @@ public class WifiTile extends QSTile<QSTile.SignalState> {
             mInfo.wifiSignalContentDescription = qsIcon.contentDescription;
             refreshState(mInfo);
         }
-    };
+    }
+    ;
 
     private final class WifiDetailAdapter implements DetailAdapter,
             NetworkController.AccessPointController.AccessPointCallback, QSDetailItems.Callback {
@@ -339,5 +354,6 @@ public class WifiTile extends QSTile<QSTile.SignalState> {
             }
             mItems.setItems(items);
         }
-    };
+    }
+    ;
 }
