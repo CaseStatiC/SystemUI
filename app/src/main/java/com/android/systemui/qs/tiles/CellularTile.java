@@ -20,6 +20,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,16 +57,19 @@ public class CellularTile extends QSTile<QSTile.SignalState> {
 
     @Override
     protected SignalState newTileState() {
+        Log.d(TAG, "newTileState: ");
         return new SignalState();
     }
 
     @Override
     public DetailAdapter getDetailAdapter() {
+        Log.d(TAG, "getDetailAdapter: ");
         return mDetailAdapter;
     }
 
     @Override
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
         if (listening) {
             mController.addSignalCallback(mSignalCallback);
         } else {
@@ -75,11 +79,13 @@ public class CellularTile extends QSTile<QSTile.SignalState> {
 
     @Override
     public QSTileView createTileView(Context context) {
+        Log.d(TAG, "createTileView: ");
         return new SignalTileView(context);
     }
 
     @Override
     protected void handleClick() {
+        Log.d(TAG, "handleClick: ");
         MetricsLogger.action(mContext, getMetricsCategory());
         if (mDataController.isMobileDataSupported()) {
             showDetail(true);
@@ -90,6 +96,7 @@ public class CellularTile extends QSTile<QSTile.SignalState> {
 
     @Override
     protected void handleUpdateState(SignalState state, Object arg) {
+        Log.d(TAG, "handleUpdateState: ");
         state.visible = mController.hasMobileDataFeature();
         if (!state.visible) return;
         CallbackInfo cb = (CallbackInfo) arg;
@@ -128,11 +135,13 @@ public class CellularTile extends QSTile<QSTile.SignalState> {
 
     @Override
     public int getMetricsCategory() {
+        Log.d(TAG, "getMetricsCategory: ");
         return MetricsLogger.QS_CELLULAR;
     }
 
     // Remove the period from the network name
     public static String removeTrailingPeriod(String string) {
+        Log.d(TAG, "removeTrailingPeriod: ");
         if (string == null) return null;
         final int length = string.length();
         if (string.endsWith(".")) {
