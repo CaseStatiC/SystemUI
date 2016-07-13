@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ import java.text.DecimalFormat;
  */
 public class DataUsageDetailView extends LinearLayout {
 
+    public static final String TAG = "DataUsageDetailView";
     private static final double KB = 1024;
     private static final double MB = 1024 * KB;
     private static final double GB = 1024 * MB;
@@ -49,6 +51,7 @@ public class DataUsageDetailView extends LinearLayout {
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        Log.d(TAG, "onConfigurationChanged: ");
         FontSizeUtils.updateFontSize(this, android.R.id.title, R.dimen.qs_data_usage_text_size);
         FontSizeUtils.updateFontSize(this, R.id.usage_text, R.dimen.qs_data_usage_usage_text_size);
         FontSizeUtils.updateFontSize(this, R.id.usage_carrier_text,
@@ -61,6 +64,7 @@ public class DataUsageDetailView extends LinearLayout {
     }
 
     public void bind(NetworkController.MobileDataController.DataUsageInfo info) {
+        Log.d(TAG, "bind: ");
         final Resources res = mContext.getResources();
         final int titleId;
         final long bytes;
@@ -112,6 +116,7 @@ public class DataUsageDetailView extends LinearLayout {
     }
 
     private String formatBytes(long bytes) {
+        Log.d(TAG, "formatBytes: ");
         final long b = Math.abs(bytes);
         double val;
         String suffix;
