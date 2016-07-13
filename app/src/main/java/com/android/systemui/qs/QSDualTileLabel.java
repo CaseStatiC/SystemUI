@@ -21,6 +21,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.text.TextUtils.TruncateAt;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -41,6 +42,7 @@ import java.util.Objects;
  *   Second line: ellipsis if necessary
  */
 public class QSDualTileLabel extends LinearLayout {
+    public static final String TAG = "QSDualTileLabel";
 
     private final Context mContext;
     private final TextView mFirstLine;
@@ -90,6 +92,7 @@ public class QSDualTileLabel extends LinearLayout {
     }
 
     private static LayoutParams newLinearLayoutParams() {
+        Log.d(TAG, "newLinearLayoutParams: ");
         final LayoutParams lp =
                 new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lp.gravity = Gravity.CENTER_HORIZONTAL;
@@ -97,6 +100,7 @@ public class QSDualTileLabel extends LinearLayout {
     }
 
     public void setFirstLineCaret(Drawable d) {
+        Log.d(TAG, "setFirstLineCaret: ");
         mFirstLineCaret.setImageDrawable(d);
         if (d != null) {
             final int h = d.getIntrinsicHeight();
@@ -106,6 +110,7 @@ public class QSDualTileLabel extends LinearLayout {
     }
 
     private TextView initTextView() {
+        Log.d(TAG, "initTextView: ");
         final TextView tv = new TextView(mContext);
         tv.setPadding(0, 0, 0, 0);
         tv.setGravity(Gravity.CENTER_VERTICAL);
@@ -116,6 +121,7 @@ public class QSDualTileLabel extends LinearLayout {
     }
 
     public void setText(CharSequence text) {
+        Log.d(TAG, "setText: ");
         final String newText = text == null ? null : text.toString().trim();
         if (Objects.equals(newText, mText)) return;
         mText = newText;
@@ -123,33 +129,39 @@ public class QSDualTileLabel extends LinearLayout {
     }
 
     public String getText() {
+        Log.d(TAG, "getText: ");
         return mText;
     }
 
     public void setTextSize(int unit, float size) {
+        Log.d(TAG, "setTextSize: ");
         mFirstLine.setTextSize(unit, size);
         mSecondLine.setTextSize(unit, size);
         rescheduleUpdateText();
     }
 
     public void setTextColor(int color) {
+        Log.d(TAG, "setTextColor: ");
         mFirstLine.setTextColor(color);
         mSecondLine.setTextColor(color);
         rescheduleUpdateText();
     }
 
     public void setTypeface(Typeface tf) {
+        Log.d(TAG, "setTypeface: ");
         mFirstLine.setTypeface(tf);
         mSecondLine.setTypeface(tf);
         rescheduleUpdateText();
     }
 
     private void rescheduleUpdateText() {
+        Log.d(TAG, "rescheduleUpdateText: ");
         removeCallbacks(mUpdateText);
         post(mUpdateText);
     }
 
     private void updateText() {
+        Log.d(TAG, "updateText: ");
         if (getWidth() == 0) return;
         if (TextUtils.isEmpty(mText)) {
             mFirstLine.setText(null);
