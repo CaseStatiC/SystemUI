@@ -69,12 +69,14 @@ public class QSFooter implements OnClickListener, DialogInterface.OnClickListene
     }
 
     public void setHost(QSTileHost host) {
+        Log.d(TAG, "setHost: ");
         mHost = host;
         mSecurityController = host.getSecurityController();
         mHandler = new H(host.getLooper());
     }
 
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
         if (listening) {
             mSecurityController.addCallback(mCallback);
         } else {
@@ -83,33 +85,40 @@ public class QSFooter implements OnClickListener, DialogInterface.OnClickListene
     }
 
     public void onConfigurationChanged() {
+        Log.d(TAG, "onConfigurationChanged: ");
         FontSizeUtils.updateFontSize(mFooterText, R.dimen.qs_tile_text_size);
     }
 
     public View getView() {
+        Log.d(TAG, "getView: ");
         return mRootView;
     }
 
     public boolean hasFooter() {
+        Log.d(TAG, "hasFooter: ");
         return mRootView.getVisibility() != View.GONE;
     }
 
     @Override
     public void onClick(View v) {
+        Log.d(TAG, "onClick: ");
         mHandler.sendEmptyMessage(H.CLICK);
     }
 
     private void handleClick() {
+        Log.d(TAG, "handleClick: ");
         mHost.collapsePanels();
         // TODO: Delay dialog creation until after panels are collapsed.
         createDialog();
     }
 
     public void refreshState() {
+        Log.d(TAG, "refreshState: ");
         mHandler.sendEmptyMessage(H.REFRESH_STATE);
     }
 
     private void handleRefreshState() {
+        Log.d(TAG, "handleRefreshState: ");
         mIsIconVisible = mSecurityController.isVpnEnabled();
         if (mSecurityController.hasDeviceOwner()) {
             mFooterTextId = R.string.device_owned_footer;
@@ -123,6 +132,7 @@ public class QSFooter implements OnClickListener, DialogInterface.OnClickListene
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
+        Log.d(TAG, "onClick: ");
         if (which == DialogInterface.BUTTON_NEGATIVE) {
             final Intent settingsIntent = new Intent(ACTION_VPN_SETTINGS);
             mContext.startActivityAsUser(settingsIntent, UserHandle.CURRENT);
@@ -130,6 +140,7 @@ public class QSFooter implements OnClickListener, DialogInterface.OnClickListene
     }
 
     private void createDialog() {
+        Log.d(TAG, "createDialog: ");
         String deviceOwner = mSecurityController.getDeviceOwnerName();
         String profileOwner = mSecurityController.getProfileOwnerName();
         String primaryVpn = mSecurityController.getPrimaryVpnName();
@@ -147,15 +158,18 @@ public class QSFooter implements OnClickListener, DialogInterface.OnClickListene
     }
 
     private String getNegativeButton() {
+        Log.d(TAG, "getNegativeButton: ");
         return mContext.getString(R.string.status_bar_settings_settings_button);
     }
 
     private String getPositiveButton() {
+        Log.d(TAG, "getPositiveButton: ");
         return mContext.getString(R.string.quick_settings_done);
     }
 
     private String getMessage(String deviceOwner, String profileOwner, String primaryVpn,
             String profileVpn, boolean primaryUserIsManaged) {
+        Log.d(TAG, "getMessage: ");
         if (deviceOwner != null) {
             if (primaryVpn != null) {
                 return mContext.getString(R.string.monitoring_description_vpn_app_device_owned,
@@ -185,6 +199,7 @@ public class QSFooter implements OnClickListener, DialogInterface.OnClickListene
     }
 
     private int getTitle(String deviceOwner) {
+        Log.d(TAG, "getTitle: ");
         if (deviceOwner != null) {
             return R.string.monitoring_title_device_owned;
         } else {
