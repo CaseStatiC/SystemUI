@@ -22,12 +22,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.android.systemui.R;
 
 public class DataUsageGraph extends View {
 
+    public static final String TAG = "DataUsageGraph";
     private final int mTrackColor;
     private final int mUsageColor;
     private final int mOverlimitColor;
@@ -52,6 +54,7 @@ public class DataUsageGraph extends View {
     }
 
     public void setLevels(long limitLevel, long warningLevel, long usageLevel) {
+        Log.d(TAG, "setLevels: ");
         mLimitLevel = Math.max(0, limitLevel);
         mWarningLevel = Math.max(0, warningLevel);
         mUsageLevel = Math.max(0, usageLevel);
@@ -62,7 +65,7 @@ public class DataUsageGraph extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        Log.d(TAG, "onDraw: ");
         final RectF r = mTmpRect;
         final Paint p = mTmpPaint;
         final int w = getWidth();
