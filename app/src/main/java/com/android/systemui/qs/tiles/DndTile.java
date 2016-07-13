@@ -24,6 +24,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
@@ -41,6 +42,7 @@ import com.android.systemui.volume.ZenModePanel;
 /** Quick settings tile: Do not disturb **/
 public class DndTile extends QSTile<QSTile.BooleanState> {
 
+    public static final String TAG = "DndTile";
     private static final Intent ZEN_SETTINGS =
             new Intent(Settings.ACTION_ZEN_MODE_SETTINGS);
 
@@ -72,34 +74,41 @@ public class DndTile extends QSTile<QSTile.BooleanState> {
     }
 
     public static void setVisible(Context context, boolean visible) {
+        Log.d(TAG, "setVisible: ");
         Prefs.putBoolean(context, Prefs.Key.DND_TILE_VISIBLE, visible);
     }
 
     public static boolean isVisible(Context context) {
+        Log.d(TAG, "isVisible: ");
         return Prefs.getBoolean(context, Prefs.Key.DND_TILE_VISIBLE, false /* defaultValue */);
     }
 
     public static void setCombinedIcon(Context context, boolean combined) {
+        Log.d(TAG, "setCombinedIcon: ");
         Prefs.putBoolean(context, Prefs.Key.DND_TILE_COMBINED_ICON, combined);
     }
 
     public static boolean isCombinedIcon(Context context) {
+        Log.d(TAG, "isCombinedIcon: ");
         return Prefs.getBoolean(context, Prefs.Key.DND_TILE_COMBINED_ICON,
                 false /* defaultValue */);
     }
 
     @Override
     public DetailAdapter getDetailAdapter() {
+        Log.d(TAG, "getDetailAdapter: ");
         return mDetailAdapter;
     }
 
     @Override
     protected BooleanState newTileState() {
+        Log.d(TAG, "newTileState: ");
         return new BooleanState();
     }
 
     @Override
     public void handleClick() {
+        Log.d(TAG, "handleClick: ");
         if (mController.isVolumeRestricted()) {
             // Collapse the panels, so the user can see the toast.
             mHost.collapsePanels();
@@ -122,6 +131,7 @@ public class DndTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
+        Log.d(TAG, "handleUpdateState: ");
         final int zen = arg instanceof Integer ? (Integer) arg : mController.getZen();
         final boolean newValue = zen != Global.ZEN_MODE_OFF;
         final boolean valueChanged = state.value != newValue;
@@ -163,11 +173,13 @@ public class DndTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
+        Log.d(TAG, "getMetricsCategory: ");
         return MetricsLogger.QS_DND;
     }
 
     @Override
     protected String composeChangeAnnouncement() {
+        Log.d(TAG, "composeChangeAnnouncement: ");
         if (mState.value) {
             return mContext.getString(R.string.accessibility_quick_settings_dnd_changed_on);
         } else {
@@ -177,6 +189,7 @@ public class DndTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
         if (mListening == listening) return;
         mListening = listening;
         if (mListening) {
