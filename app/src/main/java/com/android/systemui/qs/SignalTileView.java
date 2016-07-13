@@ -19,6 +19,7 @@ package com.android.systemui.qs;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import com.android.systemui.qs.QSTile.SignalState;
 
 /** View that represents a custom quick settings tile for displaying signal info (wifi/cell). **/
 public final class SignalTileView extends QSTileView {
+    public static final String TAG = "SignalTileView";
     private static final long DEFAULT_DURATION = new ValueAnimator().getDuration();
     private static final long SHORT_DURATION = DEFAULT_DURATION / 3;
 
@@ -50,6 +52,7 @@ public final class SignalTileView extends QSTileView {
     }
 
     private ImageView addTrafficView(int icon) {
+        Log.d(TAG, "addTrafficView: ");
         final ImageView traffic = new ImageView(mContext);
         traffic.setImageResource(icon);
         traffic.setAlpha(0f);
@@ -59,6 +62,7 @@ public final class SignalTileView extends QSTileView {
 
     @Override
     protected View createIcon() {
+        Log.d(TAG, "createIcon: ");
         mIconFrame = new FrameLayout(mContext);
         mSignal = new ImageView(mContext);
         mIconFrame.addView(mSignal);
@@ -70,6 +74,7 @@ public final class SignalTileView extends QSTileView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        Log.d(TAG, "onMeasure: ");
         int hs = MeasureSpec.makeMeasureSpec(mIconFrame.getMeasuredHeight(), MeasureSpec.EXACTLY);
         int ws = MeasureSpec.makeMeasureSpec(mIconFrame.getMeasuredHeight(), MeasureSpec.AT_MOST);
         mIn.measure(ws, hs);
@@ -79,11 +84,13 @@ public final class SignalTileView extends QSTileView {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
+        Log.d(TAG, "onLayout: ");
         layoutIndicator(mIn);
         layoutIndicator(mOut);
     }
 
     private void layoutIndicator(View indicator) {
+        Log.d(TAG, "layoutIndicator: ");
         boolean isRtl = getLayoutDirection() == LAYOUT_DIRECTION_RTL;
         int left, right;
         if (isRtl) {
@@ -103,6 +110,7 @@ public final class SignalTileView extends QSTileView {
     @Override
     protected void handleStateChanged(QSTile.State state) {
         super.handleStateChanged(state);
+        Log.d(TAG, "handleStateChanged: ");
         final SignalState s = (SignalState) state;
         setIcon(mSignal, s);
         if (s.overlayIconId > 0) {
@@ -126,6 +134,7 @@ public final class SignalTileView extends QSTileView {
     }
 
     private void setVisibility(View view, boolean shown, boolean visible) {
+        Log.d(TAG, "setVisibility: ");
         final float newAlpha = shown && visible ? 1 : 0;
         if (view.getAlpha() == newAlpha) return;
         if (shown) {
