@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -35,6 +36,7 @@ import java.lang.ref.WeakReference;
  */
 public class PseudoGridView extends ViewGroup {
 
+    public static final String TAG = "PseudoGridView";
     private int mNumColumns = 3;
     private int mVerticalSpacing;
     private int mHorizontalSpacing;
@@ -65,6 +67,7 @@ public class PseudoGridView extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.d(TAG, "onMeasure: ");
         if (MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.UNSPECIFIED) {
             throw new UnsupportedOperationException("Needs a maximum width");
         }
@@ -103,6 +106,7 @@ public class PseudoGridView extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Log.d(TAG, "onLayout: ");
         boolean isRtl = isLayoutRtl();
         int children = getChildCount();
         int rows = (children + mNumColumns - 1) / mNumColumns;
@@ -148,6 +152,7 @@ public class PseudoGridView extends ViewGroup {
         private boolean mReleased;
 
         public static void link(ViewGroup viewGroup, BaseAdapter adapter) {
+            Log.d(TAG, "ViewGroupAdapterBridge: link: ");
             new ViewGroupAdapterBridge(viewGroup, adapter);
         }
 
@@ -160,6 +165,7 @@ public class PseudoGridView extends ViewGroup {
         }
 
         private void refresh() {
+            Log.d(TAG, "ViewGroupAdapterBridge: refresh: ");
             if (mReleased) {
                 return;
             }
@@ -195,15 +201,18 @@ public class PseudoGridView extends ViewGroup {
 
         @Override
         public void onChanged() {
+            Log.d(TAG, "ViewGroupAdapterBridge: onChanged: ");
             refresh();
         }
 
         @Override
         public void onInvalidated() {
+            Log.d(TAG, "ViewGroupAdapterBridge: onInvalidated: ");
             release();
         }
 
         private void release() {
+            Log.d(TAG, "ViewGroupAdapterBridge: release: ");
             if (!mReleased) {
                 mReleased = true;
                 mAdapter.unregisterDataSetObserver(this);
