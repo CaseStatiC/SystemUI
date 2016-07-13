@@ -20,11 +20,13 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings.Global;
+import android.util.Log;
 
 import com.android.systemui.statusbar.policy.Listenable;
 
 /** Helper for managing a global setting. **/
 public abstract class GlobalSetting extends ContentObserver implements Listenable {
+    public static final String TAG = "GlobalSetting";
     private final Context mContext;
     private final String mSettingName;
 
@@ -37,15 +39,18 @@ public abstract class GlobalSetting extends ContentObserver implements Listenabl
     }
 
     public int getValue() {
+        Log.d(TAG, "getValue: ");
         return Global.getInt(mContext.getContentResolver(), mSettingName, 0);
     }
 
     public void setValue(int value) {
+        Log.d(TAG, "setValue: ");
         Global.putInt(mContext.getContentResolver(), mSettingName, value);
     }
 
     @Override
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
         if (listening) {
             mContext.getContentResolver().registerContentObserver(
                     Global.getUriFor(mSettingName), false, this);
@@ -56,6 +61,7 @@ public abstract class GlobalSetting extends ContentObserver implements Listenabl
 
     @Override
     public void onChange(boolean selfChange) {
+        Log.d(TAG, "onChange: ");
         handleValueChanged(getValue());
     }
 }
