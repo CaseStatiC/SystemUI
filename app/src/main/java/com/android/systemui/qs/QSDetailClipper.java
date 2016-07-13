@@ -20,12 +20,13 @@ import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorListenerAdapter;
 import android.graphics.drawable.TransitionDrawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 
 /** Helper for quick settings detail panel clip animations. **/
 public class QSDetailClipper {
-
+    public static final String TAG = "QSDetailClipper";
     private final View mDetail;
     private final TransitionDrawable mBackground;
 
@@ -37,6 +38,7 @@ public class QSDetailClipper {
     }
 
     public void animateCircularClip(int x, int y, boolean in, AnimatorListener listener) {
+        Log.d(TAG, "animateCircularClip: ");
         if (mAnimator != null) {
             mAnimator.cancel();
         }
@@ -84,10 +86,12 @@ public class QSDetailClipper {
     private final AnimatorListenerAdapter mVisibleOnStart = new AnimatorListenerAdapter() {
         @Override
         public void onAnimationStart(Animator animation) {
+            Log.d(TAG, "mVisibleOnStart: onAnimationStart: ");
             mDetail.setVisibility(View.VISIBLE);
         }
 
         public void onAnimationEnd(Animator animation) {
+            Log.d(TAG, "mVisibleOnStart: onAnimationEnd: ");
             mAnimator = null;
         }
     };
@@ -95,9 +99,10 @@ public class QSDetailClipper {
     private final AnimatorListenerAdapter mGoneOnEnd = new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
+            Log.d(TAG, "mGoneOnEnd: onAnimationEnd: ");
             mDetail.setVisibility(View.GONE);
             mBackground.resetTransition();
             mAnimator = null;
-        };
+        }
     };
 }
