@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 
 import com.android.systemui.Prefs;
 import com.android.systemui.R;
@@ -28,6 +29,7 @@ import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.statusbar.policy.Listenable;
 
 public class UsageTracker implements Listenable {
+    public static final String TAG = "UsageTracker";
     private static final long MILLIS_PER_DAY = 1000 * 60 * 60 * 24;
 
     private final Context mContext;
@@ -47,6 +49,7 @@ public class UsageTracker implements Listenable {
 
     @Override
     public void setListening(boolean listen) {
+        Log.d(TAG, "setListening: ");
         if (listen && !mRegistered) {
              mContext.registerReceiver(mReceiver, new IntentFilter(mResetAction));
              mRegistered = true;
@@ -57,19 +60,23 @@ public class UsageTracker implements Listenable {
     }
 
     public boolean isRecentlyUsed() {
+        Log.d(TAG, "isRecentlyUsed: ");
         long lastUsed = Prefs.getLong(mContext, mPrefKey, 0L /* defaultValue */);
         return (System.currentTimeMillis() - lastUsed) < mTimeToShowTile;
     }
 
     public void trackUsage() {
+        Log.d(TAG, "trackUsage: ");
         Prefs.putLong(mContext, mPrefKey, System.currentTimeMillis());
     }
 
     public void reset() {
+        Log.d(TAG, "reset: ");
         Prefs.remove(mContext, mPrefKey);
     }
 
     public void showResetConfirmation(String title, final Runnable onConfirmed) {
+        Log.d(TAG, "showResetConfirmation: ");
         final SystemUIDialog d = new SystemUIDialog(mContext);
         d.setTitle(title);
         d.setMessage(mContext.getString(R.string.quick_settings_reset_confirmation_message));
@@ -91,6 +98,7 @@ public class UsageTracker implements Listenable {
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "mReceiver: onReceive: ");
             if (mResetAction.equals(intent.getAction())) {
                 reset();
             }
