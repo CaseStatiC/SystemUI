@@ -26,6 +26,7 @@ import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ import java.util.Collection;
 
 /** View that represents the quick settings tile panel. **/
 public class QSPanel extends ViewGroup {
+    public static final String TAG = "QSPanel";
     private static final float TILE_ASPECT = 1.2f;
 
     private final Context mContext;
@@ -272,6 +274,7 @@ public class QSPanel extends ViewGroup {
     }
 
     private void addTile(final QSTile<?> tile) {
+        Log.d(TAG, "addTile: ");
         final TileRecord r = new TileRecord();
         r.tile = tile;
         r.tileView = tile.createTileView(mContext);
@@ -279,22 +282,26 @@ public class QSPanel extends ViewGroup {
         final QSTile.Callback callback = new QSTile.Callback() {
             @Override
             public void onStateChanged(QSTile.State state) {
+                Log.d(TAG, "callback: onStateChanged: ");
                 if (!r.openingDetail) {
                     drawTile(r, state);
                 }
             }
             @Override
             public void onShowDetail(boolean show) {
+                Log.d(TAG, "callback: onShowDetail: ");
                 QSPanel.this.showDetail(show, r);
             }
             @Override
             public void onToggleStateChanged(boolean state) {
+                Log.d(TAG, "callback: onToggleStateChanged: ");
                 if (mDetailRecord == r) {
                     fireToggleStateChanged(state);
                 }
             }
             @Override
             public void onScanStateChanged(boolean state) {
+                Log.d(TAG, "callback: onScanStateChanged: ");
                 r.scanState = state;
                 if (mDetailRecord == r) {
                     fireScanStateChanged(r.scanState);
@@ -303,6 +310,7 @@ public class QSPanel extends ViewGroup {
 
             @Override
             public void onAnnouncementRequested(CharSequence announcement) {
+                Log.d(TAG, "callback: onAnnouncementRequested: ");
                 announceForAccessibility(announcement);
             }
         };
@@ -336,22 +344,27 @@ public class QSPanel extends ViewGroup {
     }
 
     public boolean isShowingDetail() {
+        Log.d(TAG, "isShowingDetail: ");
         return mDetailRecord != null;
     }
 
     public void closeDetail() {
+        Log.d(TAG, "closeDetail: ");
         showDetail(false, mDetailRecord);
     }
 
     public boolean isClosingDetail() {
+        Log.d(TAG, "isClosingDetail: ");
         return mClosingDetail;
     }
 
     public int getGridHeight() {
+        Log.d(TAG, "getGridHeight: ");
         return mGridHeight;
     }
 
     private void handleShowDetail(Record r, boolean show) {
+        Log.d(TAG, "handleShowDetail: ");
         if (r instanceof TileRecord) {
             handleShowDetailTile((TileRecord) r, show);
         } else {
@@ -366,6 +379,7 @@ public class QSPanel extends ViewGroup {
     }
 
     private void handleShowDetailTile(TileRecord r, boolean show) {
+        Log.d(TAG, "handleShowDetailTile: ");
         if ((mDetailRecord != null) == show && mDetailRecord == r) return;
 
         if (show) {
@@ -379,6 +393,7 @@ public class QSPanel extends ViewGroup {
     }
 
     private void handleShowDetailImpl(Record r, boolean show, int x, int y) {
+        Log.d(TAG, "handleShowDetailImpl: ");
         boolean visibleDiff = (mDetailRecord != null) != show;
         if (!visibleDiff && mDetailRecord == r) return;  // already in right state
         DetailAdapter detailAdapter = null;
@@ -426,6 +441,7 @@ public class QSPanel extends ViewGroup {
     }
 
     private void setGridContentVisibility(boolean visible) {
+        Log.d(TAG, "setGridContentVisibility: ");
         int newVis = visible ? VISIBLE : INVISIBLE;
         for (int i = 0; i < mRecords.size(); i++) {
             TileRecord tileRecord = mRecords.get(i);
@@ -441,6 +457,7 @@ public class QSPanel extends ViewGroup {
     }
 
     private void logTiles() {
+        Log.d(TAG, "logTiles: ");
         for (int i = 0; i < mRecords.size(); i++) {
             TileRecord tileRecord = mRecords.get(i);
             if (tileRecord.tile.getState().visible) {
@@ -451,6 +468,7 @@ public class QSPanel extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.d(TAG, "onMeasure: ");
         final int width = MeasureSpec.getSize(widthMeasureSpec);
         mBrightnessView.measure(exactly(width), MeasureSpec.UNSPECIFIED);
         final int brightnessHeight = mBrightnessView.getMeasuredHeight() + mBrightnessPaddingTop;
@@ -499,11 +517,13 @@ public class QSPanel extends ViewGroup {
     }
 
     private static int exactly(int size) {
+        Log.d(TAG, "exactly: ");
         return MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY);
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Log.d(TAG, "onLayout: ");
         final int w = getWidth();
         mBrightnessView.layout(0, mBrightnessPaddingTop,
                 mBrightnessView.getMeasuredWidth(),
@@ -536,12 +556,14 @@ public class QSPanel extends ViewGroup {
     }
 
     private int getRowTop(int row) {
+        Log.d(TAG, "getRowTop: ");
         if (row <= 0) return mBrightnessView.getMeasuredHeight() + mBrightnessPaddingTop;
         return mBrightnessView.getMeasuredHeight() + mBrightnessPaddingTop
                 + mLargeCellHeight - mDualTileUnderlap + (row - 1) * mCellHeight;
     }
 
     private int getColumnCount(int row) {
+        Log.d(TAG, "getColumnCount: ");
         int cols = 0;
         for (TileRecord record : mRecords) {
             if (record.tileView.getVisibility() == GONE) continue;
@@ -551,24 +573,28 @@ public class QSPanel extends ViewGroup {
     }
 
     private void fireShowingDetail(QSTile.DetailAdapter detail) {
+        Log.d(TAG, "fireShowingDetail: ");
         if (mCallback != null) {
             mCallback.onShowingDetail(detail);
         }
     }
 
     private void fireToggleStateChanged(boolean state) {
+        Log.d(TAG, "fireToggleStateChanged: ");
         if (mCallback != null) {
             mCallback.onToggleStateChanged(state);
         }
     }
 
     private void fireScanStateChanged(boolean state) {
+        Log.d(TAG, "fireScanStateChanged: ");
         if (mCallback != null) {
             mCallback.onScanStateChanged(state);
         }
     }
 
     private void setDetailRecord(Record r) {
+        Log.d(TAG, "setDetailRecord: ");
         if (r == mDetailRecord) return;
         mDetailRecord = r;
         final boolean scanState = mDetailRecord instanceof TileRecord
@@ -607,6 +633,7 @@ public class QSPanel extends ViewGroup {
 
     private final AnimatorListenerAdapter mTeardownDetailWhenDone = new AnimatorListenerAdapter() {
         public void onAnimationEnd(Animator animation) {
+            Log.d(TAG, "mTeardownDetailWhenDone: onAnimationEnd: ");
             mDetailContent.removeAllViews();
             setDetailRecord(null);
             mClosingDetail = false;
@@ -615,6 +642,7 @@ public class QSPanel extends ViewGroup {
 
     private final AnimatorListenerAdapter mHideGridContentWhenDone = new AnimatorListenerAdapter() {
         public void onAnimationCancel(Animator animation) {
+            Log.d(TAG, "mHideGridContentWhenDone: onAnimationCancel: ");
             // If we have been cancelled, remove the listener so that onAnimationEnd doesn't get
             // called, this will avoid accidentally turning off the grid when we don't want to.
             animation.removeListener(this);
