@@ -19,6 +19,7 @@ package com.android.systemui.qs.tiles;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.systemui.Prefs;
@@ -29,6 +30,7 @@ import com.android.systemui.statusbar.policy.HotspotController;
 
 /** Quick settings tile: Hotspot **/
 public class HotspotTile extends QSTile<QSTile.BooleanState> {
+    public static final String TAG = "HotspotTile";
     private final AnimationIcon mEnable =
             new AnimationIcon(R.drawable.ic_hotspot_enable_animation);
     private final AnimationIcon mDisable =
@@ -47,16 +49,19 @@ public class HotspotTile extends QSTile<QSTile.BooleanState> {
     @Override
     protected void handleDestroy() {
         super.handleDestroy();
+        Log.d(TAG, "handleDestroy: ");
         mUsageTracker.setListening(false);
     }
 
     @Override
     protected BooleanState newTileState() {
+        Log.d(TAG, "newTileState: ");
         return new BooleanState();
     }
 
     @Override
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
         if (listening) {
             mController.addCallback(mCallback);
         } else {
@@ -66,6 +71,7 @@ public class HotspotTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleClick() {
+        Log.d(TAG, "handleClick: ");
         final boolean isEnabled = (Boolean) mState.value;
         MetricsLogger.action(mContext, getMetricsCategory(), !isEnabled);
         mController.setHotspotEnabled(!isEnabled);
@@ -75,6 +81,7 @@ public class HotspotTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleLongClick() {
+        Log.d(TAG, "handleLongClick: ");
         if (mState.value) return;  // don't allow usage reset if hotspot is active
         final String title = mContext.getString(R.string.quick_settings_reset_confirmation_title,
                 mState.label);
@@ -88,6 +95,7 @@ public class HotspotTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
+        Log.d(TAG, "handleUpdateState: ");
         state.visible = mController.isHotspotSupported() && mUsageTracker.isRecentlyUsed();
         state.label = mContext.getString(R.string.quick_settings_hotspot_label);
 
@@ -101,11 +109,13 @@ public class HotspotTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
+        Log.d(TAG, "getMetricsCategory: ");
         return MetricsLogger.QS_HOTSPOT;
     }
 
     @Override
     protected String composeChangeAnnouncement() {
+        Log.d(TAG, "composeChangeAnnouncement: ");
         if (mState.value) {
             return mContext.getString(R.string.accessibility_quick_settings_hotspot_changed_on);
         } else {
@@ -114,6 +124,7 @@ public class HotspotTile extends QSTile<QSTile.BooleanState> {
     }
 
     private static UsageTracker newUsageTracker(Context context) {
+        Log.d(TAG, "newUsageTracker: ");
         return new UsageTracker(context, Prefs.Key.HOTSPOT_TILE_LAST_USED, HotspotTile.class,
                 R.integer.days_to_show_hotspot_tile);
     }
