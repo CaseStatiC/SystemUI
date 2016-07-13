@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -38,6 +39,7 @@ import java.util.Set;
 
 /** Quick settings tile: Bluetooth **/
 public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
+    public static final String TAG = "BluetoothTile";
     private static final Intent BLUETOOTH_SETTINGS = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
 
     private final BluetoothController mController;
@@ -51,21 +53,25 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
 
     @Override
     public boolean supportsDualTargets() {
+        Log.d(TAG, "supportsDualTargets: ");
         return true;
     }
 
     @Override
     public DetailAdapter getDetailAdapter() {
+        Log.d(TAG, "getDetailAdapter: ");
         return mDetailAdapter;
     }
 
     @Override
     protected BooleanState newTileState() {
+        Log.d(TAG, "newTileState: ");
         return new BooleanState();
     }
 
     @Override
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
         if (listening) {
             mController.addStateChangedCallback(mCallback);
         } else {
@@ -75,6 +81,7 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
 
     @Override
     protected void handleClick() {
+        Log.d(TAG, "handleClick: ");
         final boolean isEnabled = (Boolean)mState.value;
         MetricsLogger.action(mContext, getMetricsCategory(), !isEnabled);
         mController.setBluetoothEnabled(!isEnabled);
@@ -82,6 +89,7 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
 
     @Override
     protected void handleSecondaryClick() {
+        Log.d(TAG, "handleSecondaryClick: ");
         if (!mState.value) {
             mState.value = true;
             mController.setBluetoothEnabled(true);
@@ -91,6 +99,7 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
+        Log.d(TAG, "handleUpdateState: ");
         final boolean supported = mController.isBluetoothSupported();
         final boolean enabled = mController.isBluetoothEnabled();
         final boolean connected = mController.isBluetoothConnected();
@@ -135,11 +144,13 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
 
     @Override
     public int getMetricsCategory() {
+        Log.d(TAG, "getMetricsCategory: ");
         return MetricsLogger.QS_BLUETOOTH;
     }
 
     @Override
     protected String composeChangeAnnouncement() {
+        Log.d(TAG, "composeChangeAnnouncement: ");
         if (mState.value) {
             return mContext.getString(R.string.accessibility_quick_settings_bluetooth_changed_on);
         } else {
@@ -150,11 +161,13 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
     private final BluetoothController.Callback mCallback = new BluetoothController.Callback() {
         @Override
         public void onBluetoothStateChange(boolean enabled) {
+            Log.d(TAG, "mCallback: onBluetoothStateChange: ");
             refreshState();
         }
 
         @Override
         public void onBluetoothDevicesChanged() {
+            Log.d(TAG, "mCallback: onBluetoothDevicesChanged: ");
             mUiHandler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -170,21 +183,25 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
 
         @Override
         public int getTitle() {
+            Log.d(TAG, "BluetoothDetailAdapter: getTitle: ");
             return R.string.quick_settings_bluetooth_label;
         }
 
         @Override
         public Boolean getToggleState() {
+            Log.d(TAG, "BluetoothDetailAdapter: getToggleState: ");
             return mState.value;
         }
 
         @Override
         public Intent getSettingsIntent() {
+            Log.d(TAG, "BluetoothDetailAdapter: getSettingsIntent: ");
             return BLUETOOTH_SETTINGS;
         }
 
         @Override
         public void setToggleState(boolean state) {
+            Log.d(TAG, "BluetoothDetailAdapter: setToggleState: ");
             MetricsLogger.action(mContext, MetricsLogger.QS_BLUETOOTH_TOGGLE, state);
             mController.setBluetoothEnabled(state);
             showDetail(false);
@@ -192,11 +209,13 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
 
         @Override
         public int getMetricsCategory() {
+            Log.d(TAG, "BluetoothDetailAdapter: getMetricsCategory: ");
             return MetricsLogger.QS_BLUETOOTH_DETAILS;
         }
 
         @Override
         public View createDetailView(Context context, View convertView, ViewGroup parent) {
+            Log.d(TAG, "BluetoothDetailAdapter: createDetailView: ");
             mItems = QSDetailItems.convertOrInflate(context, convertView, parent);
             mItems.setTagSuffix("Bluetooth");
             mItems.setEmptyState(R.drawable.ic_qs_bluetooth_detail_empty,
@@ -209,11 +228,13 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
         }
 
         public void setItemsVisible(boolean visible) {
+            Log.d(TAG, "BluetoothDetailAdapter: setItemsVisible: ");
             if (mItems == null) return;
             mItems.setItemsVisible(visible);
         }
 
         private void updateItems() {
+            Log.d(TAG, "BluetoothDetailAdapter: updateItems: ");
             if (mItems == null) return;
             Item[] items = null;
             final Collection<CachedBluetoothDevice> devices = mController.getDevices();
@@ -242,6 +263,7 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
         }
 
         private int getBondedCount(Collection<CachedBluetoothDevice> devices) {
+            Log.d(TAG, "BluetoothDevice: getBondedCount: ");
             int ct = 0;
             for (CachedBluetoothDevice device : devices) {
                 if (device.getBondState() != BluetoothDevice.BOND_NONE) {
@@ -253,6 +275,7 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
 
         @Override
         public void onDetailItemClick(Item item) {
+            Log.d(TAG, "BluetoothDevice: onDetailItemClick: ");
             if (item == null || item.tag == null) return;
             final CachedBluetoothDevice device = (CachedBluetoothDevice) item.tag;
             if (device != null && device.getMaxConnectionState()
@@ -263,6 +286,7 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
 
         @Override
         public void onDetailItemDisconnect(Item item) {
+            Log.d(TAG, "BluetoothDevice: onDetailItemDisconnect: ");
             if (item == null || item.tag == null) return;
             final CachedBluetoothDevice device = (CachedBluetoothDevice) item.tag;
             if (device != null) {
