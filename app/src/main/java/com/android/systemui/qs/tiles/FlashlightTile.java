@@ -17,6 +17,7 @@
 package com.android.systemui.qs.tiles;
 
 import android.app.ActivityManager;
+import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.systemui.R;
@@ -26,7 +27,7 @@ import com.android.systemui.statusbar.policy.FlashlightController;
 /** Quick settings tile: Control flashlight **/
 public class FlashlightTile extends QSTile<QSTile.BooleanState> implements
         FlashlightController.FlashlightListener {
-
+    public static final String TAG = "FlashlightTile";
     private final AnimationIcon mEnable
             = new AnimationIcon(R.drawable.ic_signal_flashlight_enable_animation);
     private final AnimationIcon mDisable
@@ -42,24 +43,29 @@ public class FlashlightTile extends QSTile<QSTile.BooleanState> implements
     @Override
     protected void handleDestroy() {
         super.handleDestroy();
+        Log.d(TAG, "handleDestroy: ");
         mFlashlightController.removeListener(this);
     }
 
     @Override
     protected BooleanState newTileState() {
+        Log.d(TAG, "newTileState: ");
         return new BooleanState();
     }
 
     @Override
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
     }
 
     @Override
     protected void handleUserSwitch(int newUserId) {
+        Log.d(TAG, "handleUserSwitch: ");
     }
 
     @Override
     protected void handleClick() {
+        Log.d(TAG, "handleClick: ");
         if (ActivityManager.isUserAMonkey()) {
             return;
         }
@@ -71,6 +77,7 @@ public class FlashlightTile extends QSTile<QSTile.BooleanState> implements
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
+        Log.d(TAG, "handleUpdateState: ");
         state.visible = mFlashlightController.isAvailable();
         state.label = mHost.getContext().getString(R.string.quick_settings_flashlight_label);
         if (arg instanceof UserBoolean) {
@@ -93,11 +100,13 @@ public class FlashlightTile extends QSTile<QSTile.BooleanState> implements
 
     @Override
     public int getMetricsCategory() {
+        Log.d(TAG, "getMetricsCategory: ");
         return MetricsLogger.QS_FLASHLIGHT;
     }
 
     @Override
     protected String composeChangeAnnouncement() {
+        Log.d(TAG, "composeChangeAnnouncement: ");
         if (mState.value) {
             return mContext.getString(R.string.accessibility_quick_settings_flashlight_changed_on);
         } else {
@@ -107,16 +116,19 @@ public class FlashlightTile extends QSTile<QSTile.BooleanState> implements
 
     @Override
     public void onFlashlightChanged(boolean enabled) {
+        Log.d(TAG, "onFlashlightChanged: ");
         refreshState(enabled ? UserBoolean.BACKGROUND_TRUE : UserBoolean.BACKGROUND_FALSE);
     }
 
     @Override
     public void onFlashlightError() {
+        Log.d(TAG, "onFlashlightError: ");
         refreshState(UserBoolean.BACKGROUND_FALSE);
     }
 
     @Override
     public void onFlashlightAvailabilityChanged(boolean available) {
+        Log.d(TAG, "onFlashlightAvailabilityChanged: ");
         refreshState();
     }
 }
