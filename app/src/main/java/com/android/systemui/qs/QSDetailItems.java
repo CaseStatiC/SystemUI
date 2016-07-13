@@ -63,6 +63,7 @@ public class QSDetailItems extends FrameLayout {
     }
 
     public static QSDetailItems convertOrInflate(Context context, View convert, ViewGroup parent) {
+        Log.d(TAG, "convertOrInflate: ");
         if (convert instanceof QSDetailItems) {
             return (QSDetailItems) convert;
         }
@@ -73,6 +74,7 @@ public class QSDetailItems extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mItems = (LinearLayout) findViewById(android.R.id.list);
         mItems.setVisibility(GONE);
         mEmpty = findViewById(android.R.id.empty);
@@ -90,6 +92,7 @@ public class QSDetailItems extends FrameLayout {
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        Log.d(TAG, "onConfigurationChanged: ");
         FontSizeUtils.updateFontSize(mEmptyText, R.dimen.qs_detail_empty_text_size);
         int count = mItems.getChildCount();
         for (int i = 0; i < count; i++) {
@@ -102,10 +105,12 @@ public class QSDetailItems extends FrameLayout {
     }
 
     public void setTagSuffix(String suffix) {
+        Log.d(TAG, "setTagSuffix: ");
         mTag = TAG + "." + suffix;
     }
 
     public void setEmptyState(int icon, int text) {
+        Log.d(TAG, "setEmptyState: ");
         mEmptyIcon.setImageResource(icon);
         mEmptyText.setText(text);
     }
@@ -114,6 +119,7 @@ public class QSDetailItems extends FrameLayout {
      * Set the minimum height of this detail view, in item count.
      */
     public void setMinHeightInItems(int minHeightInItems) {
+        Log.d(TAG, "setMinHeightInItems: ");
         ViewGroup.LayoutParams lp = mMinHeightSpacer.getLayoutParams();
         lp.height = minHeightInItems * getResources().getDimensionPixelSize(
                 R.dimen.qs_detail_item_height);
@@ -123,36 +129,43 @@ public class QSDetailItems extends FrameLayout {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        Log.d(TAG, "onAttachedToWindow: ");
         if (DEBUG) Log.d(mTag, "onAttachedToWindow");
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        Log.d(TAG, "onDetachedFromWindow: ");
         if (DEBUG) Log.d(mTag, "onDetachedFromWindow");
         mCallback = null;
     }
 
     public void setCallback(Callback callback) {
+        Log.d(TAG, "setCallback: ");
         mHandler.removeMessages(H.SET_CALLBACK);
         mHandler.obtainMessage(H.SET_CALLBACK, callback).sendToTarget();
     }
 
     public void setItems(Item[] items) {
+        Log.d(TAG, "setItems: ");
         mHandler.removeMessages(H.SET_ITEMS);
         mHandler.obtainMessage(H.SET_ITEMS, items).sendToTarget();
     }
 
     public void setItemsVisible(boolean visible) {
+        Log.d(TAG, "setItemsVisible: ");
         mHandler.removeMessages(H.SET_ITEMS_VISIBLE);
         mHandler.obtainMessage(H.SET_ITEMS_VISIBLE, visible ? 1 : 0, 0).sendToTarget();
     }
 
     private void handleSetCallback(Callback callback) {
+        Log.d(TAG, "handleSetCallback: ");
         mCallback = callback;
     }
 
     private void handleSetItems(Item[] items) {
+        Log.d(TAG, "handleSetItems: ");
         final int itemCount = items != null ? Math.min(items.length, mMaxItems) : 0;
         mEmpty.setVisibility(itemCount == 0 ? VISIBLE : GONE);
         mItems.setVisibility(itemCount == 0 ? GONE : VISIBLE);
@@ -165,6 +178,7 @@ public class QSDetailItems extends FrameLayout {
     }
 
     private void handleSetItemsVisible(boolean visible) {
+        Log.d(TAG, "handleSetItemsVisible: ");
         if (mItemsVisible == visible) return;
         mItemsVisible = visible;
         for (int i = 0; i < mItems.getChildCount(); i++) {
@@ -173,6 +187,7 @@ public class QSDetailItems extends FrameLayout {
     }
 
     private void bind(final Item item, View view) {
+        Log.d(TAG, "bind: ");
         if (view == null) {
             view = LayoutInflater.from(mContext).inflate(R.layout.qs_detail_item, this, false);
             mItems.addView(view);
