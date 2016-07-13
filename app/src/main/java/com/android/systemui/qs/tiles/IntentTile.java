@@ -37,7 +37,7 @@ import java.util.Objects;
 
 public class IntentTile extends QSTile<QSTile.State> {
     public static final String PREFIX = "intent(";
-
+    public static final String TAG = "IntentTile";
     private PendingIntent mOnClick;
     private String mOnClickUri;
     private PendingIntent mOnLongClick;
@@ -54,6 +54,7 @@ public class IntentTile extends QSTile<QSTile.State> {
 
     @Override
     protected void handleDestroy() {
+        super.handleDestroy();
         Log.d(TAG, "handleDestroy: ");
         super.handleDestroy();
         mContext.unregisterReceiver(mReceiver);
