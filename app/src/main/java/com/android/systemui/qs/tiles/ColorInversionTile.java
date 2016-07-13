@@ -17,6 +17,7 @@
 package com.android.systemui.qs.tiles;
 
 import android.provider.Settings.Secure;
+import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.systemui.Prefs;
@@ -28,6 +29,7 @@ import com.android.systemui.qs.UsageTracker;
 /** Quick settings tile: Invert colors **/
 public class ColorInversionTile extends QSTile<QSTile.BooleanState> {
 
+    public static final String TAG = "ColorInversionTile";
     private final AnimationIcon mEnable
             = new AnimationIcon(R.drawable.ic_invert_colors_enable_animation);
     private final AnimationIcon mDisable
@@ -65,28 +67,33 @@ public class ColorInversionTile extends QSTile<QSTile.BooleanState> {
     @Override
     protected void handleDestroy() {
         super.handleDestroy();
+        Log.d(TAG, "handleDestroy: ");
         mUsageTracker.setListening(false);
         mSetting.setListening(false);
     }
 
     @Override
     protected BooleanState newTileState() {
+        Log.d(TAG, "newTileState: ");
         return new BooleanState();
     }
 
     @Override
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
         mListening = listening;
     }
 
     @Override
     protected void handleUserSwitch(int newUserId) {
+        Log.d(TAG, "handleUserSwitch: ");
         mSetting.setUserId(newUserId);
         handleRefreshState(mSetting.getValue());
     }
 
     @Override
     protected void handleClick() {
+        Log.d(TAG, "handleClick: ");
         MetricsLogger.action(mContext, getMetricsCategory(), !mState.value);
         mSetting.setValue(mState.value ? 0 : 1);
         mEnable.setAllowAnimation(true);
@@ -95,6 +102,7 @@ public class ColorInversionTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleLongClick() {
+        Log.d(TAG, "handleLongClick: ");
         if (mState.value) return;  // don't allow usage reset if inversion is active
         final String title = mContext.getString(R.string.quick_settings_reset_confirmation_title,
                 mState.label);
@@ -108,6 +116,7 @@ public class ColorInversionTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
+        Log.d(TAG, "handleUpdateState: ");
         final int value = arg instanceof Integer ? (Integer) arg : mSetting.getValue();
         final boolean enabled = value != 0;
         state.visible = enabled || mUsageTracker.isRecentlyUsed();
@@ -118,11 +127,13 @@ public class ColorInversionTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
+        Log.d(TAG, "getMetricsCategory: ");
         return MetricsLogger.QS_COLORINVERSION;
     }
 
     @Override
     protected String composeChangeAnnouncement() {
+        Log.d(TAG, "composeChangeAnnouncement: ");
         if (mState.value) {
             return mContext.getString(
                     R.string.accessibility_quick_settings_color_inversion_changed_on);
