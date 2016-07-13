@@ -18,6 +18,7 @@ package com.android.systemui.qs;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.android.systemui.R;
@@ -27,6 +28,7 @@ import com.android.systemui.R;
  */
 public class QSContainer extends FrameLayout {
 
+    public static final String TAG = "QSContainer";
     private int mHeightOverride = -1;
     private QSPanel mQSPanel;
 
@@ -37,12 +39,14 @@ public class QSContainer extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Log.d(TAG, "onFinishInflate: ");
         mQSPanel = (QSPanel) findViewById(R.id.quick_settings_panel);
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+        Log.d(TAG, "onLayout: ");
         updateBottom();
     }
 
@@ -53,6 +57,7 @@ public class QSContainer extends FrameLayout {
      * @param heightOverride the overridden height
      */
     public void setHeightOverride(int heightOverride) {
+        Log.d(TAG, "setHeightOverride: ");
         mHeightOverride = heightOverride;
         updateBottom();
     }
@@ -62,6 +67,7 @@ public class QSContainer extends FrameLayout {
      * during closing the detail panel, this already returns the smaller height.
      */
     public int getDesiredHeight() {
+        Log.d(TAG, "getDesiredHeight: ");
         if (mQSPanel.isClosingDetail()) {
             return mQSPanel.getGridHeight() + getPaddingTop() + getPaddingBottom();
         } else {
@@ -70,6 +76,7 @@ public class QSContainer extends FrameLayout {
     }
 
     private void updateBottom() {
+        Log.d(TAG, "updateBottom: ");
         int height = mHeightOverride != -1 ? mHeightOverride : getMeasuredHeight();
         setBottom(getTop() + height);
     }
