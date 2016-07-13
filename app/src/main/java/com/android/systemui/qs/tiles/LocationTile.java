@@ -16,6 +16,7 @@
 
 package com.android.systemui.qs.tiles;
 
+import android.util.Log;
 import com.android.internal.logging.MetricsLogger;
 import com.android.systemui.R;
 import com.android.systemui.qs.QSTile;
@@ -43,11 +44,13 @@ public class LocationTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected BooleanState newTileState() {
+        Log.d(TAG, "newTileState: ");
         return new BooleanState();
     }
 
     @Override
     public void setListening(boolean listening) {
+        Log.d(TAG, "setListening: ");
         if (listening) {
             mController.addSettingsChangedCallback(mCallback);
             mKeyguard.addCallback(mCallback);
@@ -59,6 +62,7 @@ public class LocationTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleClick() {
+        Log.d(TAG, "handleClick: ");
         final boolean wasEnabled = (Boolean) mState.value;
         MetricsLogger.action(mContext, getMetricsCategory(), !wasEnabled);
         mController.setLocationEnabled(!wasEnabled);
@@ -68,6 +72,7 @@ public class LocationTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
+        Log.d(TAG, "handleUpdateState: ");
         final boolean locationEnabled =  mController.isLocationEnabled();
 
         // Work around for bug 15916487: don't show location tile on top of lock screen. After the
@@ -90,11 +95,13 @@ public class LocationTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
+        Log.d(TAG, "getMetricsCategory: ");
         return MetricsLogger.QS_LOCATION;
     }
 
     @Override
     protected String composeChangeAnnouncement() {
+        Log.d(TAG, "composeChangeAnnouncement: ");
         if (mState.value) {
             return mContext.getString(R.string.accessibility_quick_settings_location_changed_on);
         } else {
@@ -113,5 +120,5 @@ public class LocationTile extends QSTile<QSTile.BooleanState> {
         public void onKeyguardChanged() {
             refreshState();
         }
-    };
+    }
 }
