@@ -23,6 +23,7 @@ import com.android.systemui.statusbar.policy.UserSwitcherController;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import android.view.ViewGroup;
  */
 public class UserDetailView extends PseudoGridView {
 
+    public static final String TAG = "UserDetailView";
     private Adapter mAdapter;
 
     public UserDetailView(Context context, AttributeSet attrs) {
@@ -39,16 +41,19 @@ public class UserDetailView extends PseudoGridView {
     }
 
     public static UserDetailView inflate(Context context, ViewGroup parent, boolean attach) {
+        Log.d(TAG, "inflate: ");
         return (UserDetailView) LayoutInflater.from(context).inflate(
                 R.layout.qs_user_detail, parent, attach);
     }
 
     public void createAndSetAdapter(UserSwitcherController controller) {
+        Log.d(TAG, "createAndSetAdapter: ");
         mAdapter = new Adapter(mContext, controller);
         ViewGroupAdapterBridge.link(this, mAdapter);
     }
 
     public void refreshAdapter() {
+        Log.d(TAG, "refreshAdapter: ");
         mAdapter.refresh();
     }
 
