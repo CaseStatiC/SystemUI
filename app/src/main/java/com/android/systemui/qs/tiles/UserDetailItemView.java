@@ -28,6 +28,7 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ import android.widget.TextView;
  */
 public class UserDetailItemView extends LinearLayout {
 
+    public static final String TAG = "UserDetailItemView";
     private UserAvatarView mAvatar;
     private TextView mName;
     private Typeface mRegularTypeface;
@@ -78,6 +80,7 @@ public class UserDetailItemView extends LinearLayout {
 
     public static UserDetailItemView convertOrInflate(Context context, View convertView,
             ViewGroup root) {
+        Log.d(TAG, "convertOrInflate: ");
         if (!(convertView instanceof UserDetailItemView)) {
             convertView = LayoutInflater.from(context).inflate(
                     R.layout.qs_user_detail_item, root, false);
@@ -86,17 +89,20 @@ public class UserDetailItemView extends LinearLayout {
     }
 
     public void bind(String name, Bitmap picture) {
+        Log.d(TAG, "bind: ");
         mName.setText(name);
         mAvatar.setBitmap(picture);
     }
 
     public void bind(String name, Drawable picture) {
+        Log.d(TAG, "bind: ");
         mName.setText(name);
         mAvatar.setDrawable(picture);
     }
 
     @Override
     protected void onFinishInflate() {
+        Log.d(TAG, "onFinishInflate: ");
         mAvatar = (UserAvatarView) findViewById(R.id.user_picture);
         mName = (TextView) findViewById(R.id.user_name);
         if (mRegularTypeface == null) {
@@ -111,22 +117,26 @@ public class UserDetailItemView extends LinearLayout {
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        Log.d(TAG, "onConfigurationChanged: ");
         FontSizeUtils.updateFontSize(mName, R.dimen.qs_detail_item_secondary_text_size);
     }
 
     @Override
     protected void drawableStateChanged() {
         super.drawableStateChanged();
+        Log.d(TAG, "drawableStateChanged: ");
         updateTypeface();
     }
 
     private void updateTypeface() {
+        Log.d(TAG, "updateTypeface: ");
         boolean activated = ArrayUtils.contains(getDrawableState(), android.R.attr.state_activated);
         mName.setTypeface(activated ? mActivatedTypeface : mRegularTypeface);
     }
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 }
