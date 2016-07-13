@@ -86,18 +86,22 @@ public abstract class QSTile<TState extends State> implements Listenable {
     }
 
     public boolean supportsDualTargets() {
+        Log.d(TAG, "supportsDualTargets: ");
         return false;
     }
 
     public Host getHost() {
+        Log.d(TAG, "getHost: ");
         return mHost;
     }
 
     public QSTileView createTileView(Context context) {
+        Log.d(TAG, "createTileView: ");
         return new QSTileView(context);
     }
 
     public DetailAdapter getDetailAdapter() {
+        Log.d(TAG, "getDetailAdapter: ");
         return null; // optional
     }
 
@@ -117,6 +121,7 @@ public abstract class QSTile<TState extends State> implements Listenable {
     }
 
     public void click() {
+        Log.d(TAG, "click: ");
         mHandler.sendEmptyMessage(H.CLICK);
     }
 
@@ -141,6 +146,7 @@ public abstract class QSTile<TState extends State> implements Listenable {
     }
 
     public final void clearState() {
+        Log.d(TAG, "clearState: ");
         mHandler.sendEmptyMessage(H.CLEAR_STATE);
     }
 
@@ -149,18 +155,22 @@ public abstract class QSTile<TState extends State> implements Listenable {
     }
 
     public void fireToggleStateChanged(boolean state) {
+        Log.d(TAG, "fireToggleStateChanged: ");
         mHandler.obtainMessage(H.TOGGLE_STATE_CHANGED, state ? 1 : 0, 0).sendToTarget();
     }
 
     public void fireScanStateChanged(boolean state) {
+        Log.d(TAG, "fireScanStateChanged: ");
         mHandler.obtainMessage(H.SCAN_STATE_CHANGED, state ? 1 : 0, 0).sendToTarget();
     }
 
     public void destroy() {
+        Log.d(TAG, "destroy: ");
         mHandler.sendEmptyMessage(H.DESTROY);
     }
 
     public TState getState() {
+        Log.d(TAG, "getState: ");
         return mState;
     }
 
@@ -215,6 +225,7 @@ public abstract class QSTile<TState extends State> implements Listenable {
     }
 
     protected String composeChangeAnnouncement() {
+        Log.d(TAG, "composeChangeAnnouncement: ");
         return null;
     }
 
