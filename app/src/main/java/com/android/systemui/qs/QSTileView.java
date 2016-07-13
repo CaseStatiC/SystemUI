@@ -27,6 +27,7 @@ import android.graphics.drawable.RippleDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.util.MathUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -45,6 +46,7 @@ import java.util.Objects;
 
 /** View that represents a standard quick settings tile. **/
 public class QSTileView extends ViewGroup {
+    public static final String TAG = "QSTileView";
     private static final Typeface CONDENSED = Typeface.create("sans-serif-condensed",
             Typeface.NORMAL);
 
@@ -101,6 +103,7 @@ public class QSTileView extends ViewGroup {
     }
 
     private void updateTopPadding() {
+        Log.d(TAG, "updateTopPadding: ");
         Resources res = getResources();
         int padding = res.getDimensionPixelSize(R.dimen.qs_tile_padding_top);
         int largePadding = res.getDimensionPixelSize(R.dimen.qs_tile_padding_top_large_text);
@@ -113,6 +116,7 @@ public class QSTileView extends ViewGroup {
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        Log.d(TAG, "onConfigurationChanged: ");
         updateTopPadding();
         FontSizeUtils.updateFontSize(mLabel, R.dimen.qs_tile_text_size);
         if (mDualLabel != null) {
@@ -122,6 +126,7 @@ public class QSTileView extends ViewGroup {
     }
 
     private void recreateLabel() {
+        Log.d(TAG, "recreateLabel: ");
         CharSequence labelText = null;
         CharSequence labelDescription = null;
         if (mLabel != null) {
@@ -175,6 +180,7 @@ public class QSTileView extends ViewGroup {
     }
 
     public boolean setDual(boolean dual) {
+        Log.d(TAG, "setDual: ");
         final boolean changed = dual != mDual;
         mDual = dual;
         if (changed) {
@@ -205,6 +211,7 @@ public class QSTileView extends ViewGroup {
     }
 
     private void setRipple(RippleDrawable tileBackground) {
+        Log.d(TAG, "setRipple: ");
         mRipple = tileBackground;
         if (getWidth() != 0) {
             updateRippleSize(getWidth(), getHeight());
@@ -213,12 +220,14 @@ public class QSTileView extends ViewGroup {
 
     public void init(OnClickListener clickPrimary, OnClickListener clickSecondary,
             OnLongClickListener longClick) {
+        Log.d(TAG, "init: ");
         mClickPrimary = clickPrimary;
         mClickSecondary = clickSecondary;
         mLongClick = longClick;
     }
 
     protected View createIcon() {
+        Log.d(TAG, "createIcon: ");
         final ImageView icon = new ImageView(mContext);
         icon.setId(android.R.id.icon);
         icon.setScaleType(ScaleType.CENTER_INSIDE);
@@ -226,6 +235,7 @@ public class QSTileView extends ViewGroup {
     }
 
     private Drawable newTileBackground() {
+        Log.d(TAG, "newTileBackground: ");
         final int[] attrs = new int[] { android.R.attr.selectableItemBackgroundBorderless };
         final TypedArray ta = mContext.obtainStyledAttributes(attrs);
         final Drawable d = ta.getDrawable(0);
@@ -234,11 +244,13 @@ public class QSTileView extends ViewGroup {
     }
 
     private View labelView() {
+        Log.d(TAG, "labelView: ");
         return mDual ? mDualLabel : mLabel;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.d(TAG, "onMeasure: ");
         final int w = MeasureSpec.getSize(widthMeasureSpec);
         final int h = MeasureSpec.getSize(heightMeasureSpec);
         final int iconSpec = exactly(mIconSizePx);
@@ -254,11 +266,13 @@ public class QSTileView extends ViewGroup {
     }
 
     private static int exactly(int size) {
+        Log.d(TAG, "exactly: ");
         return MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY);
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Log.d(TAG, "onLayout: ");
         final int w = getMeasuredWidth();
         final int h = getMeasuredHeight();
 
@@ -283,6 +297,7 @@ public class QSTileView extends ViewGroup {
     }
 
     private void updateRippleSize(int width, int height) {
+        Log.d(TAG, "updateRippleSize: ");
         // center the touch feedback on the center of the icon, and dial it down a bit
         final int cx = width / 2;
         final int cy = mDual ? mIcon.getTop() + mIcon.getHeight() / 2 : height / 2;
@@ -291,10 +306,12 @@ public class QSTileView extends ViewGroup {
     }
 
     private static void layout(View child, int left, int top) {
+        Log.d(TAG, "layout: ");
         child.layout(left, top, left + child.getMeasuredWidth(), top + child.getMeasuredHeight());
     }
 
     protected void handleStateChanged(QSTile.State state) {
+        Log.d(TAG, "handleStateChanged: ");
         if (mIcon instanceof ImageView) {
             setIcon((ImageView) mIcon, state);
         }
@@ -309,6 +326,7 @@ public class QSTileView extends ViewGroup {
     }
 
     protected void setIcon(ImageView iv, QSTile.State state) {
+        Log.d(TAG, "setIcon: ");
         if (!Objects.equals(state.icon, iv.getTag(R.id.qs_icon_tag))) {
             Drawable d = state.icon != null ? state.icon.getDrawable(mContext) : null;
             if (d != null && state.autoMirrorDrawable) {
@@ -326,6 +344,7 @@ public class QSTileView extends ViewGroup {
     }
 
     public void onStateChanged(QSTile.State state) {
+        Log.d(TAG, "onStateChanged: ");
         mHandler.obtainMessage(H.STATE_CHANGED, state).sendToTarget();
     }
 
@@ -336,6 +355,7 @@ public class QSTileView extends ViewGroup {
      * @return the last view in this view which is accessible
      */
     public View updateAccessibilityOrder(View previousView) {
+        Log.d(TAG, "updateAccessibilityOrder: ");
         View firstView;
         View lastView;
         if (mDual) {
