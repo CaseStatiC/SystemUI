@@ -28,6 +28,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.UserHandle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewStub;
@@ -59,6 +60,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
         RecentsAppWidgetHost.RecentsAppWidgetHostCallbacks,
         DebugOverlayView.DebugOverlayViewCallbacks {
 
+    public static final String TAG = "RecentsActivity";
     RecentsConfiguration mConfig;
     long mLastTabKeyEventTime;
 
@@ -187,6 +189,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     /** Updates the set of recent tasks */
     void updateRecentsTasks() {
+        Log.d(TAG, "updateRecentsTasks: ");
         // If AlternateRecentsComponent has preloaded a load plan, then use that to prevent
         // reconstructing the task stack
         RecentsTaskLoader loader = RecentsTaskLoader.getInstance();
@@ -288,6 +291,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     /** Dismisses recents if we are already visible and the intent is to toggle the recents view */
     boolean dismissRecentsToFocusedTaskOrHome(boolean checkFilteredStackState) {
+        Log.d(TAG, "dismissRecentsToFocusedTaskOrHome: ");
         SystemServicesProxy ssp = RecentsTaskLoader.getInstance().getSystemServicesProxy();
         if (ssp.isRecentsTopMost(ssp.getTopMostTask(), null)) {
             // If we currently have filtered stacks, then unfilter those first
@@ -311,6 +315,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     /** Dismisses Recents directly to Home. */
     void dismissRecentsToHomeRaw(boolean animated) {
+        Log.d(TAG, "dismissRecentsToHomeRaw: ");
         if (animated) {
             ReferenceCountedTrigger exitTrigger = new ReferenceCountedTrigger(this,
                     null, mFinishLaunchHomeRunnable, null);
@@ -323,12 +328,14 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     /** Dismisses Recents directly to Home without transition animation. */
     void dismissRecentsToHomeWithoutTransitionAnimation() {
+        Log.d(TAG, "dismissRecentsToHomeWithoutTransitionAnimation: ");
         finish();
         overridePendingTransition(0, 0);
     }
 
     /** Dismisses Recents directly to Home if we currently aren't transitioning. */
     boolean dismissRecentsToHome(boolean animated) {
+        Log.d(TAG, "dismissRecentsToHome: ");
         SystemServicesProxy ssp = RecentsTaskLoader.getInstance().getSystemServicesProxy();
         if (ssp.isRecentsTopMost(ssp.getTopMostTask(), null)) {
             // Return to Home
@@ -342,6 +349,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: ");
         // For the non-primary user, ensure that the SystemServicesProxy and configuration is
         // initialized
         RecentsTaskLoader.initialize(this);
@@ -375,6 +383,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     /** Inflates the debug overlay if debug mode is enabled. */
     void inflateDebugOverlay() {
+        Log.d(TAG, "inflateDebugOverlay: ");
         if (!Constants.DebugFlags.App.EnableDebugMode) return;
 
         if (mConfig.debugModeEnabled && mDebugOverlay == null) {
@@ -387,6 +396,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     @Override
     protected void onNewIntent(Intent intent) {
+        Log.d(TAG, "onNewIntent: ");
         super.onNewIntent(intent);
         setIntent(intent);
 
@@ -399,6 +409,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart: ");
         MetricsLogger.visible(this, MetricsLogger.OVERVIEW_ACTIVITY);
         RecentsTaskLoader loader = RecentsTaskLoader.getInstance();
         SystemServicesProxy ssp = loader.getSystemServicesProxy();
@@ -433,6 +444,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d(TAG, "onPause: ");
         if (mAfterPauseRunnable != null) {
             mRecentsView.post(mAfterPauseRunnable);
             mAfterPauseRunnable = null;
@@ -442,6 +454,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
     @Override
     protected void onStop() {
         super.onStop();
+        Log.d(TAG, "onStop: ");
         MetricsLogger.hidden(this, MetricsLogger.OVERVIEW_ACTIVITY);
         RecentsTaskLoader loader = RecentsTaskLoader.getInstance();
         SystemServicesProxy ssp = loader.getSystemServicesProxy();
@@ -469,6 +482,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     @Override
     protected void onDestroy() {
+        Log.d(TAG, "onDestroy: ");
         super.onDestroy();
 
         // Unregister the system broadcast receivers
@@ -479,6 +493,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
     }
 
     public void onEnterAnimationTriggered() {
+        Log.d(TAG, "onEnterAnimationTriggered: ");
         // Try and start the enter animation (or restart it on configuration changed)
         ReferenceCountedTrigger t = new ReferenceCountedTrigger(this, null, null, null);
         ViewAnimation.TaskViewEnterContext ctx = new ViewAnimation.TaskViewEnterContext(t);
@@ -506,6 +521,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     @Override
     public void onTrimMemory(int level) {
+        Log.d(TAG, "onTrimMemory: ");
         RecentsTaskLoader loader = RecentsTaskLoader.getInstance();
         if (loader != null) {
             loader.onTrimMemory(level);
@@ -514,6 +530,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.d(TAG, "onKeyDown: ");
         switch (keyCode) {
             case KeyEvent.KEYCODE_TAB: {
                 boolean hasRepKeyTimeElapsed = (SystemClock.elapsedRealtime() -
@@ -552,11 +569,13 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     @Override
     public void onUserInteraction() {
+        Log.d(TAG, "onUserInteraction: ");
         mRecentsView.onUserInteraction();
     }
 
     @Override
     public void onBackPressed() {
+        Log.d(TAG, "onBackPressed: ");
         // Test mode where back does not do anything
         if (mConfig.debugModeEnabled) return;
 
@@ -566,6 +585,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     /** Called when debug mode is triggered */
     public void onDebugModeTriggered() {
+        Log.d(TAG, "onDebugModeTriggered: ");
         if (mConfig.developerOptionsEnabled) {
             if (Prefs.getBoolean(this, Prefs.Key.DEBUG_MODE_ENABLED, false /* boolean */)) {
                 // Disable the debug mode
@@ -594,6 +614,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
     /**** RecentsResizeTaskDialog ****/
 
     private RecentsResizeTaskDialog getResizeTaskDebugDialog() {
+        Log.d(TAG, "getResizeTaskDebugDialog: ");
         if (mResizeTaskDebugDialog == null) {
             mResizeTaskDebugDialog = new RecentsResizeTaskDialog(getFragmentManager(), this);
         }
@@ -602,6 +623,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     @Override
     public void onTaskResize(Task t) {
+        Log.d(TAG, "onTaskResize: ");
         getResizeTaskDebugDialog().showResizeTaskDialog(t, mRecentsView);
     }
 
@@ -609,27 +631,32 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     @Override
     public void onExitToHomeAnimationTriggered() {
+        Log.d(TAG, "onExitToHomeAnimationTriggered: ");
         // Animate the SystemUI scrim views out
         mScrimViews.startExitRecentsAnimation();
     }
 
     @Override
     public void onTaskViewClicked() {
+        Log.d(TAG, "onTaskViewClicked: ");
     }
 
     @Override
     public void onTaskLaunchFailed() {
+        Log.d(TAG, "onTaskLaunchFailed: ");
         // Return to Home
         dismissRecentsToHomeRaw(true);
     }
 
     @Override
     public void onAllTaskViewsDismissed() {
+        Log.d(TAG, "onAllTaskViewsDismissed: ");
         mFinishLaunchHomeRunnable.run();
     }
 
     @Override
     public void onScreenPinningRequest() {
+        Log.d(TAG, "onScreenPinningRequest: ");
         RecentsTaskLoader loader = RecentsTaskLoader.getInstance();
         SystemServicesProxy ssp = loader.getSystemServicesProxy();
         Recents.startScreenPinning(this, ssp);
@@ -639,6 +666,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     @Override
     public void runAfterPause(Runnable r) {
+        Log.d(TAG, "runAfterPause: ");
         mAfterPauseRunnable = r;
     }
 
@@ -646,6 +674,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     @Override
     public void refreshSearchWidgetView() {
+        Log.d(TAG, "refreshSearchWidgetView: ");
         if (mSearchWidgetInfo != null) {
             SystemServicesProxy ssp = RecentsTaskLoader.getInstance().getSystemServicesProxy();
             int searchWidgetId = ssp.getSearchAppWidgetId(this);
@@ -667,11 +696,13 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
     @Override
     public void onPrimarySeekBarChanged(float progress) {
+        Log.d(TAG, "onPrimarySeekBarChanged: ");
         // Do nothing
     }
 
     @Override
     public void onSecondarySeekBarChanged(float progress) {
+        Log.d(TAG, "onSecondarySeekBarChanged: ");
         // Do nothing
     }
 }
