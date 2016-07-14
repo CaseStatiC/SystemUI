@@ -23,6 +23,7 @@ import android.content.res.Resources;
 import android.graphics.Rect;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 
@@ -35,6 +36,7 @@ import com.android.systemui.recents.misc.SystemServicesProxy;
 /** A static Recents configuration for the current context
  * NOTE: We should not hold any references to a Context from a static instance */
 public class RecentsConfiguration {
+    public static final String TAG = " RecentsConfiguration";
     static RecentsConfiguration sInstance;
     static int sPrevConfigurationHashCode;
 
@@ -142,6 +144,7 @@ public class RecentsConfiguration {
 
     /** Private constructor */
     private RecentsConfiguration(Context context) {
+        Log.d(TAG, "RecentsConfiguration: ");
         // Properties that don't have to be reloaded with each configuration change can be loaded
         // here.
 
@@ -158,6 +161,7 @@ public class RecentsConfiguration {
 
     /** Updates the configuration to the current context */
     public static RecentsConfiguration reinitialize(Context context, SystemServicesProxy ssp) {
+        Log.d(TAG, "reinitialize: ");
         if (sInstance == null) {
             sInstance = new RecentsConfiguration(context);
         }
@@ -172,11 +176,13 @@ public class RecentsConfiguration {
 
     /** Returns the current recents configuration */
     public static RecentsConfiguration getInstance() {
+        Log.d(TAG, "getInstance: ");
         return sInstance;
     }
 
     /** Updates the state, given the specified context */
     void update(Context context) {
+        Log.d(TAG, "update: ");
         Resources res = context.getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
 
@@ -273,11 +279,13 @@ public class RecentsConfiguration {
 
     /** Updates the system insets */
     public void updateSystemInsets(Rect insets) {
+        Log.d(TAG, "updateSystemInsets: ");
         systemInsets.set(insets);
     }
 
     /** Updates the states that need to be re-read whenever we re-initialize. */
     void updateOnReinitialize(Context context, SystemServicesProxy ssp) {
+        Log.d(TAG, "updateOnReinitialize: ");
         // Check if the developer options are enabled
         developerOptionsEnabled = ssp.getGlobalSetting(context,
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED) != 0;
@@ -289,6 +297,7 @@ public class RecentsConfiguration {
     /** Called when the configuration has changed, and we want to reset any configuration specific
      * members. */
     public void updateOnConfigurationChange() {
+        Log.d(TAG, "updateOnConfigurationChange: ");
         // Reset this flag on configuration change to ensure that we recreate new task views
         launchedReuseTaskStackViews = false;
         // Set this flag to indicate that the configuration has changed since Recents last launched
@@ -297,21 +306,25 @@ public class RecentsConfiguration {
 
     /** Returns whether the status bar scrim should be animated when shown for the first time. */
     public boolean shouldAnimateStatusBarScrim() {
+        Log.d(TAG, "shouldAnimateStatusBarScrim: ");
         return launchedFromHome;
     }
 
     /** Returns whether the status bar scrim should be visible. */
     public boolean hasStatusBarScrim() {
+        Log.d(TAG, "hasStatusBarScrim: ");
         return !launchedWithNoRecentTasks;
     }
 
     /** Returns whether the nav bar scrim should be animated when shown for the first time. */
     public boolean shouldAnimateNavBarScrim() {
+        Log.d(TAG, "shouldAnimateNavBarScrim: ");
         return true;
     }
 
     /** Returns whether the nav bar scrim should be visible. */
     public boolean hasNavBarScrim() {
+        Log.d(TAG, "hasNavBarScrim: ");
         // Only show the scrim if we have recent tasks, and if the nav bar is not transposed
         return !launchedWithNoRecentTasks && (!hasTransposedNavBar || !isLandscape);
     }
@@ -322,6 +335,7 @@ public class RecentsConfiguration {
      */
     public void getAvailableTaskStackBounds(int windowWidth, int windowHeight, int topInset,
             int rightInset, Rect searchBarBounds, Rect taskStackBounds) {
+        Log.d(TAG, "getAvailableTaskStackBounds: ");
         if (isLandscape && hasTransposedSearchBar) {
             // In landscape, the search bar appears on the left, but we overlay it on top
             taskStackBounds.set(0, topInset, windowWidth - rightInset, windowHeight);
@@ -337,6 +351,7 @@ public class RecentsConfiguration {
      */
     public void getSearchBarBounds(int windowWidth, int windowHeight, int topInset,
             Rect searchBarSpaceBounds) {
+        Log.d(TAG, "getSearchBarBounds: ");
         // Return empty rects if search is not enabled
         int searchBarSize = searchBarSpaceHeightPx;
         if (isLandscape && hasTransposedSearchBar) {
