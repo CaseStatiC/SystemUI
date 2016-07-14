@@ -19,11 +19,13 @@ package com.android.systemui.recents;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 /**
  * A proxy for Recents events which happens strictly for non-owner users.
  */
 public class RecentsUserEventProxyReceiver extends BroadcastReceiver {
+    public static final String TAG = "RecentsUserEventProxyReceiver";
     final public static String ACTION_PROXY_SHOW_RECENTS_TO_USER =
             "com.android.systemui.recents.action.SHOW_RECENTS_FOR_USER";
     final public static String ACTION_PROXY_HIDE_RECENTS_TO_USER =
@@ -37,6 +39,7 @@ public class RecentsUserEventProxyReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d(TAG, "onReceive: ");
         Recents recents = Recents.getInstanceAndStartIfNeeded(context);
         switch (intent.getAction()) {
             case ACTION_PROXY_SHOW_RECENTS_TO_USER: {
