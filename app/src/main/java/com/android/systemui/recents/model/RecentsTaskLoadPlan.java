@@ -78,6 +78,7 @@ public class RecentsTaskLoadPlan {
      * An optimization to preload the raw list of tasks.
      */
     public synchronized void preloadRawTasks(boolean isTopTaskHome) {
+        Log.d(TAG, "preloadRawTasks: ");
         mRawTasks = mSystemServicesProxy.getRecentTasks(mConfig.maxNumTasksToLoad,
                 UserHandle.CURRENT.getIdentifier(), isTopTaskHome);
         Collections.reverse(mRawTasks);
@@ -91,6 +92,7 @@ public class RecentsTaskLoadPlan {
      * thumbnails which were not cached and have to be loaded.
      */
     synchronized void preloadPlan(RecentsTaskLoader loader, boolean isTopTaskHome) {
+        Log.d(TAG, "preloadPlan: ");
         if (DEBUG) Log.d(TAG, "preloadPlan");
 
         // This activity info cache will be used for both preloadPlan() and executePlan()
@@ -196,6 +198,7 @@ public class RecentsTaskLoadPlan {
      */
     synchronized void executePlan(Options opts, RecentsTaskLoader loader,
             TaskResourceLoadQueue loadQueue) {
+        Log.d(TAG, "executePlan: ");
         if (DEBUG) Log.d(TAG, "executePlan, # tasks: " + opts.numVisibleTasks +
                 ", # thumbnails: " + opts.numVisibleTaskThumbnails +
                 ", running task id: " + opts.runningTaskId);
@@ -263,6 +266,7 @@ public class RecentsTaskLoadPlan {
      * Returns all TaskStacks from the preloaded list of recent tasks.
      */
     public ArrayList<TaskStack> getAllTaskStacks() {
+        Log.d(TAG, "getAllTaskStacks: ");
         ArrayList<TaskStack> stacks = new ArrayList<TaskStack>();
         int stackCount = mStacks.size();
         for (int i = 0; i < stackCount; i++) {
@@ -279,11 +283,13 @@ public class RecentsTaskLoadPlan {
      * Returns a specific TaskStack from the preloaded list of recent tasks.
      */
     public TaskStack getTaskStack(int stackId) {
+        Log.d(TAG, "getTaskStack: ");
         return mStacks.get(stackId);
     }
 
     /** Returns whether there are any tasks in any stacks. */
     public boolean hasTasks() {
+        Log.d(TAG, "hasTasks: ");
         int stackCount = mStacks.size();
         for (int i = 0; i < stackCount; i++) {
             if (mStacks.valueAt(i).getTaskCount() > 0) {
