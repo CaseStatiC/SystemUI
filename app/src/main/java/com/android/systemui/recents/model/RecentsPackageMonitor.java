@@ -20,6 +20,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.Looper;
 import android.os.UserHandle;
+import android.util.Log;
 import com.android.internal.content.PackageMonitor;
 import com.android.systemui.recents.misc.SystemServicesProxy;
 
@@ -41,6 +42,7 @@ public class RecentsPackageMonitor extends PackageMonitor {
 
     /** Registers the broadcast receivers with the specified callbacks. */
     public void register(Context context, PackageCallbacks cb) {
+        Log.d(TAG, "register: ");
         mSystemServicesProxy = new SystemServicesProxy(context);
         mCb = cb;
         try {
@@ -55,6 +57,7 @@ public class RecentsPackageMonitor extends PackageMonitor {
     /** Unregisters the broadcast receivers. */
     @Override
     public void unregister() {
+        Log.d(TAG, "unregister: ");
         try {
             super.unregister();
         } catch (IllegalStateException e) {
@@ -66,6 +69,7 @@ public class RecentsPackageMonitor extends PackageMonitor {
 
     @Override
     public void onPackageRemoved(String packageName, int uid) {
+        Log.d(TAG, "onPackageRemoved: ");
         if (mCb == null) return;
 
         // Notify callbacks that a package has changed
@@ -75,12 +79,14 @@ public class RecentsPackageMonitor extends PackageMonitor {
 
     @Override
     public boolean onPackageChanged(String packageName, int uid, String[] components) {
+        Log.d(TAG, "onPackageChanged: ");
         onPackageModified(packageName);
         return true;
     }
 
     @Override
     public void onPackageModified(String packageName) {
+        Log.d(TAG, "onPackageModified: ");
         if (mCb == null) return;
 
         // Notify callbacks that a package has changed
@@ -94,6 +100,7 @@ public class RecentsPackageMonitor extends PackageMonitor {
      */
     public HashSet<ComponentName> computeComponentsRemoved(List<Task.TaskKey> taskKeys,
             String packageName, int userId) {
+        Log.d(TAG, "computeComponentsRemoved: ");
         // Identify all the tasks that should be removed as a result of the package being removed.
         // Using a set to ensure that we callback once per unique component.
         HashSet<ComponentName> existingComponents = new HashSet<ComponentName>();
