@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import com.android.systemui.recents.misc.Utilities;
 
 import java.util.Objects;
@@ -30,6 +31,7 @@ import java.util.Objects;
  * A task represents the top most task in the system's task stack.
  */
 public class Task {
+    public static final String TAG = "Task";
     /* Task callbacks */
     public interface TaskCallbacks {
         /* Notifies when a task has been bound */
@@ -54,11 +56,13 @@ public class Task {
 
         @Override
         public int hashCode() {
+            Log.d(TAG, "ComponentNameKey: hashCode: ");
             return Objects.hash(component, userId);
         }
 
         @Override
         public boolean equals(Object o) {
+            Log.d(TAG, "ComponentNameKey: equals: ");
             if (!(o instanceof ComponentNameKey)) {
                 return false;
             }
@@ -164,6 +168,7 @@ public class Task {
 
     /** Copies the other task. */
     public void copyFrom(Task o) {
+        Log.d(TAG, "copyFrom: ");
         this.key = o.key;
         this.taskAffiliation = o.taskAffiliation;
         this.taskAffiliationColor = o.taskAffiliationColor;
@@ -179,11 +184,13 @@ public class Task {
 
     /** Set the callbacks */
     public void setCallbacks(TaskCallbacks cb) {
+        Log.d(TAG, "setCallbacks: ");
         mCb = cb;
     }
 
     /** Set the grouping */
     public void setGroup(TaskGrouping group) {
+        Log.d(TAG, "setGroup: ");
         if (group != null && this.group != null) {
             throw new RuntimeException("This task is already assigned to a group.");
         }
@@ -192,6 +199,7 @@ public class Task {
 
     /** Updates the stack id of this task. */
     public void setStackId(int stackId) {
+        Log.d(TAG, "setStackId: ");
         key.stackId = stackId;
         if (mCb != null) {
             mCb.onMultiStackDebugTaskStackIdChanged();
@@ -200,6 +208,7 @@ public class Task {
 
     /** Notifies the callback listeners that this task has been loaded */
     public void notifyTaskDataLoaded(Bitmap thumbnail, Drawable applicationIcon) {
+        Log.d(TAG, "notifyTaskDataLoaded: ");
         this.applicationIcon = applicationIcon;
         this.thumbnail = thumbnail;
         if (mCb != null) {
@@ -209,6 +218,7 @@ public class Task {
 
     /** Notifies the callback listeners that this task has been unloaded */
     public void notifyTaskDataUnloaded(Bitmap defaultThumbnail, Drawable defaultApplicationIcon) {
+        Log.d(TAG, "notifyTaskDataUnloaded: ");
         applicationIcon = defaultApplicationIcon;
         thumbnail = defaultThumbnail;
         if (mCb != null) {
@@ -218,6 +228,7 @@ public class Task {
 
     @Override
     public boolean equals(Object o) {
+        Log.d(TAG, "equals: ");
         // Check that the id matches
         Task t = (Task) o;
         return key.equals(t.key);
@@ -225,6 +236,7 @@ public class Task {
 
     @Override
     public String toString() {
+        Log.d(TAG, "toString: ");
         String groupAffiliation = "no group";
         if (group != null) {
             groupAffiliation = Integer.toString(group.affiliation);
