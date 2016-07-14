@@ -17,12 +17,15 @@
 package com.android.systemui.recents.model;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 /**
  * The Bitmap LRU cache.
  */
 class BitmapLruCache extends KeyStoreLruCache<Bitmap> {
+    public static final String TAG = "BitmapLruCache";
     public BitmapLruCache(int cacheSize) {
         super(cacheSize);
+        Log.d(TAG, "BitmapLruCache: ");
     }
 }
