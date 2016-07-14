@@ -18,6 +18,7 @@ package com.android.systemui.recents.misc;
 
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.KeyEvent;
 import com.android.systemui.recents.Constants;
 
@@ -27,6 +28,7 @@ import com.android.systemui.recents.Constants;
  */
 public class DebugTrigger {
 
+    public static final String TAG = "DebugTrigger";
     Handler mHandler;
     Runnable mTriggeredRunnable;
 
@@ -40,6 +42,7 @@ public class DebugTrigger {
 
     /** Resets the debug trigger */
     void reset() {
+        Log.d(TAG, "reset: ");
         mLastKeyCode = 0;
         mLastKeyCodeTime = 0;
     }
@@ -49,6 +52,7 @@ public class DebugTrigger {
      * then we just call the callback.
      */
     public void onKeyEvent(int keyCode) {
+        Log.d(TAG, "onKeyEvent: ");
         if (!Constants.DebugFlags.App.EnableDebugMode) return;
 
         if (mLastKeyCode == 0) {
