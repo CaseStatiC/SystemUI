@@ -29,6 +29,7 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.ColorDrawable;
 import android.os.RemoteException;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ import com.android.systemui.R;
 import java.util.ArrayList;
 
 public class ScreenPinningRequest implements View.OnClickListener {
+    public static final String TAG = "ScreenPinningRequest";
     private final Context mContext;
 
     private final AccessibilityManager mAccessibilityService;
@@ -61,6 +63,7 @@ public class ScreenPinningRequest implements View.OnClickListener {
     }
 
     public void clearPrompt() {
+        Log.d(TAG, "clearPrompt: ");
         if (mRequestWindow != null) {
             mWindowManager.removeView(mRequestWindow);
             mRequestWindow = null;
@@ -68,6 +71,7 @@ public class ScreenPinningRequest implements View.OnClickListener {
     }
 
     public void showPrompt(boolean allowCancel) {
+        Log.d(TAG, "showPrompt: ");
         clearPrompt();
 
         mRequestWindow = new RequestWindowView(mContext, allowCancel);
@@ -80,12 +84,14 @@ public class ScreenPinningRequest implements View.OnClickListener {
     }
 
     public void onConfigurationChanged() {
+        Log.d(TAG, "onConfigurationChanged: ");
         if (mRequestWindow != null) {
             mRequestWindow.onConfigurationChanged();
         }
     }
 
     private WindowManager.LayoutParams getWindowLayoutParams() {
+        Log.d(TAG, "getWindowLayoutParams: ");
         final WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -104,6 +110,7 @@ public class ScreenPinningRequest implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Log.d(TAG, "onClick: ");
         if (v.getId() == R.id.screen_pinning_ok_button || mRequestWindow == v) {
             try {
                 ActivityManagerNative.getDefault().startLockTaskModeOnCurrent();
@@ -113,6 +120,7 @@ public class ScreenPinningRequest implements View.OnClickListener {
     }
 
     public FrameLayout.LayoutParams getRequestLayoutParams(boolean isLandscape) {
+        Log.d(TAG, "getRequestLayoutParams: ");
         return new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -130,6 +138,7 @@ public class ScreenPinningRequest implements View.OnClickListener {
 
         public RequestWindowView(Context context, boolean showCancel) {
             super(context);
+            Log.d(TAG, "RequestWindowView: RequestWindowView: ");
             setClickable(true);
             setOnClickListener(ScreenPinningRequest.this);
             setBackground(mColor);
@@ -138,6 +147,7 @@ public class ScreenPinningRequest implements View.OnClickListener {
 
         @Override
         public void onAttachedToWindow() {
+            Log.d(TAG, "RequestWindowView: onAttachedToWindow: ");
             DisplayMetrics metrics = new DisplayMetrics();
             mWindowManager.getDefaultDisplay().getMetrics(metrics);
             float density = metrics.density;
@@ -182,12 +192,14 @@ public class ScreenPinningRequest implements View.OnClickListener {
         }
 
         private boolean isLandscapePhone(Context context) {
+            Log.d(TAG, "RequestWindowView: isLandscapePhone: ");
             Configuration config = mContext.getResources().getConfiguration();
             return config.orientation == Configuration.ORIENTATION_LANDSCAPE
                     && config.smallestScreenWidthDp < 600;
         }
 
         private void inflateView(boolean isLandscape) {
+            Log.d(TAG, "RequestWindowView: inflateView: ");
             // We only want this landscape orientation on <600dp, so rather than handle
             // resource overlay for -land and -sw600dp-land, just inflate this
             // other view for this single case.
@@ -229,6 +241,7 @@ public class ScreenPinningRequest implements View.OnClickListener {
         }
 
         private void swapChildrenIfRtlAndVertical(View group) {
+            Log.d(TAG, "RequestWindowView: swapChildrenIfRtlAndVertical: ");
             if (mContext.getResources().getConfiguration().getLayoutDirection()
                     != View.LAYOUT_DIRECTION_RTL) {
                 return;
@@ -249,10 +262,12 @@ public class ScreenPinningRequest implements View.OnClickListener {
 
         @Override
         public void onDetachedFromWindow() {
+            Log.d(TAG, "RequestWindowView: : onDetachedFromWindow: ");
             mContext.unregisterReceiver(mReceiver);
         }
 
         protected void onConfigurationChanged() {
+            Log.d(TAG, "RequestWindowView: : onConfigurationChanged: ");
             removeAllViews();
             inflateView(isLandscapePhone(mContext));
         }
