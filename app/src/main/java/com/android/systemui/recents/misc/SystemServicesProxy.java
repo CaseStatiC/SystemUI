@@ -113,6 +113,7 @@ public class SystemServicesProxy {
 
     /** Private constructor */
     public SystemServicesProxy(Context context) {
+        Log.d(TAG, "SystemServicesProxy: ");
         mAccm = AccessibilityManager.getInstance(context);
         mAm = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         mIam = ActivityManagerNative.getDefault();
@@ -151,6 +152,7 @@ public class SystemServicesProxy {
     /** Returns a list of the recents tasks */
     public List<ActivityManager.RecentTaskInfo> getRecentTasks(int numLatestTasks, int userId,
             boolean isTopTaskHome) {
+        Log.d(TAG, "getRecentTasks: ");
         if (mAm == null) return null;
 
         // If we are mocking, then create some recent tasks
@@ -223,12 +225,14 @@ public class SystemServicesProxy {
 
     /** Returns a list of the running tasks */
     private List<ActivityManager.RunningTaskInfo> getRunningTasks(int numTasks) {
+        Log.d(TAG, "getRunningTasks: ");
         if (mAm == null) return null;
         return mAm.getRunningTasks(numTasks);
     }
 
     /** Returns the top task. */
     public ActivityManager.RunningTaskInfo getTopMostTask() {
+        Log.d(TAG, "getTopMostTask: ");
         List<ActivityManager.RunningTaskInfo> tasks = getRunningTasks(1);
         if (tasks != null && !tasks.isEmpty()) {
             return tasks.get(0);
@@ -239,6 +243,7 @@ public class SystemServicesProxy {
     /** Returns whether the recents is currently running */
     public boolean isRecentsTopMost(ActivityManager.RunningTaskInfo topTask,
             MutableBoolean isHomeTopMost) {
+        Log.d(TAG, "isRecentsTopMost: ");
         if (topTask != null) {
             ComponentName topActivity = topTask.topActivity;
 
@@ -260,6 +265,7 @@ public class SystemServicesProxy {
 
     /** Get the bounds of a stack / task. */
     public Rect getTaskBounds(int stackId) {
+        Log.d(TAG, "getTaskBounds: ");
         ActivityManager.StackInfo info = getAllStackInfos().get(stackId);
         if (info != null)
           return info.bounds;
@@ -268,6 +274,7 @@ public class SystemServicesProxy {
 
     /** Resize a given task. */
     public void resizeTask(int taskId, Rect bounds) {
+        Log.d(TAG, "resizeTask: ");
         if (mIam == null) return;
 
         try {
@@ -279,6 +286,7 @@ public class SystemServicesProxy {
 
     /** Returns the stack info for all stacks. */
     public SparseArray<ActivityManager.StackInfo> getAllStackInfos() {
+        Log.d(TAG, "getAllStackInfos: ");
         if (mIam == null) return new SparseArray<ActivityManager.StackInfo>();
 
         try {
@@ -299,6 +307,7 @@ public class SystemServicesProxy {
 
     /** Returns the focused stack id. */
     public int getFocusedStack() {
+        Log.d(TAG, "getFocusedStack: ");
         if (mIam == null) return -1;
 
         try {
@@ -311,6 +320,7 @@ public class SystemServicesProxy {
 
     /** Returns whether the specified task is in the home stack */
     public boolean isInHomeStack(int taskId) {
+        Log.d(TAG, "isInHomeStack: ");
         if (mAm == null) return false;
 
         // If we are mocking, then just return false
@@ -323,6 +333,7 @@ public class SystemServicesProxy {
 
     /** Returns the top task thumbnail for the given task id */
     public Bitmap getTaskThumbnail(int taskId) {
+        Log.d(TAG, "getTaskThumbnail: ");
         if (mAm == null) return null;
 
         // If we are mocking, then just return a dummy thumbnail
@@ -354,6 +365,7 @@ public class SystemServicesProxy {
      * Returns a task thumbnail from the activity manager
      */
     public static Bitmap getThumbnail(ActivityManager activityManager, int taskId) {
+        Log.d(TAG, "getThumbnail: ");
         ActivityManager.TaskThumbnail taskThumbnail = activityManager.getTaskThumbnail(taskId);
         if (taskThumbnail == null) return null;
 
@@ -374,6 +386,7 @@ public class SystemServicesProxy {
 
     /** Moves a task to the front with the specified activity options. */
     public void moveTaskToFront(int taskId, ActivityOptions opts) {
+        Log.d(TAG, "moveTaskToFront: ");
         if (mAm == null) return;
         if (Constants.DebugFlags.App.EnableSystemServicesProxy) return;
 
@@ -387,6 +400,7 @@ public class SystemServicesProxy {
 
     /** Removes the task */
     public void removeTask(final int taskId) {
+        Log.d(TAG, "removeTask: ");
         if (mAm == null) return;
         if (Constants.DebugFlags.App.EnableSystemServicesProxy) return;
 
@@ -406,6 +420,7 @@ public class SystemServicesProxy {
      * @param userId The userId of the user that this is for.
      */
     public ActivityInfo getActivityInfo(ComponentName cn, int userId) {
+        Log.d(TAG, "getActivityInfo: ");
         if (mIpm == null) return null;
         if (Constants.DebugFlags.App.EnableSystemServicesProxy) return new ActivityInfo();
 
@@ -423,6 +438,7 @@ public class SystemServicesProxy {
      * @param cn The component name of the activity.
      */
     public ActivityInfo getActivityInfo(ComponentName cn) {
+        Log.d(TAG, "getActivityInfo: ");
         if (mPm == null) return null;
         if (Constants.DebugFlags.App.EnableSystemServicesProxy) return new ActivityInfo();
 
@@ -436,6 +452,7 @@ public class SystemServicesProxy {
 
     /** Returns the activity label */
     public String getActivityLabel(ActivityInfo info) {
+        Log.d(TAG, "getActivityLabel: ");
         if (mPm == null) return null;
 
         // If we are mocking, then return a mock label
@@ -448,6 +465,7 @@ public class SystemServicesProxy {
 
     /** Returns the application label */
     public String getApplicationLabel(Intent baseIntent, int userId) {
+        Log.d(TAG, "getApplicationLabel: ");
         if (mPm == null) return null;
 
         // If we are mocking, then return a mock label
@@ -463,6 +481,7 @@ public class SystemServicesProxy {
     /** Returns the content description for a given task */
     public String getContentDescription(Intent baseIntent, int userId, String activityLabel,
             Resources res) {
+        Log.d(TAG, "getContentDescription: ");
         String applicationLabel = getApplicationLabel(baseIntent, userId);
         if (applicationLabel == null) {
             return getBadgedLabel(activityLabel, userId);
@@ -478,6 +497,7 @@ public class SystemServicesProxy {
      * necessary.
      */
     public Drawable getActivityIcon(ActivityInfo info, int userId) {
+        Log.d(TAG, "getActivityIcon: ");
         if (mPm == null) return null;
 
         // If we are mocking, then return a mock label
@@ -493,6 +513,7 @@ public class SystemServicesProxy {
      * Returns the given icon for a user, badging if necessary.
      */
     public Drawable getBadgedIcon(Drawable icon, int userId) {
+        Log.d(TAG, "getBadgedIcon: ");
         if (userId != UserHandle.myUserId()) {
             icon = mPm.getUserBadgedIcon(icon, new UserHandle(userId));
         }
@@ -503,6 +524,7 @@ public class SystemServicesProxy {
      * Returns the given label for a user, badging if necessary.
      */
     public String getBadgedLabel(String label, int userId) {
+        Log.d(TAG, "getBadgedLabel: ");
         if (userId != UserHandle.myUserId()) {
             label = mPm.getUserBadgedLabel(label, new UserHandle(userId)).toString();
         }
@@ -511,6 +533,7 @@ public class SystemServicesProxy {
 
     /** Returns the package name of the home activity. */
     public String getHomeActivityPackageName() {
+        Log.d(TAG, "getHomeActivityPackageName: ");
         if (mPm == null) return null;
         if (Constants.DebugFlags.App.EnableSystemServicesProxy) return null;
 
@@ -531,6 +554,7 @@ public class SystemServicesProxy {
      * Returns whether the foreground user is the owner.
      */
     public boolean isForegroundUserOwner() {
+        Log.d(TAG, "isForegroundUserOwner: ");
         if (mAm == null) return false;
 
         return mAm.getCurrentUser() == UserHandle.USER_OWNER;
@@ -540,6 +564,7 @@ public class SystemServicesProxy {
      * Returns the current search widget id.
      */
     public int getSearchAppWidgetId(Context context) {
+        Log.d(TAG, "getSearchAppWidgetId: ");
         return Prefs.getInt(context, Prefs.Key.SEARCH_APP_WIDGET_ID, -1);
     }
 
@@ -547,6 +572,7 @@ public class SystemServicesProxy {
      * Returns the current search widget info, binding a new one if necessary.
      */
     public AppWidgetProviderInfo getOrBindSearchAppWidget(Context context, AppWidgetHost host) {
+        Log.d(TAG, "getOrBindSearchAppWidget: ");
         int searchWidgetId = Prefs.getInt(context, Prefs.Key.SEARCH_APP_WIDGET_ID, -1);
         AppWidgetProviderInfo searchWidgetInfo = mAwm.getAppWidgetInfo(searchWidgetId);
         AppWidgetProviderInfo resolvedSearchWidgetInfo = resolveSearchAppWidget();
@@ -588,6 +614,7 @@ public class SystemServicesProxy {
      * Returns the first Recents widget from the same package as the global assist activity.
      */
     private AppWidgetProviderInfo resolveSearchAppWidget() {
+        Log.d(TAG, "resolveSearchAppWidget: ");
         if (mAssistComponent == null) return null;
         List<AppWidgetProviderInfo> widgets = mAwm.getInstalledProviders(
                 AppWidgetProviderInfo.WIDGET_CATEGORY_SEARCHBOX);
@@ -604,6 +631,7 @@ public class SystemServicesProxy {
      */
     private Pair<Integer, AppWidgetProviderInfo> bindSearchAppWidget(AppWidgetHost host,
             AppWidgetProviderInfo resolvedSearchWidgetInfo) {
+        Log.d(TAG, "bindSearchAppWidget: ");
         if (mAwm == null) return null;
         if (mAssistComponent == null) return null;
 
@@ -623,6 +651,7 @@ public class SystemServicesProxy {
      * Returns whether touch exploration is currently enabled.
      */
     public boolean isTouchExplorationEnabled() {
+        Log.d(TAG, "isTouchExplorationEnabled: ");
         if (mAccm == null) return false;
 
         return mAccm.isEnabled() && mAccm.isTouchExplorationEnabled();
@@ -632,6 +661,7 @@ public class SystemServicesProxy {
      * Returns a global setting.
      */
     public int getGlobalSetting(Context context, String setting) {
+        Log.d(TAG, "getGlobalSetting: ");
         ContentResolver cr = context.getContentResolver();
         return Settings.Global.getInt(cr, setting, 0);
     }
@@ -640,6 +670,7 @@ public class SystemServicesProxy {
      * Returns a system setting.
      */
     public int getSystemSetting(Context context, String setting) {
+        Log.d(TAG, "getSystemSetting: ");
         ContentResolver cr = context.getContentResolver();
         return Settings.System.getInt(cr, setting, 0);
     }
@@ -648,6 +679,7 @@ public class SystemServicesProxy {
      * Returns a system property.
      */
     public String getSystemProperty(String key) {
+        Log.d(TAG, "getSystemProperty: ");
         return SystemProperties.get(key);
     }
 
@@ -655,6 +687,7 @@ public class SystemServicesProxy {
      * Returns the window rect.
      */
     public Rect getWindowRect() {
+        Log.d(TAG, "getWindowRect: ");
         Rect windowRect = new Rect();
         if (mWm == null) return windowRect;
 
@@ -667,6 +700,7 @@ public class SystemServicesProxy {
     /** Starts an activity from recents. */
     public boolean startActivityFromRecents(Context context, int taskId, String taskName,
             ActivityOptions options) {
+        Log.d(TAG, "startActivityFromRecents: ");
         if (mIam != null) {
             try {
                 mIam.startActivityFromRecents(taskId, options == null ? null : options.toBundle());
@@ -681,6 +715,7 @@ public class SystemServicesProxy {
 
     /** Starts an in-place animation on the front most application windows. */
     public void startInPlaceAnimationOnFrontMostApplication(ActivityOptions opts) {
+        Log.d(TAG, "startInPlaceAnimationOnFrontMostApplication: ");
         if (mIam == null) return;
 
         try {
@@ -692,6 +727,7 @@ public class SystemServicesProxy {
 
     /** Registers a task stack listener with the system. */
     public void registerTaskStackListener(ITaskStackListener listener) {
+        Log.d(TAG, "registerTaskStackListener: ");
         if (mIam == null) return;
 
         try {
