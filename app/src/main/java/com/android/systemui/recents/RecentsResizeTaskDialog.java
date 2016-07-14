@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,6 +85,7 @@ public class RecentsResizeTaskDialog extends DialogFragment {
 
     /** Shows the resize-task dialog. */
     void showResizeTaskDialog(Task mainTask, RecentsView rv) {
+        Log.d(TAG, "showResizeTaskDialog: ");
         mTasks[0] = mainTask;
         mRecentsView = rv;
 
@@ -93,6 +95,7 @@ public class RecentsResizeTaskDialog extends DialogFragment {
     /** Creates a new resize-task dialog. */
     private void createResizeTaskDialog(final Context context, LayoutInflater inflater,
             AlertDialog.Builder builder) {
+        Log.d(TAG, "createResizeTaskDialog: ");
         builder.setTitle(R.string.recents_caption_resize);
         mResizeTaskDialogContent =
                 inflater.inflate(R.layout.recents_task_resize_dialog, null, false);
@@ -122,6 +125,7 @@ public class RecentsResizeTaskDialog extends DialogFragment {
 
     /** Helper function to place window(s) on the display according to an arrangement request. */
     private void placeTasks(int arrangement) {
+        Log.d(TAG, "placeTasks: ");
         Rect rect = mSsp.getWindowRect();
         for (int i = 0; i < mBounds.length; ++i) {
             mBounds[i].set(rect);
@@ -231,6 +235,7 @@ public class RecentsResizeTaskDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle args) {
+        Log.d(TAG, "onCreateDialog: ");
         final Context context = this.getActivity();
         LayoutInflater inflater = getActivity().getLayoutInflater();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
