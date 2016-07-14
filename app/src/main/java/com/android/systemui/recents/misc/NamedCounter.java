@@ -16,11 +16,13 @@
 
 package com.android.systemui.recents.misc;
 
+import android.util.Log;
 /**
  * Used to generate successive incremented names.
  */
 public class NamedCounter {
 
+    public static final String TAG = "NamedCounter";
     int mCount;
     String mPrefix = "";
     String mSuffix = "";
@@ -32,6 +34,7 @@ public class NamedCounter {
 
     /** Returns the next name. */
     public String nextName() {
+        Log.d(TAG, "nextName: ");
         String name = mPrefix + mCount + mSuffix;
         mCount++;
         return name;
