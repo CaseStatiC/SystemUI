@@ -20,6 +20,7 @@ import android.animation.Animator;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -27,8 +28,10 @@ import java.util.ArrayList;
 /* Common code */
 public class Utilities {
 
+    public static final String TAG = "Utilities";
     /** Scales a rect about its centroid */
     public static void scaleRectAboutCenter(Rect r, float scale) {
+        Log.d(TAG, "scaleRectAboutCenter: ");
         if (scale != 1.0f) {
             int cx = r.centerX();
             int cy = r.centerY();
@@ -44,6 +47,7 @@ public class Utilities {
     /** Maps a coorindate in a descendant view into the parent. */
     public static float mapCoordInDescendentToSelf(View descendant, View root,
             float[] coord, boolean includeRootScroll) {
+        Log.d(TAG, "mapCoordInDescendentToSelf: ");
         ArrayList<View> ancestorChain = new ArrayList<View>();
 
         float[] pt = {coord[0], coord[1]};
@@ -80,6 +84,7 @@ public class Utilities {
     /** Maps a coordinate in the root to a descendent. */
     public static float mapCoordInSelfToDescendent(View descendant, View root,
             float[] coord, Matrix tmpInverseMatrix) {
+        Log.d(TAG, "mapCoordInSelfToDescendent: ");
         ArrayList<View> ancestorChain = new ArrayList<View>();
 
         float[] pt = {coord[0], coord[1]};
@@ -117,6 +122,7 @@ public class Utilities {
 
     /** Calculates the constrast between two colors, using the algorithm provided by the WCAG v2. */
     public static float computeContrastBetweenColors(int bg, int fg) {
+        Log.d(TAG, "computeContrastBetweenColors: ");
         float bgR = Color.red(bg) / 255f;
         float bgG = Color.green(bg) / 255f;
         float bgB = Color.blue(bg) / 255f;
@@ -138,6 +144,7 @@ public class Utilities {
 
     /** Returns the base color overlaid with another overlay color with a specified alpha. */
     public static int getColorWithOverlay(int baseColor, int overlayColor, float overlayAlpha) {
+        Log.d(TAG, "getColorWithOverlay: ");
         return Color.rgb(
             (int) (overlayAlpha * Color.red(baseColor) +
                     (1f - overlayAlpha) * Color.red(overlayColor)),
@@ -152,6 +159,7 @@ public class Utilities {
      * are not called.
      */
     public static void cancelAnimationWithoutCallbacks(Animator animator) {
+        Log.d(TAG, "cancelAnimationWithoutCallbacks: ");
         if (animator != null) {
             animator.removeAllListeners();
             animator.cancel();
