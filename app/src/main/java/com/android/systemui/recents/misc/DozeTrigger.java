@@ -17,6 +17,7 @@
 package com.android.systemui.recents.misc;
 
 import android.os.Handler;
+import android.util.Log;
 
 /**
  * A dozer is a class that fires a trigger after it falls asleep.  You can occasionally poke it to
@@ -24,6 +25,7 @@ import android.os.Handler;
  */
 public class DozeTrigger {
 
+    public static final String TAG = "DozeTrigger";
     Handler mHandler;
 
     boolean mIsDozing;
@@ -49,18 +51,21 @@ public class DozeTrigger {
 
     /** Starts dozing. This also resets the trigger flag. */
     public void startDozing() {
+        Log.d(TAG, "startDozing: ");
         forcePoke();
         mHasTriggered = false;
     }
 
     /** Stops dozing. */
     public void stopDozing() {
+        Log.d(TAG, "stopDozing: ");
         mHandler.removeCallbacks(mDozeRunnable);
         mIsDozing = false;
     }
 
     /** Poke this dozer to wake it up for a little bit, if it is dozing. */
     public void poke() {
+        Log.d(TAG, "poke: ");
         if (mIsDozing) {
             forcePoke();
         }
@@ -68,6 +73,7 @@ public class DozeTrigger {
 
     /** Poke this dozer to wake it up for a little bit. */
     void forcePoke() {
+        Log.d(TAG, "forcePoke: ");
         mHandler.removeCallbacks(mDozeRunnable);
         mHandler.postDelayed(mDozeRunnable, mDozeDurationSeconds * 1000);
         mIsDozing = true;
@@ -75,16 +81,19 @@ public class DozeTrigger {
 
     /** Returns whether we are dozing or not. */
     public boolean isDozing() {
+        Log.d(TAG, "isDozing: ");
         return mIsDozing;
     }
 
     /** Returns whether the trigger has fired at least once. */
     public boolean hasTriggered() {
+        Log.d(TAG, "hasTriggered: ");
         return mHasTriggered;
     }
 
     /** Resets the doze trigger state. */
     public void resetTrigger() {
+        Log.d(TAG, "resetTrigger: ");
         mHasTriggered = false;
     }
 }
