@@ -20,10 +20,12 @@ import android.appwidget.AppWidgetHost;
 import android.appwidget.AppWidgetHostView;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.Context;
+import android.util.Log;
 
 /** Our special app widget host for the Search widget */
 public class RecentsAppWidgetHost extends AppWidgetHost {
 
+    public static final String TAG = "RecentsAppWidgetHost";
     /* Callbacks to notify when an app package changes */
     interface RecentsAppWidgetHostCallbacks {
         void refreshSearchWidgetView();
@@ -37,6 +39,7 @@ public class RecentsAppWidgetHost extends AppWidgetHost {
     }
 
     public void startListening(RecentsAppWidgetHostCallbacks cb) {
+        Log.d(TAG, "startListening: ");
         mCb = cb;
         if (!mIsListening) {
             mIsListening = true;
@@ -46,6 +49,7 @@ public class RecentsAppWidgetHost extends AppWidgetHost {
 
     @Override
     public void stopListening() {
+        Log.d(TAG, "stopListening: ");
         if (mIsListening) {
             super.stopListening();
         }
@@ -57,6 +61,7 @@ public class RecentsAppWidgetHost extends AppWidgetHost {
     @Override
     protected AppWidgetHostView onCreateView(Context context, int appWidgetId,
                                              AppWidgetProviderInfo appWidget) {
+        Log.d(TAG, "onCreateView: ");
         return new RecentsAppWidgetHostView(context);
     }
 
@@ -66,6 +71,7 @@ public class RecentsAppWidgetHost extends AppWidgetHost {
     @Override
     protected void onProviderChanged(int appWidgetId, AppWidgetProviderInfo appWidgetInfo) {
         super.onProviderChanged(appWidgetId, appWidgetInfo);
+        Log.d(TAG, "onProviderChanged: ");
         if (mIsListening && mCb != null) {
             mCb.refreshSearchWidgetView();
         }
