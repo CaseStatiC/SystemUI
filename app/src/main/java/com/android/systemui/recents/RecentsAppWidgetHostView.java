@@ -18,10 +18,12 @@ package com.android.systemui.recents;
 
 import android.appwidget.AppWidgetHostView;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
 public class RecentsAppWidgetHostView extends AppWidgetHostView {
+    public static final String TAG = "RecentsAppWidgetHostView";
 
     private Context mContext;
     private int mPreviousOrientation;
@@ -36,10 +38,12 @@ public class RecentsAppWidgetHostView extends AppWidgetHostView {
         // Store the orientation in which the widget was inflated
         updateLastInflationOrientation();
         super.updateAppWidget(remoteViews);
+        Log.d(TAG, "updateAppWidget: ");
     }
 
     @Override
     protected View getErrorView() {
+        Log.d(TAG, "getErrorView: ");
         // Just return an empty view as the error view when failing to inflate the Recents search
         // bar widget (this is mainly to catch the case where we try and inflate the widget view
         // while the search provider is updating)
@@ -50,6 +54,7 @@ public class RecentsAppWidgetHostView extends AppWidgetHostView {
      * Updates the last orientation that this widget was inflated.
      */
     private void updateLastInflationOrientation() {
+        Log.d(TAG, "updateLastInflationOrientation: ");
         mPreviousOrientation = mContext.getResources().getConfiguration().orientation;
     }
 
@@ -58,6 +63,7 @@ public class RecentsAppWidgetHostView extends AppWidgetHostView {
      *         in the background.
      */
     public boolean isReinflateRequired() {
+        Log.d(TAG, "isReinflateRequired: ");
         // Re-inflate is required if the orientation has changed since last inflated.
         int orientation = mContext.getResources().getConfiguration().orientation;
         if (mPreviousOrientation != orientation) {
