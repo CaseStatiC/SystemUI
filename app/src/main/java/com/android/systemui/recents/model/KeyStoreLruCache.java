@@ -16,6 +16,7 @@
 
 package com.android.systemui.recents.model;
 
+import android.util.Log;
 import android.util.LruCache;
 
 import java.util.HashMap;
@@ -27,6 +28,7 @@ import java.util.HashMap;
  * key.
  */
 public class KeyStoreLruCache<V> {
+    public static final String TAG = "KeyStoreLruCache";
     // We keep a set of keys that are associated with the LRU cache, so that we can find out
     // information about the Task that was previously in the cache.
     HashMap<Integer, Task.TaskKey> mTaskKeys = new HashMap<Integer, Task.TaskKey>();
@@ -45,6 +47,7 @@ public class KeyStoreLruCache<V> {
 
     /** Gets a specific entry in the cache. */
     final V get(Task.TaskKey key) {
+        Log.d(TAG, "get: ");
         return mCache.get(key.id);
     }
 
@@ -52,6 +55,7 @@ public class KeyStoreLruCache<V> {
      * Returns the value only if the Task has not updated since the last time it was in the cache.
      */
     final V getAndInvalidateIfModified(Task.TaskKey key) {
+        Log.d(TAG, "getAndInvalidateIfModified: ");
         Task.TaskKey lastKey = mTaskKeys.get(key.id);
         if (lastKey != null && (lastKey.lastActiveTime < key.lastActiveTime)) {
             // The task has updated (been made active since the last time it was put into the
@@ -66,29 +70,34 @@ public class KeyStoreLruCache<V> {
 
     /** Puts an entry in the cache for a specific key. */
     final void put(Task.TaskKey key, V value) {
+        Log.d(TAG, "put: ");
         mCache.put(key.id, value);
         mTaskKeys.put(key.id, key);
     }
 
     /** Removes a cache entry for a specific key. */
     final void remove(Task.TaskKey key) {
+        Log.d(TAG, "remove: ");
         mCache.remove(key.id);
         mTaskKeys.remove(key.id);
     }
 
     /** Removes all the entries in the cache. */
     final void evictAll() {
+        Log.d(TAG, "evictAll: ");
         mCache.evictAll();
         mTaskKeys.clear();
     }
 
     /** Returns the size of the cache. */
     final int size() {
+        Log.d(TAG, "size: ");
         return mCache.size();
     }
 
     /** Trims the cache to a specific size */
     final void trimToSize(int cacheSize) {
+        Log.d(TAG, "trimToSize: ");
         mCache.resize(cacheSize);
     }
 }
