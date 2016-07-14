@@ -35,6 +35,7 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.util.Log;
 import android.util.MutableBoolean;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -76,6 +77,7 @@ import java.util.ArrayList;
 public class Recents extends SystemUI
         implements ActivityOptions.OnAnimationStartedListener, RecentsComponent {
 
+    public static final String TAG  = "Recents";
     final public static String EXTRA_TRIGGERED_FROM_ALT_TAB = "triggeredFromAltTab";
     final public static String EXTRA_TRIGGERED_FROM_HOME_KEY = "triggeredFromHomeKey";
     final public static String EXTRA_RECENTS_VISIBILITY = "recentsVisibility";
@@ -206,6 +208,7 @@ public class Recents extends SystemUI
      * lifecycle doesn't exist, so we need to start it manually here if needed.
      */
     public static Recents getInstanceAndStartIfNeeded(Context ctx) {
+        Log.d(TAG, "getInstanceAndStartIfNeeded: ");
         if (sInstance == null) {
             sInstance = new Recents();
             sInstance.mContext = ctx;
@@ -217,6 +220,7 @@ public class Recents extends SystemUI
 
     /** Creates a new broadcast intent */
     static Intent createLocalBroadcastIntent(Context context, String action) {
+        Log.d(TAG, "createLocalBroadcastIntent: ");
         Intent intent = new Intent(action);
         intent.setPackage(context.getPackageName());
         intent.addFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT |
@@ -228,6 +232,7 @@ public class Recents extends SystemUI
     @ProxyFromPrimaryToCurrentUser
     @Override
     public void start() {
+        Log.d(TAG, "start: ");
         if (sInstance == null) {
             sInstance = this;
         }
@@ -274,6 +279,7 @@ public class Recents extends SystemUI
 
     @Override
     public void onBootCompleted() {
+        Log.d(TAG, "onBootCompleted: ");
         mBootCompleted = true;
     }
 
@@ -281,6 +287,7 @@ public class Recents extends SystemUI
     @ProxyFromPrimaryToCurrentUser
     @Override
     public void showRecents(boolean triggeredFromAltTab, View statusBarView) {
+        Log.d(TAG, "showRecents: ");
         // Ensure the device has been provisioned before allowing the user to interact with
         // recents
         if (!isDeviceProvisioned()) {
@@ -298,6 +305,7 @@ public class Recents extends SystemUI
     }
 
     void showRecentsInternal(boolean triggeredFromAltTab) {
+        Log.d(TAG, "showRecentsInternal: -");
         mTriggeredFromAltTab = triggeredFromAltTab;
 
         try {
@@ -311,6 +319,7 @@ public class Recents extends SystemUI
     @ProxyFromPrimaryToCurrentUser
     @Override
     public void hideRecents(boolean triggeredFromAltTab, boolean triggeredFromHomeKey) {
+        Log.d(TAG, "hideRecents: ");
         // Ensure the device has been provisioned before allowing the user to interact with
         // recents
         if (!isDeviceProvisioned()) {
@@ -329,6 +338,7 @@ public class Recents extends SystemUI
     }
 
     void hideRecentsInternal(boolean triggeredFromAltTab, boolean triggeredFromHomeKey) {
+        Log.d(TAG, "hideRecentsInternal: ");
         if (mBootCompleted) {
             // Defer to the activity to handle hiding recents, if it handles it, then it must still
             // be visible
@@ -343,6 +353,7 @@ public class Recents extends SystemUI
     @ProxyFromPrimaryToCurrentUser
     @Override
     public void toggleRecents(Display display, int layoutDirection, View statusBarView) {
+        Log.d(TAG, "toggleRecents: ");
         // Ensure the device has been provisioned before allowing the user to interact with
         // recents
         if (!isDeviceProvisioned()) {
@@ -359,6 +370,7 @@ public class Recents extends SystemUI
     }
 
     void toggleRecentsInternal() {
+        Log.d(TAG, "toggleRecentsInternal: ");
         mTriggeredFromAltTab = false;
 
         try {
@@ -372,6 +384,7 @@ public class Recents extends SystemUI
     @ProxyFromPrimaryToCurrentUser
     @Override
     public void preloadRecents() {
+        Log.d(TAG, "preloadRecents: ");
         // Ensure the device has been provisioned before allowing the user to interact with
         // recents
         if (!isDeviceProvisioned()) {
@@ -388,6 +401,7 @@ public class Recents extends SystemUI
     }
 
     void preloadRecentsInternal() {
+        Log.d(TAG, "preloadRecentsInternal: ");
         // Preload only the raw task list into a new load plan (which will be consumed by the
         // RecentsActivity) only if there is a task to animate to.
         ActivityManager.RunningTaskInfo topTask = mSystemServicesProxy.getTopMostTask();
@@ -407,10 +421,12 @@ public class Recents extends SystemUI
 
     @Override
     public void cancelPreloadingRecents() {
+        Log.d(TAG, "cancelPreloadingRecents: ");
         // Do nothing
     }
 
     void showRelativeAffiliatedTask(boolean showNextTask) {
+        Log.d(TAG, "showRelativeAffiliatedTask: ");
         // Return early if there is no focused stack
         int focusedStackId = mSystemServicesProxy.getFocusedStack();
         TaskStack focusedStack = null;
@@ -494,6 +510,7 @@ public class Recents extends SystemUI
 
     @Override
     public void showNextAffiliatedTask() {
+        Log.d(TAG, "showNextAffiliatedTask: ");
         // Ensure the device has been provisioned before allowing the user to interact with
         // recents
         if (!isDeviceProvisioned()) {
@@ -507,6 +524,7 @@ public class Recents extends SystemUI
 
     @Override
     public void showPrevAffiliatedTask() {
+        Log.d(TAG, "showPrevAffiliatedTask: ");
         // Ensure the device has been provisioned before allowing the user to interact with
         // recents
         if (!isDeviceProvisioned()) {
@@ -521,6 +539,7 @@ public class Recents extends SystemUI
     /** Updates on configuration change. */
     @ProxyFromPrimaryToCurrentUser
     public void onConfigurationChanged(Configuration newConfig) {
+        Log.d(TAG, "onConfigurationChanged: ");
         if (mSystemServicesProxy.isForegroundUserOwner()) {
             configurationChanged();
         } else {
@@ -530,6 +549,7 @@ public class Recents extends SystemUI
         }
     }
     void configurationChanged() {
+        Log.d(TAG, "configurationChanged: ");
         // Don't reuse task stack views if the configuration changes
         mCanReuseTaskStackViews = false;
         // Reload the header bar layout
@@ -538,6 +558,7 @@ public class Recents extends SystemUI
 
     /** Prepares the header bar layout. */
     void reloadHeaderBarLayout() {
+        Log.d(TAG, "reloadHeaderBarLayout: ");
         Resources res = mContext.getResources();
         mWindowRect = mSystemServicesProxy.getWindowRect();
         mStatusBarHeight = res.getDimensionPixelSize(com.android.internal.R.dimen.status_bar_height);
@@ -583,6 +604,7 @@ public class Recents extends SystemUI
 
     /** Toggles the recents activity */
     void toggleRecentsActivity() {
+        Log.d(TAG, "toggleRecentsActivity: ");
         // If the user has toggled it too quickly, then just eat up the event here (it's better than
         // showing a janky screenshot).
         // NOTE: Ideally, the screenshot mechanism would take the window transform into account
@@ -608,6 +630,7 @@ public class Recents extends SystemUI
 
     /** Starts the recents activity if it is not already running */
     void startRecentsActivity() {
+        Log.d(TAG, "startRecentsActivity: ");
         // Check if the top task is in the home stack, and start the recents activity
         ActivityManager.RunningTaskInfo topTask = mSystemServicesProxy.getTopMostTask();
         MutableBoolean isTopTaskHome = new MutableBoolean(true);
@@ -620,6 +643,7 @@ public class Recents extends SystemUI
      * Creates the activity options for a unknown state->recents transition.
      */
     ActivityOptions getUnknownTransitionActivityOptions() {
+        Log.d(TAG, "getUnknownTransitionActivityOptions: ");
         mStartAnimationTriggered = false;
         return ActivityOptions.makeCustomAnimation(mContext,
                 R.anim.recents_from_unknown_enter,
@@ -631,6 +655,7 @@ public class Recents extends SystemUI
      * Creates the activity options for a home->recents transition.
      */
     ActivityOptions getHomeTransitionActivityOptions(boolean fromSearchHome) {
+        Log.d(TAG, "getHomeTransitionActivityOptions: ");
         mStartAnimationTriggered = false;
         if (fromSearchHome) {
             return ActivityOptions.makeCustomAnimation(mContext,
@@ -649,6 +674,7 @@ public class Recents extends SystemUI
      */
     ActivityOptions getThumbnailTransitionActivityOptions(ActivityManager.RunningTaskInfo topTask,
             TaskStack stack, TaskStackView stackView) {
+        Log.d(TAG, "getThumbnailTransitionActivityOptions: ");
 
         // Update the destination rect
         Task toTask = new Task();
@@ -681,6 +707,7 @@ public class Recents extends SystemUI
      * Preloads the icon of a task.
      */
     void preloadIcon(ActivityManager.RunningTaskInfo task) {
+        Log.d(TAG, "preloadIcon: ");
 
         // Ensure that we load the running task's icon
         RecentsTaskLoadPlan.Options launchOpts = new RecentsTaskLoadPlan.Options();
@@ -696,6 +723,7 @@ public class Recents extends SystemUI
      */
     void preCacheThumbnailTransitionBitmapAsync(ActivityManager.RunningTaskInfo topTask,
             TaskStack stack, TaskStackView stackView, boolean isTopTaskHome) {
+        Log.d(TAG, "preCacheThumbnailTransitionBitmapAsync: ");
         preloadIcon(topTask);
 
         // Update the destination rect
@@ -721,6 +749,7 @@ public class Recents extends SystemUI
      * Draws the header of a task used for the window animation into a bitmap.
      */
     Bitmap drawThumbnailTransitionBitmap(Task toTask, TaskViewTransform toTransform) {
+        Log.d(TAG, "drawThumbnailTransitionBitmap: ");
         if (toTransform != null && toTask.key != null) {
             Bitmap thumbnail;
             synchronized (mHeaderBarLock) {
@@ -746,6 +775,7 @@ public class Recents extends SystemUI
     /** Returns the transition rect for the given task id. */
     TaskViewTransform getThumbnailTransitionTransform(TaskStack stack, TaskStackView stackView,
             int runningTaskId, Task runningTaskOut) {
+        Log.d(TAG, "getThumbnailTransitionTransform: ");
         // Find the running task in the TaskStack
         Task task = null;
         ArrayList<Task> tasks = stack.getTasks();
@@ -776,6 +806,7 @@ public class Recents extends SystemUI
 
     /** Starts the recents activity */
     void startRecentsActivity(ActivityManager.RunningTaskInfo topTask, boolean isTopTaskHome) {
+        Log.d(TAG, "startRecentsActivity: ");
         RecentsTaskLoader loader = RecentsTaskLoader.getInstance();
         RecentsConfiguration.reinitialize(mContext, mSystemServicesProxy);
 
@@ -854,6 +885,7 @@ public class Recents extends SystemUI
     void startAlternateRecentsActivity(ActivityManager.RunningTaskInfo topTask,
             ActivityOptions opts, boolean fromHome, boolean fromSearchHome, boolean fromThumbnail,
             TaskStackViewLayoutAlgorithm.VisibilityReport vr) {
+        Log.d(TAG, "startAlternateRecentsActivity: ");
         // Update the configuration based on the launch options
         mConfig.launchedFromHome = fromSearchHome || fromHome;
         mConfig.launchedFromSearchHome = fromSearchHome;
@@ -881,6 +913,7 @@ public class Recents extends SystemUI
     /** Sets the RecentsComponent callbacks. */
     @Override
     public void setCallback(RecentsComponent.Callbacks cb) {
+        Log.d(TAG, "setCallback: ");
         sRecentsComponentCallbacks = cb;
     }
 
@@ -888,6 +921,7 @@ public class Recents extends SystemUI
     @ProxyFromAnyToPrimaryUser
     public static void notifyVisibilityChanged(Context context, SystemServicesProxy ssp,
             boolean visible) {
+        Log.d(TAG, "notifyVisibilityChanged: ");
         if (ssp.isForegroundUserOwner()) {
             visibilityChanged(visible);
         } else {
@@ -898,6 +932,7 @@ public class Recents extends SystemUI
         }
     }
     static void visibilityChanged(boolean visible) {
+        Log.d(TAG, "visibilityChanged: ");
         if (sRecentsComponentCallbacks != null) {
             sRecentsComponentCallbacks.onVisibilityChanged(visible);
         }
@@ -906,6 +941,7 @@ public class Recents extends SystemUI
     /** Notifies the status bar to trigger screen pinning. */
     @ProxyFromAnyToPrimaryUser
     public static void startScreenPinning(Context context, SystemServicesProxy ssp) {
+        Log.d(TAG, "startScreenPinning: ");
         if (ssp.isForegroundUserOwner()) {
             onStartScreenPinning(context);
         } else {
@@ -915,6 +951,7 @@ public class Recents extends SystemUI
         }
     }
     static void onStartScreenPinning(Context context) {
+        Log.d(TAG, "onStartScreenPinning: ");
         // For the primary user, the context for the SystemUI component is the SystemUIApplication
         SystemUIApplication app = (SystemUIApplication)
                 getInstanceAndStartIfNeeded(context).mContext;
@@ -928,6 +965,7 @@ public class Recents extends SystemUI
      * @return whether this device is provisioned.
      */
     private boolean isDeviceProvisioned() {
+        Log.d(TAG, "isDeviceProvisioned: ");
         return Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 0) != 0;
     }
@@ -936,6 +974,7 @@ public class Recents extends SystemUI
      * Returns the preloaded load plan and invalidates it.
      */
     public static RecentsTaskLoadPlan consumeInstanceLoadPlan() {
+        Log.d(TAG, "consumeInstanceLoadPlan: ");
         RecentsTaskLoadPlan plan = sInstanceLoadPlan;
         sInstanceLoadPlan = null;
         return plan;
@@ -945,6 +984,7 @@ public class Recents extends SystemUI
 
     @Override
     public void onAnimationStarted() {
+        Log.d(TAG, "onAnimationStarted: ");
         // Notify recents to start the enter animation
         if (!mStartAnimationTriggered) {
             // There can be a race condition between the start animation callback and
