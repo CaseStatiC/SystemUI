@@ -28,6 +28,7 @@ import java.util.Map;
 
 
 public class Console {
+    public static final String TAG = "Console";
     // Timer
     public static final Map<Object, Long> mTimeLogs = new HashMap<Object, Long>();
 
@@ -47,11 +48,13 @@ public class Console {
 
     /** Logs a key */
     public static void log(String key) {
+        Log.d(TAG, "log: 1");
         log(true, key, "", AnsiReset);
     }
 
     /** Logs a conditioned key */
     public static void log(boolean condition, String key) {
+        Log.d(TAG, "log: 2 = ");
         if (condition) {
             log(condition, key, "", AnsiReset);
         }
@@ -59,6 +62,7 @@ public class Console {
 
     /** Logs a key in a specific color */
     public static void log(boolean condition, String key, Object data) {
+        Log.d(TAG, "log:3 ");
         if (condition) {
             log(condition, key, data, AnsiReset);
         }
@@ -66,6 +70,7 @@ public class Console {
 
     /** Logs a key with data in a specific color */
     public static void log(boolean condition, String key, Object data, String color) {
+        Log.d(TAG, "log: 4");
         if (condition) {
             System.out.println(color + key + AnsiReset + " " + data.toString());
         }
@@ -73,17 +78,20 @@ public class Console {
 
     /** Logs an error */
     public static void logError(Context context, String msg) {
+        Log.d(TAG, "logError: ");
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
         Log.e("Recents", msg);
     }
 
     /** Logs a raw error */
     public static void logRawError(String msg, Exception e) {
+        Log.d(TAG, "logRawError: ");
         Log.e("Recents", msg, e);
     }
 
     /** Logs a divider bar */
     public static void logDivider(boolean condition) {
+        Log.d(TAG, "logDivider: ");
         if (condition) {
             System.out.println("==== [" + System.currentTimeMillis() +
                     "] ============================================================");
@@ -92,6 +100,7 @@ public class Console {
 
     /** Starts a time trace */
     public static void logStartTracingTime(boolean condition, String key) {
+        Log.d(TAG, "logStartTracingTime: ");
         if (condition) {
             long curTime = System.currentTimeMillis();
             mTimeLogs.put(key, curTime);
@@ -102,6 +111,7 @@ public class Console {
 
     /** Continues a time trace */
     public static void logTraceTime(boolean condition, String key, String desc) {
+        Log.d(TAG, "logTraceTime: ");
         if (condition) {
             long timeDiff = System.currentTimeMillis() - mTimeLogs.get(key);
             Console.log(condition, "[Recents|" + key + "|" + desc + "]",
@@ -111,16 +121,19 @@ public class Console {
 
     /** Logs a stack trace */
     public static void logStackTrace() {
+        Log.d(TAG, "logStackTrace: ");
         logStackTrace("", 99);
     }
 
     /** Logs a stack trace to a certain depth */
     public static void logStackTrace(int depth) {
+        Log.d(TAG, "logStackTrace: ");
         logStackTrace("", depth);
     }
 
     /** Logs a stack trace to a certain depth with a key */
     public static void logStackTrace(String key, int depth) {
+        Log.d(TAG, "logStackTrace: ");
         int offset = 0;
         StackTraceElement[] callStack = Thread.currentThread().getStackTrace();
         String tinyStackTrace = "";
@@ -155,6 +168,7 @@ public class Console {
 
     /** Returns the stringified MotionEvent action */
     public static String motionEventActionToString(int action) {
+        Log.d(TAG, "motionEventActionToString: ");
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 return "Down";
@@ -174,6 +188,7 @@ public class Console {
     }
 
     public static String trimMemoryLevelToString(int level) {
+        Log.d(TAG, "trimMemoryLevelToString: ");
         switch (level) {
             case ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN:
                 return "UI Hidden";
