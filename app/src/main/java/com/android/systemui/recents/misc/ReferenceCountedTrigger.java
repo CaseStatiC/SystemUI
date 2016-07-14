@@ -19,6 +19,7 @@ package com.android.systemui.recents.misc;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,7 @@ import java.util.ArrayList;
  */
 public class ReferenceCountedTrigger {
 
+    public static final String TAG = "ReferenceCountedTrigger";
     Context mContext;
     int mCount;
     ArrayList<Runnable> mFirstIncRunnables = new ArrayList<Runnable>();
@@ -58,6 +60,7 @@ public class ReferenceCountedTrigger {
 
     /** Increments the ref count */
     public void increment() {
+        Log.d(TAG, "increment: ");
         if (mCount == 0 && !mFirstIncRunnables.isEmpty()) {
             int numRunnables = mFirstIncRunnables.size();
             for (int i = 0; i < numRunnables; i++) {
@@ -69,11 +72,13 @@ public class ReferenceCountedTrigger {
 
     /** Convenience method to increment this trigger as a runnable */
     public Runnable incrementAsRunnable() {
+        Log.d(TAG, "incrementAsRunnable: ");
         return mIncrementRunnable;
     }
 
     /** Adds a runnable to the last-decrement runnables list. */
     public void addLastDecrementRunnable(Runnable r) {
+        Log.d(TAG, "addLastDecrementRunnable: ");
         // To ensure that the last decrement always calls, we increment and decrement after setting
         // the last decrement runnable
         boolean ensureLastDecrement = (mCount == 0);
@@ -84,6 +89,7 @@ public class ReferenceCountedTrigger {
 
     /** Decrements the ref count */
     public void decrement() {
+        Log.d(TAG, "decrement: ");
         mCount--;
         if (mCount == 0 && !mLastDecRunnables.isEmpty()) {
             int numRunnables = mLastDecRunnables.size();
@@ -102,10 +108,12 @@ public class ReferenceCountedTrigger {
 
     /** Convenience method to decrement this trigger as a runnable. */
     public Runnable decrementAsRunnable() {
+        Log.d(TAG, "decrementAsRunnable: ");
         return mDecrementRunnable;
     }
     /** Convenience method to decrement this trigger as a animator listener. */
     public Animator.AnimatorListener decrementOnAnimationEnd() {
+        Log.d(TAG, "decrementOnAnimationEnd: ");
         return new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -116,6 +124,7 @@ public class ReferenceCountedTrigger {
 
     /** Returns the current ref count */
     public int getCount() {
+        Log.d(TAG, "getCount: ");
         return mCount;
     }
 }
