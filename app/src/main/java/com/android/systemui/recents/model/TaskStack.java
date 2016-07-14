@@ -18,6 +18,7 @@ package com.android.systemui.recents.model;
 
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.util.Log;
 import com.android.systemui.recents.Constants;
 import com.android.systemui.recents.RecentsConfiguration;
 import com.android.systemui.recents.misc.NamedCounter;
@@ -43,6 +44,7 @@ interface TaskFilter {
  * A list of filtered tasks.
  */
 class FilteredTaskList {
+    public static final String TAG = "FilteredTaskList";
     ArrayList<Task> mTasks = new ArrayList<Task>();
     ArrayList<Task> mFilteredTasks = new ArrayList<Task>();
     HashMap<Task.TaskKey, Integer> mTaskIndices = new HashMap<Task.TaskKey, Integer>();
@@ -50,6 +52,7 @@ class FilteredTaskList {
 
     /** Sets the task filter, saving the current touch state */
     boolean setFilter(TaskFilter filter) {
+        Log.d(TAG, "setFilter: ");
         ArrayList<Task> prevFilteredTasks = new ArrayList<Task>(mFilteredTasks);
         mFilter = filter;
         updateFilteredTasks();
@@ -64,6 +67,7 @@ class FilteredTaskList {
 
     /** Resets this FilteredTaskList. */
     void reset() {
+        Log.d(TAG, "reset: ");
         mTasks.clear();
         mFilteredTasks.clear();
         mTaskIndices.clear();
@@ -72,18 +76,21 @@ class FilteredTaskList {
 
     /** Removes the task filter and returns the previous touch state */
     void removeFilter() {
+        Log.d(TAG, "removeFilter: ");
         mFilter = null;
         updateFilteredTasks();
     }
 
     /** Adds a new task to the task list */
     void add(Task t) {
+        Log.d(TAG, "add: ");
         mTasks.add(t);
         updateFilteredTasks();
     }
 
     /** Sets the list of tasks */
     void set(List<Task> tasks) {
+        Log.d(TAG, "set: ");
         mTasks.clear();
         mTasks.addAll(tasks);
         updateFilteredTasks();
@@ -91,6 +98,7 @@ class FilteredTaskList {
 
     /** Removes a task from the base list only if it is in the filtered list */
     boolean remove(Task t) {
+        Log.d(TAG, "remove: ");
         if (mFilteredTasks.contains(t)) {
             boolean removed = mTasks.remove(t);
             updateFilteredTasks();
@@ -101,6 +109,7 @@ class FilteredTaskList {
 
     /** Returns the index of this task in the list of filtered tasks */
     int indexOf(Task t) {
+        Log.d(TAG, "indexOf: ");
         if (mTaskIndices.containsKey(t.key)) {
             return mTaskIndices.get(t.key);
         }
@@ -109,16 +118,19 @@ class FilteredTaskList {
 
     /** Returns the size of the list of filtered tasks */
     int size() {
+        Log.d(TAG, "size: ");
         return mFilteredTasks.size();
     }
 
     /** Returns whether the filtered list contains this task */
     boolean contains(Task t) {
+        Log.d(TAG, "contains: ");
         return mTaskIndices.containsKey(t.key);
     }
 
     /** Updates the list of filtered tasks whenever the base task list changes */
     private void updateFilteredTasks() {
+        Log.d(TAG, "updateFilteredTasks: ");
         mFilteredTasks.clear();
         if (mFilter != null) {
             int taskCount = mTasks.size();
@@ -136,6 +148,7 @@ class FilteredTaskList {
 
     /** Updates the mapping of tasks to indices. */
     private void updateFilteredTaskIndices() {
+        Log.d(TAG, "updateFilteredTaskIndices: ");
         mTaskIndices.clear();
         int taskCount = mFilteredTasks.size();
         for (int i = 0; i < taskCount; i++) {
@@ -146,11 +159,13 @@ class FilteredTaskList {
 
     /** Returns whether this task list is filtered */
     boolean hasFilter() {
+        Log.d(TAG, "hasFilter: ");
         return (mFilter != null);
     }
 
     /** Returns the list of filtered tasks */
     ArrayList<Task> getTasks() {
+        Log.d(TAG, "getTasks: ");
         return mFilteredTasks;
     }
 }
@@ -160,6 +175,7 @@ class FilteredTaskList {
  */
 public class TaskStack {
 
+    public static final String TAG = "TaskStack";
     /** Task stack callbacks */
     public interface TaskStackCallbacks {
         /* Notifies when a task has been added to the stack */
@@ -197,6 +213,7 @@ public class TaskStack {
 
     /** Sets the callbacks for this task stack. */
     public void setCallbacks(TaskStackCallbacks cb) {
+        Log.d(TAG, "setCallbacks: ");
         mCb = cb;
     }
 
@@ -208,6 +225,7 @@ public class TaskStack {
 
     /** Resets this TaskStack. */
     public void reset() {
+        Log.d(TAG, "reset: ");
         mCb = null;
         mTaskList.reset();
         mGroups.clear();
@@ -216,6 +234,7 @@ public class TaskStack {
 
     /** Adds a new task */
     public void addTask(Task t) {
+        Log.d(TAG, "addTask: ");
         mTaskList.add(t);
         if (mCb != null) {
             mCb.onStackTaskAdded(this, t);
@@ -224,6 +243,7 @@ public class TaskStack {
 
     /** Does the actual work associated with removing the task. */
     void removeTaskImpl(Task t) {
+        Log.d(TAG, "removeTaskImpl: ");
         // Remove the task from the list
         mTaskList.remove(t);
         // Remove it from the group as well, and if it is empty, remove the group
@@ -238,6 +258,7 @@ public class TaskStack {
 
     /** Removes a task */
     public void removeTask(Task t) {
+        Log.d(TAG, "removeTask: ");
         if (mTaskList.contains(t)) {
             removeTaskImpl(t);
             Task newFrontMostTask = getFrontMostTask();
@@ -253,6 +274,7 @@ public class TaskStack {
 
     /** Removes all tasks */
     public void removeAllTasks() {
+        Log.d(TAG, "removeAllTasks: ");
         ArrayList<Task> taskList = new ArrayList<Task>(mTaskList.getTasks());
         int taskCount = taskList.size();
         for (int i = taskCount - 1; i >= 0; i--) {
@@ -267,6 +289,7 @@ public class TaskStack {
 
     /** Sets a few tasks in one go */
     public void setTasks(List<Task> tasks) {
+        Log.d(TAG, "setTasks: ");
         ArrayList<Task> taskList = mTaskList.getTasks();
         int taskCount = taskList.size();
         for (int i = taskCount - 1; i >= 0; i--) {
@@ -287,12 +310,14 @@ public class TaskStack {
 
     /** Gets the front task */
     public Task getFrontMostTask() {
+        Log.d(TAG, "getFrontMostTask: ");
         if (mTaskList.size() == 0) return null;
         return mTaskList.getTasks().get(mTaskList.size() - 1);
     }
 
     /** Gets the task keys */
     public ArrayList<Task.TaskKey> getTaskKeys() {
+        Log.d(TAG, "getTaskKeys: ");
         ArrayList<Task.TaskKey> taskKeys = new ArrayList<Task.TaskKey>();
         ArrayList<Task> tasks = mTaskList.getTasks();
         int taskCount = tasks.size();
@@ -304,21 +329,25 @@ public class TaskStack {
 
     /** Gets the tasks */
     public ArrayList<Task> getTasks() {
+        Log.d(TAG, "getTasks: ");
         return mTaskList.getTasks();
     }
 
     /** Gets the number of tasks */
     public int getTaskCount() {
+        Log.d(TAG, "getTaskCount: ");
         return mTaskList.size();
     }
 
     /** Returns the index of this task in this current task stack */
     public int indexOfTask(Task t) {
+        Log.d(TAG, "indexOfTask: ");
         return mTaskList.indexOf(t);
     }
 
     /** Finds the task with the specified task id. */
     public Task findTaskWithId(int taskId) {
+        Log.d(TAG, "findTaskWithId: ");
         ArrayList<Task> tasks = mTaskList.getTasks();
         int taskCount = tasks.size();
         for (int i = 0; i < taskCount; i++) {
@@ -334,6 +363,7 @@ public class TaskStack {
 
     /** Filters the stack into tasks similar to the one specified */
     public void filterTasks(final Task t) {
+        Log.d(TAG, "filterTasks: ");
         ArrayList<Task> oldStack = new ArrayList<Task>(mTaskList.getTasks());
 
         // Set the task list filter
@@ -351,6 +381,7 @@ public class TaskStack {
 
     /** Unfilters the current stack */
     public void unfilterTasks() {
+        Log.d(TAG, "unfilterTasks: ");
         ArrayList<Task> oldStack = new ArrayList<Task>(mTaskList.getTasks());
 
         // Unset the filter, then update the virtual scroll
@@ -362,6 +393,7 @@ public class TaskStack {
 
     /** Returns whether tasks are currently filtered */
     public boolean hasFilteredTasks() {
+        Log.d(TAG, "hasFilteredTasks: ");
         return mTaskList.hasFilter();
     }
 
@@ -369,17 +401,20 @@ public class TaskStack {
 
     /** Adds a group to the set */
     public void addGroup(TaskGrouping group) {
+        Log.d(TAG, "addGroup: ");
         mGroups.add(group);
         mAffinitiesGroups.put(group.affiliation, group);
     }
 
     public void removeGroup(TaskGrouping group) {
+        Log.d(TAG, "removeGroup: ");
         mGroups.remove(group);
         mAffinitiesGroups.remove(group.affiliation);
     }
 
     /** Returns the group with the specified affiliation. */
     public TaskGrouping getGroupWithAffiliation(int affiliation) {
+        Log.d(TAG, "getGroupWithAffiliation: ");
         return mAffinitiesGroups.get(affiliation);
     }
 
@@ -387,6 +422,7 @@ public class TaskStack {
      * Temporary: This method will simulate affiliation groups by
      */
     public void createAffiliatedGroupings(RecentsConfiguration config) {
+        Log.d(TAG, "createAffiliatedGroupings: ");
         if (Constants.DebugFlags.App.EnableSimulatedTaskGroups) {
             HashMap<Task.TaskKey, Task> taskMap = new HashMap<Task.TaskKey, Task>();
             // Sort all tasks by increasing firstActiveTime of the task
@@ -494,6 +530,7 @@ public class TaskStack {
 
     @Override
     public String toString() {
+        Log.d(TAG, "toString: ");
         String str = "Tasks:\n";
         for (Task t : mTaskList.getTasks()) {
             str += "  " + t.toString() + "\n";
