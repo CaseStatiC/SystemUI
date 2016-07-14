@@ -16,11 +16,14 @@
 
 package com.android.systemui.recents.model;
 
+import android.util.Log;
 /**
  * The String LRU cache.
  */
 class StringLruCache extends KeyStoreLruCache<String> {
+    public static final String TAG = "StringLruCache";
     public StringLruCache(int cacheSize) {
         super(cacheSize);
+        Log.d(TAG, "StringLruCache: ");
     }
 }
