@@ -17,12 +17,15 @@
 package com.android.systemui.recents.model;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 /**
  * The Drawable LRU cache.
  */
 class DrawableLruCache extends KeyStoreLruCache<Drawable> {
+    public static final String TAG = "DrawableLruCache";
     public DrawableLruCache(int cacheSize) {
         super(cacheSize);
+        Log.d(TAG, "DrawableLruCache: ");
     }
 }
