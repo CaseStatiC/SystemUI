@@ -32,6 +32,7 @@ import java.util.List;
  * Recents list.
  */
 public class RecentsPackageMonitor extends PackageMonitor {
+    public static final String TAG = "RecentsPackageMonitor";
     public interface PackageCallbacks {
         public void onPackagesChanged(RecentsPackageMonitor monitor, String packageName,
                                       int userId);
