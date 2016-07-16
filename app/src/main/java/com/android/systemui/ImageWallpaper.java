@@ -73,6 +73,7 @@ public class ImageWallpaper extends WallpaperService {
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.d(TAG, "onCreate: ");
         mWallpaperManager = (WallpaperManager) getSystemService(WALLPAPER_SERVICE);
 
         //noinspection PointlessBooleanExpression,ConstantConditions
@@ -85,17 +86,20 @@ public class ImageWallpaper extends WallpaperService {
 
     @Override
     public void onTrimMemory(int level) {
+        Log.d(TAG, "onTrimMemory: ");
         if (mEngine != null) {
             mEngine.trimMemory(level);
         }
     }
 
     private static boolean isEmulator() {
+        Log.d(TAG, "isEmulator: ");
         return "1".equals(SystemProperties.get(PROPERTY_KERNEL_QEMU, "0"));
     }
 
     @Override
     public Engine onCreateEngine() {
+        Log.d(TAG, "onCreateEngine: ");
         mEngine = new DrawableEngine();
         return mEngine;
     }
@@ -161,6 +165,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         public void trimMemory(int level) {
+            Log.d(TAG, "DrawableEngine: trimMemory: ");
             if (level >= ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW &&
                     mBackground != null) {
                 if (DEBUG) {
@@ -176,6 +181,7 @@ public class ImageWallpaper extends WallpaperService {
 
         @Override
         public void onCreate(SurfaceHolder surfaceHolder) {
+            Log.d(TAG, "DrawableEngine: onCreate: ");
             if (DEBUG) {
                 Log.d(TAG, "onCreate");
             }
@@ -192,11 +198,13 @@ public class ImageWallpaper extends WallpaperService {
         @Override
         public void onDestroy() {
             super.onDestroy();
+            Log.d(TAG, "DrawableEngine: onDestroy: ");
             mBackground = null;
             mWallpaperManager.forgetLoadedWallpaper();
         }
 
         void updateSurfaceSize(SurfaceHolder surfaceHolder, DisplayInfo displayInfo) {
+            Log.d(TAG, "DrawableEngine: updateSurfaceSize: ");
             // Load background image dimensions, if we haven't saved them yet
             if (mBackgroundWidth <= 0 || mBackgroundHeight <= 0) {
                 // Need to load the image to get dimensions
@@ -227,6 +235,7 @@ public class ImageWallpaper extends WallpaperService {
 
         @Override
         public void onVisibilityChanged(boolean visible) {
+            Log.d(TAG, "DrawableEngine: onVisibilityChanged: ");
             if (DEBUG) {
                 Log.d(TAG, "onVisibilityChanged: mVisible, visible=" + mVisible + ", " + visible);
             }
@@ -243,12 +252,14 @@ public class ImageWallpaper extends WallpaperService {
         @Override
         public void onTouchEvent(MotionEvent event) {
             super.onTouchEvent(event);
+            Log.d(TAG, "DrawableEngine: onTouchEvent: ");
         }
 
         @Override
         public void onOffsetsChanged(float xOffset, float yOffset,
                 float xOffsetStep, float yOffsetStep,
                 int xPixels, int yPixels) {
+            Log.d(TAG, "DrawableEngine: onOffsetsChanged: ");
             if (DEBUG) {
                 Log.d(TAG, "onOffsetsChanged: xOffset=" + xOffset + ", yOffset=" + yOffset
                         + ", xOffsetStep=" + xOffsetStep + ", yOffsetStep=" + yOffsetStep
@@ -268,6 +279,7 @@ public class ImageWallpaper extends WallpaperService {
 
         @Override
         public void onSurfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+            Log.d(TAG, "DrawableEngine: onSurfaceChanged: ");
             if (DEBUG) {
                 Log.d(TAG, "onSurfaceChanged: width=" + width + ", height=" + height);
             }
@@ -280,12 +292,14 @@ public class ImageWallpaper extends WallpaperService {
         @Override
         public void onSurfaceDestroyed(SurfaceHolder holder) {
             super.onSurfaceDestroyed(holder);
+            Log.d(TAG, "DrawableEngine: onSurfaceDestroyed: ");
             mLastSurfaceWidth = mLastSurfaceHeight = -1;
         }
 
         @Override
         public void onSurfaceCreated(SurfaceHolder holder) {
             super.onSurfaceCreated(holder);
+            Log.d(TAG, "DrawableEngine: onSurfaceCreated: ");
             mLastSurfaceWidth = mLastSurfaceHeight = -1;
         }
 
@@ -300,11 +314,13 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private DisplayInfo getDefaultDisplayInfo() {
+            Log.d(TAG, "DrawableEngine: getDefaultDisplayInfo: ");
             mDefaultDisplay.getDisplayInfo(mTmpDisplayInfo);
             return mTmpDisplayInfo;
         }
 
         void drawFrame() {
+            Log.d(TAG, "DrawableEngine: drawFrame: ");
             try {
                 DisplayInfo displayInfo = getDefaultDisplayInfo();
                 int newRotation = displayInfo.rotation;
@@ -420,6 +436,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private void updateWallpaperLocked() {
+            Log.d(TAG, "DrawableEngine: updateWallpaperLocked: ");
             Throwable exception = null;
             try {
                 mBackground = null;
@@ -454,7 +471,7 @@ public class ImageWallpaper extends WallpaperService {
         @Override
         protected void dump(String prefix, FileDescriptor fd, PrintWriter out, String[] args) {
             super.dump(prefix, fd, out, args);
-
+            Log.d(TAG, "DrawableEngine: dump: ");
             out.print(prefix); out.println("ImageWallpaper.DrawableEngine:");
             out.print(prefix); out.print(" mBackground="); out.print(mBackground);
             out.print(" mBackgroundWidth="); out.print(mBackgroundWidth);
@@ -485,6 +502,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private void drawWallpaperWithCanvas(SurfaceHolder sh, int w, int h, int left, int top) {
+            Log.d(TAG, "DrawableEngine: drawWallpaperWithCanvas: ");
             Canvas c = sh.lockCanvas();
             if (c != null) {
                 try {
@@ -513,6 +531,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private boolean drawWallpaperWithOpenGL(SurfaceHolder sh, int w, int h, int left, int top) {
+            Log.d(TAG, "DrawableEngine: drawWallpaperWithOpenGL: ");
             if (!initGL(sh)) return false;
 
             final float right = left + mBackground.getWidth() * mScale;
@@ -570,6 +589,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private FloatBuffer createMesh(int left, int top, float right, float bottom) {
+            Log.d(TAG, "DrawableEngine: createMesh: ");
             final float[] verticesData = {
                     // X, Y, Z, U, V
                      left,  bottom, 0.0f, 0.0f, 1.0f,
@@ -586,6 +606,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private int loadTexture(Bitmap bitmap) {
+            Log.d(TAG, "DrawableEngine: loadTexture: ");
             int[] textures = new int[1];
 
             glActiveTexture(GL_TEXTURE0);
@@ -609,6 +630,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private int buildProgram(String vertex, String fragment) {
+            Log.d(TAG, "DrawableEngine: buildProgram: ");
             int vertexShader = buildShader(vertex, GL_VERTEX_SHADER);
             if (vertexShader == 0) return 0;
 
@@ -637,6 +659,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private int buildShader(String source, int type) {
+            Log.d(TAG, "DrawableEngine: buildShader: ");
             int shader = glCreateShader(type);
 
             glShaderSource(shader, source);
@@ -658,6 +681,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private void checkEglError() {
+            Log.d(TAG, "DrawableEngine: checkEglError: ");
             int error = mEgl.eglGetError();
             if (error != EGL_SUCCESS) {
                 Log.w(GL_LOG_TAG, "EGL error = " + GLUtils.getEGLErrorString(error));
@@ -665,6 +689,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private void checkGlError() {
+            Log.d(TAG, "DrawableEngine: checkGlError: ");
             int error = glGetError();
             if (error != GL_NO_ERROR) {
                 Log.w(GL_LOG_TAG, "GL error = 0x" + Integer.toHexString(error), new Throwable());
@@ -672,6 +697,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private void finishGL(int texture, int program) {
+            Log.d(TAG, "DrawableEngine: finishGL: ");
             int[] textures = new int[1];
             textures[0] = texture;
             glDeleteTextures(1, textures, 0);
@@ -683,6 +709,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private boolean initGL(SurfaceHolder surfaceHolder) {
+            Log.d(TAG, "DrawableEngine: initGL: ");
             mEgl = (EGL10) EGLContext.getEGL();
 
             mEglDisplay = mEgl.eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -754,11 +781,13 @@ public class ImageWallpaper extends WallpaperService {
 
 
         EGLContext createContext(EGL10 egl, EGLDisplay eglDisplay, EGLConfig eglConfig) {
+            Log.d(TAG, "DrawableEngine: createContext: ");
             int[] attrib_list = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
             return egl.eglCreateContext(eglDisplay, eglConfig, EGL_NO_CONTEXT, attrib_list);
         }
 
         private EGLConfig chooseEglConfig() {
+            Log.d(TAG, "DrawableEngine: chooseEglConfig: ");
             int[] configsCount = new int[1];
             EGLConfig[] configs = new EGLConfig[1];
             int[] configSpec = getConfig();
@@ -772,6 +801,7 @@ public class ImageWallpaper extends WallpaperService {
         }
 
         private int[] getConfig() {
+            Log.d(TAG, "DrawableEngine: getConfig: ");
             return new int[] {
                     EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
                     EGL_RED_SIZE, 8,
