@@ -17,14 +17,17 @@
 package com.android.systemui;
 
 import android.service.dreams.DreamService;
+import android.util.Log;
 
 public class DessertCaseDream extends DreamService {
+    public static final String TAG = "DessertCaseDream";
     private DessertCaseView mView;
     private DessertCaseView.RescalingContainer mContainer;
 
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
+        Log.d(TAG, "onAttachedToWindow: ");
         setInteractive(false);
 
         mView = new DessertCaseView(this);
@@ -39,6 +42,7 @@ public class DessertCaseDream extends DreamService {
     @Override
     public void onDreamingStarted() {
         super.onDreamingStarted();
+        Log.d(TAG, "onDreamingStarted: ");
         mView.postDelayed(new Runnable() {
             public void run() {
                 mView.start();
@@ -48,6 +52,7 @@ public class DessertCaseDream extends DreamService {
 
     @Override
     public void onDreamingStopped() {
+        Log.d(TAG, "onDreamingStopped: ");
         super.onDreamingStopped();
         mView.stop();
     }
