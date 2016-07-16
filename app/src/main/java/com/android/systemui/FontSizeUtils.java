@@ -16,6 +16,7 @@
 
 package com.android.systemui;
 
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
@@ -24,14 +25,16 @@ import android.widget.TextView;
  * Utility class to update the font size when the configuration has changed.
  */
 public class FontSizeUtils {
-
+    public static final String TAG = "FontSizeUtils";
     public static final float LARGE_TEXT_SCALE = 1.3f;
 
     public static void updateFontSize(View parent, int viewId, int dimensId) {
+        Log.d(TAG, "updateFontSize: ");
         updateFontSize((TextView) parent.findViewById(viewId), dimensId);
     }
 
     public static void updateFontSize(TextView v, int dimensId) {
+        Log.d(TAG, "updateFontSize: ");
         if (v != null) {
             v.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     v.getResources().getDimensionPixelSize(dimensId));
