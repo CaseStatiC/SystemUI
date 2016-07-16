@@ -25,6 +25,7 @@ import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -32,6 +33,7 @@ import android.view.WindowManager;
 import com.android.internal.os.ProcessCpuTracker;
 
 public class LoadAverageService extends Service {
+    public static final String TAG = "LoadAverageService";
     private View mView;
 
     private static final class CpuTracker extends ProcessCpuTracker {
@@ -47,12 +49,14 @@ public class LoadAverageService extends Service {
 
         @Override
         public void onLoadChanged(float load1, float load5, float load15) {
+            Log.d(TAG, "onLoadChanged: ");
             mLoadText = load1 + " / " + load5 + " / " + load15;
             mLoadWidth = (int)mPaint.measureText(mLoadText);
         }
 
         @Override
         public int onMeasureProcessName(String name) {
+            Log.d(TAG, "onMeasureProcessName: ");
             return (int)mPaint.measureText(name);
         }
     }
@@ -158,17 +162,20 @@ public class LoadAverageService extends Service {
         @Override
         protected void onAttachedToWindow() {
             super.onAttachedToWindow();
+            Log.d(TAG, "onAttachedToWindow: ");
             mHandler.sendEmptyMessage(1);
         }
 
         @Override
         protected void onDetachedFromWindow() {
             super.onDetachedFromWindow();
+            Log.d(TAG, "onDetachedFromWindow: ");
             mHandler.removeMessages(1);
         }
 
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+            Log.d(TAG, "onMeasure: ");
             setMeasuredDimension(resolveSize(mNeededWidth, widthMeasureSpec),
                     resolveSize(mNeededHeight, heightMeasureSpec));
         }
@@ -176,6 +183,7 @@ public class LoadAverageService extends Service {
         @Override
         public void onDraw(Canvas canvas) {
             super.onDraw(canvas);
+            Log.d(TAG, "onDraw: ");
             final int W = mNeededWidth;
             final int RIGHT = getWidth()-1;
 
@@ -260,6 +268,7 @@ public class LoadAverageService extends Service {
         }
 
         void updateDisplay() {
+            Log.d(TAG, "updateDisplay: ");
             final CpuTracker stats = mStats;
             final int NW = stats.countWorkingStats();
 
