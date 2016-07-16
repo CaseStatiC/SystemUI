@@ -19,25 +19,29 @@ package com.android.systemui;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
 public class SystemUIService extends Service {
-
+    public static final String TAG = "SystemUIService";
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.d(TAG, "onCreate: ");
         ((SystemUIApplication) getApplication()).startServicesIfNeeded();
     }
 
     @Override
     public IBinder onBind(Intent intent) {
+        Log.d(TAG, "onBind: ");
         return null;
     }
 
     @Override
     protected void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         SystemUI[] services = ((SystemUIApplication) getApplication()).getServices();
         if (args == null || args.length == 0) {
             for (SystemUI ui: services) {
