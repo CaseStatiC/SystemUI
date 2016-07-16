@@ -46,6 +46,7 @@ public class GuestResumeSessionReceiver extends BroadcastReceiver {
     private Dialog mNewSessionDialog;
 
     public void register(Context context) {
+        Log.d(TAG, "register: ");
         IntentFilter f = new IntentFilter(Intent.ACTION_USER_SWITCHED);
         context.registerReceiverAsUser(this, UserHandle.OWNER,
                 f, null /* permission */, null /* scheduler */);
@@ -53,6 +54,7 @@ public class GuestResumeSessionReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d(TAG, "onReceive: ");
         String action = intent.getAction();
 
         if (Intent.ACTION_USER_SWITCHED.equals(action)) {
@@ -93,6 +95,7 @@ public class GuestResumeSessionReceiver extends BroadcastReceiver {
      * The guest must be the current user and its id must be {@param userId}.
      */
     private static void wipeGuestSession(Context context, int userId) {
+        Log.d(TAG, "wipeGuestSession: ");
         UserManager userManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         UserInfo currentUser;
         try {
@@ -136,6 +139,7 @@ public class GuestResumeSessionReceiver extends BroadcastReceiver {
     }
 
     private void cancelDialog() {
+        Log.d(TAG, "cancelDialog: ");
         if (mNewSessionDialog != null && mNewSessionDialog.isShowing()) {
             mNewSessionDialog.cancel();
             mNewSessionDialog = null;
@@ -167,6 +171,7 @@ public class GuestResumeSessionReceiver extends BroadcastReceiver {
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
+            Log.d(TAG, "ResetSessionDialog: onClick: ");
             if (which == BUTTON_WIPE) {
                 wipeGuestSession(getContext(), mUserId);
                 dismiss();
