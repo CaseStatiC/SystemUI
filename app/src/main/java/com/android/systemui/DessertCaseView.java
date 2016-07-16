@@ -184,6 +184,7 @@ public class DessertCaseView extends FrameLayout {
     }
 
     private static Bitmap convertToAlphaMask(Bitmap b) {
+        Log.d(TAG, "convertToAlphaMask: ");
         Bitmap a = Bitmap.createBitmap(b.getWidth(), b.getHeight(), Bitmap.Config.ALPHA_8);
         Canvas c = new Canvas(a);
         Paint pt = new Paint();
@@ -193,6 +194,7 @@ public class DessertCaseView extends FrameLayout {
     }
 
     public void start() {
+        Log.d(TAG, "start: ");
         if (!mStarted) {
             mStarted = true;
             fillFreeList(DURATION * 4);
@@ -201,24 +203,29 @@ public class DessertCaseView extends FrameLayout {
     }
 
     public void stop() {
+        Log.d(TAG, "stop: ");
         mStarted = false;
         mHandler.removeCallbacks(mJuggle);
     }
 
     int pick(int[] a) {
+        Log.d(TAG, "pick: ");
         return a[(int)(Math.random()*a.length)];
     }
 
     <T> T pick(T[] a) {
+        Log.d(TAG, "pick: ");
         return a[(int)(Math.random()*a.length)];
     }
 
     <T> T pick(SparseArray<T> sa) {
+        Log.d(TAG, "pick: ");
         return sa.valueAt((int)(Math.random()*sa.size()));
     }
 
     float[] hsv = new float[] { 0, 1f, .85f };
     int random_color() {
+        Log.d(TAG, "random_color: ");
 //        return 0xFF000000 | (int) (Math.random() * (float) 0xFFFFFF); // totally random
         final int COLORS = 12;
         hsv[0] = irand(0,COLORS) * (360f/COLORS);
@@ -228,6 +235,7 @@ public class DessertCaseView extends FrameLayout {
     @Override
     protected synchronized void onSizeChanged (int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        Log.d(TAG, "onSizeChanged: ");
         if (mWidth == w && mHeight == h) return;
 
         final boolean wasStarted = mStarted;
@@ -266,10 +274,12 @@ public class DessertCaseView extends FrameLayout {
     }
 
     public void fillFreeList() {
+        Log.d(TAG, "fillFreeList: ");
         fillFreeList(DURATION);
     }
 
     public synchronized void fillFreeList(int animationLen) {
+        Log.d(TAG, "fillFreeList: ");
         final Context ctx = getContext();
         final FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(mCellSize, mCellSize);
 
@@ -323,6 +333,7 @@ public class DessertCaseView extends FrameLayout {
     }
 
     public void place(View v, boolean animate) {
+        Log.d(TAG, "place: ");
         place(v, new Point(irand(0, mColumns), irand(0, mRows)), animate);
     }
 
@@ -331,11 +342,13 @@ public class DessertCaseView extends FrameLayout {
         return new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animator) {
+                Log.d(TAG, "makeHardwareLayerListener: onAnimationStart: ");
                 v.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                 v.buildLayer();
             }
             @Override
             public void onAnimationEnd(Animator animator) {
+                Log.d(TAG, "makeHardwareLayerListener: onAnimationEnd: ");
                 v.setLayerType(View.LAYER_TYPE_NONE, null);
             }
         };
@@ -343,6 +356,7 @@ public class DessertCaseView extends FrameLayout {
 
     private final HashSet<View> tmpSet = new HashSet<View>();
     public synchronized void place(View v, Point pt, boolean animate) {
+        Log.d(TAG, "place: ");
         final int i = pt.x;
         final int j = pt.y;
         final float rnd = frand();
@@ -448,6 +462,7 @@ public class DessertCaseView extends FrameLayout {
     }
 
     private Point[] getOccupied(View v) {
+        Log.d(TAG, "getOccupied: ");
         final int scale = (Integer) v.getTag(TAG_SPAN);
         final Point pt = (Point)v.getTag(TAG_POS);
         if (pt == null || scale == 0) return new Point[0];
@@ -463,14 +478,17 @@ public class DessertCaseView extends FrameLayout {
     }
 
     static float frand() {
+        Log.d(TAG, "frand: ");
         return (float)(Math.random());
     }
 
     static float frand(float a, float b) {
+        Log.d(TAG, "frand: ");
         return (frand() * (b-a) + a);
     }
 
     static int irand(int a, int b) {
+        Log.d(TAG, "irand: ");
         return (int)(frand(a, b));
     }
 
