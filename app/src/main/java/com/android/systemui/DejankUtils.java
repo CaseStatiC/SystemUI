@@ -19,6 +19,7 @@ package com.android.systemui;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.Choreographer;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
  * Utility class for methods used to dejank the UI.
  */
 public class DejankUtils {
-
+    public static final String TAG = "DejankUtils";
     private static final Choreographer sChoreographer = Choreographer.getInstance();
     private static final Handler sHandler = new Handler();
 
@@ -51,6 +52,7 @@ public class DejankUtils {
      * <p>Needs to be called from the main thread.
      */
     public static void postAfterTraversal(Runnable r) {
+        Log.d(TAG, "postAfterTraversal: ");
         throwIfNotCalledOnMainThread();
         sPendingRunnables.add(r);
         postAnimationCallback();
@@ -62,17 +64,20 @@ public class DejankUtils {
      * <p>Needs to be called from the main thread.
      */
     public static void removeCallbacks(Runnable r) {
+        Log.d(TAG, "removeCallbacks: ");
         throwIfNotCalledOnMainThread();
         sPendingRunnables.remove(r);
         sHandler.removeCallbacks(r);
     }
 
     private static void postAnimationCallback() {
+        Log.d(TAG, "postAnimationCallback: ");
         sChoreographer.postCallback(Choreographer.CALLBACK_ANIMATION, sAnimationCallbackRunnable,
                 null);
     }
 
     private static void throwIfNotCalledOnMainThread() {
+        Log.d(TAG, "throwIfNotCalledOnMainThread: ");
         if (!Looper.getMainLooper().isCurrentThread()) {
             throw new IllegalStateException("should be called from the main thread.");
         }
