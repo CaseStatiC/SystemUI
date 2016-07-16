@@ -18,32 +18,39 @@ package com.android.systemui;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.util.Log;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Map;
 
 public abstract class SystemUI {
+    public static final String TAG = "SystemUI";
     public Context mContext;
     public Map<Class<?>, Object> mComponents;
 
     public abstract void start();
 
     protected void onConfigurationChanged(Configuration newConfig) {
+        Log.d(TAG, "onConfigurationChanged: ");
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
     }
 
     protected void onBootCompleted() {
+        Log.d(TAG, "onBootCompleted: ");
     }
 
     @SuppressWarnings("unchecked")
     public <T> T getComponent(Class<T> interfaceType) {
+        Log.d(TAG, "getComponent: ");
         return (T) (mComponents != null ? mComponents.get(interfaceType) : null);
     }
 
     public <T, C extends T> void putComponent(Class<T> interfaceType, C component) {
+        Log.d(TAG, "putComponent: ");
         if (mComponents != null) {
             mComponents.put(interfaceType, component);
         }
