@@ -19,15 +19,17 @@ package com.android.systemui;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
+import android.util.Log;
 import android.util.Slog;
 
 public class DessertCase extends Activity {
+    public static final String TAG = "DessertCase";
     DessertCaseView mView;
 
     @Override
     public void onStart() {
         super.onStart();
-
+        Log.d(TAG, "onStart: ");
         PackageManager pm = getPackageManager();
         final ComponentName cn = new ComponentName(this, DessertCaseDream.class);
         if (pm.getComponentEnabledSetting(cn) != PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
@@ -49,6 +51,7 @@ public class DessertCase extends Activity {
     @Override
     public void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume: ");
         mView.postDelayed(new Runnable() {
             public void run() {
                 mView.start();
@@ -59,6 +62,7 @@ public class DessertCase extends Activity {
     @Override
     public void onPause() {
         super.onPause();
+        Log.d(TAG, "onPause: ");
         mView.stop();
     }
 }
