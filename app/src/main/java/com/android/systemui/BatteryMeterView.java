@@ -36,6 +36,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.android.systemui.statusbar.policy.BatteryController;
@@ -168,7 +169,7 @@ public class BatteryMeterView extends View implements DemoMode,
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-
+        Log.d(TAG, "onAttachedToWindow: ");
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_BATTERY_CHANGED);
         filter.addAction(ACTION_LEVEL_TEST);
@@ -185,29 +186,33 @@ public class BatteryMeterView extends View implements DemoMode,
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-
+        Log.d(TAG, "onDetachedFromWindow: ");
         getContext().unregisterReceiver(mTracker);
         mBatteryController.removeStateChangedCallback(this);
         getContext().getContentResolver().unregisterContentObserver(mSettingObserver);
     }
 
     public void setBatteryController(BatteryController batteryController) {
+        Log.d(TAG, "setBatteryController: ");
         mBatteryController = batteryController;
         mPowerSaveEnabled = mBatteryController.isPowerSave();
     }
 
     @Override
     public void onBatteryLevelChanged(int level, boolean pluggedIn, boolean charging) {
+        Log.d(TAG, "onBatteryLevelChanged: ");
         // TODO: Use this callback instead of own broadcast receiver.
     }
 
     @Override
     public void onPowerSaveChanged() {
+        Log.d(TAG, "onPowerSaveChanged: ");
         mPowerSaveEnabled = mBatteryController.isPowerSave();
         invalidate();
     }
 
     private static float[] loadBoltPoints(Resources res) {
+        Log.d(TAG, "loadBoltPoints: ");
         final int[] pts = res.getIntArray(R.array.batterymeter_bolt_points);
         int maxX = 0, maxY = 0;
         for (int i = 0; i < pts.length; i += 2) {
@@ -224,6 +229,7 @@ public class BatteryMeterView extends View implements DemoMode,
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        Log.d(TAG, "onSizeChanged: ");
         mHeight = h;
         mWidth = w;
         mWarningTextPaint.setTextSize(h * 0.75f);
@@ -231,12 +237,13 @@ public class BatteryMeterView extends View implements DemoMode,
     }
 
     private void updateShowPercent() {
+        Log.d(TAG, "updateShowPercent: ");
         mShowPercent = 0 != Settings.System.getInt(getContext().getContentResolver(),
                 SHOW_PERCENT_SETTING, 0);
     }
 
     private int getColorForLevel(int percent) {
-
+        Log.d(TAG, "getColorForLevel: ");
         // If we are in power save mode, always use the normal color.
         if (mPowerSaveEnabled) {
             return mColors[mColors.length-1];
@@ -259,6 +266,7 @@ public class BatteryMeterView extends View implements DemoMode,
     }
 
     public void setDarkIntensity(float darkIntensity) {
+        Log.d(TAG, "setDarkIntensity: ");
         int backgroundColor = getBackgroundColor(darkIntensity);
         int fillColor = getFillColor(darkIntensity);
         mIconTint = fillColor;
@@ -269,21 +277,25 @@ public class BatteryMeterView extends View implements DemoMode,
     }
 
     private int getBackgroundColor(float darkIntensity) {
+        Log.d(TAG, "getBackgroundColor: ");
         return getColorForDarkIntensity(
                 darkIntensity, mLightModeBackgroundColor, mDarkModeBackgroundColor);
     }
 
     private int getFillColor(float darkIntensity) {
+        Log.d(TAG, "getFillColor: ");
         return getColorForDarkIntensity(
                 darkIntensity, mLightModeFillColor, mDarkModeFillColor);
     }
 
     private int getColorForDarkIntensity(float darkIntensity, int lightColor, int darkColor) {
+        Log.d(TAG, "getColorForDarkIntensity: ");
         return (int) ArgbEvaluator.getInstance().evaluate(darkIntensity, lightColor, darkColor);
     }
 
     @Override
     public void draw(Canvas c) {
+        Log.d(TAG, "draw: ");
         BatteryTracker tracker = mDemoMode ? mDemoTracker : mTracker;
         final int level = tracker.level;
 
@@ -425,6 +437,7 @@ public class BatteryMeterView extends View implements DemoMode,
 
     @Override
     public boolean hasOverlappingRendering() {
+        Log.d(TAG, "hasOverlappingRendering: ");
         return false;
     }
 
@@ -433,6 +446,7 @@ public class BatteryMeterView extends View implements DemoMode,
 
     @Override
     public void dispatchDemoCommand(String command, Bundle args) {
+        Log.d(TAG, "dispatchDemoCommand: ");
         if (!mDemoMode && command.equals(COMMAND_ENTER)) {
             mDemoMode = true;
             mDemoTracker.level = mTracker.level;
@@ -470,6 +484,7 @@ public class BatteryMeterView extends View implements DemoMode,
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "BatteryTracker: onReceive: ");
             final String action = intent.getAction();
             if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
                 if (testmode && ! intent.getBooleanExtra("testmode", false)) return;
@@ -530,11 +545,13 @@ public class BatteryMeterView extends View implements DemoMode,
     private final class SettingObserver extends ContentObserver {
         public SettingObserver() {
             super(new Handler());
+            Log.d(TAG, "SettingObserver: ");
         }
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             super.onChange(selfChange, uri);
+            Log.d(TAG, "onChange: ");
             updateShowPercent();
             postInvalidate();
         }
