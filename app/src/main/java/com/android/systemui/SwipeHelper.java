@@ -100,42 +100,51 @@ public class SwipeHelper implements Gefingerpoken {
     }
 
     public void setLongPressListener(LongPressListener listener) {
+        Log.d(TAG, "setLongPressListener: ");
         mLongPressListener = listener;
     }
 
     public void setDensityScale(float densityScale) {
+        Log.d(TAG, "setDensityScale: ");
         mDensityScale = densityScale;
     }
 
     public void setPagingTouchSlop(float pagingTouchSlop) {
+        Log.d(TAG, "setPagingTouchSlop: ");
         mPagingTouchSlop = pagingTouchSlop;
     }
 
     private float getPos(MotionEvent ev) {
+        Log.d(TAG, "getPos: ");
         return mSwipeDirection == X ? ev.getX() : ev.getY();
     }
 
     private float getTranslation(View v) {
+        Log.d(TAG, "getTranslation: ");
         return mSwipeDirection == X ? v.getTranslationX() : v.getTranslationY();
     }
 
     private float getVelocity(VelocityTracker vt) {
+        Log.d(TAG, "getVelocity: ");
         return mSwipeDirection == X ? vt.getXVelocity() :
                 vt.getYVelocity();
     }
 
     private ObjectAnimator createTranslationAnimation(View v, float newPos) {
+        Log.d(TAG, "createTranslationAnimation: ");
         ObjectAnimator anim = ObjectAnimator.ofFloat(v,
                 mSwipeDirection == X ? "translationX" : "translationY", newPos);
         return anim;
     }
 
     private float getPerpendicularVelocity(VelocityTracker vt) {
+        Log.d(TAG, "getPerpendicularVelocity: ");
         return mSwipeDirection == X ? vt.getYVelocity() :
                 vt.getXVelocity();
     }
 
     private void setTranslation(View v, float translate) {
+        Log.d(TAG, "setTranslation: ");
         if (mSwipeDirection == X) {
             v.setTranslationX(translate);
         } else {
@@ -144,19 +153,23 @@ public class SwipeHelper implements Gefingerpoken {
     }
 
     private float getSize(View v) {
+        Log.d(TAG, "getSize: ");
         return mSwipeDirection == X ? v.getMeasuredWidth() :
                 v.getMeasuredHeight();
     }
 
     public void setMinSwipeProgress(float minSwipeProgress) {
+        Log.d(TAG, "setMinSwipeProgress: ");
         mMinSwipeProgress = minSwipeProgress;
     }
 
     public void setMaxSwipeProgress(float maxSwipeProgress) {
+        Log.d(TAG, "setMaxSwipeProgress: ");
         mMaxSwipeProgress = maxSwipeProgress;
     }
 
     private float getSwipeProgressForOffset(View view) {
+        Log.d(TAG, "getSwipeProgressForOffset: ");
         float viewSize = getSize(view);
         final float fadeSize = SWIPE_PROGRESS_FADE_END * viewSize;
         float result = 1.0f;
@@ -170,6 +183,7 @@ public class SwipeHelper implements Gefingerpoken {
     }
 
     private void updateSwipeProgressFromOffset(View animView, boolean dismissable) {
+        Log.d(TAG, "updateSwipeProgressFromOffset: ");
         float swipeProgress = getSwipeProgressForOffset(animView);
         if (!mCallback.updateSwipeProgress(animView, dismissable, swipeProgress)) {
             if (FADE_OUT_DURING_SWIPE && dismissable) {
@@ -187,6 +201,7 @@ public class SwipeHelper implements Gefingerpoken {
 
     // invalidate the view's own bounds all the way up the view hierarchy
     public static void invalidateGlobalRegion(View view) {
+        Log.d(TAG, "invalidateGlobalRegion: ");
         invalidateGlobalRegion(
             view,
             new RectF(view.getLeft(), view.getTop(), view.getRight(), view.getBottom()));
@@ -195,6 +210,7 @@ public class SwipeHelper implements Gefingerpoken {
     // invalidate a rectangle relative to the view's coordinate system all the way up the view
     // hierarchy
     public static void invalidateGlobalRegion(View view, RectF childBounds) {
+        Log.d(TAG, "invalidateGlobalRegion: ");
         //childBounds.offset(view.getTranslationX(), view.getTranslationY());
         if (DEBUG_INVALIDATE)
             Log.v(TAG, "-------------");
@@ -215,6 +231,7 @@ public class SwipeHelper implements Gefingerpoken {
     }
 
     public void removeLongPressCallback() {
+        Log.d(TAG, "removeLongPressCallback: ");
         if (mWatchLongPress != null) {
             mHandler.removeCallbacks(mWatchLongPress);
             mWatchLongPress = null;
@@ -222,6 +239,7 @@ public class SwipeHelper implements Gefingerpoken {
     }
 
     public boolean onInterceptTouchEvent(final MotionEvent ev) {
+        Log.d(TAG, "onInterceptTouchEvent: ");
         final int action = ev.getAction();
 
         switch (action) {
@@ -295,6 +313,7 @@ public class SwipeHelper implements Gefingerpoken {
      * @param velocity The desired pixels/second speed at which the view should move
      */
     public void dismissChild(final View view, float velocity) {
+        Log.d(TAG, "dismissChild: ");
         dismissChild(view, velocity, null, 0, false, 0);
     }
 
@@ -308,6 +327,7 @@ public class SwipeHelper implements Gefingerpoken {
      */
     public void dismissChild(final View view, float velocity, final Runnable endAction,
             long delay, boolean useAccelerateInterpolator, long fixedDuration) {
+        Log.d(TAG, "dismissChild: ");
         final View animView = mCallback.getChildContentView(view);
         final boolean canAnimViewBeDismissed = mCallback.canChildBeDismissed(view);
         float newPos;
@@ -367,6 +387,7 @@ public class SwipeHelper implements Gefingerpoken {
     }
 
     public void snapChild(final View view, float velocity) {
+        Log.d(TAG, "snapChild: ");
         final View animView = mCallback.getChildContentView(view);
         final boolean canAnimViewBeDismissed = mCallback.canChildBeDismissed(animView);
         ObjectAnimator anim = createTranslationAnimation(animView, 0);
@@ -387,6 +408,7 @@ public class SwipeHelper implements Gefingerpoken {
     }
 
     public boolean onTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "onTouchEvent: ");
         if (mLongPressSent) {
             return true;
         }
@@ -471,6 +493,7 @@ public class SwipeHelper implements Gefingerpoken {
     }
 
     private int getFalsingThreshold() {
+        Log.d(TAG, "getFalsingThreshold: ");
         float factor = mCallback.getFalsingThresholdFactor();
         return (int) (mFalsingThreshold * factor);
     }
