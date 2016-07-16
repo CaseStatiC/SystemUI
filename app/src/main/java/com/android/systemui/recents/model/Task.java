@@ -99,6 +99,7 @@ public class Task {
 
         @Override
         public boolean equals(Object o) {
+            Log.d(TAG, "TaskKey: equals: ");
             if (!(o instanceof TaskKey)) {
                 return false;
             }
@@ -108,6 +109,7 @@ public class Task {
 
         @Override
         public int hashCode() {
+            Log.d(TAG, "TaskKey: hashCode: ");
             return Objects.hash(id, stackId, userId);
         }
 
