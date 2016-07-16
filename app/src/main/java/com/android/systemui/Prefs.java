@@ -20,12 +20,14 @@ import android.annotation.StringDef;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.util.Log;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
 public final class Prefs {
+    public static final String TAG = "Prefs";
     private Prefs() {} // no instantation
 
     @Retention(RetentionPolicy.SOURCE)
@@ -58,56 +60,69 @@ public final class Prefs {
     }
 
     public static boolean getBoolean(Context context, @Key String key, boolean defaultValue) {
+        Log.d(TAG, "getBoolean: ");
         return get(context).getBoolean(key, defaultValue);
     }
 
     public static void putBoolean(Context context, @Key String key, boolean value) {
+        Log.d(TAG, "putBoolean: ");
         get(context).edit().putBoolean(key, value).apply();
     }
 
     public static int getInt(Context context, @Key String key, int defaultValue) {
+        Log.d(TAG, "getInt: ");
         return get(context).getInt(key, defaultValue);
     }
 
     public static void putInt(Context context, @Key String key, int value) {
+        Log.d(TAG, "putInt: ");
         get(context).edit().putInt(key, value).apply();
     }
 
     public static long getLong(Context context, @Key String key, long defaultValue) {
+        Log.d(TAG, "getLong: ");
         return get(context).getLong(key, defaultValue);
     }
 
     public static void putLong(Context context, @Key String key, long value) {
+        Log.d(TAG, "putLong: ");
         get(context).edit().putLong(key, value).apply();
     }
 
     public static String getString(Context context, @Key String key, String defaultValue) {
+        Log.d(TAG, "getString: ");
         return get(context).getString(key, defaultValue);
     }
 
     public static void putString(Context context, @Key String key, String value) {
+        Log.d(TAG, "putString: ");
         get(context).edit().putString(key, value).apply();
     }
 
     public static Map<String, ?> getAll(Context context) {
+        Log.d(TAG, "getAll: ");
         return get(context).getAll();
     }
 
     public static void remove(Context context, @Key String key) {
+        Log.d(TAG, "remove: ");
         get(context).edit().remove(key).apply();
     }
 
     public static void registerListener(Context context,
             OnSharedPreferenceChangeListener listener) {
+        Log.d(TAG, "registerListener: ");
         get(context).registerOnSharedPreferenceChangeListener(listener);
     }
 
     public static void unregisterListener(Context context,
             OnSharedPreferenceChangeListener listener) {
+        Log.d(TAG, "unregisterListener: ");
         get(context).unregisterOnSharedPreferenceChangeListener(listener);
     }
 
     private static SharedPreferences get(Context context) {
+        Log.d(TAG, "get: ");
         return context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
     }
 }
