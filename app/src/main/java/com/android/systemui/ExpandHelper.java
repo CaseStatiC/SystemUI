@@ -134,17 +134,21 @@ public class ExpandHelper implements Gefingerpoken {
 
         public ViewScaler() {}
         public void setView(ExpandableView v) {
+            Log.d(TAG, "setView: ");
             mView = v;
         }
         public void setHeight(float h) {
+            Log.d(TAG, "setHeight: ");
             if (DEBUG_SCALE) Log.v(TAG, "SetHeight: setting to " + h);
             mView.setContentHeight((int) h);
             mCurrentHeight = h;
         }
         public float getHeight() {
+            Log.d(TAG, "getHeight: ");
             return mView.getContentHeight();
         }
         public int getNaturalHeight(int maximum) {
+            Log.d(TAG, "getNaturalHeight: ");
             return Math.min(maximum, mView.getMaxContentHeight());
         }
     }
@@ -176,6 +180,7 @@ public class ExpandHelper implements Gefingerpoken {
     }
 
     private void updateExpansion() {
+        Log.d(TAG, "updateExpansion: ");
         if (DEBUG_SCALE) Log.v(TAG, "updateExpansion()");
         // are we scaling or dragging?
         float span = mSGD.getCurrentSpan() - mInitialTouchSpan;
@@ -193,6 +198,7 @@ public class ExpandHelper implements Gefingerpoken {
     }
 
     private float clamp(float target) {
+        Log.d(TAG, "clamp: ");
         float out = target;
         out = out < mSmallSize ? mSmallSize : (out > mLargeSize ? mLargeSize : out);
         out = out > mNaturalHeight ? mNaturalHeight : out;
@@ -214,6 +220,7 @@ public class ExpandHelper implements Gefingerpoken {
     }
 
     private boolean isInside(View v, float x, float y) {
+        Log.d(TAG, "isInside: x = " + x + ", y = " + y);
         if (DEBUG) Log.d(TAG, "isinside (" + x + ", " + y + ")");
 
         if (v == null) {
@@ -238,19 +245,23 @@ public class ExpandHelper implements Gefingerpoken {
     }
 
     public void setEventSource(View eventSource) {
+        Log.d(TAG, "setEventSource: ");
         mEventSource = eventSource;
     }
 
     public void setGravity(int gravity) {
+        Log.d(TAG, "setGravity: ");
         mGravity = gravity;
     }
 
     public void setScrollAdapter(ScrollAdapter adapter) {
+        Log.d(TAG, "setScrollAdapter: ");
         mScrollAdapter = adapter;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "onInterceptTouchEvent: ");
         if (!isEnabled()) {
             return false;
         }
@@ -334,6 +345,7 @@ public class ExpandHelper implements Gefingerpoken {
     }
 
     private void trackVelocity(MotionEvent event) {
+        Log.d(TAG, "trackVelocity: ");
         int action = event.getActionMasked();
         switch(action) {
             case MotionEvent.ACTION_DOWN:
@@ -373,6 +385,7 @@ public class ExpandHelper implements Gefingerpoken {
     }
 
     public void setEnabled(boolean enable) {
+        Log.d(TAG, "setEnabled: ");
         mEnabled = enable;
     }
 
@@ -387,6 +400,7 @@ public class ExpandHelper implements Gefingerpoken {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "onTouchEvent: ");
         if (!isEnabled()) {
             return false;
         }
@@ -495,6 +509,7 @@ public class ExpandHelper implements Gefingerpoken {
      * @return True if the view is expandable, false otherwise.
      */
     private boolean startExpanding(ExpandableView v, int expandType) {
+        Log.d(TAG, "startExpanding: ");
         if (!(v instanceof ExpandableNotificationRow)) {
             return false;
         }
@@ -591,6 +606,7 @@ public class ExpandHelper implements Gefingerpoken {
      * @param onlyMovements Should only movements be observed?
      */
     public void onlyObserveMovements(boolean onlyMovements) {
+        Log.d(TAG, "onlyObserveMovements: ");
         mOnlyMovements = onlyMovements;
     }
 }
