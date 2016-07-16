@@ -62,6 +62,7 @@ public class SystemUIApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.d(TAG, "onCreate: ");
         // Set the application theme that is inherited by all services. Note that setting the
         // application theme in the manifest does only work for activities. Keep this in sync with
         // the theme set there.
@@ -95,6 +96,7 @@ public class SystemUIApplication extends Application {
      * <p>This method must only be called from the main thread.</p>
      */
     public void startServicesIfNeeded() {
+        Log.d(TAG, "startServicesIfNeeded: ");
         if (mServicesStarted) {
             return;
         }
@@ -134,6 +136,7 @@ public class SystemUIApplication extends Application {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        Log.d(TAG, "onConfigurationChanged: ");
         if (mServicesStarted) {
             int len = mServices.length;
             for (int i = 0; i < len; i++) {
@@ -144,10 +147,12 @@ public class SystemUIApplication extends Application {
 
     @SuppressWarnings("unchecked")
     public <T> T getComponent(Class<T> interfaceType) {
+        Log.d(TAG, "getComponent: ");
         return (T) mComponents.get(interfaceType);
     }
 
     public SystemUI[] getServices() {
+        Log.d(TAG, "getServices: ");
         return mServices;
     }
 }
