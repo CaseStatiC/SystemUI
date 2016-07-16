@@ -237,6 +237,7 @@ class TaskResourceLoader implements Runnable {
 
     Drawable getTaskDescriptionIcon(Task.TaskKey taskKey, Bitmap iconBitmap, String iconFilename,
             SystemServicesProxy ssp, Resources res) {
+        Log.d(TAG, "getTaskDescriptionIcon: ");
         Bitmap tdIcon = iconBitmap != null
                 ? iconBitmap
                 : ActivityManager.TaskDescription.loadTaskDescriptionIcon(iconFilename);
@@ -306,6 +307,7 @@ public class RecentsTaskLoader {
 
     /** Initializes the recents task loader */
     public static RecentsTaskLoader initialize(Context context) {
+        Log.d(TAG, "initialize: ");
         if (sInstance == null) {
             sInstance = new RecentsTaskLoader(context);
         }
@@ -314,11 +316,13 @@ public class RecentsTaskLoader {
 
     /** Returns the current recents task loader */
     public static RecentsTaskLoader getInstance() {
+        Log.d(TAG, "getInstance: ");
         return sInstance;
     }
 
     /** Returns the system services proxy */
     public SystemServicesProxy getSystemServicesProxy() {
+        Log.d(TAG, "getSystemServicesProxy: ");
         return mSystemServicesProxy;
     }
 
@@ -326,6 +330,7 @@ public class RecentsTaskLoader {
     public String getAndUpdateActivityLabel(Task.TaskKey taskKey,
             ActivityManager.TaskDescription td, SystemServicesProxy ssp,
             ActivityInfoHandle infoHandle) {
+        Log.d(TAG, "getAndUpdateActivityLabel: ");
         // Return the task description label if it exists
         if (td != null && td.getLabel() != null) {
             return td.getLabel();
@@ -356,6 +361,7 @@ public class RecentsTaskLoader {
     /** Returns the content description using as many cached values as we can. */
     public String getAndUpdateContentDescription(Task.TaskKey taskKey, String activityLabel,
             SystemServicesProxy ssp, Resources res) {
+        Log.d(TAG, "getAndUpdateContentDescription: ");
         // Return the cached content description if it exists
         String label = mContentDescriptionCache.getAndInvalidateIfModified(taskKey);
         if (label != null) {
@@ -384,6 +390,7 @@ public class RecentsTaskLoader {
             ActivityManager.TaskDescription td, SystemServicesProxy ssp,
             Resources res, ActivityInfoHandle infoHandle, boolean loadIfNotCached) {
         // Return the cached activity icon if it exists
+        Log.d(TAG, "getAndUpdateActivityIcon: ");
         Drawable icon = mApplicationIconCache.getAndInvalidateIfModified(taskKey);
         if (icon != null) {
             return icon;
@@ -418,6 +425,7 @@ public class RecentsTaskLoader {
     /** Returns the bitmap using as many cached values as we can. */
     public Bitmap getAndUpdateThumbnail(Task.TaskKey taskKey, SystemServicesProxy ssp,
             boolean loadIfNotCached) {
+        Log.d(TAG, "getAndUpdateThumbnail: ");
         // Return the cached thumbnail if it exists
         Bitmap thumbnail = mThumbnailCache.getAndInvalidateIfModified(taskKey);
         if (thumbnail != null) {
@@ -440,6 +448,7 @@ public class RecentsTaskLoader {
     /** Returns the activity's primary color. */
     public int getActivityPrimaryColor(ActivityManager.TaskDescription td,
             RecentsConfiguration config) {
+        Log.d(TAG, "getActivityPrimaryColor: ");
         if (td != null && td.getPrimaryColor() != 0) {
             return td.getPrimaryColor();
         }
@@ -448,16 +457,19 @@ public class RecentsTaskLoader {
 
     /** Returns the size of the app icon cache. */
     public int getApplicationIconCacheSize() {
+        Log.d(TAG, "getApplicationIconCacheSize: ");
         return mMaxIconCacheSize;
     }
 
     /** Returns the size of the thumbnail cache. */
     public int getThumbnailCacheSize() {
+        Log.d(TAG, "getThumbnailCacheSize: ");
         return mMaxThumbnailCacheSize;
     }
 
     /** Creates a new plan for loading the recent tasks. */
     public RecentsTaskLoadPlan createLoadPlan(Context context) {
+        Log.d(TAG, "createLoadPlan: ");
         RecentsConfiguration config = RecentsConfiguration.getInstance();
         RecentsTaskLoadPlan plan = new RecentsTaskLoadPlan(context, config, mSystemServicesProxy);
         return plan;
@@ -465,12 +477,14 @@ public class RecentsTaskLoader {
 
     /** Preloads recents tasks using the specified plan to store the output. */
     public void preloadTasks(RecentsTaskLoadPlan plan, boolean isTopTaskHome) {
+        Log.d(TAG, "preloadTasks: ");
         plan.preloadPlan(this, isTopTaskHome);
     }
 
     /** Begins loading the heavy task data according to the specified options. */
     public void loadTasks(Context context, RecentsTaskLoadPlan plan,
             RecentsTaskLoadPlan.Options opts) {
+        Log.d(TAG, "loadTasks: ");
         if (opts == null) {
             throw new RuntimeException("Requires load options");
         }
@@ -486,6 +500,7 @@ public class RecentsTaskLoader {
 
     /** Acquires the task resource data directly from the pool. */
     public void loadTaskData(Task t) {
+        Log.d(TAG, "loadTaskData: ");
         Drawable applicationIcon = mApplicationIconCache.getAndInvalidateIfModified(t.key);
         Bitmap thumbnail = mThumbnailCache.getAndInvalidateIfModified(t.key);
 
@@ -501,12 +516,14 @@ public class RecentsTaskLoader {
 
     /** Releases the task resource data back into the pool. */
     public void unloadTaskData(Task t) {
+        Log.d(TAG, "unloadTaskData: ");
         mLoadQueue.removeTask(t);
         t.notifyTaskDataUnloaded(null, mDefaultApplicationIcon);
     }
 
     /** Completely removes the resource data from the pool. */
     public void deleteTaskData(Task t, boolean notifyTaskDataUnloaded) {
+        Log.d(TAG, "deleteTaskData: ");
         mLoadQueue.removeTask(t);
         mThumbnailCache.remove(t.key);
         mApplicationIconCache.remove(t.key);
@@ -517,18 +534,21 @@ public class RecentsTaskLoader {
 
     /** Stops the task loader and clears all pending tasks */
     void stopLoader() {
+        Log.d(TAG, "stopLoader: ");
         mLoader.stop();
         mLoadQueue.clearTasks();
     }
 
     /** Registers any broadcast receivers. */
     public void registerReceivers(Context context, RecentsPackageMonitor.PackageCallbacks cb) {
+        Log.d(TAG, "registerReceivers: ");
         // Register the broadcast receiver to handle messages related to packages being added/removed
         mPackageMonitor.register(context, cb);
     }
 
     /** Unregisters any broadcast receivers. */
     public void unregisterReceivers() {
+        Log.d(TAG, "unregisterReceivers: ");
         mPackageMonitor.unregister();
     }
 
@@ -537,6 +557,7 @@ public class RecentsTaskLoader {
      * out of memory.
      */
     public void onTrimMemory(int level) {
+        Log.d(TAG, "onTrimMemory: ");
         RecentsConfiguration config = RecentsConfiguration.getInstance();
         switch (level) {
             case ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN:
