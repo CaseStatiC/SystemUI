@@ -19,6 +19,7 @@ package com.android.systemui;
 import android.app.Activity;
 import android.content.Intent;
 import android.service.dreams.Sandman;
+import android.util.Log;
 
 /**
  * A simple activity that launches a dream.
@@ -28,13 +29,14 @@ import android.service.dreams.Sandman;
  * </p>
  */
 public class Somnambulator extends Activity {
+    public static final String TAG = "Somnambulator";
     public Somnambulator() {
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
+        Log.d(TAG, "onStart: ");
         final Intent launchIntent = getIntent();
         final String action = launchIntent.getAction();
         if (Intent.ACTION_CREATE_SHORTCUT.equals(action)) {
