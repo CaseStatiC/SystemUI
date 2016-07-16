@@ -22,6 +22,7 @@ import android.animation.ValueAnimator;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
@@ -31,6 +32,7 @@ import android.view.animation.Interpolator;
  */
 public class ViewInvertHelper {
 
+    public static final String TAG = "ViewInvertHelper";
     private final Paint mDarkPaint = new Paint();
     private final Interpolator mLinearOutSlowInInterpolator;
     private final View mTarget;
@@ -39,6 +41,7 @@ public class ViewInvertHelper {
     private final long mFadeDuration;
 
     public ViewInvertHelper(View target, long fadeDuration) {
+        Log.d(TAG, "ViewInvertHelper: ");
         mTarget = target;
         mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(mTarget.getContext(),
                 android.R.interpolator.linear_out_slow_in);
@@ -46,6 +49,7 @@ public class ViewInvertHelper {
     }
 
     public void fade(final boolean invert, long delay) {
+        Log.d(TAG, "fade: ");
         float startIntensity = invert ? 0f : 1f;
         float endIntensity = invert ? 1f : 0f;
         ValueAnimator animator = ValueAnimator.ofFloat(startIntensity, endIntensity);
@@ -71,6 +75,7 @@ public class ViewInvertHelper {
     }
 
     public void update(boolean invert) {
+        Log.d(TAG, "update: ");
         if (invert) {
             updateInvertPaint(1f);
             mTarget.setLayerType(View.LAYER_TYPE_HARDWARE, mDarkPaint);
@@ -80,10 +85,12 @@ public class ViewInvertHelper {
     }
 
     public View getTarget() {
+        Log.d(TAG, "getTarget: ");
         return mTarget;
     }
 
     private void updateInvertPaint(float intensity) {
+        Log.d(TAG, "updateInvertPaint: ");
         float components = 1 - 2 * intensity;
         final float[] invert = {
                 components, 0f,         0f,         0f, 255f * intensity,
