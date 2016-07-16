@@ -16,12 +16,14 @@
 package com.android.systemui;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 public class SysUIToast {
-
+    public static final String TAG = "SysUIToast";
     public static Toast makeText(Context context, CharSequence text, int duration) {
+        Log.d(TAG, "makeText: ");
         Toast toast = Toast.makeText(context, text, duration);
         toast.getWindowParams().privateFlags |=
                 WindowManager.LayoutParams.PRIVATE_FLAG_SHOW_FOR_ALL_USERS;
