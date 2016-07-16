@@ -32,6 +32,7 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
+        Log.d(TAG, "onReceive: ");
         try {
             // Start the load average overlay, if activated
             ContentResolver res = context.getContentResolver();
