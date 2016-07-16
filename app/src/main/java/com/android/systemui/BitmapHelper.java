@@ -23,8 +23,10 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.util.Log;
 
 public class BitmapHelper {
+    public static final String TAG = "BitmapHelper";
     /**
      * Generate a new bitmap (width x height pixels, ARGB_8888) with the input bitmap scaled
      * to fit and clipped to an inscribed circle.
@@ -34,6 +36,7 @@ public class BitmapHelper {
      * @return A shiny new bitmap for you to use
      */
     public static Bitmap createCircularClip(Bitmap input, int width, int height) {
+        Log.d(TAG, "createCircularClip: ");
         if (input == null) return null;
 
         final int inWidth = input.getWidth();
