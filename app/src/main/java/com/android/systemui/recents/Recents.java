@@ -405,6 +405,9 @@ public class Recents extends SystemUI
         // Preload only the raw task list into a new load plan (which will be consumed by the
         // RecentsActivity) only if there is a task to animate to.
         ActivityManager.RunningTaskInfo topTask = mSystemServicesProxy.getTopMostTask();
+        Log.d(TAG, "preloadRecentsInternal: topTask.id = " + topTask.id);
+        Log.d(TAG, "preloadRecentsInternal: topTask.topActivity.toShortString() = " + topTask.topActivity.toShortString());
+        Log.d(TAG, "preloadRecentsInternal: topTask.baseActivity.toShortString() = " + topTask.baseActivity.toShortString());
         MutableBoolean topTaskHome = new MutableBoolean(true);
         RecentsTaskLoader loader = RecentsTaskLoader.getInstance();
         sInstanceLoadPlan = loader.createLoadPlan(mContext);
@@ -412,6 +415,7 @@ public class Recents extends SystemUI
             sInstanceLoadPlan.preloadRawTasks(topTaskHome.value);
             loader.preloadTasks(sInstanceLoadPlan, topTaskHome.value);
             TaskStack top = sInstanceLoadPlan.getAllTaskStacks().get(0);
+            Log.d(TAG, "preloadRecentsInternal: top.getTaskCount() = " + top.getTaskCount());
             if (top.getTaskCount() > 0) {
                 preCacheThumbnailTransitionBitmapAsync(topTask, top, mDummyStackView,
                         topTaskHome.value);
