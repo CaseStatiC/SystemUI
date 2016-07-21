@@ -104,6 +104,7 @@ public class NavigationBarView extends LinearLayout {
         @Override
         public void startTransition(LayoutTransition transition, ViewGroup container,
                 View view, int transitionType) {
+            Log.d(TAG, "startTransition: ");
             if (view.getId() == R.id.back) {
                 mBackTransitioning = true;
             } else if (view.getId() == R.id.home && transitionType == LayoutTransition.APPEARING) {
@@ -117,6 +118,7 @@ public class NavigationBarView extends LinearLayout {
         @Override
         public void endTransition(LayoutTransition transition, ViewGroup container,
                 View view, int transitionType) {
+            Log.d(TAG, "endTransition: ");
             if (view.getId() == R.id.back) {
                 mBackTransitioning = false;
             } else if (view.getId() == R.id.home && transitionType == LayoutTransition.APPEARING) {
@@ -125,6 +127,7 @@ public class NavigationBarView extends LinearLayout {
         }
 
         public void onBackAltCleared() {
+            Log.d(TAG, "onBackAltCleared: ");
             // When dismissing ime during unlock, force the back button to run the same appearance
             // animation as home (if we catch this condition early enough).
             if (!mBackTransitioning && getBackButton().getVisibility() == VISIBLE
@@ -142,6 +145,7 @@ public class NavigationBarView extends LinearLayout {
     private final OnClickListener mImeSwitcherClickListener = new OnClickListener() {
         @Override
         public void onClick(View view) {
+            Log.d(TAG, "mImeSwitcherClickListener: onClick: ");
             ((InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE))
                     .showInputMethodPicker(true /* showAuxiliarySubtypes */);
         }
@@ -172,7 +176,7 @@ public class NavigationBarView extends LinearLayout {
 
     public NavigationBarView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
+        Log.d(TAG, "NavigationBarView: ");
         mDisplay = ((WindowManager)context.getSystemService(
                 Context.WINDOW_SERVICE)).getDefaultDisplay();
 
