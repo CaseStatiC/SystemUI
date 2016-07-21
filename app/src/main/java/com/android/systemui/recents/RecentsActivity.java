@@ -108,6 +108,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
 
         @Override
         public void run() {
+            Log.d(TAG, "FinishRecentsRunnable: run: ");
             // Finish Recents
             if (mLaunchIntent != null) {
                 try {
@@ -134,6 +135,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
     final BroadcastReceiver mServiceBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "mServiceBroadcastReceiver: onReceive: ");
             String action = intent.getAction();
             if (action.equals(Recents.ACTION_HIDE_RECENTS_ACTIVITY)) {
                 if (intent.getBooleanExtra(Recents.EXTRA_TRIGGERED_FROM_ALT_TAB, false)) {
@@ -164,6 +166,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
     final BroadcastReceiver mSystemBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "mSystemBroadcastReceiver: onReceive: ");
             String action = intent.getAction();
             if (action.equals(Intent.ACTION_SCREEN_OFF)) {
                 // When the screen turns off, dismiss Recents to Home
@@ -183,6 +186,7 @@ public class RecentsActivity extends Activity implements RecentsView.RecentsView
     final DebugTrigger mDebugTrigger = new DebugTrigger(new Runnable() {
         @Override
         public void run() {
+            Log.d(TAG, "mDebugTrigger: run: ");
             onDebugModeTriggered();
         }
     });
