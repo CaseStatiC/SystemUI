@@ -1040,6 +1040,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     }
 
     private void performDismissAllAnimations(ArrayList<View> hideAnimatedList) {
+        Log.d(TAG, "performDismissAllAnimations: ");
         Runnable animationFinishAction = new Runnable() {
             @Override
             public void run() {
