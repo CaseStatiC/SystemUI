@@ -1171,6 +1171,7 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     /** Jumps to the previous affiliated task in the group. */
     public void showPreviousAffiliatedTask() {
+        Log.d(TAG, "showPreviousAffiliatedTask: ");
         int msg = MSG_SHOW_PREV_AFFILIATED_TASK;
         mHandler.removeMessages(msg);
         mHandler.sendEmptyMessage(msg);
@@ -1181,6 +1182,7 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     static void sendCloseSystemWindows(Context context, String reason) {
+        Log.d(TAG, "sendCloseSystemWindows: ");
         if (ActivityManagerNative.isSystemReady()) {
             try {
                 ActivityManagerNative.getDefault().closeSystemDialogs(reason);
@@ -1196,6 +1198,7 @@ public abstract class BaseStatusBar extends SystemUI implements
         // tasks on touch down
         @Override
         public boolean onTouch(View v, MotionEvent event) {
+            Log.d(TAG, "mRecentsPreloadOnTouchListener: onTouch: ");
             int action = event.getAction() & MotionEvent.ACTION_MASK;
             if (action == MotionEvent.ACTION_DOWN) {
                 preloadRecents();
@@ -1214,6 +1217,7 @@ public abstract class BaseStatusBar extends SystemUI implements
     /** Proxy for RecentsComponent */
 
     protected void showRecents(boolean triggeredFromAltTab) {
+        Log.d(TAG, "showRecents: ");
         if (mRecents != null) {
             sendCloseSystemWindows(mContext, SYSTEM_DIALOG_REASON_RECENT_APPS);
             mRecents.showRecents(triggeredFromAltTab, getStatusBarView());
@@ -1221,12 +1225,14 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     protected void hideRecents(boolean triggeredFromAltTab, boolean triggeredFromHomeKey) {
+        Log.d(TAG, "hideRecents: ");
         if (mRecents != null) {
             mRecents.hideRecents(triggeredFromAltTab, triggeredFromHomeKey);
         }
     }
 
     protected void toggleRecents() {
+        Log.d(TAG, "toggleRecents: ");
         if (mRecents != null) {
             sendCloseSystemWindows(mContext, SYSTEM_DIALOG_REASON_RECENT_APPS);
             mRecents.toggleRecents(mDisplay, mLayoutDirection, getStatusBarView());
@@ -1234,24 +1240,28 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     protected void preloadRecents() {
+        Log.d(TAG, "preloadRecents: ");
         if (mRecents != null) {
             mRecents.preloadRecents();
         }
     }
 
     protected void cancelPreloadingRecents() {
+        Log.d(TAG, "cancelPreloadingRecents: ");
         if (mRecents != null) {
             mRecents.cancelPreloadingRecents();
         }
     }
 
     protected void showRecentsNextAffiliatedTask() {
+        Log.d(TAG, "showRecentsNextAffiliatedTask: ");
         if (mRecents != null) {
             mRecents.showNextAffiliatedTask();
         }
     }
 
     protected void showRecentsPreviousAffiliatedTask() {
+        Log.d(TAG, "showRecentsPreviousAffiliatedTask: ");
         if (mRecents != null) {
             mRecents.showPrevAffiliatedTask();
         }
@@ -1259,6 +1269,7 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     @Override
     public void onVisibilityChanged(boolean visible) {
+        Log.d(TAG, "onVisibilityChanged: ");
         // Do nothing
     }
 
@@ -1271,10 +1282,12 @@ public abstract class BaseStatusBar extends SystemUI implements
      * Save the current "public" (locked and secure) state of the lockscreen.
      */
     public void setLockscreenPublicMode(boolean publicMode) {
+        Log.d(TAG, "setLockscreenPublicMode: ");
         mLockscreenPublicMode = publicMode;
     }
 
     public boolean isLockscreenPublicMode() {
+        Log.d(TAG, "isLockscreenPublicMode: ");
         return mLockscreenPublicMode;
     }
 
@@ -1283,6 +1296,7 @@ public abstract class BaseStatusBar extends SystemUI implements
      * when the lockscreen is in "public" (secure & locked) mode?
      */
     public boolean userAllowsPrivateNotificationsInPublic(int userHandle) {
+        Log.d(TAG, "userAllowsPrivateNotificationsInPublic: ");
         if (userHandle == UserHandle.USER_ALL) {
             return true;
         }
@@ -1310,10 +1324,12 @@ public abstract class BaseStatusBar extends SystemUI implements
      */
     @Override  // NotificationData.Environment
     public boolean shouldHideSensitiveContents(int userid) {
+        Log.d(TAG, "shouldHideSensitiveContents: ");
         return isLockscreenPublicMode() && !userAllowsPrivateNotificationsInPublic(userid);
     }
 
     public void onNotificationClear(StatusBarNotification notification) {
+        Log.d(TAG, "onNotificationClear: ");
         try {
             mBarService.onNotificationClear(
                     notification.getPackageName(),
