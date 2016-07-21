@@ -41,6 +41,7 @@ import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Slog;
 import android.view.WindowManager;
 
@@ -114,6 +115,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     @Override
     public void start() {
+        Log.d(TAG, "start: ");
         mContext = super.mContext;
         HandlerThread thread = new HandlerThread("Keyboard", Process.THREAD_PRIORITY_BACKGROUND);
         thread.start();
@@ -123,10 +125,12 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
+        Log.d(TAG, "onConfigurationChanged: ");
     }
 
     @Override
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+        Log.d(TAG, "dump: ");
         pw.println("KeyboardUI:");
         pw.println("  mEnabled=" + mEnabled);
         pw.println("  mBootCompleted=" + mEnabled);
@@ -138,11 +142,13 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     @Override
     protected void onBootCompleted() {
+        Log.d(TAG, "onBootCompleted: ");
         mHandler.sendEmptyMessage(MSG_ON_BOOT_COMPLETED);
     }
 
     @Override
     public void onTabletModeChanged(long whenNanos, boolean inTabletMode) {
+        Log.d(TAG, "onTabletModeChanged: ");
         if (DEBUG) {
             Slog.d(TAG, "onTabletModeChanged(" + whenNanos + ", " + inTabletMode + ")");
         }
@@ -157,6 +163,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     // Shoud only be called on the handler thread
     private void init() {
+        Log.d(TAG, "init: ");
         Context context = mContext;
         mKeyboardName =
                 context.getString(com.android.internal.R.string.config_packagedKeyboardName);
@@ -190,6 +197,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     // Should only be called on the handler thread
     private void processKeyboardState() {
+        Log.d(TAG, "processKeyboardState: ");
         mHandler.removeMessages(MSG_PROCESS_KEYBOARD_STATE);
 
         if (!mEnabled) {
@@ -258,6 +266,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     // Should only be called on the handler thread
     public void onBootCompletedInternal() {
+        Log.d(TAG, "onBootCompletedInternal: ");
         mBootCompleted = true;
         mBootCompletedTime = SystemClock.uptimeMillis();
         if (mState == STATE_WAITING_FOR_BOOT_COMPLETED) {
@@ -267,6 +276,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     // Should only be called on the handler thread
     private void showBluetoothDialog() {
+        Log.d(TAG, "showBluetoothDialog: ");
         if (isUserSetupComplete()) {
             long now = SystemClock.uptimeMillis();
             long earliestDialogTime = mBootCompletedTime + BLUETOOTH_START_DELAY_MILLIS;
@@ -282,12 +292,14 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
     }
 
     private boolean isUserSetupComplete() {
+        Log.d(TAG, "isUserSetupComplete: ");
         ContentResolver resolver = mContext.getContentResolver();
         return Secure.getIntForUser(
                 resolver, Secure.USER_SETUP_COMPLETE, 0, UserHandle.USER_CURRENT) != 0;
     }
 
     private CachedBluetoothDevice getPairedKeyboard() {
+        Log.d(TAG, "getPairedKeyboard: ");
         Set<BluetoothDevice> devices = mLocalBluetoothAdapter.getBondedDevices();
         for (BluetoothDevice d : devices) {
             if (mKeyboardName.equals(d.getName())) {
@@ -298,6 +310,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
     }
 
     private CachedBluetoothDevice getDiscoveredKeyboard() {
+        Log.d(TAG, "getDiscoveredKeyboard: ");
         Collection<CachedBluetoothDevice> devices = mCachedDeviceManager.getCachedDevicesCopy();
         for (CachedBluetoothDevice d : devices) {
             if (d.getName().equals(mKeyboardName)) {
@@ -309,6 +322,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
 
     private CachedBluetoothDevice getCachedBluetoothDevice(BluetoothDevice d) {
+        Log.d(TAG, "getCachedBluetoothDevice: ");
         CachedBluetoothDevice cachedDevice = mCachedDeviceManager.findDevice(d);
         if (cachedDevice == null) {
             cachedDevice = mCachedDeviceManager.addDevice(
@@ -318,6 +332,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
     }
 
     private void startScanning() {
+        Log.d(TAG, "startScanning: ");
         BluetoothLeScanner scanner = mLocalBluetoothAdapter.getBluetoothLeScanner();
         ScanFilter filter = (new ScanFilter.Builder()).setDeviceName(mKeyboardName).build();
         ScanSettings settings = (new ScanSettings.Builder())
@@ -331,6 +346,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
     }
 
     private void stopScanning() {
+        Log.d(TAG, "stopScanning: ");
         if (mScanCallback != null) {
             mLocalBluetoothAdapter.getBluetoothLeScanner().stopScan(mScanCallback);
             mScanCallback = null;
@@ -339,6 +355,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     // Should only be called on the handler thread
     private void onDeviceAddedInternal(CachedBluetoothDevice d) {
+        Log.d(TAG, "onDeviceAddedInternal: ");
         if (mState == STATE_WAITING_FOR_DEVICE_DISCOVERY && d.getName().equals(mKeyboardName)) {
             stopScanning();
             d.startPairing();
@@ -348,6 +365,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     // Should only be called on the handler thread
     private void onBluetoothStateChangedInternal(int bluetoothState) {
+        Log.d(TAG, "onBluetoothStateChangedInternal: ");
         if (bluetoothState == BluetoothAdapter.STATE_ON && mState == STATE_WAITING_FOR_BLUETOOTH) {
             processKeyboardState();
         }
@@ -355,6 +373,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     // Should only be called on the handler thread
     private void onDeviceBondStateChangedInternal(CachedBluetoothDevice d, int bondState) {
+        Log.d(TAG, "onDeviceBondStateChangedInternal: ");
         if (d.getName().equals(mKeyboardName) && bondState == BluetoothDevice.BOND_BONDED) {
             // We don't need to manually connect to the device here because it will automatically
             // try to connect after it has been paired.
@@ -364,6 +383,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     // Should only be called on the handler thread
     private void onBleScanFailedInternal() {
+        Log.d(TAG, "onBleScanFailedInternal: ");
         mScanCallback = null;
         if (mState == STATE_WAITING_FOR_DEVICE_DISCOVERY) {
             mState = STATE_DEVICE_NOT_FOUND;
@@ -372,10 +392,12 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     private final class KeyboardUIHandler extends Handler {
         public KeyboardUIHandler() {
+            Log.d(TAG, "KeyboardUIHandler: ");
             super(Looper.getMainLooper(), null, true /*async*/);
         }
         @Override
         public void handleMessage(Message msg) {
+            Log.d(TAG, "KeyboardUIHandler: handleMessage: ");
             switch(msg.what) {
                 case MSG_SHOW_BLUETOOTH_DIALOG: {
                     DialogInterface.OnClickListener listener = new BluetoothDialogClickListener();
@@ -400,11 +422,13 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     private final class KeyboardHandler extends Handler {
         public KeyboardHandler(Looper looper) {
+            Log.d(TAG, "KeyboardHandler: ");
             super(looper, null, true /*async*/);
         }
 
         @Override
         public void handleMessage(Message msg) {
+            Log.d(TAG, "KeyboardHandler: handleMessage: ");
             switch(msg.what) {
                 case MSG_INIT: {
                     init();
@@ -455,6 +479,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
     private final class BluetoothDialogClickListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {
+            Log.d(TAG, "BluetoothDialogClickListener: onClick: ");
             int enable = DialogInterface.BUTTON_POSITIVE == which ? 1 : 0;
             mHandler.obtainMessage(MSG_ENABLE_BLUETOOTH, enable, 0).sendToTarget();
             mDialog = null;
@@ -464,6 +489,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
     private final class KeyboardScanCallback extends ScanCallback {
 
         private boolean isDeviceDiscoverable(ScanResult result) {
+            Log.d(TAG, "KeyboardScanCallback: isDeviceDiscoverable: ");
             final ScanRecord scanRecord = result.getScanRecord();
             final int flags = scanRecord.getAdvertiseFlags();
             final int BT_DISCOVERABLE_MASK = 0x03;
@@ -473,6 +499,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
         @Override
         public void onBatchScanResults(List<ScanResult> results) {
+            Log.d(TAG, "KeyboardScanCallback: onBatchScanResults: ");
             if (DEBUG) {
                 Slog.d(TAG, "onBatchScanResults(" + results.size() + ")");
             }
@@ -498,6 +525,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
         @Override
         public void onScanFailed(int errorCode) {
+            Log.d(TAG, "KeyboardScanCallback: onScanFailed: ");
             if (DEBUG) {
                 Slog.d(TAG, "onScanFailed(" + errorCode + ")");
             }
@@ -506,6 +534,7 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
+            Log.d(TAG, "KeyboardScanCallback: onScanResult: ");
             if (DEBUG) {
                 Slog.d(TAG, "onScanResult(" + callbackType + ", " + result + ")");
             }
@@ -523,24 +552,34 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
     private final class BluetoothCallbackHandler implements BluetoothCallback {
         @Override
         public void onBluetoothStateChanged(int bluetoothState) {
+            Log.d(TAG, "BluetoothCallbackHandler: onBluetoothStateChanged: ");
             mHandler.obtainMessage(MSG_ON_BLUETOOTH_STATE_CHANGED,
                     bluetoothState, 0).sendToTarget();
         }
 
         @Override
         public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
+            Log.d(TAG, "BluetoothCallbackHandler: onDeviceBondStateChanged: ");
             mHandler.obtainMessage(MSG_ON_DEVICE_BOND_STATE_CHANGED,
                     bondState, 0, cachedDevice).sendToTarget();
         }
 
         @Override
-        public void onDeviceAdded(CachedBluetoothDevice cachedDevice) { }
+        public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
+            Log.d(TAG, "BluetoothCallbackHandler: onDeviceAdded: ");
+        }
         @Override
-        public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) { }
+        public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) {
+            Log.d(TAG, "BluetoothCallbackHandler: onDeviceDeleted: ");
+        }
         @Override
-        public void onScanningStateChanged(boolean started) { }
+        public void onScanningStateChanged(boolean started) {
+            Log.d(TAG, "BluetoothCallbackHandler: onScanningStateChanged: ");
+        }
         @Override
-        public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) { }
+        public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
+            Log.d(TAG, "BluetoothCallbackHandler: onConnectionStateChanged: ");
+        }
     }
 
     private static String stateToString(int state) {
