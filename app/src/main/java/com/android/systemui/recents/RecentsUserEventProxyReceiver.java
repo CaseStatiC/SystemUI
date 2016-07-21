@@ -39,7 +39,7 @@ public class RecentsUserEventProxyReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG, "onReceive: ");
+        Log.d(TAG, "onReceive: intent.getAction() = " + intent.getAction());
         Recents recents = Recents.getInstanceAndStartIfNeeded(context);
         switch (intent.getAction()) {
             case ACTION_PROXY_SHOW_RECENTS_TO_USER: {
