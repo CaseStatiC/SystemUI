@@ -166,6 +166,7 @@ public class KeyguardStatusBarView extends RelativeLayout
 
     @Override
     public void onBatteryLevelChanged(int level, boolean pluggedIn, boolean charging) {
+        Log.d(TAG, "onBatteryLevelChanged: ");
         String percentage = NumberFormat.getPercentInstance().format((double) level / 100.0);
         mBatteryLevel.setText(percentage);
         boolean changed = mBatteryCharging != charging;
