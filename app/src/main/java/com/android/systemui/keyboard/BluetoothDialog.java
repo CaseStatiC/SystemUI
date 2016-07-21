@@ -18,16 +18,18 @@ package com.android.systemui.keyboard;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.icu.text.FilteredNormalizer2;
+import android.util.Log;
 import android.view.WindowManager;
 
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 
 public class BluetoothDialog extends SystemUIDialog {
-
+    public static final String TAG  = "BluetoothDialog";
     public BluetoothDialog(Context context) {
         super(context);
-
+        Log.d(TAG, "BluetoothDialog: ");
         getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG);
         setShowForAllUsers(true);
     }
