@@ -392,8 +392,8 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     private final class KeyboardUIHandler extends Handler {
         public KeyboardUIHandler() {
-            Log.d(TAG, "KeyboardUIHandler: ");
             super(Looper.getMainLooper(), null, true /*async*/);
+            Log.d(TAG, "KeyboardUIHandler: ");
         }
         @Override
         public void handleMessage(Message msg) {
@@ -422,8 +422,8 @@ public class KeyboardUI extends SystemUI implements InputManager.OnTabletModeCha
 
     private final class KeyboardHandler extends Handler {
         public KeyboardHandler(Looper looper) {
-            Log.d(TAG, "KeyboardHandler: ");
             super(looper, null, true /*async*/);
+            Log.d(TAG, "KeyboardHandler: ");
         }
 
         @Override

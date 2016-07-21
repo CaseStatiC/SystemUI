@@ -56,7 +56,7 @@ import java.util.List;
 public class TaskStackView extends FrameLayout implements TaskStack.TaskStackCallbacks,
         TaskView.TaskViewCallbacks, TaskStackViewScroller.TaskStackViewScrollerCallbacks,
         ViewPool.ViewPoolConsumer<TaskView, Task>, RecentsPackageMonitor.PackageCallbacks {
-    public static final String TAG = "TaskStackView"
+    public static final String TAG = "TaskStackView";
     /** The TaskView callbacks */
     interface TaskStackViewCallbacks {
         public void onTaskViewClicked(TaskStackView stackView, TaskView tv, TaskStack stack, Task t,
@@ -768,7 +768,7 @@ public class TaskStackView extends FrameLayout implements TaskStack.TaskStackCal
      * updateMinMaxScrollForStack() is called first.
      */
     public TaskStackViewLayoutAlgorithm.VisibilityReport computeStackVisibilityReport() {
-        logd''
+        Log.d(TAG, "computeStackVisibilityReport: ");
         return mLayoutAlgorithm.computeStackVisibilityReport(mStack.getTasks());
     }
 
