@@ -235,6 +235,7 @@ public class CommandQueue extends IStatusBar.Stub {
     }
 
     public void cancelPreloadRecentApps() {
+        Log.d(TAG, "cancelPreloadRecentApps: ");
         synchronized (mList) {
             mHandler.removeMessages(MSG_CANCEL_PRELOAD_RECENT_APPS);
             mHandler.obtainMessage(MSG_CANCEL_PRELOAD_RECENT_APPS, 0, 0, null).sendToTarget();
