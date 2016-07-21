@@ -21,6 +21,7 @@ import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
 
@@ -33,7 +34,7 @@ import com.android.systemui.statusbar.policy.AccessibilityController;
  * Manages the different states and animations of the unlock icon.
  */
 public class LockIcon extends KeyguardAffordanceView {
-
+    public static final String TAG = "LockIcon";
     private static final int STATE_LOCKED = 0;
     private static final int STATE_LOCK_OPEN = 1;
     private static final int STATE_FACE_UNLOCK = 2;
@@ -61,6 +62,7 @@ public class LockIcon extends KeyguardAffordanceView {
     @Override
     protected void onVisibilityChanged(View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
+        Log.d(TAG, "onVisibilityChanged: ");
         if (isShown()) {
             mTrustDrawable.start();
         } else {
@@ -71,20 +73,24 @@ public class LockIcon extends KeyguardAffordanceView {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        Log.d(TAG, "onDetachedFromWindow: ");
         mTrustDrawable.stop();
     }
 
     public void setTransientFpError(boolean transientFpError) {
+        Log.d(TAG, "setTransientFpError: ");
         mTransientFpError = transientFpError;
         update();
     }
 
     public void setDeviceInteractive(boolean deviceInteractive) {
+        Log.d(TAG, "setDeviceInteractive: ");
         mDeviceInteractive = deviceInteractive;
         update();
     }
 
     public void setScreenOn(boolean screenOn) {
+        Log.d(TAG, "setScreenOn: ");
         mScreenOn = screenOn;
         update();
     }
@@ -163,6 +169,7 @@ public class LockIcon extends KeyguardAffordanceView {
     }
 
     private void updateClickability() {
+        Log.d(TAG, "updateClickability: ");
         if (mAccessibilityController == null) {
             return;
         }
@@ -179,6 +186,7 @@ public class LockIcon extends KeyguardAffordanceView {
     @Override
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
+        Log.d(TAG, "onInitializeAccessibilityNodeInfo: ");
         if (mHasFingerPrintIcon) {
             // Avoid that the button description is also spoken
             info.setClassName(LockIcon.class.getName());
@@ -191,10 +199,12 @@ public class LockIcon extends KeyguardAffordanceView {
     }
 
     public void setAccessibilityController(AccessibilityController accessibilityController) {
+        Log.d(TAG, "setAccessibilityController: ");
         mAccessibilityController = accessibilityController;
     }
 
     private int getIconForState(int state, boolean screenOn, boolean deviceInteractive) {
+        Log.d(TAG, "getIconForState: ");
         switch (state) {
             case STATE_LOCKED:
                 return R.drawable.ic_lock_24dp;
@@ -218,6 +228,7 @@ public class LockIcon extends KeyguardAffordanceView {
     private int getAnimationResForTransition(int oldState, int newState,
             boolean oldDeviceInteractive, boolean deviceInteractive,
             boolean oldScreenOn, boolean screenOn) {
+        Log.d(TAG, "getAnimationResForTransition: ");
         if (oldState == STATE_FINGERPRINT && newState == STATE_FINGERPRINT_ERROR) {
             return R.drawable.lockscreen_fingerprint_fp_to_error_state_animation;
         } else if (oldState == STATE_LOCK_OPEN && newState == STATE_FINGERPRINT_ERROR) {
@@ -238,6 +249,7 @@ public class LockIcon extends KeyguardAffordanceView {
     }
 
     private int getState() {
+        Log.d(TAG, "getState: ");
         KeyguardUpdateMonitor updateMonitor = KeyguardUpdateMonitor.getInstance(mContext);
         boolean fingerprintRunning = updateMonitor.isFingerprintDetectionRunning();
         boolean unlockingAllowed = updateMonitor.isUnlockingWithFingerprintAllowed();
@@ -264,17 +276,20 @@ public class LockIcon extends KeyguardAffordanceView {
 
         public IntrinsicSizeDrawable(Drawable drawable, int intrinsicWidth, int intrinsicHeight) {
             super(drawable, 0);
+            Log.d(TAG, "IntrinsicSizeDrawable: ");
             mIntrinsicWidth = intrinsicWidth;
             mIntrinsicHeight = intrinsicHeight;
         }
 
         @Override
         public int getIntrinsicWidth() {
+            Log.d(TAG, "IntrinsicSizeDrawable: getIntrinsicWidth: ");
             return mIntrinsicWidth;
         }
 
         @Override
         public int getIntrinsicHeight() {
+            Log.d(TAG, "IntrinsicSizeDrawable: getIntrinsicHeight: ");
             return mIntrinsicHeight;
         }
     }
