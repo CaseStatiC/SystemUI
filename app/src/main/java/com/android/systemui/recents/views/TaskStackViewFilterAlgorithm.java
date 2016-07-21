@@ -16,6 +16,7 @@
 
 package com.android.systemui.recents.views;
 
+import android.util.Log;
 import com.android.systemui.recents.Constants;
 import com.android.systemui.recents.RecentsConfiguration;
 import com.android.systemui.recents.model.Task;
@@ -26,13 +27,14 @@ import java.util.List;
 
 /* The layout logic for a TaskStackView */
 public class TaskStackViewFilterAlgorithm {
-
+    public static final String TAG = "TaskStackViewFilterAlgorithm";
     RecentsConfiguration mConfig;
     TaskStackView mStackView;
     ViewPool<TaskView, Task> mViewPool;
 
     public TaskStackViewFilterAlgorithm(RecentsConfiguration config, TaskStackView stackView,
                                         ViewPool<TaskView, Task> viewPool) {
+        Log.d(TAG, "TaskStackViewFilterAlgorithm: ");
         mConfig = config;
         mStackView = stackView;
         mViewPool = viewPool;
@@ -43,6 +45,7 @@ public class TaskStackViewFilterAlgorithm {
                                  ArrayList<TaskViewTransform> curTaskTransforms,
                                  final ArrayList<Task> tasks,
                                  final ArrayList<TaskViewTransform> taskTransforms) {
+        Log.d(TAG, "startFilteringAnimation: ");
         // Calculate the transforms to animate out all the existing views if they are not in the
         // new visible range (or to their final positions in the stack if they are)
         final ArrayList<TaskView> childrenToRemove = new ArrayList<TaskView>();
@@ -99,6 +102,7 @@ public class TaskStackViewFilterAlgorithm {
     int getEnterTransformsForFilterAnimation(ArrayList<Task> tasks,
                                              ArrayList<TaskViewTransform> taskTransforms,
                                              HashMap<TaskView, TaskViewTransform> childViewTransformsOut) {
+        Log.d(TAG, "getEnterTransformsForFilterAnimation: ");
         int offset = 0;
         int movement = 0;
         int taskCount = tasks.size();
@@ -139,6 +143,7 @@ public class TaskStackViewFilterAlgorithm {
                                             ArrayList<Task> tasks, ArrayList<TaskViewTransform> taskTransforms,
                                             HashMap<TaskView, TaskViewTransform> childViewTransformsOut,
                                             ArrayList<TaskView> childrenToRemoveOut) {
+        Log.d(TAG, "getExitTransformsForFilterAnimation: ");
         // Animate all of the existing views out of view (if they are not in the visible range in
         // the new stack) or to their final positions in the new stack
         int offset = 0;
