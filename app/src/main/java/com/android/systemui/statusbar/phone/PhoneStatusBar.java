@@ -186,7 +186,7 @@ import static com.android.systemui.statusbar.phone.BarTransitions.MODE_WARNING;
 public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         DragDownHelper.DragDownCallback, ActivityStarter, OnUnlockMethodChangedListener,
         HeadsUpManager.OnHeadsUpChangedListener {
-    static final String TAG = "PhoneStatusBar";
+    public static final String TAG = "PhoneStatusBar";
     public static final boolean DEBUG = BaseStatusBar.DEBUG;
     public static final boolean SPEW = false;
     public static final boolean DUMPTRUCK = true; // extra dumpsys info
@@ -4730,7 +4730,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
             @Override
             public void handleMessage(Message msg) {
-                Log.d(TAG, "H: handleMessage: msg.what = " + msg.what);
                 switch (msg.what) {
                     case MSG_START_DOZING:
                         handleStartDozing((Runnable) msg.obj);
